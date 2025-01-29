@@ -2,6 +2,7 @@
 gateSizeWidth = 60
 gateSizeHeight = 40
 
+
 //Class for logic gates, will likely be moved out of this main file.
 class LogicGate {
     constructor(x, y, type) {
@@ -36,7 +37,12 @@ function setup() {
     //Create the Canvas based on the width and height of the window
     //AKA, the canvas element takes up the entire page.
     //If we want to do some html/css design, then we will have to readjust this.
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(1100, 600);
+
+    let x = (windowWidth - width) / 2;
+    let y = (windowHeight - height) / 2;
+    canvas = createCanvas(1100, 600);
+    canvas.position(x, y);
 
     //Set the background color to that intriguing shade of blue.
     background('#4287f5');
@@ -60,4 +66,7 @@ function draw() {
         gate.display();
     }
     
+   
 }
+
+
