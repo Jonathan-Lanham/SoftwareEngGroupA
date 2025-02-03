@@ -1,0 +1,19 @@
+/* Selector to style the entire page */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white; 
+  }
+
+
+/* Main Page--------------------------------------------------------- */
+canvas {
+  display: block;
+}
+/* Styles the background to the entire screen and with a dark gray color */
+#background{
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(28, 28, 28);
+}
