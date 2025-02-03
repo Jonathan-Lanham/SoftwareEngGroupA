@@ -32,12 +32,12 @@ HTML, CSS, js
 P5.js
 
 ### Contributors
-Andrew Cash
-Jeffrey Felger
-Isha Gupta
-Caitlyn Hartmann
-Jonathan Lanham
-Sam Markus
-Vasu Ravindra Rabadia
-Mario Stanic
-Madelyn Washer
+* Andrew Cash
+* Jeffrey Felger
+* Isha Gupta
+* Caitlyn Hartmann
+* Jonathan Lanham
+* Sam Markus
+* Vasu Ravindra Rabadia
+* Mario Stanic
+* Madelyn Washer
