@@ -71,9 +71,14 @@ class LogicGate {
     }
 
     // Input lines
-    line(this.x - 20 * s, this.y + 10 * s, this.x, this.y + 10 * s);
-    if (this.type !== "NOT") {
+    if (this.type === "AND") {
+      line(this.x - 20 * s, this.y + 10 * s, this.x, this.y + 10 * s);
       line(this.x - 20 * s, this.y + 40 * s, this.x, this.y + 40 * s);
+    } else if (this.type === "OR") {
+      line(this.x - 20 * s, this.y + 10 * s, this.x + 5 * s, this.y + 10 * s);
+      line(this.x - 20 * s, this.y + 40 * s, this.x + 5 * s, this.y + 40 * s);
+    } else if (this.type === "NOT") {
+      line(this.x - 20 * s, this.y + 25 * s, this.x, this.y + 25 * s);
     }
 
     // Output line
@@ -81,10 +86,12 @@ class LogicGate {
 
     // Input buttons
     fill(this.inputA ? "green" : "red");
-    ellipse(this.x - 20 * s, this.y + 10 * s, 15 * s, 15 * s);
-    if (this.type !== "NOT") {
+    if (this.type === "AND" || this.type === "OR") {
+      ellipse(this.x - 20 * s, this.y + 10 * s, 15 * s, 15 * s);
       fill(this.inputB ? "green" : "red");
       ellipse(this.x - 20 * s, this.y + 40 * s, 15 * s, 15 * s);
+    } else if (this.type === "NOT") {
+      ellipse(this.x - 20 * s, this.y + 25 * s, 15 * s, 15 * s);
     }
 
     // Output
@@ -93,19 +100,23 @@ class LogicGate {
   }
 
   toggleInputA() {
-    this.inputA = this.inputA ? 0 : 1;
+    if (this.type === "AND" || this.type === "OR" || this.type === "NOT") {
+      this.inputA = this.inputA ? 0 : 1;
+    }
   }
 
   toggleInputB() {
-    this.inputB = this.inputB ? 0 : 1;
+    if (this.type === "AND" || this.type === "OR") {
+      this.inputB = this.inputB ? 0 : 1;
+    }
   }
 }
 
 function setup() {
-  createCanvas(400, 200);
-  andGate = new LogicGate(150, 30, "AND", 1);
-  orGate = new LogicGate(150, 100, "OR", 1);
-  notGate = new LogicGate(300, 65, "NOT", 1);
+  createCanvas(1000, 700);
+  andGate = new LogicGate(100, 100, "AND", 2);
+  orGate = new LogicGate(300, 300, "OR", 1);
+  notGate = new LogicGate(600, 600, "NOT", 0.5);
 }
 
 function draw() {
@@ -119,54 +130,34 @@ function draw() {
 }
 
 function mousePressed() {
+  let sA = andGate.scalar,
+    sO = orGate.scalar,
+    sN = notGate.scalar;
+
   if (
-    dist(
-      mouseX,
-      mouseY,
-      andGate.x - 20 * andGate.scalar,
-      andGate.y + 10 * andGate.scalar
-    ) <
-    10 * andGate.scalar
-  )
+    dist(mouseX, mouseY, andGate.x - 20 * sA, andGate.y + 10 * sA) <
+    10 * sA
+  ) {
     andGate.toggleInputA();
+  }
   if (
-    dist(
-      mouseX,
-      mouseY,
-      andGate.x - 20 * andGate.scalar,
-      andGate.y + 40 * andGate.scalar
-    ) <
-    10 * andGate.scalar
-  )
+    dist(mouseX, mouseY, andGate.x - 20 * sA, andGate.y + 40 * sA) <
+    10 * sA
+  ) {
     andGate.toggleInputB();
-  if (
-    dist(
-      mouseX,
-      mouseY,
-      orGate.x - 20 * orGate.scalar,
-      orGate.y + 10 * orGate.scalar
-    ) <
-    10 * orGate.scalar
-  )
+  }
+
+  if (dist(mouseX, mouseY, orGate.x - 20 * sO, orGate.y + 10 * sO) < 10 * sO) {
     orGate.toggleInputA();
-  if (
-    dist(
-      mouseX,
-      mouseY,
-      orGate.x - 20 * orGate.scalar,
-      orGate.y + 40 * orGate.scalar
-    ) <
-    10 * orGate.scalar
-  )
+  }
+  if (dist(mouseX, mouseY, orGate.x - 20 * sO, orGate.y + 40 * sO) < 10 * sO) {
     orGate.toggleInputB();
+  }
+
   if (
-    dist(
-      mouseX,
-      mouseY,
-      notGate.x - 20 * notGate.scalar,
-      notGate.y + 10 * notGate.scalar
-    ) <
-    10 * notGate.scalar
-  )
+    dist(mouseX, mouseY, notGate.x - 20 * sN, notGate.y + 25 * sN) <
+    10 * sN
+  ) {
     notGate.toggleInputA();
+  }
 }
