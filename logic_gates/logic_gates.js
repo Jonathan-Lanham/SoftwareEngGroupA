@@ -11,23 +11,33 @@ class LogicGate {
     this.output = 0;
   }
 
+  // UPDATE OUTPUT
   update() {
+    // AND GATE
     if (this.type === "AND") {
       this.output = this.inputA && this.inputB;
-    } else if (this.type === "OR") {
+    }
+    // OR GATE
+    else if (this.type === "OR") {
       this.output = this.inputA || this.inputB;
-    } else if (this.type === "NOT") {
-      this.output = !this.inputA;
-    } else if (this.type === "XOR") {
+    }
+    // XOR GATE
+    else if (this.type === "XOR") {
       this.output =
         (this.inputA && !this.inputB) || (!this.inputA && this.inputB);
     }
+    // NOT GATE
+    else if (this.type === "NOT") {
+      this.output = !this.inputA;
+    }
   }
 
+  // DRAWING GATES
   display() {
     stroke(0);
     noFill();
     let s = this.scalar;
+    // AND GATE
     if (this.type === "AND") {
       arc(
         this.x + 30 * s,
@@ -40,7 +50,9 @@ class LogicGate {
       line(this.x, this.y, this.x + 30 * s, this.y);
       line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
       line(this.x, this.y, this.x, this.y + 50 * s);
-    } else if (this.type === "OR") {
+    }
+    // OR GATE
+    else if (this.type === "OR") {
       arc(
         this.x + 30 * s,
         this.y + 25 * s,
@@ -61,7 +73,42 @@ class LogicGate {
       );
       line(this.x, this.y, this.x + 30 * s, this.y);
       line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
-    } else if (this.type === "NOT") {
+    }
+    // XOR GATE
+    else if (this.type === "XOR") {
+      arc(
+        this.x + 30 * s,
+        this.y + 25 * s,
+        60 * s,
+        50 * s,
+        PI + HALF_PI,
+        TWO_PI + HALF_PI
+      );
+      bezier(
+        this.x,
+        this.y,
+        this.x + 10 * s,
+        this.y + 10 * s,
+        this.x + 10 * s,
+        this.y + 40 * s,
+        this.x,
+        this.y + 50 * s
+      );
+      bezier(
+        this.x - 5 * s,
+        this.y,
+        this.x + 5 * s,
+        this.y + 10 * s,
+        this.x + 5 * s,
+        this.y + 40 * s,
+        this.x - 5 * s,
+        this.y + 50 * s
+      );
+      line(this.x, this.y, this.x + 30 * s, this.y);
+      line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
+    }
+    // NOT GATE
+    else if (this.type === "NOT") {
       triangle(
         this.x,
         this.y,
@@ -71,57 +118,26 @@ class LogicGate {
         this.y + 25 * s
       );
       circle(this.x + 55 * s, this.y + 25 * s, 10 * s);
-    } else if (this.type === "XOR") {
-      arc(
-        this.x + 30 * s,
-        this.y + 25 * s,
-        60 * s,
-        50 * s,
-        PI + HALF_PI,
-        TWO_PI + HALF_PI
-      );
-      bezier(
-        this.x,
-        this.y,
-        this.x + 10 * s,
-        this.y + 10 * s,
-        this.x + 10 * s,
-        this.y + 40 * s,
-        this.x,
-        this.y + 50 * s
-      );
-      bezier(
-        this.x - 5 * s,
-        this.y,
-        this.x + 5 * s,
-        this.y + 10 * s,
-        this.x + 5 * s,
-        this.y + 40 * s,
-        this.x - 5 * s,
-        this.y + 50 * s
-      );
-      line(this.x, this.y, this.x + 30 * s, this.y);
-      line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
     }
 
-    // Input lines
+    // INPUT LINES
     if (this.type === "AND") {
       line(this.x - 20 * s, this.y + 10 * s, this.x, this.y + 10 * s);
       line(this.x - 20 * s, this.y + 40 * s, this.x, this.y + 40 * s);
     } else if (this.type === "OR") {
       line(this.x - 20 * s, this.y + 10 * s, this.x + 5 * s, this.y + 10 * s);
       line(this.x - 20 * s, this.y + 40 * s, this.x + 5 * s, this.y + 40 * s);
-    } else if (this.type === "NOT") {
-      line(this.x - 20 * s, this.y + 25 * s, this.x, this.y + 25 * s);
     } else if (this.type === "XOR") {
       line(this.x - 20 * s, this.y + 10 * s, this.x + 5 * s, this.y + 10 * s);
       line(this.x - 20 * s, this.y + 40 * s, this.x + 5 * s, this.y + 40 * s);
+    } else if (this.type === "NOT") {
+      line(this.x - 20 * s, this.y + 25 * s, this.x, this.y + 25 * s);
     }
 
-    // Output line
+    // OUTPUT LINE
     line(this.x + 60 * s, this.y + 25 * s, this.x + 80 * s, this.y + 25 * s);
 
-    // Input buttons
+    // INPUT BUTTONS
     fill(this.inputA ? "green" : "red");
     if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
       ellipse(this.x - 20 * s, this.y + 10 * s, 15 * s, 15 * s);
@@ -131,17 +147,24 @@ class LogicGate {
       ellipse(this.x - 20 * s, this.y + 25 * s, 15 * s, 15 * s);
     }
 
-    // Output
+    // OUTPUT
     fill(this.output ? "green" : "red");
     ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
   }
 
+  // TOGGLE INPUT A
   toggleInputA() {
-    if (this.type === "AND" || this.type === "OR" || this.type === "NOT" || this.type === "XOR") {
+    if (
+      this.type === "AND" ||
+      this.type === "OR" ||
+      this.type === "NOT" ||
+      this.type === "XOR"
+    ) {
       this.inputA = this.inputA ? 0 : 1;
     }
   }
 
+  // TOGGLE INPUT B
   toggleInputB() {
     if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
       this.inputB = this.inputB ? 0 : 1;
@@ -169,6 +192,7 @@ function draw() {
   xorGate.display();
 }
 
+// TOGGLE INPUTS
 function mousePressed() {
   let sAnd = andGate.scalar,
     sOr = orGate.scalar,
@@ -176,26 +200,44 @@ function mousePressed() {
     sNot = notGate.scalar;
 
   // AND GATE
-  if (dist(mouseX, mouseY, andGate.x - 20 * sAnd, andGate.y + 10 * sAnd) < 10 * sAnd) {
+  if (
+    dist(mouseX, mouseY, andGate.x - 20 * sAnd, andGate.y + 10 * sAnd) <
+    10 * sAnd
+  ) {
     andGate.toggleInputA();
   }
-  if (dist(mouseX, mouseY, andGate.x - 20 * sAnd, andGate.y + 40 * sAnd) < 10 * sAnd) {
+  if (
+    dist(mouseX, mouseY, andGate.x - 20 * sAnd, andGate.y + 40 * sAnd) <
+    10 * sAnd
+  ) {
     andGate.toggleInputB();
   }
 
   // OR GATE
-  if (dist(mouseX, mouseY, orGate.x - 20 * sOr, orGate.y + 10 * sOr) < 10 * sOr) {
+  if (
+    dist(mouseX, mouseY, orGate.x - 20 * sOr, orGate.y + 10 * sOr) <
+    10 * sOr
+  ) {
     orGate.toggleInputA();
   }
-  if (dist(mouseX, mouseY, orGate.x - 20 * sOr, orGate.y + 40 * sOr) < 10 * sOr) {
+  if (
+    dist(mouseX, mouseY, orGate.x - 20 * sOr, orGate.y + 40 * sOr) <
+    10 * sOr
+  ) {
     orGate.toggleInputB();
   }
 
   // XOR GATE
-  if (dist(mouseX, mouseY, xorGate.x - 20 * sXor, xorGate.y + 10 * sXor) < 10 * sXor) {
+  if (
+    dist(mouseX, mouseY, xorGate.x - 20 * sXor, xorGate.y + 10 * sXor) <
+    10 * sXor
+  ) {
     xorGate.toggleInputA();
   }
-  if (dist(mouseX, mouseY, xorGate.x - 20 * sXor, xorGate.y + 40 * sXor) < 10 * sXor) {
+  if (
+    dist(mouseX, mouseY, xorGate.x - 20 * sXor, xorGate.y + 40 * sXor) <
+    10 * sXor
+  ) {
     xorGate.toggleInputB();
   }
 
