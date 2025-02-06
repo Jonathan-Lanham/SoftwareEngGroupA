@@ -261,3 +261,36 @@
   background: rgb(247, 58, 58);
   cursor: pointer;
 }
+
+/* bottom buttons section with language, support, credits, terms */
+.bottom-options-section{
+  height: 18em;
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+.bottom-options-section button{
+  font-size: 1.3em;
+  height: 2.6em;
+  width: 16em;
+  box-shadow: 0px 5px 5px 1px black; 
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 1px 1px black;
+  background-color: rgb(247, 58, 58);
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .1s;
+}
+/* hover effect to buttons in options menu popup */
+.bottom-options-section button:hover{
+  background-color: rgb(242, 95, 95);
+}
+/* the push in effect with buttons when clicked */
+.bottom-options-section button:active{
+  transform: scale(.9);
+}
