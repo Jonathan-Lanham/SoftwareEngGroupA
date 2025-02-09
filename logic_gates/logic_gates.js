@@ -34,11 +34,27 @@ class LogicGate {
 
   // DRAWING GATES
   display() {
+    // STYLE SETTINGS (SIMULATE CSS)
+    let gateColor = color(255, 204, 0);
+    let inputColor = color(200);
+    let outputColor = color(0, 255, 0);
+    let inputHoverColor = color(0, 255, 0);
+    let outputHoverColor = color(255, 0, 0);
+    //
+    let textsize = 15;
+    let textColor = 'black';
+    // 
     stroke(0);
-    noFill();
+    // 
     let s = this.scalar;
+    // 
+    textSize(textsize * s);
+    // 
     // AND GATE
     if (this.type === "AND") {
+      fill(textColor);
+      text(this.type, this.x + 10 * s, this.y + 30 * s);
+      noFill();
       arc(
         this.x + 30 * s,
         this.y + 25 * s,
@@ -53,6 +69,9 @@ class LogicGate {
     }
     // OR GATE
     else if (this.type === "OR") {
+      fill(textColor);
+      text(this.type, this.x + 15 * s, this.y + 30 * s);
+      noFill();
       arc(
         this.x + 30 * s,
         this.y + 25 * s,
@@ -76,6 +95,9 @@ class LogicGate {
     }
     // XOR GATE
     else if (this.type === "XOR") {
+      fill(textColor);
+      text(this.type, this.x + 15 * s, this.y + 30 * s);
+      noFill();
       arc(
         this.x + 30 * s,
         this.y + 25 * s,
@@ -109,6 +131,9 @@ class LogicGate {
     }
     // NOT GATE
     else if (this.type === "NOT") {
+      fill(textColor);
+      text(this.type, this.x + 2 * s, this.y + 30 * s);
+      noFill();
       triangle(
         this.x,
         this.y,
@@ -174,10 +199,10 @@ class LogicGate {
 
 function setup() {
   createCanvas(1000, 700);
-  andGate = new LogicGate(100, 100, "AND", 1);
-  orGate = new LogicGate(200, 200, "OR", 1);
-  xorGate = new LogicGate(300, 300, "XOR", 1);
-  notGate = new LogicGate(400, 400, "NOT", 1);
+  andGate = new LogicGate(100, 100, "AND", 2);
+  orGate = new LogicGate(500, 100, "OR", 2);
+  xorGate = new LogicGate(100, 350, "XOR", 2);
+  notGate = new LogicGate(500, 350, "NOT", 2);
 }
 
 function draw() {
