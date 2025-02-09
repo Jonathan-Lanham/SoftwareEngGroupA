@@ -18,11 +18,35 @@ class LogicGate {
         //2 bits for input sources
         this.inputs = null;
 
+        //this.is_dragged = false;
+
     }
     display() {
         rect(this.x, this.y, gateSizeWidth, gateSizeHeight, 10);
         textAlign(CENTER, CENTER);
         text(this.type, this.x + 30, this.y + 20);
+    }
+    update() {
+        //check if dragging
+        //then move
+        if (this.is_dragging()){
+            
+            let offsets = this.getOffsets()
+
+            this.x = mouseX - offsets[0];
+            this.y = mouseY - offsets[1];
+        }
+    }
+    is_dragging() {
+        //plus 15 until I adjust offsets
+        return (
+            this.x < mouseX && mouseX < this.x+gateSizeWidth && 
+            this.y < mouseY && mouseY < this.y+gateSizeHeight && 
+            mouseIsPressed
+        )
+    }
+    getOffsets(){
+        return [gateSizeWidth/2, gateSizeHeight/2]
     }
 }
 
@@ -49,7 +73,7 @@ function setup() {
 
     //Initialize a gate? work in progress, will need to reference a "level database" for initializing "puzzles"
     gates.push(new LogicGate(200, 350, "AND"));
-    //gates.push(new LogicGate(200, 300, "OR"));
+    gates.push(new LogicGate(800, 300, "OR"));
 }
 
 // "draw() is called directly after setup()"
@@ -61,9 +85,10 @@ function draw() {
 
     //Loops over every gate, and updates it
     for (let gate of gates) {
-        gate.x = mouseX;
-        gate.y = mouseY;
+        
+        gate.update();
         gate.display();
+        
     }
     
    
