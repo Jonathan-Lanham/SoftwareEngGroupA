@@ -4,14 +4,13 @@ https://p5js.org/tutorials/get-started/
 
 ## Gatekeeper
 ### About the Game
-Gatekeeper is a puzzle game where players use logic gates to manipulate circuits and achieve specific outputs. Each level challenges players to strategically place AND, OR, XOR, NOT, and other gates to complete the circuit.
+Gatekeeper is a puzzle game where players use logic gates to manipulate circuits and achieve specific outputs. Each level challenges players to strategically adjust switches to AND, OR, XOR, NOT, and other gates to complete the task.
 
 Sharpen your problem-solving skills and master digital logic in this fun and educational experience!
 
-### Features
+### Benefits of Features
 * Learn as you play
-* Drag and drop ability
-* Movement
+* Cultivate understanding of logic gates
 * Challenging puzzles
 * Achievements and Leaderboards
 
