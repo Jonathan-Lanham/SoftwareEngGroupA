@@ -4,20 +4,22 @@
     padding: 0;
     box-sizing: border-box;
     color: white; 
+    background-color: #4287f5;
 }
 
 #level1-background {
     height: 100vh;
     width: 100%;
+    margin: 5px;
     background-color: #4287f5; /* Same as the start page */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    
 }
 
 h1 {
     font-size: 5em;
     font-family: "Modak", serif;
-    -webkit-text-stroke: 3px black;
-    text-shadow: 4px 4px black;
+    -webkit-text-stroke: 4px black;
+    text-shadow: 3px 2px black;
 }
