@@ -2,4 +2,41 @@
 
 https://p5js.org/tutorials/get-started/
 
-Logic Puzzle Game
+## Gatekeeper
+### About the Game
+Gatekeeper is a puzzle game where players use logic gates to manipulate circuits and achieve specific outputs. Each level challenges players to strategically adjust switches to AND, OR, XOR, NOT, and other gates to complete the task.
+
+Sharpen your problem-solving skills and master digital logic in this fun and educational experience!
+
+### Benefits of Features
+* Learn as you play
+* Cultivate understanding of logic gates
+* Challenging puzzles
+* Achievements and Leaderboards
+
+### How to Play
+1. Receive the objective
+2. Place logic gates
+3. Connect the circuit
+4. Test your design
+5. Adjust until you succeed!
+
+
+### Access
+Local server access from Github Repository.
+
+### Materials Used
+HTML, CSS, js
+
+P5.js
+
+### Contributors
+* Andrew Cash
+* Jeffrey Felger
+* Isha Gupta
+* Caitlyn Hartmann
+* Jonathan Lanham
+* Sam Markus
+* Vasu Ravindra Rabadia
+* Mario Stanic
+* Madelyn Washer
