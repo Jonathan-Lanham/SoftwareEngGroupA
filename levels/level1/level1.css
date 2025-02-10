@@ -23,3 +23,7 @@ h1 {
     -webkit-text-stroke: 4px black;
     text-shadow: 3px 2px black;
 }
+canvas {
+    display: block;
+  }
+  
