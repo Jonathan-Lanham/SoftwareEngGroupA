@@ -17,6 +17,7 @@
   align-items: center;
   flex-direction: column;
   overflow: hidden;
+  gap: 2em;
  
 }
 /* container to center the text and buttons within the container */
@@ -27,6 +28,7 @@
   align-items: center;
   height: 30em;
   width: 80%;
+  
   
 }
 /* style the title text */
