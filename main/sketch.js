@@ -222,25 +222,56 @@ class Button
         // Coordinates for where the button will be placed
         this.x = x; 
         this.y = y;  
+        this.name = "BUTTON"
     }
     // Action: Overrided by child class perform an action upon the button being pressed
     action() {};
 
+    isMouseOver() 
+    {
+      return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
+             mouseY > this.y && mouseY < this.y + gateSizeHeight);
+    }
+
     // Display: Displays the button on the screen
     display()
     {
-        rect(this.x, this.y, gateSizeWidth, gateSizeHeight, 10);
-        textAlign(CENTER, CENTER);
-        text("BUTTON", this.x + 30, this.y + 20);
+      stroke(0);
+      fill("green");
+      rect(this.x, this.y, gateSizeWidth, gateSizeHeight, 10);
+      textAlign(CENTER, CENTER);
+      text(this.name, this.x + 30, this.y + 20);
     }
 }
 
-const createButton = (text = 'No text') =>
+class PlusButton extends Button
+{ 
+  constructor(x, y)
+  {
+    super(x, y);
+    this.name = "+"
+    this.open = false; 
+  }
+  action()
+  {
+      buttons.push(new gateInsertButton(this.x, this.y - gateSizeHeight, "AND"));
+      buttons.push(new gateInsertButton(this.x, this.y - gateSizeHeight*2, "OR"));
+      buttons.push(new gateInsertButton(this.x, this.y - gateSizeHeight*3, "XOR"));
+      buttons.push(new gateInsertButton(this.x, this.y - gateSizeHeight*4, "NOT"));
+  }
+}
+
+class gateInsertButton extends Button
 {
-    const button = document.createElement('button');
-    button.innerText = text;
-    document.body.appendChild(button);
-    return button;
+  constructor(x, y, gateName)
+  {
+    super(x, y);
+    this.name = gateName;
+  }
+  action()
+  {
+    gates.push(new LogicGate(this.x + 100, this.y, this.name));
+  }
 }
 
 //Will be used to store all gates currently on screen. Work in progress.
@@ -273,7 +304,7 @@ function setup() {
     background('#4287f5');
 
     // Place buttons on screen
-    buttons.push(new Button(500, 500));
+    buttons.push(new PlusButton(200, 500));
 
     //Initialize a gate? work in progress, will need to reference a "level database" for initializing "puzzles"
     gates.push(new LogicGate(100, 100, "AND"));
@@ -309,6 +340,13 @@ function draw() {
 //Messy RN, but it works. Refactor later.
 function mousePressed() {
 
+    for (let button of buttons)
+    {
+      if (button.isMouseOver())
+      {
+        button.action();
+      }
+    }
 
     for (let gate of gates){
 
