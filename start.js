@@ -23,3 +23,22 @@ optionsExitBtn.addEventListener('click', () => {
         optionsHiddenMenu.style.display = 'block';
     }
 });
+
+
+// grabbing the elements for the sound button
+const soundBtn = document.querySelector('.sound-button');
+const soundIcon = document.querySelector('.fa-volume-xmark');
+const music = new Audio('music/game-8-bit-on-278083.mp3')
+
+// when sound button is clicked, replace the icons and play music
+soundBtn.addEventListener('click', () =>{
+    if(soundIcon.classList.contains('fa-volume-xmark')){
+        soundIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+        music.play();
+    }
+    else{
+        soundIcon.classList.add('fa-volume-xmark');
+        music.currentTime = 0;
+        music.pause();
+    }
+});
