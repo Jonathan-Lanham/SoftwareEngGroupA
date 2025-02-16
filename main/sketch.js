@@ -222,7 +222,8 @@ class Button
         // Coordinates for where the button will be placed
         this.x = x; 
         this.y = y;  
-        this.name = "BUTTON"
+        this.name = "BUTTON";
+        this.color = "Green";
     }
     // Action: Overrided by child class perform an action upon the button being pressed
     action() {};
@@ -237,7 +238,7 @@ class Button
     display()
     {
       stroke(0);
-      fill("green");
+      fill(this.color);
       rect(this.x, this.y, gateSizeWidth, gateSizeHeight, 10);
       textAlign(CENTER, CENTER);
       text(this.name, this.x + 30, this.y + 20);
@@ -254,14 +255,14 @@ class PlusButton extends Button
   }
   action()
   {
-      buttons.push(new gateInsertButton(this.x, this.y - gateSizeHeight, "AND"));
-      buttons.push(new gateInsertButton(this.x, this.y - gateSizeHeight*2, "OR"));
-      buttons.push(new gateInsertButton(this.x, this.y - gateSizeHeight*3, "XOR"));
-      buttons.push(new gateInsertButton(this.x, this.y - gateSizeHeight*4, "NOT"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight, "AND"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*2, "OR"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*3, "XOR"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*4, "NOT"));
   }
 }
 
-class gateInsertButton extends Button
+class GateInsertButton extends Button
 {
   constructor(x, y, gateName)
   {
@@ -271,6 +272,16 @@ class gateInsertButton extends Button
   action()
   {
     gates.push(new LogicGate(this.x + 100, this.y, this.name));
+  }
+}
+
+class DeleteButton extends Button
+{
+  constructor(x, y)
+  {
+    super(x, y);
+    this.name = "Delete";
+    this.color = "Red";
   }
 }
 
@@ -284,6 +295,7 @@ function mouseReleased() {
 
 // List for buttons
 let buttons = [];
+let deleteButton;
 
 //Initial setup; Only runs once
 // "It can be used to set default values for your project."
@@ -305,6 +317,7 @@ function setup() {
 
     // Place buttons on screen
     buttons.push(new PlusButton(200, 500));
+    deleteButton = new DeleteButton(500, 500);
 
     //Initialize a gate? work in progress, will need to reference a "level database" for initializing "puzzles"
     gates.push(new LogicGate(100, 100, "AND"));
@@ -320,11 +333,13 @@ function draw() {
     //If you want to see something fun, comment this out
     background('#4287f5');
 
+    
     // For each loop that displays each button in buttons
     for (let button of buttons)
     {
         button.display();
     }
+    deleteButton.display();
 
     //Loops over every gate, and updates it
     for (let gate of gates) {
@@ -332,6 +347,12 @@ function draw() {
         gate.update();
         gate.display();
         
+        // Bugged: Can delete more than one gate at once
+        if (gate.x > deleteButton.x && gate.x < deleteButton.x + gateSizeWidth &&
+          gate.y > deleteButton.y && gate.y < deleteButton.y + gateSizeHeight)
+        {
+          gates.pop(gate);
+        }
     }
    
 }
