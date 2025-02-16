@@ -20,7 +20,6 @@ Sharpen your problem-solving skills and master digital logic in this fun and edu
 3. Test your design
 4. Adjust until you succeed!
 
-
 ### Access
 Local server access from Github Repository.
 
