@@ -1,32 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>GateKeeper - Main</title>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GateKeeper - Start</title>
+    <link rel="stylesheet" href="start.css">
 
-  </head>
-  <body>
-    <main>
-      
+    
+    <!-- Link the google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&family=Belanosima:wght@400;600;700&family=Modak&family=Rampart+One&display=swap" rel="stylesheet">
+    <!-- Link the font icons from font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- Section for the startpage -->
+    <section id="startPage">
+        <div class="start-page-container">
+            <!-- title for the start page -->
+            <div class="start-title">
+                <p>GateKeeper</p>
+            </div>
+            <!-- The 3 buttons that control start, options, and level select -->
+            <div class="start-buttons">
+                <a href="./levels/level1/level1.html"><button class="start-btn">Start</button></a>
+                <button class="options-btn">Options</button>
+                <button class="level-btn">Level Select</button>
+            </div>
+            
 
 
-      <!-- Added background to canvas -->
-      <section id="background">
 
-      </section>
-      
+            <!-- the options menu popup -->
+            <div id="optionsMenu" style="display: none;" >
+                <!-- the exit button in the options menu -->
+                <div class="exit-button">
+                    <button class="exit-btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <!-- top section involving the title options -->
+                <div class="top-options-section">
+                    <div class="options-title">
+                        <p>Options</p>
+                    </div>
+                </div>
+                <!-- middle section involving the volume and music mixers in the option menu -->
+                <div class="middle-options-section">
+                    <div class="volume-container">
+                        <div class="volume-icon">
+                            <i class="fa-solid fa-volume-off"></i>
+                        </div>
+                        <div class="volume-slider">
+                            <input id="volumeSlider" type="range" min="1" max="100" value="1">
+                        </div>
+                    </div>
+                    <div class="music-container">
+                        <div class="music-icon">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <div class="music-slider">
+                            <input id="musicSlider" type="range" min="1" max="100" value="1">
+                            
+                        </div>
+                    </div>
+                </div>
 
 
 
+                <!-- bottom section involving the buttons in the option menu -->
+                <div class="bottom-options-section">
+
+                    <button class="language-btn">Language</button>
+                    <button class="support-btn">Support</button>
+                    <button class="credits-btn">Credits</button>
+                    <button class="terms-btn">Terms & Privacy</button>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- The sound button on bottom right -->
+        <div class="sound-container">
+            <div class="sound-button">
+                <button><i class="fa-solid fa-volume-xmark" style="color: #ffffff;"></i></button>
+            </div>
+        </div>
+        
+    </section>
 
 
-
-
-    </main>
-    <script src="sketch.js"></script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="start.js"></script>
-  </body>
+</body>
 </html>

@@ -15,6 +15,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 2em;
+ 
 }
 /* container to center the text and buttons within the container */
 .start-page-container{
@@ -23,7 +27,9 @@
   justify-content: center;
   align-items: center;
   height: 30em;
-  width: 80em;
+  width: 80%;
+  
+  
 }
 /* style the title text */
 .start-title p {
@@ -67,15 +73,227 @@
 }
 
 
-/* Sound button position and styling */
-.sound-button{
-  position: relative;
+/* change size of audio button icon */
+.fa-volume-xmark{
+  font-size: 3em;
+}
+
+/* Options Menu--------------------------------------------------------- */
+
+/* the options menu white space with black border */
+#optionsMenu{
+  height: 36em;
+  width: 34em;
+  position: absolute;
+  background-color:white;
+  border: 4px solid rgb(0, 0, 0);
+  border-radius: 15px;
+  
   
 }
-.sound-button button{
+/* Styling for the exit button */
+.exit-btn{
+  display: inline;
   position: absolute;
-  top: 5em;
-  left: 52em;
+  right: 1%;
+  margin-top: .2em;
+  padding: .3em .5em;
+  font-size: 1.4em;
+  background-color: rgb(247, 58, 58);
+  color: black;
+  cursor: pointer;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 0px 2px 5px 1px rgb(148, 148, 148);
+  border-radius: 50em;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: .1s;
+}
+.exit-btn:hover{
+  background-color: rgb(242, 95, 95);
+}
+.exit-btn:active{
+  transform: scale(.8);
+}
+/* the icon for the exit btn */
+.fa-xmark{
+  text-shadow: 0px 3px black;
+}
+
+
+
+
+
+
+/* the styling for the title options */
+.top-options-section{
+  display: flex;
+  justify-content: center;
+}
+.options-title{
+  background-color: rgb(247, 58, 58);
+  width: 50%;
+  text-align: center;
+  box-shadow: 0px 3px 6px 1px rgb(104, 104, 104);
+  border: 2px solid black;
+  border-radius: 5px;
+  border-top: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.options-title p{
+  color: white;
+  font-size: 2.2em;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+}
+/* styling and positioning on the volume and music mixers */
+.middle-options-section{
+  height: 10em;
+}
+/* for the volume mixer */
+.volume-container{
+  height: 5em;
+  display: flex;
+  align-items: center;
+  margin-top: 2em;
+  margin-left: 2.8em;
+}
+.volume-icon i{
+  font-size: 2em;
+  color: white;
+  background-color: rgb(247, 58, 58);
+  padding: .3em .5em;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  box-shadow: 0px 5px 10px 1px black;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.volume-slider{
+  margin-left: 2.2em;
+}
+.volume-slider input{
+  cursor: pointer;
+  width: 20em;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 25px;
+  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%);
+  border: 2px solid black;
+  cursor: pointer;
+}
+.volume-slider input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 35px;
+  background: rgb(247, 58, 58);
+  cursor: pointer;
+  border: 2px solid black;
+}
+.volume-slider input::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: rgb(247, 58, 58);
+  cursor: pointer;
+}
+
+/* for the music mixer */
+.music-container{
+  height: 5em;
+  display: flex;
+  align-items: center;
+  margin-left: 2.8em;
+}
+.music-icon i{
+  font-size: 2em;
+  color: white;
+  background-color: rgb(247, 58, 58);
+  padding: .3em .4em .3em .2em;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  box-shadow: 0px 5px 10px 1px black;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.music-slider{
+  margin-left: 2.2em;
+}
+.music-slider input{
+  cursor: pointer;
+  width: 20em;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 25px;
+  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%);
+  border: 2px solid black;
+  cursor: pointer;
+}
+.music-slider input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 35px;
+  background: rgb(247, 58, 58);
+  cursor: pointer;
+  border: 2px solid black;
+}
+.music-slider input::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: rgb(247, 58, 58);
+  cursor: pointer;
+}
+
+/* bottom buttons section with language, support, credits, terms */
+.bottom-options-section{
+  height: 18em;
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+.bottom-options-section button{
+  font-size: 1.3em;
+  height: 2.6em;
+  width: 16em;
+  box-shadow: 0px 5px 5px 1px black; 
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 1px 1px black;
+  background-color: rgb(247, 58, 58);
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .1s;
+}
+/* hover effect to buttons in options menu popup */
+.bottom-options-section button:hover{
+  background-color: rgb(242, 95, 95);
+}
+/* the push in effect with buttons when clicked */
+.bottom-options-section button:active{
+  transform: scale(.9);
+}
+
+
+/* Styling and position on the sound button */
+.sound-container{
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: flex-end;
+
+}
+.sound-button{
+  height: 10vh;
+  width: 10em;
+  margin-top: 7em;
+}
+.sound-button button{
   background-color: rgb(247, 58, 58);
   padding: 1.4em;
   transition: .1s;
@@ -92,7 +310,277 @@
 .sound-button button:active{
   transform: scale(.9);
 }
-/* change size of audio button icon */
-i{
-  font-size: 3em;
+.fa-volume-high{
+  font-size: 2.9em;
+ 
+}
+
+
+
+
+
+
+
+/* Start Media Queries-------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+/* When screen size is less than 985 width, change these */
+@media screen and (max-width: 985px) {
+  .start-title p {
+    font-size: 8em;
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 4px black;
+    text-shadow: 5px 5px black;
+  }
+  /* position the 3 buttons */
+  .start-buttons{
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    gap: 1em;
+    
+  }
+  /* style the three buttons */
+  .start-buttons button{
+    font-size: 2.0em;
+    background-color: rgb(247, 58, 58);
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: .4em 1.1em;
+    box-shadow: 0px 5px 5px 1px black; 
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 3px 2px black;
+    cursor: pointer;
+    transition: .1s;
+  }
+  .start-btn{
+    width: 10em;
+  }
+  /* the hover effect over buttons */
+  .start-buttons button:hover{
+    background-color: rgb(242, 95, 95);
+  }
+  /* the push in effect with buttons when clicked */
+  .start-buttons button:active{
+    transform: scale(.9);
+  }
+
+
+}
+
+
+
+
+/* When screen size is less than 800 width, change these */
+@media screen and (max-width: 800px) {
+
+
+  .start-title p {
+    font-size: 6em;
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 4px black;
+    text-shadow: 5px 5px black;
+  }
+  /* position the 3 buttons */
+  .start-buttons{
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    gap: 1em;
+    
+  }
+  /* style the three buttons */
+  .start-buttons button{
+    font-size: 1.8em;
+    background-color: rgb(247, 58, 58);
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: .4em 1.0em;
+    box-shadow: 0px 5px 5px 1px black; 
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 3px 2px black;
+    cursor: pointer;
+    transition: .1s;
+  }
+  .start-btn{
+    width: 11.1em;
+  }
+  /* the hover effect over buttons */
+  .start-buttons button:hover{
+    background-color: rgb(242, 95, 95);
+  }
+  /* the push in effect with buttons when clicked */
+  .start-buttons button:active{
+    transform: scale(.9);
+  }
+  .sound-button{
+    display: none;
+  }
+}
+
+
+
+
+/* When screen size is less than 580 width, change these */
+@media screen and (max-width: 580px) {
+
+
+  .start-title p {
+    font-size: 4em;
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 4px black;
+    text-shadow: 5px 5px black;
+  }
+  /* position the 3 buttons */
+  .start-buttons{
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    gap: 1em;
+    padding-top: 2em;
+    
+  }
+  /* style the three buttons */
+  .start-buttons button{
+    font-size: 1.4em;
+    background-color: rgb(247, 58, 58);
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: .4em .2em;
+    box-shadow: 0px 5px 5px 1px black; 
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 3px 2px black;
+    cursor: pointer;
+    transition: .1s;
+  }
+  .start-btn{
+    width: 14.2em;
+  }
+  /* the hover effect over buttons */
+  .start-buttons button:hover{
+    background-color: rgb(242, 95, 95);
+  }
+  /* the push in effect with buttons when clicked */
+  .start-buttons button:active{
+    transform: scale(.9);
+  }
+  .sound-button{
+    display: none;
+  }
+
+  #optionsMenu{
+    height: 18em;
+    width: 22em;
+    position: absolute;
+    background-color:white;
+    border: 4px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    
+    
+  }
+  .top-options-section{
+    display: flex;
+    justify-content: center;
+  }
+  .options-title{
+    background-color: rgb(247, 58, 58);
+    width: 50%;
+    text-align: center;
+    box-shadow: 0px 3px 6px 1px rgb(104, 104, 104);
+    border: 2px solid black;
+    border-radius: 5px;
+    border-top: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+  .options-title p{
+    color: white;
+    font-size: 2.2em;
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 3px 2px black;
+  }
+  /* styling and positioning on the volume and music mixers */
+  .middle-options-section{
+    height: 10em;
+  }
+  /* for the volume mixer */
+  .volume-container{
+    height: 5em;
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+    margin-left: 2.8em;
+  }
+  .volume-icon i{
+    font-size: 2em;
+    color: white;
+    background-color: rgb(247, 58, 58);
+    padding: .3em .5em;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 3px 2px black;
+    box-shadow: 0px 5px 10px 1px black;
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+  .volume-slider{
+    margin-left: 2.2em;
+  }
+  .volume-slider input{
+    cursor: pointer;
+    width: 14em;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 25px;
+    background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%);
+    border: 2px solid black;
+    cursor: pointer;
+  }
+
+  /* for the music mixer */
+  .music-container{
+    height: 5em;
+    display: flex;
+    align-items: center;
+    margin-left: 2.8em;
+  }
+  .music-icon i{
+    font-size: 2em;
+    color: white;
+    background-color: rgb(247, 58, 58);
+    padding: .3em .4em .3em .2em;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 3px 2px black;
+    box-shadow: 0px 5px 10px 1px black;
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+  .music-slider{
+    margin-left: 2.2em;
+  }
+  .music-slider input{
+    cursor: pointer;
+    width: 14em;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 25px;
+    background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%);
+    border: 2px solid black;
+    cursor: pointer;
+  }
+
+  /* bottom buttons section with language, support, credits, terms */
+  .bottom-options-section{
+    display: none;
+    
+  }
 }
