@@ -372,7 +372,7 @@ function draw() {
         if (gate.x > deleteButton.x && gate.x < deleteButton.x + gateSizeWidth &&
           gate.y > deleteButton.y && gate.y < deleteButton.y + gateSizeHeight)
         {
-          gates.pop(gate);
+          gates.splice(gates.indexOf(gate), 1);
         }
     }
    
