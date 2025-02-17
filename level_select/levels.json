@@ -13,5 +13,32 @@
             { "x": 350, "y": 450, "type": "XOR" },
             { "x": 500, "y": 550, "type": "AND" }
         ]
+    },
+    {
+        "Name": "Level 3",
+        "Gates": [
+            { "x": 150, "y": 250, "type": "NOT" },
+            { "x": 350, "y": 450, "type": "XOR" },
+            { "x": 500, "y": 550, "type": "AND" }
+        ]
+    },
+    {
+        "Name": "Level 4",
+        "Gates": [
+            { "x": 150, "y": 250, "type": "NOT" },
+            { "x": 350, "y": 450, "type": "XOR" },
+            { "x": 500, "y": 550, "type": "AND" }
+        ]
+    },
+    {
+        "Name": "Boss Level 1",
+        "Gates": [
+            { "x": 150, "y": 250, "type": "NOT" },
+            { "x": 350, "y": 450, "type": "XOR" },
+            { "x": 500, "y": 550, "type": "AND" },
+            { "x": 350, "y": 150, "type": "XOR" },
+            { "x": 350, "y": 250, "type": "XOR" },
+            { "x": 350, "y": 550, "type": "XOR" }
+        ]
     }
 ]

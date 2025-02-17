@@ -54,7 +54,7 @@ class LogicGate {
     // AND GATE
     if (this.type === "AND") {
       fill(textColor);
-      text(this.type, this.x + 10 * s, this.y + 30 * s);
+      text(this.type, this.x + 25 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -71,7 +71,7 @@ class LogicGate {
     // OR GATE
     else if (this.type === "OR") {
       fill(textColor);
-      text(this.type, this.x + 15 * s, this.y + 30 * s);
+      text(this.type, this.x + 28 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -97,7 +97,7 @@ class LogicGate {
     // XOR GATE
     else if (this.type === "XOR") {
       fill(textColor);
-      text(this.type, this.x + 15 * s, this.y + 30 * s);
+      text(this.type, this.x + 30 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -133,7 +133,7 @@ class LogicGate {
     // NOT GATE
     else if (this.type === "NOT") {
       fill(textColor);
-      text(this.type, this.x + 2 * s, this.y + 30 * s);
+      text(this.type, this.x + 19 * s, this.y + 27 * s);
       noFill();
       triangle(
         this.x,
@@ -330,11 +330,15 @@ function setup() {
       const initialize_objects = JSON.parse(storedObjects);
       //console.log(initialize_objects);
       //console.log(initialize_objects.Name);
-      document.getElementById("Level-Name").innerHTML = initialize_objects.Name
+      document.getElementById("Level-Name").innerHTML = initialize_objects.Name;
 
        for (let g of initialize_objects.Gates){
-          gates.push(new LogicGate(g.x, g.y, g.type))
+          gates.push(new LogicGate(g.x, g.y, g.type));
        }
+    } else{
+
+      window.location.href = "/level_select/level_select.html";
+
     }
 
     // gates.push(new LogicGate(100, 100, "AND"));
