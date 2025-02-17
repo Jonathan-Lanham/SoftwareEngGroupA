@@ -25,9 +25,9 @@
             </div>
             <!-- The 3 buttons that control start, options, and level select -->
             <div class="start-buttons">
-                <a href="./main/index.html"><button class="start-btn">Start</button></a>
+                <a href="./levels/level1/level1.html"><button class="start-btn">Start</button></a>
                 <button class="options-btn">Options</button>
-                <a href="./level_select/level_select.html"><button class="start-btn">Level Select</button></a>
+                <button class="level-btn">Level Select</button>
             </div>
             
 
@@ -93,5 +93,62 @@
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="start.js"></script>
+
+
+    <!-- This is the top right info/about button --> 
+    <button class="about-button" onclick="togglePopup()">ℹ</button>
+
+    <!-- Popup includes an overlay behind the page to be able to click outside as well as the x to exit popup -->
+    <div class="popup-overlay" id="popup" onclick="closePopup(event)">
+        <div class="popup-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="togglePopup()">&times;</button>
+
+            <!-- using options menu popup css for title -->
+            <div class="top-about-section">
+                <div class="options-title">
+                    <p>About</p>
+                </div>
+            </div>
+            <!-- this is for the toggling between 'tabs' -->
+            <div class="tab-container">
+                <div class="tab active" onclick="openTab('game-info')">Game Info</div>
+                <div class="tab" onclick="openTab('logic-gates')">Logic Gates</div>
+            </div>
+            <!-- div for body of tabs bc they were being janky-->
+            <div class="tab-body">
+                <div id="game-info" class="tab-content active">
+                    <h3>About the Game</h3>
+                    <p><br>Gatekeeper is a puzzle game where players use logic gates to complete circuits. <br><br></p>
+                </div>
+                <div id="logic-gates" class="tab-content">
+                    <h3>Logic Gates Overview</h3>
+                    <p><br>Learn how AND, OR, NOT, XOR, and other gates function in circuits.<br><br></p>
+                </div>
+            </div> 
+        </div>
+    </div>
+    
+    <script>
+        // pop up
+        function togglePopup() {
+            document.getElementById("popup").style.display = 
+                document.getElementById("popup").style.display === "flex" ? "none" : "flex";
+        }
+        // pop down
+        function closePopup(event) {
+            if (event.target.id === "popup") {
+                togglePopup();
+            }
+        }
+        // tab visibility management active/nonactive
+        function openTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[onclick="openTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+    
 </body>
 </html>
