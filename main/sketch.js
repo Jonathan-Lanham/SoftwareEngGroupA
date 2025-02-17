@@ -54,7 +54,7 @@ class LogicGate {
     // AND GATE
     if (this.type === "AND") {
       fill(textColor);
-      text(this.type, this.x + 10 * s, this.y + 30 * s);
+      text(this.type, this.x + 25 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -71,7 +71,7 @@ class LogicGate {
     // OR GATE
     else if (this.type === "OR") {
       fill(textColor);
-      text(this.type, this.x + 15 * s, this.y + 30 * s);
+      text(this.type, this.x + 28 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -97,7 +97,7 @@ class LogicGate {
     // XOR GATE
     else if (this.type === "XOR") {
       fill(textColor);
-      text(this.type, this.x + 15 * s, this.y + 30 * s);
+      text(this.type, this.x + 30 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -133,7 +133,7 @@ class LogicGate {
     // NOT GATE
     else if (this.type === "NOT") {
       fill(textColor);
-      text(this.type, this.x + 2 * s, this.y + 30 * s);
+      text(this.type, this.x + 19 * s, this.y + 27 * s);
       noFill();
       triangle(
         this.x,
@@ -214,6 +214,77 @@ class LogicGate {
     }
 }
 
+// Button parent class, gonna need to add a mousee event to this
+class Button
+{
+    constructor(x, y)
+    {
+        // Coordinates for where the button will be placed
+        this.x = x; 
+        this.y = y;  
+        this.name = "BUTTON";
+        this.color = "Green";
+    }
+    // Action: Overrided by child class perform an action upon the button being pressed
+    action() {};
+
+    isMouseOver() 
+    {
+      return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
+             mouseY > this.y && mouseY < this.y + gateSizeHeight);
+    }
+
+    // Display: Displays the button on the screen
+    display()
+    {
+      stroke(0);
+      fill(this.color);
+      rect(this.x, this.y, gateSizeWidth, gateSizeHeight, 10);
+      textAlign(CENTER, CENTER);
+      text(this.name, this.x + 30, this.y + 20);
+    }
+}
+
+class PlusButton extends Button
+{ 
+  constructor(x, y)
+  {
+    super(x, y);
+    this.name = "+"
+    this.open = false; 
+  }
+  action()
+  {
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight, "AND"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*2, "OR"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*3, "XOR"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*4, "NOT"));
+  }
+}
+
+class GateInsertButton extends Button
+{
+  constructor(x, y, gateName)
+  {
+    super(x, y);
+    this.name = gateName;
+  }
+  action()
+  {
+    gates.push(new LogicGate(this.x + 100, this.y, this.name));
+  }
+}
+
+class DeleteButton extends Button
+{
+  constructor(x, y)
+  {
+    super(x, y);
+    this.name = "Delete";
+    this.color = "Red";
+  }
+}
+
 //Will be used to store all gates currently on screen. Work in progress.
 let gates = [];
 let gates_being_dragged = [];
@@ -221,6 +292,10 @@ let gates_being_dragged = [];
 function mouseReleased() {
     gates_being_dragged = []; // Clear all dragged objects on release
 }
+
+// List for buttons
+let buttons = [];
+let deleteButton;
 
 //Initial setup; Only runs once
 // "It can be used to set default values for your project."
@@ -237,14 +312,39 @@ function setup() {
     canvas = createCanvas(1100, 600);
     canvas.position(x, y);
 
+    canvas.style('border', '2px solid black');
+
+
     //Set the background color to that intriguing shade of blue.
     background('#4287f5');
 
+    // Place buttons on screen
+    buttons.push(new PlusButton(200, 500));
+    deleteButton = new DeleteButton(500, 500);
+
     //Initialize a gate? work in progress, will need to reference a "level database" for initializing "puzzles"
-    gates.push(new LogicGate(100, 100, "AND"));
-    gates.push(new LogicGate(500, 100, "OR"));
-    gates.push(new LogicGate(100, 350, "XOR"));
-    gates.push(new LogicGate(500, 350, "NOT"));
+      //Reference local storage for gates.
+    const storedObjects = localStorage.getItem('initialize_objects');
+
+    if (storedObjects) {
+      const initialize_objects = JSON.parse(storedObjects);
+      //console.log(initialize_objects);
+      //console.log(initialize_objects.Name);
+      document.getElementById("Level-Name").innerHTML = initialize_objects.Name;
+
+       for (let g of initialize_objects.Gates){
+          gates.push(new LogicGate(g.x, g.y, g.type));
+       }
+    } else{
+
+      window.location.href = "../level_select/level_select.html";
+
+    }
+
+    // gates.push(new LogicGate(100, 100, "AND"));
+    // gates.push(new LogicGate(500, 100, "OR"));
+    // gates.push(new LogicGate(100, 350, "XOR"));
+    // gates.push(new LogicGate(500, 350, "NOT"));
 }
 
 // "draw() is called directly after setup()"
@@ -254,12 +354,26 @@ function draw() {
     //If you want to see something fun, comment this out
     background('#4287f5');
 
+    
+    // For each loop that displays each button in buttons
+    for (let button of buttons)
+    {
+        button.display();
+    }
+    deleteButton.display();
+
     //Loops over every gate, and updates it
     for (let gate of gates) {
         //console.log(mouseX, mouseY)
         gate.update();
         gate.display();
         
+        // Bugged: Can delete more than one gate at once
+        if (gate.x > deleteButton.x && gate.x < deleteButton.x + gateSizeWidth &&
+          gate.y > deleteButton.y && gate.y < deleteButton.y + gateSizeHeight)
+        {
+          gates.splice(gates.indexOf(gate), 1);
+        }
     }
    
 }
@@ -268,6 +382,13 @@ function draw() {
 //Messy RN, but it works. Refactor later.
 function mousePressed() {
 
+    for (let button of buttons)
+    {
+      if (button.isMouseOver())
+      {
+        button.action();
+      }
+    }
 
     for (let gate of gates){
 
