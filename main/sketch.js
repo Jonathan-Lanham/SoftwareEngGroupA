@@ -337,7 +337,7 @@ function setup() {
        }
     } else{
 
-      window.location.href = "/level_select/level_select.html";
+      window.location.href = "../level_select/level_select.html";
 
     }
 
