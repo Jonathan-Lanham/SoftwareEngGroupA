@@ -237,14 +237,31 @@ function setup() {
     canvas = createCanvas(1100, 600);
     canvas.position(x, y);
 
+    canvas.style('border', '2px solid black');
+
+
     //Set the background color to that intriguing shade of blue.
     background('#4287f5');
 
     //Initialize a gate? work in progress, will need to reference a "level database" for initializing "puzzles"
-    gates.push(new LogicGate(100, 100, "AND"));
-    gates.push(new LogicGate(500, 100, "OR"));
-    gates.push(new LogicGate(100, 350, "XOR"));
-    gates.push(new LogicGate(500, 350, "NOT"));
+      //Reference local storage for gates.
+    const storedObjects = localStorage.getItem('initialize_objects');
+
+    if (storedObjects) {
+      const initialize_objects = JSON.parse(storedObjects);
+      //console.log(initialize_objects);
+      //console.log(initialize_objects.Name);
+      document.getElementById("Level-Name").innerHTML = initialize_objects.Name
+
+       for (let g of initialize_objects.Gates){
+          gates.push(new LogicGate(g.x, g.y, g.type))
+       }
+    }
+
+    // gates.push(new LogicGate(100, 100, "AND"));
+    // gates.push(new LogicGate(500, 100, "OR"));
+    // gates.push(new LogicGate(100, 350, "XOR"));
+    // gates.push(new LogicGate(500, 350, "NOT"));
 }
 
 // "draw() is called directly after setup()"
