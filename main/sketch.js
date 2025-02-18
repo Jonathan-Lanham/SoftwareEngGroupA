@@ -54,7 +54,7 @@ class LogicGate {
     // AND GATE
     if (this.type === "AND") {
       fill(textColor);
-      text(this.type, this.x + 10 * s, this.y + 30 * s);
+      text(this.type, this.x + 25 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -71,7 +71,7 @@ class LogicGate {
     // OR GATE
     else if (this.type === "OR") {
       fill(textColor);
-      text(this.type, this.x + 15 * s, this.y + 30 * s);
+      text(this.type, this.x + 28 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -97,7 +97,7 @@ class LogicGate {
     // XOR GATE
     else if (this.type === "XOR") {
       fill(textColor);
-      text(this.type, this.x + 15 * s, this.y + 30 * s);
+      text(this.type, this.x + 30 * s, this.y + 27 * s);
       noFill();
       arc(
         this.x + 30 * s,
@@ -133,7 +133,7 @@ class LogicGate {
     // NOT GATE
     else if (this.type === "NOT") {
       fill(textColor);
-      text(this.type, this.x + 2 * s, this.y + 30 * s);
+      text(this.type, this.x + 19 * s, this.y + 27 * s);
       noFill();
       triangle(
         this.x,
@@ -312,6 +312,9 @@ function setup() {
     canvas = createCanvas(1100, 600);
     canvas.position(x, y);
 
+    canvas.style('border', '2px solid black');
+
+
     //Set the background color to that intriguing shade of blue.
     background('#4287f5');
 
@@ -320,10 +323,28 @@ function setup() {
     deleteButton = new DeleteButton(500, 500);
 
     //Initialize a gate? work in progress, will need to reference a "level database" for initializing "puzzles"
-    gates.push(new LogicGate(100, 100, "AND"));
-    gates.push(new LogicGate(500, 100, "OR"));
-    gates.push(new LogicGate(100, 350, "XOR"));
-    gates.push(new LogicGate(500, 350, "NOT"));
+      //Reference local storage for gates.
+    const storedObjects = localStorage.getItem('initialize_objects');
+
+    if (storedObjects) {
+      const initialize_objects = JSON.parse(storedObjects);
+      //console.log(initialize_objects);
+      //console.log(initialize_objects.Name);
+      document.getElementById("Level-Name").innerHTML = initialize_objects.Name;
+
+       for (let g of initialize_objects.Gates){
+          gates.push(new LogicGate(g.x, g.y, g.type));
+       }
+    } else{
+
+      window.location.href = "../level_select/level_select.html";
+
+    }
+
+    // gates.push(new LogicGate(100, 100, "AND"));
+    // gates.push(new LogicGate(500, 100, "OR"));
+    // gates.push(new LogicGate(100, 350, "XOR"));
+    // gates.push(new LogicGate(500, 350, "NOT"));
 }
 
 // "draw() is called directly after setup()"
@@ -351,7 +372,7 @@ function draw() {
         if (gate.x > deleteButton.x && gate.x < deleteButton.x + gateSizeWidth &&
           gate.y > deleteButton.y && gate.y < deleteButton.y + gateSizeHeight)
         {
-          gates.pop(gate);
+          gates.splice(gates.indexOf(gate), 1);
         }
     }
    
