@@ -356,7 +356,7 @@ function setup() {
     });
 
     backToMain.addEventListener("click", () => {
-        window.location.href = "../level_select/level_select.html";
+        window.location.href = "../index.html";
     });
 
     document.addEventListener("click", (event) => {
