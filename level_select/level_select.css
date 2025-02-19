@@ -1,5 +1,8 @@
 @import "../start.css";
 
+*{
+  color: white;
+}
 /* Override styles if needed */
 #levelSelectPage {
   height: 100vh;
