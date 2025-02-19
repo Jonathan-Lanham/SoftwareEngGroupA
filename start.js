@@ -42,3 +42,57 @@ soundBtn.addEventListener('click', () =>{
         music.pause();
     }
 });
+
+// grabbing the elements for all buttons
+const allBtns = document.querySelectorAll('button');
+const allAtags = document.querySelectorAll('a');
+const btnSound = new Audio('music/music_button-click.mp3');
+
+// when any button is clicked, it plays a sound effect
+allBtns.forEach(button => {
+    button.addEventListener('click', ()  =>{
+       btnSound.play();
+    });
+});
+// when any a-tag is clicked, it plays a sound effect
+allAtags.forEach(aTag => {
+    aTag.addEventListener('click', (event)  =>{
+        event.preventDefault();
+        btnSound.play();
+        btnSound.onended = () => {
+            window.location.href = aTag.href;  // navigate after sound ends
+        };
+    });
+});
+
+// grabbing the sliders from the HTML
+const volumeSlider = document.getElementById('volumeSlider');
+const musicSlider = document.getElementById('musicSlider');
+
+// loading the saved volume setting from localStorage (if it exists)
+const savedVolume = localStorage.getItem('volume');
+if (savedVolume !== null) { // if the saved volume is not equal to nothing...
+    volumeSlider.value = savedVolume;  // setting slider to saved volume
+    btnSound.volume = savedVolume / 100;  // setting the volume of the sound to saved value (0 to 1)
+};
+
+// saving volume setting to the localStorage and update the volume
+volumeSlider.addEventListener('input', () => {
+    const volumeValue = volumeSlider.value / 100;  // getting volume as a decimal (0 to 1)
+    btnSound.volume = volumeValue;  // updating the sound's volume
+    localStorage.setItem('volume', volumeSlider.value);  // saving the volume slider value to localStorage
+});
+
+// loading the saved music volume setting from localStorage (if it exists)
+const savedMusicVolume = localStorage.getItem('musicVolume');
+if (savedMusicVolume !== null) {
+    musicSlider.value = savedMusicVolume;  // setting music slider to saved value
+    music.volume = savedMusicVolume / 100;  // setting the volume of the music to saved value (0 to 1)
+};
+
+// saving music volume setting to the localStorage and updating the music player volume
+musicSlider.addEventListener('input', () => {
+    const musicVolumeValue = musicSlider.value / 100;  // getting volume as a decimal (0 to 1)
+    music.volume = musicVolumeValue;  // updating the music player's volume
+    localStorage.setItem('musicVolume', musicSlider.value);  // saving the music volume slider value to localStorage
+});
