@@ -59,9 +59,15 @@ allAtags.forEach(aTag => {
     aTag.addEventListener('click', (event)  =>{
         event.preventDefault();
         btnSound.play();
-        btnSound.onended = () => {
-            window.location.href = aTag.href;  // navigate after sound ends
-        };
+
+        //Hardcoded 125ms timeout to let the button sound play. Can remove if preferred.
+        setTimeout(() => {
+            window.location.href = aTag.href
+        }, 125);
+        //Old issue: location change was attached to the end of a global sound object
+        // btnSound.onended = () => {
+        //     window.location.href = aTag.href;  // navigate after sound ends
+        // };
     });
 });
 
