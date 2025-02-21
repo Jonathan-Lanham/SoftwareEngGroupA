@@ -337,7 +337,7 @@ function setup() {
        }
     } else{
 
-      window.location.href = "../level_select/level_select.html";
+      window.location.href = "../templates/level_select.html";
 
     }
 
@@ -356,7 +356,7 @@ function setup() {
     });
 
     backToMain.addEventListener("click", () => {
-        window.location.href = "../index.html";
+        window.location.href = "../templates/index.html";
     });
 
     document.addEventListener("click", (event) => {
