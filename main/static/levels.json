@@ -4,6 +4,9 @@
         "Gates": [
             { "x": 100, "y": 200, "type": "AND" },
             { "x": 300, "y": 400, "type": "OR" }
+        ],
+        "Connections": [
+            { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
         ]
     },
     {
