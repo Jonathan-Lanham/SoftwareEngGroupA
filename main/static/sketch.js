@@ -46,6 +46,7 @@ class LogicGate {
     let textColor = 'black';
     // 
     stroke(0);
+    strokeWeight(1);
     // 
     let s = this.scalar;
     // 
@@ -232,14 +233,30 @@ class Connection {
   
   display() {
     stroke(0);
-    fill("Green");
-    rect(this.startX, this.startY, gateSizeWidth, gateSizeHeight, 10);
-    textAlign(CENTER, CENTER);
-    text(this.name, this.startX + 30, this.startY + 20);
+    strokeWeight(3);
+    let s = this.scalar;
+
+    line(this.startX, this.startY, (this.endX + this.startX) / 2, this.startY);
+    line((this.endX + this.startX) / 2, this.startY, (this.endX + this.startX) / 2, this.endY);
+    line((this.endX + this.startX) / 2, this.endY, this.endX, this.endY);
+
+    fill(this.output ? "green" : "red");
+    strokeWeight(1);
+    ellipse(this.startX * s, this.startY * s, 15 * s, 15 * s);
+    ellipse(this.endX * s, this.endY * s, 15 * s, 15 * s);
   }
 
   update() {
     //references global hashmap to run gate logic
+    let color = get(this.startX, this.startY);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0)
+    {
+      this.input = true;
+    }
+    else
+    {
+      this.input = false;
+    }
     this.output = this.input;
 
   }
@@ -249,7 +266,7 @@ class Connection {
       mouseY > this.startY && mouseY < this.startY + gateSizeHeight);
   }
   // TOGGLE INPUT A
-  toggleInputA() {
+  toggleInput() {
     this.inputA = this.inputA ? 0 : 1;
   }
 }
@@ -444,13 +461,7 @@ function draw() {
   }
   deleteButton.display();
 
-  //con.update();
-  //con.display();
-  for (let connection of connections) {
-    connection.update();
-    connection.display();
-    //console.log(connection);
-  }
+  
 
   //Loops over every gate, and updates it
   for (let gate of gates) {
@@ -465,6 +476,22 @@ function draw() {
     }
   }
 
+  for (let connection of connections) {
+    connection.update();
+    connection.display();
+  }
+
+  for (let gate of gates) {
+    //console.log(mouseX, mouseY)
+    gate.update();
+    gate.display();
+
+    // Bugged: Can delete more than one gate at once
+    if (gate.x > deleteButton.x && gate.x < deleteButton.x + gateSizeWidth &&
+      gate.y > deleteButton.y && gate.y < deleteButton.y + gateSizeHeight) {
+      gates.splice(gates.indexOf(gate), 1);
+    }
+  }
   
 }
 
