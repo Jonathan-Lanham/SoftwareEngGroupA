@@ -255,10 +255,19 @@ class PlusButton extends Button
   }
   action()
   {
+    if (!this.open)
+    {
       buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight, "AND"));
       buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*2, "OR"));
       buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*3, "XOR"));
       buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*4, "NOT"));
+      this.open = true;
+    }
+    else
+    {
+      for (let i = 0; i < 4; i++) buttons.pop();
+      this.open = false;
+    }
   }
 }
 
