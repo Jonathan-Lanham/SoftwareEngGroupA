@@ -4,37 +4,37 @@ gateSizeHeight = 50
 
 //global hash object for updating gate output
 const gateLogic = {
-    "AND": (a, b) => a && b,
-    "OR": (a, b) => a || b,
-    "XOR": (a, b) => (a && !b) || (!a && b),
-    "NOT": (a) => !a
+  "AND": (a, b) => a && b,
+  "OR": (a, b) => a || b,
+  "XOR": (a, b) => (a && !b) || (!a && b),
+  "NOT": (a) => !a
 };
 
 //Class for logic gates, will likely be moved out of this main file.
 class LogicGate {
-    constructor(x, y, type, scalar = 1) {
-        
-        //2D coordinates for logic gate object
-        this.x = x;
-        this.y = y;
+  constructor(x, y, type, scalar = 1) {
 
-        this.offsetX = 0
-        this.offsetY = 0
+    //2D coordinates for logic gate object
+    this.x = x;
+    this.y = y;
 
-        //What type of logic gate it is? AND, OR, etc?
-        //Will either be a string, or we might mess around with inheritance.
-        this.type = type;
+    this.offsetX = 0
+    this.offsetY = 0
 
-        this.scalar = scalar;
+    //What type of logic gate it is? AND, OR, etc?
+    //Will either be a string, or we might mess around with inheritance.
+    this.type = type;
 
-        //2 bits for input sources, 1 for output
-        this.inputA = false;
-        this.inputB = false;
-        this.output = false;
+    this.scalar = scalar;
 
-    }
-      // DRAWING GATES
-    display() {
+    //2 bits for input sources, 1 for output
+    this.inputA = false;
+    this.inputB = false;
+    this.output = false;
+
+  }
+  // DRAWING GATES
+  display() {
     // STYLE SETTINGS (SIMULATE CSS)
     let gateColor = color(255, 204, 0);
     let inputColor = color(200);
@@ -176,82 +176,116 @@ class LogicGate {
     // OUTPUT
     fill(this.output ? "green" : "red");
     ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
-    }
-    update() {
+  }
+  update() {
 
-        //update position of gate(s) being dragged, if any
-        for (let dragged_gate of gates_being_dragged){
-            dragged_gate.x = mouseX - dragged_gate.offsetX;
-            dragged_gate.y = mouseY - dragged_gate.offsetY;
-        }
-
-        //references global hashmap to run gate logic
-        this.output = gateLogic[this.type](this.inputA, this.inputB)
-
-    }
-    //Check if the mouse position is over a logic gate
-    isMouseOver() {
-        return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
-               mouseY > this.y && mouseY < this.y + gateSizeHeight);
-    }
-        // TOGGLE INPUT A
-    toggleInputA() {
-        if (
-        this.type === "AND" ||
-        this.type === "OR" ||
-        this.type === "NOT" ||
-        this.type === "XOR"
-        ) {
-        this.inputA = this.inputA ? 0 : 1;
-        }
+    //update position of gate(s) being dragged, if any
+    for (let dragged_gate of gates_being_dragged) {
+      dragged_gate.x = mouseX - dragged_gate.offsetX;
+      dragged_gate.y = mouseY - dragged_gate.offsetY;
     }
 
-    // TOGGLE INPUT B
-    toggleInputB() {
-        if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
-        this.inputB = this.inputB ? 0 : 1;
-        }
+    //references global hashmap to run gate logic
+    this.output = gateLogic[this.type](this.inputA, this.inputB)
+
+  }
+  //Check if the mouse position is over a logic gate
+  isMouseOver() {
+    return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
+      mouseY > this.y && mouseY < this.y + gateSizeHeight);
+  }
+  // TOGGLE INPUT A
+  toggleInputA() {
+    if (
+      this.type === "AND" ||
+      this.type === "OR" ||
+      this.type === "NOT" ||
+      this.type === "XOR"
+    ) {
+      this.inputA = this.inputA ? 0 : 1;
     }
+  }
+
+  // TOGGLE INPUT B
+  toggleInputB() {
+    if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
+      this.inputB = this.inputB ? 0 : 1;
+    }
+  }
+}
+
+class Connection {
+  constructor(startX, startY, endX, endY, scalar = 1) {
+
+    //2D coordinates for start and end points
+    this.startX = startX;
+    this.startY = startY;
+    this.endX = endX;
+    this.endY = endY;
+
+    this.scalar = scalar;
+
+    this.input = false;
+    this.output = false;
+
+  }
+  
+  display() {
+    stroke(0);
+    fill("Green");
+    rect(this.startX, this.startY, gateSizeWidth, gateSizeHeight, 10);
+    textAlign(CENTER, CENTER);
+    text(this.name, this.startX + 30, this.startY + 20);
+  }
+
+  update() {
+    //references global hashmap to run gate logic
+    this.output = this.input;
+
+  }
+  //Check if the mouse position is over a logic gate
+  isMouseOver() {
+    return (mouseX > this.startX && mouseX < this.startX + gateSizeWidth &&
+      mouseY > this.startY && mouseY < this.startY + gateSizeHeight);
+  }
+  // TOGGLE INPUT A
+  toggleInputA() {
+    this.inputA = this.inputA ? 0 : 1;
+  }
 }
 
 // Button parent class, gonna need to add a mousee event to this
-class Button
-{
-    constructor(x, y)
-    {
-        // Coordinates for where the button will be placed
-        this.x = x; 
-        this.y = y;  
-        this.name = "BUTTON";
-        this.color = "Green";
-    }
-    // Action: Overrided by child class perform an action upon the button being pressed
-    action() {};
+class Button {
+  constructor(x, y) {
+    // Coordinates for where the button will be placed
+    this.x = x;
+    this.y = y;
+    this.name = "BUTTON";
+    this.color = "Green";
+  }
+  // Action: Overrided by child class perform an action upon the button being pressed
+  action() { };
 
-    isMouseOver() 
-    {
-      return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
-             mouseY > this.y && mouseY < this.y + gateSizeHeight);
-    }
+  isMouseOver() {
+    return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
+      mouseY > this.y && mouseY < this.y + gateSizeHeight);
+  }
 
-    // Display: Displays the button on the screen
-    display()
-    {
-      stroke(0);
-      fill(this.color);
-      rect(this.x, this.y, gateSizeWidth, gateSizeHeight, 10);
-      textAlign(CENTER, CENTER);
-      text(this.name, this.x + 30, this.y + 20);
-    }
+  // Display: Displays the button on the screen
+  display() {
+    stroke(0);
+    fill(this.color);
+    rect(this.x, this.y, gateSizeWidth, gateSizeHeight, 10);
+    textAlign(CENTER, CENTER);
+    text(this.name, this.x + 30, this.y + 20);
+  }
 }
 
-class PlusButton extends Button
-{ 
-  constructor(x, y)
-  {
+class PlusButton extends Button {
+  constructor(x, y) {
     super(x, y);
     this.name = "+"
-    this.open = false; 
+    this.open = false;
   }
   action()
   {
@@ -271,23 +305,18 @@ class PlusButton extends Button
   }
 }
 
-class GateInsertButton extends Button
-{
-  constructor(x, y, gateName)
-  {
+class GateInsertButton extends Button {
+  constructor(x, y, gateName) {
     super(x, y);
     this.name = gateName;
   }
-  action()
-  {
+  action() {
     gates.push(new LogicGate(this.x + 100, this.y, this.name));
   }
 }
 
-class DeleteButton extends Button
-{
-  constructor(x, y)
-  {
+class DeleteButton extends Button {
+  constructor(x, y) {
     super(x, y);
     this.name = "Delete";
     this.color = "Red";
@@ -298,8 +327,10 @@ class DeleteButton extends Button
 let gates = [];
 let gates_being_dragged = [];
 
+let connections = [];
+
 function mouseReleased() {
-    gates_being_dragged = []; // Clear all dragged objects on release
+  gates_being_dragged = []; // Clear all dragged objects on release
 }
 
 // List for buttons
@@ -311,164 +342,174 @@ let deleteButton;
 //We may need to move things from here to "draw()" if they should be updated every frame, eg window size?
 function setup() {
 
-    //Create the Canvas based on the width and height of the window
-    //AKA, the canvas element takes up the entire page.
-    //If we want to do some html/css design, then we will have to readjust this.
-    createCanvas(1100, 600);
+  //Create the Canvas based on the width and height of the window
+  //AKA, the canvas element takes up the entire page.
+  //If we want to do some html/css design, then we will have to readjust this.
+  createCanvas(1100, 600);
 
-    let x = (windowWidth - width) / 2;
-    let y = (windowHeight - height) / 2;
-    canvas = createCanvas(1100, 600);
-    canvas.position(x, y);
+  let x = (windowWidth - width) / 2;
+  let y = (windowHeight - height) / 2;
+  canvas = createCanvas(1100, 600);
+  canvas.position(x, y);
 
-    canvas.style('border', '2px solid black');
+  canvas.style('border', '2px solid black');
 
+  //Set the background color to that intriguing shade of blue.
+  background('#4287f5');
 
-    //Set the background color to that intriguing shade of blue.
-    background('#4287f5');
+  // Place buttons on screen
+  buttons.push(new PlusButton(200, 500));
+  deleteButton = new DeleteButton(500, 500);
 
-    // Place buttons on screen
-    buttons.push(new PlusButton(200, 500));
-    deleteButton = new DeleteButton(500, 500);
+  //Initialize a gate? work in progress, will need to reference a "level database" for initializing "puzzles"
+  //Reference local storage for gates.
+  const storedObjects = localStorage.getItem('initialize_objects');
+  console.log(storedObjects);
 
-    //Initialize a gate? work in progress, will need to reference a "level database" for initializing "puzzles"
-      //Reference local storage for gates.
-    const storedObjects = localStorage.getItem('initialize_objects');
+  if (storedObjects) {
+    const initialize_objects = JSON.parse(storedObjects);
+    console.log(initialize_objects);
+    console.log(initialize_objects.Name);
+    document.getElementById("Level-Name").innerHTML = initialize_objects.Name;
 
-    if (storedObjects) {
-      const initialize_objects = JSON.parse(storedObjects);
-      //console.log(initialize_objects);
-      //console.log(initialize_objects.Name);
-      document.getElementById("Level-Name").innerHTML = initialize_objects.Name;
-
-       for (let g of initialize_objects.Gates){
-          gates.push(new LogicGate(g.x, g.y, g.type));
-       }
-    } else{
-
-      window.location.href = "../templates/level_select.html";
-
+    for (let g of initialize_objects.Gates) {
+      gates.push(new LogicGate(g.x, g.y, g.type));
     }
 
-    // === OPTIONS MENU LOGIC ===
-    const optionsBtn = document.getElementById("options-btn");
-    const optionsMenu = document.getElementById("options-menu");
-    const closeOptions = document.getElementById("close-options");
-    const backToMain = document.getElementById("back-to-main");
+    for (let c of initialize_objects.Connections) {
+      console.log(c);
+      connections.push(new Connection(c.startX, c.startY, c.endX, c.endY))
+    }
+  } else {
 
-    optionsBtn.addEventListener("click", () => {
-        optionsMenu.classList.toggle("show");
-    });
+    window.location.href = "../templates/level_select.html";
 
-    closeOptions.addEventListener("click", () => {
-        optionsMenu.classList.remove("show");
-    });
+  }
 
-    backToMain.addEventListener("click", () => {
-        window.location.href = "../templates/index.html";
-    });
+  // === OPTIONS MENU LOGIC ===
+  const optionsBtn = document.getElementById("options-btn");
+  const optionsMenu = document.getElementById("options-menu");
+  const closeOptions = document.getElementById("close-options");
+  const backToMain = document.getElementById("back-to-main");
 
-    document.addEventListener("click", (event) => {
-        if (!optionsBtn.contains(event.target) && !optionsMenu.contains(event.target)) {
-            optionsMenu.classList.remove("show");
-        }
-    });
+  optionsBtn.addEventListener("click", () => {
+    optionsMenu.classList.toggle("show");
+  });
 
-    // Handle volume control
-    const volumeSlider = document.getElementById("volume-slider");
-    volumeSlider.addEventListener("input", (event) => {
-        console.log("Volume:", event.target.value);
-        // Add logic to update game sound volume
-    });
+  closeOptions.addEventListener("click", () => {
+    optionsMenu.classList.remove("show");
+  });
 
-    // Handle music control
-    const musicSlider = document.getElementById("music-slider");
-    musicSlider.addEventListener("input", (event) => {
-        console.log("Music Volume:", event.target.value);
-        // Add logic to update background music
-    });
+  backToMain.addEventListener("click", () => {
+    window.location.href = "../templates/index.html";
+  });
 
-    // gates.push(new LogicGate(100, 100, "AND"));
-    // gates.push(new LogicGate(500, 100, "OR"));
-    // gates.push(new LogicGate(100, 350, "XOR"));
-    // gates.push(new LogicGate(500, 350, "NOT"));
+  document.addEventListener("click", (event) => {
+    if (!optionsBtn.contains(event.target) && !optionsMenu.contains(event.target)) {
+      optionsMenu.classList.remove("show");
+    }
+  });
+
+  // Handle volume control
+  const volumeSlider = document.getElementById("volume-slider");
+  volumeSlider.addEventListener("input", (event) => {
+    console.log("Volume:", event.target.value);
+    // Add logic to update game sound volume
+  });
+
+  // Handle music control
+  const musicSlider = document.getElementById("music-slider");
+  musicSlider.addEventListener("input", (event) => {
+    console.log("Music Volume:", event.target.value);
+    // Add logic to update background music
+  });
+
+  // gates.push(new LogicGate(100, 100, "AND"));
+  // gates.push(new LogicGate(500, 100, "OR"));
+  // gates.push(new LogicGate(100, 350, "XOR"));
+  // gates.push(new LogicGate(500, 350, "NOT"));
 }
 
 // "draw() is called directly after setup()"
 // "Executes the lines of code inside its curly brackets 60 times per second until the program is stopped or the noLoop() function is called."
 function draw() {
 
-    //If you want to see something fun, comment this out
-    background('#4287f5');
+  //If you want to see something fun, comment this out
+  background('#4287f5');
 
-    
-    // For each loop that displays each button in buttons
-    for (let button of buttons)
-    {
-        button.display();
-    }
-    deleteButton.display();
 
-    //Loops over every gate, and updates it
-    for (let gate of gates) {
-        //console.log(mouseX, mouseY)
-        gate.update();
-        gate.display();
-        
-        // Bugged: Can delete more than one gate at once
-        if (gate.x > deleteButton.x && gate.x < deleteButton.x + gateSizeWidth &&
-          gate.y > deleteButton.y && gate.y < deleteButton.y + gateSizeHeight)
-        {
-          gates.splice(gates.indexOf(gate), 1);
-        }
+  // For each loop that displays each button in buttons
+  for (let button of buttons) {
+    button.display();
+  }
+  deleteButton.display();
+
+  //con.update();
+  //con.display();
+  for (let connection of connections) {
+    connection.update();
+    connection.display();
+    //console.log(connection);
+  }
+
+  //Loops over every gate, and updates it
+  for (let gate of gates) {
+    //console.log(mouseX, mouseY)
+    gate.update();
+    gate.display();
+
+    // Bugged: Can delete more than one gate at once
+    if (gate.x > deleteButton.x && gate.x < deleteButton.x + gateSizeWidth &&
+      gate.y > deleteButton.y && gate.y < deleteButton.y + gateSizeHeight) {
+      gates.splice(gates.indexOf(gate), 1);
     }
-   
+  }
+
+  
 }
 
 // TOGGLE INPUTS
 //Messy RN, but it works. Refactor later.
 function mousePressed() {
 
-    for (let button of buttons)
-    {
-      if (button.isMouseOver())
-      {
-        button.action();
-      }
+  for (let button of buttons) {
+    if (button.isMouseOver()) {
+      button.action();
+    }
+  }
+
+  for (let gate of gates) {
+
+    if (gate.isMouseOver()) {
+      console.log("over")
+      gate.offsetX = mouseX - gate.x
+      gate.offsetY = mouseY - gate.y
+      gates_being_dragged.push(gate)
     }
 
-    for (let gate of gates){
-
-        if (gate.isMouseOver()){
-            console.log("over")
-            gate.offsetX = mouseX - gate.x
-            gate.offsetY = mouseY - gate.y
-            gates_being_dragged.push(gate)
-        }
-
-        if (gate.type != "NOT"){
-            if (
-                dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 10 * gate.scalar) <
-                10 * gate.scalar
-            ) {
-                gate.toggleInputA();
-            }
-            if (
-                dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 40 * gate.scalar) <
-                10 * gate.scalar
-            ) {
-                gate.toggleInputB();
-            }
-        } else{
-              // NOT GATE
-                if (
-                    dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 25 * gate.scalar) <
-                    10 * gate.scalar
-                ) {
-                    gate.toggleInputA();
-                }
-            }
-        }
+    if (gate.type != "NOT") {
+      if (
+        dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 10 * gate.scalar) <
+        10 * gate.scalar
+      ) {
+        gate.toggleInputA();
+      }
+      if (
+        dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 40 * gate.scalar) <
+        10 * gate.scalar
+      ) {
+        gate.toggleInputB();
+      }
+    } else {
+      // NOT GATE
+      if (
+        dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 25 * gate.scalar) <
+        10 * gate.scalar
+      ) {
+        gate.toggleInputA();
+      }
+    }
+  }
 }
-  
+
 
