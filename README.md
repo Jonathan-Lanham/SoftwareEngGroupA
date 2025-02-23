@@ -16,12 +16,14 @@ Sharpen your problem-solving skills and master digital logic in this fun and edu
 
 ### How to Play
 1. Receive the objective
-2. Place logic gates
-3. Connect the circuit
-4. Test your design
-5. Adjust until you succeed!
+2. Complete the circuit
+3. Test your design
+4. Adjust until you succeed!
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a83cc7372884a0bd1a822d9611bf0b7c54b6710b
 ### Access
 Local server access from Github Repository.
 
