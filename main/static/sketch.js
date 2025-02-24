@@ -215,7 +215,6 @@ class LogicGate {
 
     } else if (this.type === "NOT") {
       color = get(this.x - 20 * s, this.y + 25 * s);
-      console.log(color);
       if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
         this.inputA = true;
         this.output = false;
@@ -239,29 +238,29 @@ class LogicGate {
     }
 
   }
-  //Check if the mouse position is over a logic gate
+  // //Check if the mouse position is over a logic gate
   isMouseOver() {
     return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
       mouseY > this.y && mouseY < this.y + gateSizeHeight);
   }
-  // TOGGLE INPUT A
-  toggleInputA() {
-    if (
-      this.type === "AND" ||
-      this.type === "OR" ||
-      this.type === "NOT" ||
-      this.type === "XOR"
-    ) {
-      this.inputA = this.inputA ? 0 : 1;
-    }
-  }
+  // // TOGGLE INPUT A
+  // toggleInputA() {
+  //   if (
+  //     this.type === "AND" ||
+  //     this.type === "OR" ||
+  //     this.type === "NOT" ||
+  //     this.type === "XOR"
+  //   ) {
+  //     this.inputA = this.inputA ? 0 : 1;
+  //   }
+  // }
 
-  // TOGGLE INPUT B
-  toggleInputB() {
-    if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
-      this.inputB = this.inputB ? 0 : 1;
-    }
-  }
+  // // TOGGLE INPUT B
+  // toggleInputB() {
+  //   if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
+  //     this.inputB = this.inputB ? 0 : 1;
+  //   }
+  // }
 }
 
 class Connection {
@@ -306,14 +305,61 @@ class Connection {
     this.output = this.input;
 
   }
-  //Check if the mouse position is over a logic gate
-  isMouseOver() {
-    return (mouseX > this.startX && mouseX < this.startX + gateSizeWidth &&
-      mouseY > this.startY && mouseY < this.startY + gateSizeHeight);
+}
+
+class EnterancePoint {
+  constructor(x, y, state, scalar = 1) {
+
+    //2D coordinates for start and end points
+    this.x = x;
+    this.y = y;
+
+    this.scalar = scalar;
+
+    this.state = state;
   }
-  // TOGGLE INPUT A
-  toggleInput() {
-    this.inputA = this.inputA ? 0 : 1;
+
+  display() {
+    stroke(0);
+    strokeWeight(3);
+    let s = this.scalar
+
+    fill(this.state ? "green" : "red");
+    strokeWeight(1);
+    ellipse(this.x * s, this.y * s, 15 * s, 15 * s);
+  }
+}
+
+class ExitPoint {
+  constructor(x, y, scalar = 1) {
+
+    //2D coordinates for start and end points
+    this.x = x;
+    this.y = y;
+
+    this.scalar = scalar;
+
+    this.state = false;
+  }
+
+  display() {
+    stroke(0);
+    let s = this.scalar;
+
+    fill(this.state ? "green" : "red");
+    strokeWeight(1);
+    ellipse(this.x * s, this.y * s, 15 * s, 15 * s);
+  }
+
+  update()
+  {
+    let color = get(this.x, this.y);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.state = true;
+    }
+    else {
+      this.state = false;
+    }
   }
 }
 
@@ -391,6 +437,8 @@ let gates = [];
 let gates_being_dragged = [];
 
 let connections = [];
+let startPoints = [];
+let endPoints = [];
 
 function mouseReleased() {
   gates_being_dragged = []; // Clear all dragged objects on release
@@ -440,8 +488,18 @@ function setup() {
     }
 
     for (let c of initialize_objects.Connections) {
-      console.log(c);
-      connections.push(new Connection(c.startX, c.startY, c.endX, c.endY))
+      connections.push(new Connection(c.startX, c.startY, c.endX, c.endY));
+    }
+
+    for (let s of initialize_objects.Start) {
+      startPoints.push(new EnterancePoint(s.x, s.y, s.state));
+      print(s.x);
+      print(s.y);
+      print(s.state);
+    }
+
+    for (let e of initialize_objects.End) {
+      endPoints.push(new ExitPoint(e.x, e.y));
     }
   } else {
 
@@ -500,18 +558,16 @@ function draw() {
   //If you want to see something fun, comment this out
   background('#4287f5');
 
-  stroke(0);
-  fill("Green");
-  rect(0, 0, 30, 600, 10);
-
-
   // For each loop that displays each button in buttons
   for (let button of buttons) {
     button.display();
   }
   deleteButton.display();
 
-
+  for (let start of startPoints)
+  {
+    start.display();
+  }
 
   //Loops over every gate, and updates it
   for (let gate of gates) {
@@ -542,9 +598,36 @@ function draw() {
       gates.splice(gates.indexOf(gate), 1);
     }
   }
+
+  for (let connection of connections) {
+    connection.update();
+    connection.display();
+  }
+
+  for (let gate of gates) {
+    //console.log(mouseX, mouseY)
+    gate.update();
+    gate.display();
+
+    // Bugged: Can delete more than one gate at once
+    if (gate.x > deleteButton.x && gate.x < deleteButton.x + gateSizeWidth &&
+      gate.y > deleteButton.y && gate.y < deleteButton.y + gateSizeHeight) {
+      gates.splice(gates.indexOf(gate), 1);
+    }
+  }
+
+  for (let connection of connections) {
+    connection.update();
+    connection.display();
+  }
+
+  for (let end of endPoints)
+    {
+      end.update();
+      end.display();
+    }
 }
 
-// No longer works not needed
 // TOGGLE INPUTS
 //Messy RN, but it works. Refactor later.
 function mousePressed() {
@@ -564,28 +647,29 @@ function mousePressed() {
       gates_being_dragged.push(gate)
     }
 
-    if (gate.type != "NOT") {
-      if (
-        dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 10 * gate.scalar) <
-        10 * gate.scalar
-      ) {
-        gate.toggleInputA();
-      }
-      if (
-        dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 40 * gate.scalar) <
-        10 * gate.scalar
-      ) {
-        gate.toggleInputB();
-      }
-    } else {
-      // NOT GATE
-      if (
-        dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 25 * gate.scalar) <
-        10 * gate.scalar
-      ) {
-        gate.toggleInputA();
-      }
-    }
+    // No longer works and is not needed
+    // if (gate.type != "NOT") {
+    //   if (
+    //     dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 10 * gate.scalar) <
+    //     10 * gate.scalar
+    //   ) {
+    //     gate.toggleInputA();
+    //   }
+    //   if (
+    //     dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 40 * gate.scalar) <
+    //     10 * gate.scalar
+    //   ) {
+    //     gate.toggleInputB();
+    //   }
+    // } else {
+    //   // NOT GATE
+    //   if (
+    //     dist(mouseX, mouseY, gate.x - 20 * gate.scalar, gate.y + 25 * gate.scalar) <
+    //     10 * gate.scalar
+    //   ) {
+    //     gate.toggleInputA();
+    //   }
+    // }
   }
 }
 

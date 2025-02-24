@@ -3,22 +3,52 @@
         "Name": "Level 1",
         "Gates": [
             { "x": 100, "y": 200, "type": "AND" },
-            { "x": 300, "y": 400, "type": "OR" }
+            { "x": 300, "y": 400, "type": "OR" },
+            { "x": 500, "y": 300, "type": "OR" }
         ],
         "Connections": [
-            { "startX": 120, "startY": 200, "endX": 220, "endY": 300 },
-            { "startX": 120, "startY": 420, "endX": 220, "endY": 330 }
+            { "startX": 50, "startY": 50, "endX": 500, "endY": 150 },
+            { "startX": 50, "startY": 270, "endX": 500, "endY": 180 },
+            { "startX": 50, "startY": 320, "endX": 500, "endY": 400 },
+            { "startX": 50, "startY": 480, "endX": 500, "endY": 430 },
+            { "startX": 600, "startY": 165, "endX": 800, "endY": 285 },
+            { "startX": 600, "startY": 415, "endX": 800, "endY": 315 },
+            { "startX": 900, "startY": 300, "endX": 1000, "endY": 300 }
+        ],
+        "Start": [
+            { "x": 50, "y": 50, "state": true},
+            { "x": 50, "y": 270, "state": true},
+            { "x": 50, "y": 320, "state": true},
+            { "x": 50, "y": 480, "state": false}
+        ],
+        "End": [
+            {"x": 1000, "y": 300}
         ]
     },
     {
         "Name": "Level 2",
         "Gates": [
-            { "x": 150, "y": 250, "type": "NOT" },
-            { "x": 350, "y": 450, "type": "XOR" },
-            { "x": 500, "y": 550, "type": "AND" }
+            { "x": 100, "y": 200, "type": "AND" },
+            { "x": 300, "y": 400, "type": "XOR" },
+            { "x": 500, "y": 300, "type": "OR" }
         ],
         "Connections": [
-            { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
+            { "startX": 50, "startY": 50, "endX": 500, "endY": 150 },
+            { "startX": 50, "startY": 270, "endX": 500, "endY": 180 },
+            { "startX": 50, "startY": 320, "endX": 500, "endY": 400 },
+            { "startX": 50, "startY": 480, "endX": 500, "endY": 430 },
+            { "startX": 600, "startY": 165, "endX": 800, "endY": 285 },
+            { "startX": 600, "startY": 415, "endX": 800, "endY": 315 },
+            { "startX": 900, "startY": 300, "endX": 1000, "endY": 300 }
+        ],
+        "Start": [
+            { "x": 50, "y": 50, "state": false},
+            { "x": 50, "y": 270, "state": true},
+            { "x": 50, "y": 320, "state": true},
+            { "x": 50, "y": 480, "state": false}
+        ],
+        "End": [
+            {"x": 1000, "y": 300}
         ]
     },
     {
@@ -30,6 +60,13 @@
         ],
         "Connections": [
             { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
+        ],
+        "Start": [
+            { "x": 120, "y": 200, "state": true},
+            { "x": 120, "y": 420, "state": false}
+        ],
+        "End": [
+            {"x": 1000, "y": 500}
         ]
     },
     {
@@ -41,6 +78,13 @@
         ],
         "Connections": [
             { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
+        ],
+        "Start": [
+            { "x": 120, "y": 200, "state": true},
+            { "x": 120, "y": 420, "state": false}
+        ],
+        "End": [
+            {"x": 1000, "y": 500}
         ]
     },
     {
@@ -55,6 +99,13 @@
         ],
         "Connections": [
             { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
+        ],
+        "Start": [
+            { "x": 120, "y": 200, "state": true},
+            { "x": 120, "y": 420, "state": false}
+        ],
+        "End": [
+            {"x": 1000, "y": 500}
         ]
     }
 ]
