@@ -6,7 +6,8 @@
             { "x": 300, "y": 400, "type": "OR" }
         ],
         "Connections": [
-            { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
+            { "startX": 120, "startY": 200, "endX": 220, "endY": 300 },
+            { "startX": 120, "startY": 420, "endX": 220, "endY": 330 }
         ]
     },
     {
@@ -15,6 +16,9 @@
             { "x": 150, "y": 250, "type": "NOT" },
             { "x": 350, "y": 450, "type": "XOR" },
             { "x": 500, "y": 550, "type": "AND" }
+        ],
+        "Connections": [
+            { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
         ]
     },
     {
@@ -23,6 +27,9 @@
             { "x": 150, "y": 250, "type": "NOT" },
             { "x": 350, "y": 450, "type": "XOR" },
             { "x": 500, "y": 550, "type": "AND" }
+        ],
+        "Connections": [
+            { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
         ]
     },
     {
@@ -31,6 +38,9 @@
             { "x": 150, "y": 250, "type": "NOT" },
             { "x": 350, "y": 450, "type": "XOR" },
             { "x": 500, "y": 550, "type": "AND" }
+        ],
+        "Connections": [
+            { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
         ]
     },
     {
@@ -42,6 +52,9 @@
             { "x": 350, "y": 150, "type": "XOR" },
             { "x": 350, "y": 250, "type": "XOR" },
             { "x": 350, "y": 550, "type": "XOR" }
+        ],
+        "Connections": [
+            { "startX": 200, "startY": 200, "endX": 300, "endY": 300 }
         ]
     }
 ]

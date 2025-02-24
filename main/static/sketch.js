@@ -171,11 +171,18 @@ class LogicGate {
       fill(this.inputB ? "green" : "red");
       ellipse(this.x - 20 * s, this.y + 40 * s, 15 * s, 15 * s);
     } else if (this.type === "NOT") {
+      if (this.inputA == false && this.output == false)
+      {
+        fill("grey");
+      }
       ellipse(this.x - 20 * s, this.y + 25 * s, 15 * s, 15 * s);
     }
 
     // OUTPUT
     fill(this.output ? "green" : "red");
+    if (this.type === "NOT" && this.inputA == false && this.output == false){
+      fill("grey");
+    }
     ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
   }
   update() {
@@ -186,8 +193,50 @@ class LogicGate {
       dragged_gate.y = mouseY - dragged_gate.offsetY;
     }
 
+    let s = this.scalar;
+
+    let color = get(this.startX, this.startY);
+    if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
+      color = get(this.x - 20 * s, this.y + 10 * s,);
+      if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+        this.inputA = true;
+      }
+      else {
+        this.inputA = false;
+      }
+
+      color = get(this.x - 20 * s, this.y + 40 * s);
+      if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+        this.inputB = true;
+      }
+      else {
+        this.inputB = false;
+      }
+
+    } else if (this.type === "NOT") {
+      color = get(this.x - 20 * s, this.y + 25 * s);
+      console.log(color);
+      if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+        this.inputA = true;
+        this.output = false;
+      }
+      else if (color[1] === 0 && color[2] === 0 && color[0] > 0)
+      {
+        this.inputA = false;
+        this.output = true;
+      }
+      else
+      {
+        this.inputA = false;
+        this.output = false;
+      }
+    }
+
     //references global hashmap to run gate logic
-    this.output = gateLogic[this.type](this.inputA, this.inputB)
+    if (!(this.type === "NOT"))
+    {
+      this.output = gateLogic[this.type](this.inputA, this.inputB)
+    }
 
   }
   //Check if the mouse position is over a logic gate
@@ -230,7 +279,7 @@ class Connection {
     this.output = false;
 
   }
-  
+
   display() {
     stroke(0);
     strokeWeight(3);
@@ -247,14 +296,11 @@ class Connection {
   }
 
   update() {
-    //references global hashmap to run gate logic
     let color = get(this.startX, this.startY);
-    if (color[0] === 0 && color[2] === 0 && color[1] > 0)
-    {
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
       this.input = true;
     }
-    else
-    {
+    else {
       this.input = false;
     }
     this.output = this.input;
@@ -454,6 +500,10 @@ function draw() {
   //If you want to see something fun, comment this out
   background('#4287f5');
 
+  stroke(0);
+  fill("Green");
+  rect(0, 0, 30, 600, 10);
+
 
   // For each loop that displays each button in buttons
   for (let button of buttons) {
@@ -461,7 +511,7 @@ function draw() {
   }
   deleteButton.display();
 
-  
+
 
   //Loops over every gate, and updates it
   for (let gate of gates) {
@@ -492,9 +542,9 @@ function draw() {
       gates.splice(gates.indexOf(gate), 1);
     }
   }
-  
 }
 
+// No longer works not needed
 // TOGGLE INPUTS
 //Messy RN, but it works. Refactor later.
 function mousePressed() {
