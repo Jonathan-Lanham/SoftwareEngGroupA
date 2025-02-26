@@ -322,7 +322,7 @@
 #supportPopup{
   height: 44em;
   width: 40em;
-  background-color: white;
+  background-color: #2b71f3;
   position: absolute;
   display: none;
   border-radius: 25px;
@@ -339,7 +339,7 @@
   color: black;
   cursor: pointer;
   border: 2px solid rgb(0, 0, 0);
-  box-shadow: 0px 2px 5px 1px rgb(148, 148, 148);
+  box-shadow: 0px 2px 5px 1px rgb(37, 37, 37);
   border-radius: 50em;
   font-family: Arial, Helvetica, sans-serif;
   transition: .1s;
@@ -355,20 +355,29 @@
 .fa-xmark{
   text-shadow: 0px 3px black;
 }
+#supportForm{
+  height: 38em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
 .top-support-section{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  gap: 1.8em;
 }
 .support-title{
   background-color: rgb(247, 58, 58);
   width: 60%;
   text-align: center;
-  box-shadow: 0px 3px 6px 1px rgb(104, 104, 104);
+  box-shadow: 0px 3px 6px 1px rgb(37, 37, 37);
   border: 2px solid black;
   border-radius: 5px;
   border-top: none;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  margin: 0 auto;
 }
 .support-title p{
   color: white;
@@ -376,9 +385,77 @@
   font-family: "Modak", serif;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 2px black;
+
 }
-
-
+.subject-label,
+.username-label,
+.question-label,
+.message-label,
+.attachments-label{
+  color: white;
+  font-size: 1.2em;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 1px 1px black;
+  margin: 1.5em;
+  
+}
+.support-inputs{
+  margin-left: 2.2em;
+  padding-left: 1em;
+  color: black;
+  font-size: .8em;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: white;
+  outline: none;
+}
+.support-inputs::placeholder{
+  color: black;
+}
+#subject-input,
+#username-input,
+#type-question-input,
+#attachments-input{
+  height: 3em;
+  width: 90%;
+  margin-top: .2em;
+}
+#attachments-input{
+  padding-left: 2em;
+}
+#message-input{
+  height: 7em;
+  width: 90%;
+  margin-top: .2em;
+  padding-top: 1em;
+  resize: none;
+}
+.support-submit{
+  text-align: center;
+}
+.support-submit input{
+  padding: .2em 4.5em;
+  border-radius: 5px;
+  border: 2px solid black;
+  background-color: rgb(247, 58, 58);
+  font-size: 1.6em;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  color: white;
+  margin-top: .6em;
+  cursor: pointer;
+  transition: .1s;
+  box-shadow: 0px 2px 5px 1px rgb(37, 37, 37);
+}
+.support-submit button:hover{
+  background-color: rgb(242, 95, 95);
+}
+.support-submit button:active{
+  transform: scale(.9);
+}
 
 
 

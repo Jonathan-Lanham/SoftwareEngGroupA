@@ -90,13 +90,52 @@
 
         <!-- Support Popup when clicked in the options menu popup -->
         <div id="supportPopup" style="display: none;">
+            <!-- Support Popup Exit Button -->
             <div class="exit-button">
                 <button class="support-exit-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
+            <!-- Support title -->
             <div class="top-support-section">
                 <div class="support-title">
                     <p>Help is on it's way!</p>
                 </div>
+                <!-- the form for the support popup and action is sent to email after submission -->
+                <form id="supportForm" action="https://formsubmit.co/mariostanic367@gmail.com" method="post">
+                    <!-- subject section -->
+                    <div class="support-subject">
+                        <label class="subject-label">Subject</label><br>
+                        <input type="text" name="subject" id="subject-input" class="support-inputs" placeholder="Enter the Subject of your Message..." required>
+                    </div>
+                    <!-- username section -->
+                    <div class="support-username">
+                        <label class="username-label">Email</label><br>
+                        <input type="email" name="email" id="username-input" class="support-inputs" placeholder="Enter your Email..." required>
+                    </div>
+                    <!-- type of question section -->
+                    <div class="support-type-question">
+                        <label class="question-label">Type of Question</label><br>
+                        <select type="text" name="text" id="type-question-input" class="support-inputs" placeholder="Writing to us Regarding..." >
+                            <option value="">Account Issues (e.g., Login Problems, Password Reset)</option>
+                            <option value="">Technical Issues (e.g, Errors, Crashes, Bugs)</option>
+                            <option value="">Content/Feature Requests</option>
+                            <option value="">Other (Please Describe)</option>
+                        </select>
+                    </div>
+                    <!-- message section -->
+                    <div class="support-message">
+                        <label class="message-label">Message</label><br>
+                        <textarea type="text" name="message" id="message-input" class="support-inputs" placeholder="Please Provide your Message..." required></textarea>
+                    </div>
+                    <!-- attachments section -->
+                    <div class="support-attachments">
+                        <label class="attachments-label">Upload Attachments</label><br>
+                        <input type="file" name="file" id="attachments-input"  placeholder="Add Attachments...">
+                    </div>
+                    <!-- form submission button -->
+                    <div class="support-submit">
+                        <input type="submit" name="submit"><a href="#"></a>
+                    </div>
+                </form>
             </div>
         </div>
 
