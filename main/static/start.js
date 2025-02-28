@@ -5,6 +5,7 @@ const optionsBtn = document.querySelector('.options-btn');
 const optionsHiddenMenu = document.getElementById('optionsMenu');
 const optionsExitBtn = document.querySelector('.exit-btn');
 
+
 // code for the options button to showcase the options menu
 optionsBtn.addEventListener('click', () => {
     if(optionsHiddenMenu.style.display === 'none'){
@@ -16,13 +17,41 @@ optionsBtn.addEventListener('click', () => {
 });
 // code for the options exit button to get rid of the options menu
 optionsExitBtn.addEventListener('click', () => {
-    if(optionsHiddenMenu.style.display === 'block'){
+    if(optionsHiddenMenu.style.display === 'block' ){
         optionsHiddenMenu.style.display = 'none';
     }
     else{
         optionsHiddenMenu.style.display = 'block';
     }
 });
+
+
+// grabbing the elements for the support menu buttons
+const supportBtn = document.querySelector('.support-btn');
+const supportHiddenMenu = document.getElementById('supportPopup');
+const supportExitBtn = document.querySelector('.support-exit-btn');
+
+
+// code for the support button to showcase the support popup
+supportBtn.addEventListener('click', () => {
+    if(supportHiddenMenu.style.display === 'none'){
+        supportHiddenMenu.style.display = 'block';
+    }
+    else{
+        supportHiddenMenu.style.display = 'none';
+    }
+});
+// code for the support exit button to get rid of the support menu
+supportExitBtn.addEventListener('click', () => {
+    if(supportHiddenMenu.style.display === 'block' ){
+        supportHiddenMenu.style.display = 'none';
+    }
+    else{
+        supportHiddenMenu.style.display = 'block';
+    }
+});
+
+
 
 
 // grabbing the elements for the sound button
