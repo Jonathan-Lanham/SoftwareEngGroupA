@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GateKeeper - Level Select</title>
-    <link rel="stylesheet" href="level_select.css">
+    <link rel="stylesheet" href="../static/level_select.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,14 +21,13 @@
         <div class="level-buttons" id="level-list">
            
         </div>
-        <a href="../index.html"><button class="back-btn">Back</button></a>
+        <a href="index.html"><button class="back-btn">Back</button></a>
     </section>
 
-    <script src="level_select.js"></script>
     <script>
         async function loadLevels() {
             try {
-                const response = await fetch('levels.json');
+                const response = await fetch('../static/levels.json');
                 if (!response.ok) {
                     throw new Error('Failed to load levels.json');
                 }
@@ -46,11 +45,14 @@
 
                     //If user clicks on button, then print level name and attributes
                     listItem.addEventListener('click', () => {
-
+                        // play the btn sound effect when any listItem is clicked
+                        btnSound.play();
                         //store gates from selected level in local storage. Will allow users to start from the level they ended on.
                         localStorage.setItem('initialize_objects', JSON.stringify(level));
-                        //redirect to the main page
-                        window.location.href = '../main/index.html';
+                        // delay the page change by 1 second (1000 ms)
+                        setTimeout(() => {
+                            window.location.href = 'play.html';  // Redirect to the play page after the delay
+                        }, 1000);
 
                         console.log(`Selected level: ${level.Name}`);
                         console.log('Object:', JSON.stringify(level));
@@ -63,9 +65,39 @@
                 console.error('Error loading levels:', error);
             }
         }
+
+
+
+        // Added this to make button sound effect work...
+        document.addEventListener('DOMContentLoaded', () => {
+        // Grabbing all buttons and links for sound effects
+        const allBtns = document.querySelectorAll('button');
+        const allAtags = document.querySelectorAll('a');
         
-        document.addEventListener('DOMContentLoaded', loadLevels);
+        // When any button is clicked, it plays a sound effect
+        allBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                btnSound.play();  // Play the button sound
+            });
+        });
+
+        // When any <a> tag (link) is clicked, it plays a sound effect
+        allAtags.forEach(aTag => {
+            aTag.addEventListener('click', (event) => {
+                event.preventDefault();  // Prevent default link behavior
+                btnSound.play();  // Play the button sound
+
+                // Hardcoded 125ms timeout to let the button sound play before redirecting
+                setTimeout(() => {
+                    window.location.href = aTag.href;  // Redirect to the link's href
+                }, 1000);
+            });
+        });
+
+        // Load the levels once the DOM is ready
+        loadLevels();
+    });
     </script>
-    </body>
+    <script src="../static/sound_effect.js"></script>
 </body>
 </html>

@@ -1,0 +1,223 @@
+/* Use the same background color as start.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white; 
+  background-color: #4287f5;
+}
+
+#level-background {
+  height: 100vh;
+  width: 100%;
+  margin: 5px;
+  background-color: #4287f5; /* Same as the start page */
+  display: flex;
+  justify-content: left;
+  
+}
+
+h1 {
+  font-size: 5em;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 4px black;
+  text-shadow: 3px 2px black;
+}
+canvas {
+  display: block;
+}
+
+/* Options Button (Top Right) */
+#options-btn {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2em;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 100; /* Ensure it appears on top */
+}
+
+#options-btn:hover {
+  color: #ccc;
+}
+
+/* Options Menu (Hidden by Default) */
+#options-menu {
+  height: 23em;
+  width: 34em;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 320px;
+  background: white;
+  border: 2px  solid black;
+  padding: 1em;
+  border-radius: 15px;
+  display: none;
+  z-index: 100;
+  box-shadow: 0px 5px 5px 1px black;
+}
+
+#options-menu * {
+  background: rgb(247, 58, 58);
+}
+
+.options-title {
+  width: 80%;
+  text-align: center;
+  box-shadow: 0px 3px 6px 1px rgb(104, 104, 104); /* 3D shadow */
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 10px;
+  color: white;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  margin: auto;
+  box-shadow: 0px 5px 5px 1px black;
+  margin-right: 2.5em;
+}
+
+.options-title p{
+  color: white;
+  font-size: 2.2em;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+}
+/* Make the menu visible when toggled */
+#options-menu.show {
+  display: block;
+  justify-content: center;
+}
+
+/* Exit Button */
+.exit-btn {
+  display: inline;
+  position: absolute;
+  right: 1%;
+  margin-top: .2em;
+  margin-right: .2em;
+  padding: .3em .5em;
+  font-size: 1.4em;
+  background-color: rgb(247, 58, 58) !important;
+  color: black;
+  cursor: pointer;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 0px 5px 5px 1px black;
+  border-radius: 50em;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: .1s;
+}
+
+.exit-btn:hover {
+  background-color: rgb(242, 95, 95);
+}
+
+.fa-xmark{
+  text-shadow: 0px 3px black;
+}
+
+/* Sliders */
+.volume-container, .music-container {
+  height: 3em;
+  display: flex;
+  align-items: center;
+  margin-top: 2em;
+  margin-left: 2.8em;
+  margin-right: 18em;
+  margin-bottom: 2em;
+}
+
+.volume-icon i {
+  font-size: 1.2em;
+  color: white;
+  background-color: rgb(247, 58, 58) !important;
+  padding: .3em .5em;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  box-shadow: 0px 5px 10px 1px black;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.music-icon i {
+  font-size: 1.2em;
+  color: white;
+  background-color: rgb(247, 58, 58) !important;
+  padding: .3em .4em .3em .2em;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  box-shadow: 0px 5px 10px 1px black;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.volume-slider{
+  margin-left: .2em;
+}
+
+.music-slider{
+  margin-left: .2em;
+}
+
+.volume-slider input, .music-slider input {
+  cursor: pointer;
+  width: 14em;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 25px;
+  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%) !important;
+  border: 2px solid black;
+  cursor: pointer;
+  margin-right: -18em;
+  box-shadow: 0px 5px 5px 1px black;
+}
+
+.volume-slider input::-webkit-slider-thumb, .music-slider input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 35px;
+  background: rgb(247, 58, 58);
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+.volume-slider input::-moz-range-thumb, .music-slider input::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: rgb(247, 58, 58);
+  cursor: pointer;
+}
+
+/* Back to Main Page Button */
+#back-to-main {
+  font-size: 1.3em;
+  height: 2.6em;
+  width: 14em;
+  box-shadow: 0px 5px 5px 1px black; 
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 1px 1px black;
+  background-color: rgb(247, 58, 58);
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .1s;
+}
+
+#back-to-main:hover {
+  background-color: gray;
+}
+
+/* Selector to style the entire page */
+
+
+/* Main Page--------------------------------------------------------- */
