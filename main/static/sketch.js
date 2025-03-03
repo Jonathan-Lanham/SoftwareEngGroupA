@@ -30,9 +30,11 @@ class GateObject {
   update() { };
 }
 
-class AndGate extends LogicGate {
+class AndGate extends GateObject {
   constructor(x, y, scalar = 1) {
     super(x, y);
+    
+    this.type = "AND";
 
     this.inputA = false;
     this.inputB = false;
@@ -116,7 +118,7 @@ class AndGate extends LogicGate {
       this.inputB = false;
     }
 
-    this.output = gateLogic[this.type](this.inputA, this.inputB)
+    this.output = gateLogic["AND"](this.inputA, this.inputB)
   }
 
   //Check if the mouse position is over a logic gate
@@ -126,9 +128,11 @@ class AndGate extends LogicGate {
   }
 }
 
-class OrGate extends LogicGate {
+class OrGate extends GateObject {
   constructor(x, y, scalar = 1) {
     super(x, y);
+
+    this.type = "OR";
 
     this.inputA = false;
     this.inputB = false;
@@ -221,7 +225,7 @@ class OrGate extends LogicGate {
       this.inputB = false;
     }
 
-    this.output = gateLogic[this.type](this.inputA, this.inputB)
+    this.output = gateLogic["OR"](this.inputA, this.inputB)
   }
 
   //Check if the mouse position is over a logic gate
@@ -234,6 +238,8 @@ class OrGate extends LogicGate {
 class XorGate extends GateObject {
   constructor(x, y, scalar = 1) {
     super(x, y);
+
+    this.type = "XOR";
 
     this.inputA = false;
     this.inputB = false;
@@ -339,7 +345,7 @@ class XorGate extends GateObject {
       this.inputB = false;
     }
 
-    this.output = gateLogic[this.type](this.inputA, this.inputB)
+    this.output = gateLogic["XOR"](this.inputA, this.inputB)
   }
 
   //Check if the mouse position is over a logic gate
@@ -350,9 +356,11 @@ class XorGate extends GateObject {
 }
 
 //Class for logic gates, will likely be moved out of this main file.
-class NotGate {
+class NotGate extends GateObject {
   constructor(x, y, scalar = 1) {
     super(x, y);
+
+    this.type = "NOT";
 
     this.input = false;
   }
