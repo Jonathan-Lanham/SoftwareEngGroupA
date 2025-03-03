@@ -11,30 +11,59 @@ const gateLogic = {
 };
 
 class GateObject {
-  constructor(x, y, scalar = 1) {
+  constructor(x, y, type, scalar = 1) {
 
     //2D coordinates for logic gate object
     this.x = x;
     this.y = y;
 
+    this.type = type;
+    
     this.offsetX = 0
     this.offsetY = 0
 
     this.scalar = scalar;
 
+    this.inputA = false;
+    this.inputB = false;
     this.output = false;
 
   }
 
   display() { };
-  update() { };
+  update() {
+
+    //update position of gate(s) being dragged, if any
+    for (let dragged_gate of gates_being_dragged) {
+      dragged_gate.x = mouseX - dragged_gate.offsetX;
+      dragged_gate.y = mouseY - dragged_gate.offsetY;
+    }
+
+    let s = this.scalar;
+    let color = get(this.x - 20 * s, this.y + 10 * s,);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputA = true;
+    }
+    else {
+      this.inputA = false;
+    }
+
+    color = get(this.x - 20 * s, this.y + 40 * s);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputB = true;
+    }
+    else {
+      this.inputB = false;
+    }
+    
+
+    this.output = gateLogic[this.type](this.inputA, this.inputB);
+  }
 }
 
 class AndGate extends GateObject {
-  constructor(x, y, scalar = 1) {
-    super(x, y);
-    
-    this.type = "AND";
+  constructor(x, y, type, scalar = 1) {
+    super(x, y, type);
 
     this.inputA = false;
     this.inputB = false;
@@ -93,34 +122,6 @@ class AndGate extends GateObject {
     ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
   }
 
-  update() {
-
-    //update position of gate(s) being dragged, if any
-    for (let dragged_gate of gates_being_dragged) {
-      dragged_gate.x = mouseX - dragged_gate.offsetX;
-      dragged_gate.y = mouseY - dragged_gate.offsetY;
-    }
-
-    let s = this.scalar;
-    let color = get(this.x - 20 * s, this.y + 10 * s,);
-    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-      this.inputA = true;
-    }
-    else {
-      this.inputA = false;
-    }
-
-    color = get(this.x - 20 * s, this.y + 40 * s);
-    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-      this.inputB = true;
-    }
-    else {
-      this.inputB = false;
-    }
-
-    this.output = gateLogic["AND"](this.inputA, this.inputB)
-  }
-
   //Check if the mouse position is over a logic gate
   isMouseOver() {
     return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
@@ -129,10 +130,8 @@ class AndGate extends GateObject {
 }
 
 class OrGate extends GateObject {
-  constructor(x, y, scalar = 1) {
-    super(x, y);
-
-    this.type = "OR";
+  constructor(x, y, type, scalar = 1) {
+    super(x, y, type);
 
     this.inputA = false;
     this.inputB = false;
@@ -199,35 +198,6 @@ class OrGate extends GateObject {
     ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
   }
 
-  update() {
-
-    //update position of gate(s) being dragged, if any
-    for (let dragged_gate of gates_being_dragged) {
-      dragged_gate.x = mouseX - dragged_gate.offsetX;
-      dragged_gate.y = mouseY - dragged_gate.offsetY;
-    }
-
-    let s = this.scalar;
-
-    let color = get(this.x - 20 * s, this.y + 10 * s,);
-    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-      this.inputA = true;
-    }
-    else {
-      this.inputA = false;
-    }
-
-    color = get(this.x - 20 * s, this.y + 40 * s);
-    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-      this.inputB = true;
-    }
-    else {
-      this.inputB = false;
-    }
-
-    this.output = gateLogic["OR"](this.inputA, this.inputB)
-  }
-
   //Check if the mouse position is over a logic gate
   isMouseOver() {
     return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
@@ -236,10 +206,8 @@ class OrGate extends GateObject {
 }
 
 class XorGate extends GateObject {
-  constructor(x, y, scalar = 1) {
-    super(x, y);
-
-    this.type = "XOR";
+  constructor(x, y, type, scalar = 1) {
+    super(x, y, type);
 
     this.inputA = false;
     this.inputB = false;
@@ -319,35 +287,6 @@ class XorGate extends GateObject {
     ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
   }
 
-  update() {
-
-    //update position of gate(s) being dragged, if any
-    for (let dragged_gate of gates_being_dragged) {
-      dragged_gate.x = mouseX - dragged_gate.offsetX;
-      dragged_gate.y = mouseY - dragged_gate.offsetY;
-    }
-
-    let s = this.scalar;
-
-    let color = get(this.x - 20 * s, this.y + 10 * s,);
-    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-      this.inputA = true;
-    }
-    else {
-      this.inputA = false;
-    }
-
-    color = get(this.x - 20 * s, this.y + 40 * s);
-    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-      this.inputB = true;
-    }
-    else {
-      this.inputB = false;
-    }
-
-    this.output = gateLogic["XOR"](this.inputA, this.inputB)
-  }
-
   //Check if the mouse position is over a logic gate
   isMouseOver() {
     return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
@@ -357,10 +296,8 @@ class XorGate extends GateObject {
 
 //Class for logic gates, will likely be moved out of this main file.
 class NotGate extends GateObject {
-  constructor(x, y, scalar = 1) {
-    super(x, y);
-
-    this.type = "NOT";
+  constructor(x, y, type, scalar = 1) {
+    super(x, y, type);
 
     this.input = false;
   }
@@ -435,15 +372,15 @@ class NotGate extends GateObject {
 
     let color = get(this.x - 20 * s, this.y + 25 * s);
     if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-      this.inputA = true;
+      this.input = true;
       this.output = false;
     }
     else if (color[1] === 0 && color[2] === 0 && color[0] > 0) {
-      this.inputA = false;
+      this.input = false;
       this.output = true;
     }
     else {
-      this.inputA = false;
+      this.input = false;
       this.output = false;
     }
   }
@@ -624,7 +561,18 @@ class GateInsertButton extends Button {
     this.name = gateName;
   }
   action() {
-    gates.push(new LogicGate(this.x + 100, this.y, this.name));
+    if (this.name === "AND"){
+      gates.push(new AndGate(this.x + 100, this.y, this.name));
+    }
+    else if (this.name === "OR"){
+      gates.push(new OrGate(this.x + 100, this.y, this.name));
+    }
+    else if (this.name === "XOR"){
+      gates.push(new XorGate(this.x + 100, this.y, this.name));
+    }
+    else if (this.name === "NOT"){
+      gates.push(new NotGate(this.x + 100, this.y, this.name));
+    }
   }
 }
 
@@ -689,16 +637,16 @@ function setup() {
 
     for (let g of initialize_objects.Gates) {
       if (g.type === "AND"){
-        gates.push(new AndGate(g.x, g.y));
+        gates.push(new AndGate(g.x, g.y, g.type));
       }
       else if (g.type === "OR"){
-        gates.push(new OrGate(g.x, g.y));
+        gates.push(new OrGate(g.x, g.y, g.type));
       }
       else if (g.type === "XOR"){
-        gates.push(new XorGate(g.x, g.y));
+        gates.push(new XorGate(g.x, g.y, g.type));
       }
       else if (g.type === "NOT"){
-        gates.push(new NotGate(g.x, g.y));
+        gates.push(new NotGate(g.x, g.y, g.type));
       }
     }
 
