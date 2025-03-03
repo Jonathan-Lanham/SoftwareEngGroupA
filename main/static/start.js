@@ -51,27 +51,6 @@ supportExitBtn.addEventListener('click', () => {
     }
 });
 
-
-
-
-// grabbing the elements for the sound button
-const soundBtn = document.querySelector('.sound-button');
-const soundIcon = document.querySelector('.fa-volume-xmark');
-const music = new Audio('../static/music/game-8-bit-on-278083.mp3')
-
-// when sound button is clicked, replace the icons and play music
-soundBtn.addEventListener('click', () =>{
-    if(soundIcon.classList.contains('fa-volume-xmark')){
-        soundIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
-        music.play();
-    }
-    else{
-        soundIcon.classList.add('fa-volume-xmark');
-        music.currentTime = 0;
-        music.pause();
-    }
-});
-
 // grabbing the elements for all buttons
 const allBtns = document.querySelectorAll('button');
 const allAtags = document.querySelectorAll('a');
@@ -99,6 +78,28 @@ allAtags.forEach(aTag => {
         // };
     });
 });
+
+
+
+
+// grabbing the elements for the sound button
+const soundBtn = document.querySelector('.sound-button');
+const soundIcon = document.querySelector('.fa-volume-xmark');
+const music = new Audio('../static/music/game-8-bit-on-278083.mp3')
+
+// when sound button is clicked, replace the icons and play music
+soundBtn.addEventListener('click', () =>{
+    if(soundIcon.classList.contains('fa-volume-xmark')){
+        soundIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+        music.play();
+    }
+    else{
+        soundIcon.classList.add('fa-volume-xmark');
+        music.currentTime = 0;
+        music.pause();
+    }
+});
+
 
 // grabbing the sliders from the HTML
 const volumeSlider = document.getElementById('volumeSlider');
