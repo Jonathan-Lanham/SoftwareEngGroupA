@@ -10,9 +10,8 @@ const gateLogic = {
   "NOT": (a) => !a
 };
 
-//Class for logic gates, will likely be moved out of this main file.
-class LogicGate {
-  constructor(x, y, type, scalar = 1) {
+class GateObject {
+  constructor(x, y, scalar = 1) {
 
     //2D coordinates for logic gate object
     this.x = x;
@@ -21,18 +20,225 @@ class LogicGate {
     this.offsetX = 0
     this.offsetY = 0
 
-    //What type of logic gate it is? AND, OR, etc?
-    //Will either be a string, or we might mess around with inheritance.
-    this.type = type;
-
     this.scalar = scalar;
 
-    //2 bits for input sources, 1 for output
-    this.inputA = false;
-    this.inputB = false;
     this.output = false;
 
   }
+
+  display() { };
+  update() { };
+}
+
+class AndGate extends LogicGate {
+  constructor(x, y, scalar = 1) {
+    super(x, y);
+
+    this.inputA = false;
+    this.inputB = false;
+  }
+
+  display() {
+    // STYLE SETTINGS (SIMULATE CSS)
+    let gateColor = color(255, 204, 0);
+    let inputColor = color(200);
+    let outputColor = color(0, 255, 0);
+    let inputHoverColor = color(0, 255, 0);
+    let outputHoverColor = color(255, 0, 0);
+    //
+    let textsize = 15;
+    let textColor = 'black';
+    // 
+    stroke(0);
+    strokeWeight(1);
+    // 
+    let s = this.scalar;
+    // 
+    textSize(textsize * s);
+    // 
+
+    fill(textColor);
+    text(this.type, this.x + 25 * s, this.y + 27 * s);
+    noFill();
+    arc(
+      this.x + 30 * s,
+      this.y + 25 * s,
+      60 * s,
+      50 * s,
+      PI + HALF_PI,
+      TWO_PI + HALF_PI
+    );
+    line(this.x, this.y, this.x + 30 * s, this.y);
+    line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
+    line(this.x, this.y, this.x, this.y + 50 * s);
+
+
+    // INPUT LINES
+    line(this.x - 20 * s, this.y + 10 * s, this.x, this.y + 10 * s);
+    line(this.x - 20 * s, this.y + 40 * s, this.x, this.y + 40 * s);
+
+    // OUTPUT LINE
+    line(this.x + 60 * s, this.y + 25 * s, this.x + 80 * s, this.y + 25 * s);
+
+    // INPUT BUTTONS
+    fill(this.inputA ? "green" : "red");
+    ellipse(this.x - 20 * s, this.y + 10 * s, 15 * s, 15 * s);
+    fill(this.inputB ? "green" : "red");
+    ellipse(this.x - 20 * s, this.y + 40 * s, 15 * s, 15 * s);
+
+    // OUTPUT
+    fill(this.output ? "green" : "red");
+    ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
+  }
+
+  update() {
+
+    //update position of gate(s) being dragged, if any
+    for (let dragged_gate of gates_being_dragged) {
+      dragged_gate.x = mouseX - dragged_gate.offsetX;
+      dragged_gate.y = mouseY - dragged_gate.offsetY;
+    }
+
+    let s = this.scalar;
+    let color = get(this.x - 20 * s, this.y + 10 * s,);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputA = true;
+    }
+    else {
+      this.inputA = false;
+    }
+
+    color = get(this.x - 20 * s, this.y + 40 * s);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputB = true;
+    }
+    else {
+      this.inputB = false;
+    }
+
+    this.output = gateLogic[this.type](this.inputA, this.inputB)
+  }
+
+  //Check if the mouse position is over a logic gate
+  isMouseOver() {
+    return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
+      mouseY > this.y && mouseY < this.y + gateSizeHeight);
+  }
+}
+
+class OrGate extends LogicGate {
+  constructor(x, y, scalar = 1) {
+    super(x, y);
+
+    this.inputA = false;
+    this.inputB = false;
+  }
+
+  // DRAWING GATES
+  display() {
+    // STYLE SETTINGS (SIMULATE CSS)
+    let gateColor = color(255, 204, 0);
+    let inputColor = color(200);
+    let outputColor = color(0, 255, 0);
+    let inputHoverColor = color(0, 255, 0);
+    let outputHoverColor = color(255, 0, 0);
+
+    let textsize = 15;
+    let textColor = 'black';
+
+    stroke(0);
+    strokeWeight(1);
+
+    let s = this.scalar;
+    textSize(textsize * s);
+
+    fill(textColor);
+    text(this.type, this.x + 28 * s, this.y + 27 * s);
+    noFill();
+    arc(
+      this.x + 30 * s,
+      this.y + 25 * s,
+      60 * s,
+      50 * s,
+      PI + HALF_PI,
+      TWO_PI + HALF_PI
+    );
+    bezier(
+      this.x,
+      this.y,
+      this.x + 10 * s,
+      this.y + 10 * s,
+      this.x + 10 * s,
+      this.y + 40 * s,
+      this.x,
+      this.y + 50 * s
+    );
+    line(this.x, this.y, this.x + 30 * s, this.y);
+    line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
+
+
+    // INPUT LINES
+    line(this.x - 20 * s, this.y + 10 * s, this.x + 5 * s, this.y + 10 * s);
+    line(this.x - 20 * s, this.y + 40 * s, this.x + 5 * s, this.y + 40 * s);
+
+    // OUTPUT LINE
+    line(this.x + 60 * s, this.y + 25 * s, this.x + 80 * s, this.y + 25 * s);
+
+    // INPUT BUTTONS
+    fill(this.inputA ? "green" : "red");
+    ellipse(this.x - 20 * s, this.y + 10 * s, 15 * s, 15 * s);
+    fill(this.inputB ? "green" : "red");
+    ellipse(this.x - 20 * s, this.y + 40 * s, 15 * s, 15 * s);
+
+    // OUTPUT
+    fill(this.output ? "green" : "red");
+    ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
+  }
+
+  update() {
+
+    //update position of gate(s) being dragged, if any
+    for (let dragged_gate of gates_being_dragged) {
+      dragged_gate.x = mouseX - dragged_gate.offsetX;
+      dragged_gate.y = mouseY - dragged_gate.offsetY;
+    }
+
+    let s = this.scalar;
+
+    let color = get(this.x - 20 * s, this.y + 10 * s,);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputA = true;
+    }
+    else {
+      this.inputA = false;
+    }
+
+    color = get(this.x - 20 * s, this.y + 40 * s);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputB = true;
+    }
+    else {
+      this.inputB = false;
+    }
+
+    this.output = gateLogic[this.type](this.inputA, this.inputB)
+  }
+
+  //Check if the mouse position is over a logic gate
+  isMouseOver() {
+    return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
+      mouseY > this.y && mouseY < this.y + gateSizeHeight);
+  }
+}
+
+class XorGate extends GateObject {
+  constructor(x, y, scalar = 1) {
+    super(x, y);
+
+    this.inputA = false;
+    this.inputB = false;
+  }
+
   // DRAWING GATES
   display() {
     // STYLE SETTINGS (SIMULATE CSS)
@@ -52,139 +258,61 @@ class LogicGate {
     // 
     textSize(textsize * s);
     // 
-    // AND GATE
-    if (this.type === "AND") {
-      fill(textColor);
-      text(this.type, this.x + 25 * s, this.y + 27 * s);
-      noFill();
-      arc(
-        this.x + 30 * s,
-        this.y + 25 * s,
-        60 * s,
-        50 * s,
-        PI + HALF_PI,
-        TWO_PI + HALF_PI
-      );
-      line(this.x, this.y, this.x + 30 * s, this.y);
-      line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
-      line(this.x, this.y, this.x, this.y + 50 * s);
-    }
-    // OR GATE
-    else if (this.type === "OR") {
-      fill(textColor);
-      text(this.type, this.x + 28 * s, this.y + 27 * s);
-      noFill();
-      arc(
-        this.x + 30 * s,
-        this.y + 25 * s,
-        60 * s,
-        50 * s,
-        PI + HALF_PI,
-        TWO_PI + HALF_PI
-      );
-      bezier(
-        this.x,
-        this.y,
-        this.x + 10 * s,
-        this.y + 10 * s,
-        this.x + 10 * s,
-        this.y + 40 * s,
-        this.x,
-        this.y + 50 * s
-      );
-      line(this.x, this.y, this.x + 30 * s, this.y);
-      line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
-    }
-    // XOR GATE
-    else if (this.type === "XOR") {
-      fill(textColor);
-      text(this.type, this.x + 30 * s, this.y + 27 * s);
-      noFill();
-      arc(
-        this.x + 30 * s,
-        this.y + 25 * s,
-        60 * s,
-        50 * s,
-        PI + HALF_PI,
-        TWO_PI + HALF_PI
-      );
-      bezier(
-        this.x,
-        this.y,
-        this.x + 10 * s,
-        this.y + 10 * s,
-        this.x + 10 * s,
-        this.y + 40 * s,
-        this.x,
-        this.y + 50 * s
-      );
-      bezier(
-        this.x - 5 * s,
-        this.y,
-        this.x + 5 * s,
-        this.y + 10 * s,
-        this.x + 5 * s,
-        this.y + 40 * s,
-        this.x - 5 * s,
-        this.y + 50 * s
-      );
-      line(this.x, this.y, this.x + 30 * s, this.y);
-      line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
-    }
-    // NOT GATE
-    else if (this.type === "NOT") {
-      fill(textColor);
-      text(this.type, this.x + 19 * s, this.y + 27 * s);
-      noFill();
-      triangle(
-        this.x,
-        this.y,
-        this.x,
-        this.y + 50 * s,
-        this.x + 50 * s,
-        this.y + 25 * s
-      );
-      circle(this.x + 55 * s, this.y + 25 * s, 10 * s);
-    }
 
-    // INPUT LINES
-    if (this.type === "AND") {
-      line(this.x - 20 * s, this.y + 10 * s, this.x, this.y + 10 * s);
-      line(this.x - 20 * s, this.y + 40 * s, this.x, this.y + 40 * s);
-    } else if (this.type === "OR") {
-      line(this.x - 20 * s, this.y + 10 * s, this.x + 5 * s, this.y + 10 * s);
-      line(this.x - 20 * s, this.y + 40 * s, this.x + 5 * s, this.y + 40 * s);
-    } else if (this.type === "XOR") {
-      line(this.x - 20 * s, this.y + 10 * s, this.x + 5 * s, this.y + 10 * s);
-      line(this.x - 20 * s, this.y + 40 * s, this.x + 5 * s, this.y + 40 * s);
-    } else if (this.type === "NOT") {
-      line(this.x - 20 * s, this.y + 25 * s, this.x, this.y + 25 * s);
-    }
+    fill(textColor);
+    text(this.type, this.x + 30 * s, this.y + 27 * s);
+    noFill();
+    arc(
+      this.x + 30 * s,
+      this.y + 25 * s,
+      60 * s,
+      50 * s,
+      PI + HALF_PI,
+      TWO_PI + HALF_PI
+    );
+    bezier(
+      this.x,
+      this.y,
+      this.x + 10 * s,
+      this.y + 10 * s,
+      this.x + 10 * s,
+      this.y + 40 * s,
+      this.x,
+      this.y + 50 * s
+    );
+    bezier(
+      this.x - 5 * s,
+      this.y,
+      this.x + 5 * s,
+      this.y + 10 * s,
+      this.x + 5 * s,
+      this.y + 40 * s,
+      this.x - 5 * s,
+      this.y + 50 * s
+    );
+    line(this.x, this.y, this.x + 30 * s, this.y);
+    line(this.x, this.y + 50 * s, this.x + 30 * s, this.y + 50 * s);
+
+
+
+    line(this.x - 20 * s, this.y + 10 * s, this.x + 5 * s, this.y + 10 * s);
+    line(this.x - 20 * s, this.y + 40 * s, this.x + 5 * s, this.y + 40 * s);
 
     // OUTPUT LINE
     line(this.x + 60 * s, this.y + 25 * s, this.x + 80 * s, this.y + 25 * s);
 
     // INPUT BUTTONS
     fill(this.inputA ? "green" : "red");
-    if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
-      ellipse(this.x - 20 * s, this.y + 10 * s, 15 * s, 15 * s);
-      fill(this.inputB ? "green" : "red");
-      ellipse(this.x - 20 * s, this.y + 40 * s, 15 * s, 15 * s);
-    } else if (this.type === "NOT") {
-      if (this.inputA == false && this.output == false)
-      {
-        fill("grey");
-      }
-      ellipse(this.x - 20 * s, this.y + 25 * s, 15 * s, 15 * s);
-    }
+
+    ellipse(this.x - 20 * s, this.y + 10 * s, 15 * s, 15 * s);
+    fill(this.inputB ? "green" : "red");
+    ellipse(this.x - 20 * s, this.y + 40 * s, 15 * s, 15 * s);
 
     // OUTPUT
     fill(this.output ? "green" : "red");
-    if (this.type === "NOT" && this.inputA == false && this.output == false){
-      fill("grey");
-    }
     ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
   }
+
   update() {
 
     //update position of gate(s) being dragged, if any
@@ -195,49 +323,123 @@ class LogicGate {
 
     let s = this.scalar;
 
-    let color = get(this.startX, this.startY);
-    if (this.type === "AND" || this.type === "OR" || this.type === "XOR") {
-      color = get(this.x - 20 * s, this.y + 10 * s,);
-      if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-        this.inputA = true;
-      }
-      else {
-        this.inputA = false;
-      }
-
-      color = get(this.x - 20 * s, this.y + 40 * s);
-      if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-        this.inputB = true;
-      }
-      else {
-        this.inputB = false;
-      }
-
-    } else if (this.type === "NOT") {
-      color = get(this.x - 20 * s, this.y + 25 * s);
-      if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
-        this.inputA = true;
-        this.output = false;
-      }
-      else if (color[1] === 0 && color[2] === 0 && color[0] > 0)
-      {
-        this.inputA = false;
-        this.output = true;
-      }
-      else
-      {
-        this.inputA = false;
-        this.output = false;
-      }
+    let color = get(this.x - 20 * s, this.y + 10 * s,);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputA = true;
+    }
+    else {
+      this.inputA = false;
     }
 
-    //references global hashmap to run gate logic
-    if (!(this.type === "NOT"))
-    {
-      this.output = gateLogic[this.type](this.inputA, this.inputB)
+    color = get(this.x - 20 * s, this.y + 40 * s);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputB = true;
+    }
+    else {
+      this.inputB = false;
     }
 
+    this.output = gateLogic[this.type](this.inputA, this.inputB)
   }
+
+  //Check if the mouse position is over a logic gate
+  isMouseOver() {
+    return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
+      mouseY > this.y && mouseY < this.y + gateSizeHeight);
+  }
+}
+
+//Class for logic gates, will likely be moved out of this main file.
+class NotGate {
+  constructor(x, y, scalar = 1) {
+    super(x, y);
+
+    this.input = false;
+  }
+
+  // DRAWING GATES
+  display() {
+    // STYLE SETTINGS (SIMULATE CSS)
+    let gateColor = color(255, 204, 0);
+    let inputColor = color(200);
+    let outputColor = color(0, 255, 0);
+    let inputHoverColor = color(0, 255, 0);
+    let outputHoverColor = color(255, 0, 0);
+    //
+    let textsize = 15;
+    let textColor = 'black';
+    // 
+    stroke(0);
+    strokeWeight(1);
+    // 
+    let s = this.scalar;
+    // 
+    textSize(textsize * s);
+    // 
+
+    fill(textColor);
+    text(this.type, this.x + 19 * s, this.y + 27 * s);
+    noFill();
+    triangle(
+      this.x,
+      this.y,
+      this.x,
+      this.y + 50 * s,
+      this.x + 50 * s,
+      this.y + 25 * s
+    );
+    circle(this.x + 55 * s, this.y + 25 * s, 10 * s);
+
+
+
+    line(this.x - 20 * s, this.y + 25 * s, this.x, this.y + 25 * s);
+
+
+    // OUTPUT LINE
+    line(this.x + 60 * s, this.y + 25 * s, this.x + 80 * s, this.y + 25 * s);
+
+    // INPUT BUTTONS
+    fill(this.input ? "green" : "red");
+
+    if (this.input == false && this.output == false) {
+      fill("grey");
+    }
+    ellipse(this.x - 20 * s, this.y + 25 * s, 15 * s, 15 * s);
+
+
+    // OUTPUT
+    fill(this.output ? "green" : "red");
+    if (this.input == false && this.output == false) {
+      fill("grey");
+    }
+    ellipse(this.x + 80 * s, this.y + 25 * s, 15 * s, 15 * s);
+  }
+
+  update() {
+
+    //update position of gate(s) being dragged, if any
+    for (let dragged_gate of gates_being_dragged) {
+      dragged_gate.x = mouseX - dragged_gate.offsetX;
+      dragged_gate.y = mouseY - dragged_gate.offsetY;
+    }
+
+    let s = this.scalar;
+
+    let color = get(this.x - 20 * s, this.y + 25 * s);
+    if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
+      this.inputA = true;
+      this.output = false;
+    }
+    else if (color[1] === 0 && color[2] === 0 && color[0] > 0) {
+      this.inputA = false;
+      this.output = true;
+    }
+    else {
+      this.inputA = false;
+      this.output = false;
+    }
+  }
+
   // //Check if the mouse position is over a logic gate
   isMouseOver() {
     return (mouseX > this.x && mouseX < this.x + gateSizeWidth &&
@@ -263,19 +465,17 @@ class LogicGate {
   // }
 }
 
-class Connection {
+class Connection extends GateObject {
   constructor(startX, startY, endX, endY, scalar = 1) {
 
     //2D coordinates for start and end points
-    this.startX = startX;
-    this.startY = startY;
+    super(startX, startY);
     this.endX = endX;
     this.endY = endY;
 
     this.scalar = scalar;
 
     this.input = false;
-    this.output = false;
 
   }
 
@@ -284,18 +484,18 @@ class Connection {
     strokeWeight(3);
     let s = this.scalar;
 
-    line(this.startX, this.startY, (this.endX + this.startX) / 2, this.startY);
-    line((this.endX + this.startX) / 2, this.startY, (this.endX + this.startX) / 2, this.endY);
-    line((this.endX + this.startX) / 2, this.endY, this.endX, this.endY);
+    line(this.x, this.y, (this.endX + this.x) / 2, this.y);
+    line((this.endX + this.x) / 2, this.y, (this.endX + this.x) / 2, this.endY);
+    line((this.endX + this.x) / 2, this.endY, this.endX, this.endY);
 
     fill(this.output ? "green" : "red");
     strokeWeight(1);
-    ellipse(this.startX * s, this.startY * s, 15 * s, 15 * s);
+    ellipse(this.x * s, this.y * s, 15 * s, 15 * s);
     ellipse(this.endX * s, this.endY * s, 15 * s, 15 * s);
   }
 
   update() {
-    let color = get(this.startX, this.startY);
+    let color = get(this.x, this.y);
     if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
       this.input = true;
     }
@@ -307,7 +507,7 @@ class Connection {
   }
 }
 
-class EnterancePoint {
+class EntrancePoint {
   constructor(x, y, state, scalar = 1) {
 
     //2D coordinates for start and end points
@@ -351,8 +551,7 @@ class ExitPoint {
     ellipse(this.x * s, this.y * s, 15 * s, 15 * s);
   }
 
-  update()
-  {
+  update() {
     let color = get(this.x, this.y);
     if (color[0] === 0 && color[2] === 0 && color[1] > 0) {
       this.state = true;
@@ -396,18 +595,15 @@ class PlusButton extends Button {
     this.name = "+"
     this.open = false;
   }
-  action()
-  {
-    if (!this.open)
-    {
+  action() {
+    if (!this.open) {
       buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight, "AND"));
-      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*2, "OR"));
-      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*3, "XOR"));
-      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight*4, "NOT"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight * 2, "OR"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight * 3, "XOR"));
+      buttons.push(new GateInsertButton(this.x, this.y - gateSizeHeight * 4, "NOT"));
       this.open = true;
     }
-    else
-    {
+    else {
       for (let i = 0; i < 4; i++) buttons.pop();
       this.open = false;
     }
@@ -484,7 +680,18 @@ function setup() {
     document.getElementById("Level-Name").innerHTML = initialize_objects.Name;
 
     for (let g of initialize_objects.Gates) {
-      gates.push(new LogicGate(g.x, g.y, g.type));
+      if (g.type === "AND"){
+        gates.push(new AndGate(g.x, g.y));
+      }
+      else if (g.type === "OR"){
+        gates.push(new OrGate(g.x, g.y));
+      }
+      else if (g.type === "XOR"){
+        gates.push(new XorGate(g.x, g.y));
+      }
+      else if (g.type === "NOT"){
+        gates.push(new NotGate(g.x, g.y));
+      }
     }
 
     for (let c of initialize_objects.Connections) {
@@ -492,7 +699,7 @@ function setup() {
     }
 
     for (let s of initialize_objects.Start) {
-      startPoints.push(new EnterancePoint(s.x, s.y, s.state));
+      startPoints.push(new EntrancePoint(s.x, s.y, s.state));
       print(s.x);
       print(s.y);
       print(s.state);
@@ -544,11 +751,6 @@ function setup() {
     console.log("Music Volume:", event.target.value);
     // Add logic to update background music
   });
-
-  // gates.push(new LogicGate(100, 100, "AND"));
-  // gates.push(new LogicGate(500, 100, "OR"));
-  // gates.push(new LogicGate(100, 350, "XOR"));
-  // gates.push(new LogicGate(500, 350, "NOT"));
 }
 
 // "draw() is called directly after setup()"
@@ -564,8 +766,7 @@ function draw() {
   }
   deleteButton.display();
 
-  for (let start of startPoints)
-  {
+  for (let start of startPoints) {
     start.display();
   }
 
@@ -621,11 +822,10 @@ function draw() {
     connection.display();
   }
 
-  for (let end of endPoints)
-    {
-      end.update();
-      end.display();
-    }
+  for (let end of endPoints) {
+    end.update();
+    end.display();
+  }
 }
 
 // TOGGLE INPUTS
