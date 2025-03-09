@@ -1,0 +1,321 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Documentation</title>
+</head>
+<body>
+    <header>
+        <h1>GateKeeper Main File Docs</h1>
+        <p>For internal use within Team Alpha; Written on March 8th, 2025</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#core-functions">Core Functions of p5.js</a></li>
+            <li><a href="#GateKeeper-Objects">GateKeeper Classes</a></li>
+    </nav>
+
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>These are the docs for the main JavaScript code that runs the game. Things are getting complicated, so it's best to write stuff down.</p>
+
+            <p>As it is required by the course, this project's graphics are handled by p5.js, a beginner-friendly library for creating interactive visuals and experiences. </p>
+
+            <p>Listed below are some of the most important methods and member variables of p5.js: </p>
+
+        </section>
+
+        <section id="core-functions">
+            <h2>Core Functions of p5.js</h2>
+            
+            <ul>
+                <li id="setup">
+                    <strong>setup()</strong>
+                    <p>
+                        Called once when the program starts.
+                        <br>
+                        Use it to define initial environment properties such as canvas size and background color and to load media such as images and fonts.
+                        <br>
+                        Example: <code>function setup() { createCanvas(800, 600); }</code>
+                    </p>
+                </li>
+                
+                <li id="draw">
+                    <strong>draw()</strong>
+                    <p>
+                        Is called directly after <code><a href="#setup">setup()</a></code>
+                        <br>
+                        Executes the lines of code inside its curly brackets 60 times per second until the program is stopped or the <code>noLoop()</code> function is called.
+                        <br>
+                        Example: <code>function draw() { background(220); ellipse(50, 50, 80, 80); }</code>
+                    </p>
+                </li>
+                
+                <li id="preload">
+                    <strong>preload()</strong>
+                    <p>
+                        Called before <code><a href="#setup">setup()</a></code>, used to handle asynchronous loading of external files.
+                        <br>
+                        Ensures assets are loaded before sketch starts.
+                        <br>
+                        Example: <code>function preload() { img = loadImage('assets/image.jpg'); }</code>
+                    </p>
+                </li>
+                
+                <li id="createCanvas">
+                    <strong>createCanvas(width, height)</strong>
+                    <p>
+                        Creates a canvas element in the document with given width and height in pixels.
+                        <br>
+                        Usually called in setup().
+                        <br>
+                        Example: <code>createCanvas(640, 480);</code>
+                    </p>
+                </li>
+                <li id="background">
+                    <strong>background(color)</strong>
+                    <p>
+                        Sets the background color of the canvas.
+                        <br>
+                        Example: <code>background(200);</code> or <code>background(255, 0, 0);</code>
+                    </p>
+                </li>
+                <li id="mouseX-mouseY">
+                    <strong>mouseX, mouseY</strong>
+                    <p>
+                        System variables that contain the current horizontal and vertical mouse position.
+                        <br>
+                        Example: <code>ellipse(mouseX, mouseY, 50, 50);</code>
+                    </p>
+                </li>
+                
+                <li id="mousePressed">
+                    <strong>mousePressed()</strong>
+                    <p>
+                        Called once after every time a mouse button is pressed.
+                        <br>
+                        Example: <code>function mousePressed() { background(random(255)); }</code>
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="GateKeeper-Objects">
+            <h2>GateKeeper Classes</h2>
+            <p>We used Object Oriented Programming to manage our game's complexity by organizing code into reusable classes.</p>
+            <p>Below are the classes we created for this game, their methods, their member variables, and a description of what they do.</p>
+            
+            <ul>
+                <li id="Game">
+                    <strong>Game</strong>
+                    <p>
+                        Stores necessary information for the Game Engine, including the 2D Spatial Hash Grid, and variables about scale/size
+                        <br>
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>int scale</code>
+                            <p>The scale of the game canvas, used to scale up the display of every object and whatnot</p>
+                        </li>
+                    </ul>
+                </li>
+                <li id="SpatialHashGrid">
+                    <strong>SpatialHashGrid</strong>
+                    <p>
+                        Used to reference every node in the game, for efficient collision detection.
+                        <br>
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>cellSize</code>
+                            <p>Size of each grid hash cell. Should about the size of each node.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li id="DraggableObject">
+                    <strong>DraggableObject</strong>
+                    <p>
+                        Defines the behavior of every draggable object, mostly gates. These will all be rectangular.
+                        <br>
+                        Used to define the size of the "drag object hit-box". Will also store offsets for smooth dragging, and will manage whether objects are being dragged or not.
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>(x, y), (x2, y2)</code>
+                            <p>Represents the top left and bottom right coordinates of the object.</p>
+                        </li>
+                        <li>
+                            <code>offsetX, offsetY</code>
+                            <p>Used to calculate the offsets for dragging objects. Makes dragging smooth, instead of snappy.</p>
+                        </li>
+                        
+                    </ul>
+                    <h4>Static Member Variables:</h4>
+                    <p>Static variables are shared by ALL instances of the same class. Including objects that inherit from said class.</p>
+                    <ul>
+                        <li id="Being-Dragged">
+                            <code>beingDragged[]</code>
+                            <p>Holds all objects currently being dragged. Is looped over every frame to re-display every object that needs to be.</p>
+                        </li>
+                        
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>pointIsWithin(x_coord, y_coord)</code>
+                            <p>Checks if the coordinate point <code>(x_coord, y_coord)</code> falls between the range of <code>(x, y)</code> and <code>(x2, y2)</code></p>
+                            <p><code>return (x_coord > this.x && x_coord < this.x2 && y_coord > this.y && y_coord < this.y2)</code></p>
+                            <p>Typical use: <code>if (gate.pointIsWithin(mouseX, mouseY)){ gate.startDragging() }</code></p>
+                        </li>
+                        <li>
+                            <code>startDragging()</code>
+                            <p>Pushes the Object into to the static <a href="Being-Dragged"><code>beingDragged[]</code></a> array.</p>
+                            <p>Will be called within mouse_click event</p>
+                        </li>
+                        <li>
+                            <code>stopDragging()</code>
+                            <p>Removes the Object from the static <a href="Being-Dragged"><code>beingDragged[]</code></a> array.</p>
+                        </li>
+                        <li>
+                            <code>drag()</code>
+                            <p>Drags the object when called. </p>
+                            <p><code>this.x = <a href="#mouseX-mouseY">mouseX</a> - this.offsetX<br>this.y = <a href="#mouseX-mouseY">mouseY</a> - this.offsetY</code></p>
+                            
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li id="LogicGate">
+                    <strong>LogicGate (Extends <a href="#DraggableObject">DraggableObject</a>)</strong>
+                    <p>
+                        Defines the behavior of Logic Gates: input state, output state, labeling of gates, and graphical display.
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>label</code>
+                            <p>Mostly for metadata/debugging. Default value is "GATE", will be overridden by child classes.</p>
+                        </li>
+                        <li>
+                            <code>inputs[]</code>
+                            <p>Directly references the output state of "connected" gates. Every frame, gates will reference what is in inputs[] and use that to recompute output.</p>
+                        </li>
+                        <li>
+                            <code>maxInputs</code>
+                            <p>Maximum inputs allowed for a gate. Default is 2, can be overridden by child classes (ie NOT gate). </p>
+                        </li>
+                        <li>
+                            <code>output</code>
+                            <p>Boolean; Stores the current output state of an object, based on what is evaluated from the connected inputs.</p>
+                        </li>
+
+                        <li>
+                            <code>inputNodes</code>
+                            <p>x, y, x2, y2. node.nodeOverlaps(node)</p>
+                        </li>
+                        <li>
+                            <code>outputNode</code>
+                            <p>x, y, x2, y2</p>
+                        </li>
+                        
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>connectInto(LogicGate gate)</code>
+                            <p>If possible based on max input constraint, pushes a reference of this.output into gate.inputs[]</p>
+                        </li>
+                        <li>
+                            <code>inputs[]</code>
+                            <p>Directly references the output state of "connected" gates. </p>
+                        </li>
+                        
+                    </ul>
+                        
+                </li>
+                <li id="GateNode">
+                    <strong>GateNode</strong>
+                    <p>
+                        Defines the behavior of Logic Gate Nodes: do nodes collide?
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>x, y, x2, y2</code>
+                            <p>Position of Node</p>
+                        </li>
+                        <li>
+                            <code>parentGate</code>
+                            <p>Stores a reference to the parent of the Node object</p>
+                        </li>
+                    </ul>
+                    <h4>Static Member Variables:</h4>
+                    <p>Static variables are shared by ALL instances of the same class. Including objects that inherit from said class.</p>
+                    <ul>
+                        <li>
+                            <code>nodeSprite???</code>
+                            <p>sprite to display for every node object</p>
+                        </li>
+                        <li>
+                            <code>SpatialHashGrid grid</code>
+                            <p>Used to index the location of each node in the game, for efficient collision detection between nodes.</p>
+                        </li>
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>node.collidesWith(GateNode node)</code> https://www.geeksforgeeks.org/find-two-rectangles-overlap/
+                            Prune nodes. Create a searchNode() function that effectively searches nodes in a 2d space. Look at notebook.
+                            <p>If possible based on max input constraint, pushes a reference of this.output into gate.inputs[]</p>
+                        </li>         
+                    </ul>
+                        
+                </li>
+            </ul>
+            
+        </section>
+
+    </main>
+
+    <br>
+
+    <strong>
+        Important Considerations
+    </strong>
+    <p>
+        <code>
+        function mouseReleased() { gates_being_dragged = []; } // Clear all dragged objects on release
+        </code>
+    </p>
+
+    <p>
+        <code>
+        function evaluateOutput() { //get whats in inputs, recompute output based on gateCompute() function }
+        </code>
+    </p>
+
+    <p>
+        <code>
+            doNodesCollide() Need node collision. Nodes are associated with gates. if nodes overlap, then the output state is  sent to  the  inputs[] of gate
+            Performance Tip
+            Choose the right cell size for your game. If your cell size is too small, objects will span many cells, increasing overhead. If it's too large, you'll check too many non-colliding objects. A good rule of thumb is to make cells roughly the size of your average game object.
+            Is there a specific aspect of using this class that you'd like me to elaborate on?
+        </code>
+    </p>
+
+    <footer>
+        <p>Written by Andrew Cash • <a href="https://github.com/Jonathan-Lanham/SoftwareEngGroupA">GitHub Repo</a>
+    </footer>
+</body>
+</html>
