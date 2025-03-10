@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draggable Objects Demo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #222;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <h1 style="color: white; position: absolute; left: 20px; top: 5px;"><strong>THIS IS A DEMO OF <code>DraggableObject</code> INSTANCES</strong></h1>
+
+
+  <script src="../skGateObjects.js"></script>
+  <script>
+    // Array to store all draggable objects
+    let objects = [];
+    
+    // Colors for the rectangles
+    const colors = [
+      [255, 0, 0],    // Red
+      [0, 255, 0],    // Green
+      [0, 0, 255],    // Blue
+      [255, 255, 0],  // Yellow
+      [255, 0, 255],  // Magenta
+      [0, 255, 255]   // Cyan
+    ];
+
+    // Extend the DraggableObject with display functionality
+    class DisplayableDraggable extends DraggableObject {
+      constructor(x, y, height, width, color) {
+        super(x, y, height, width);
+        this.color = color;
+      }
+      
+      display() {
+        fill(this.color);
+        rect(this.x, this.y, this.width, this.height);
+        
+        // Add a handle indicator when being dragged
+        if (DraggableObject.beingDragged.includes(this)) {
+          fill(255);
+          ellipse(this.x + this.width/2, this.y + this.height/2, 10, 10);
+        }
+      }
+    }
+
+    function setup() {
+      createCanvas(800, 600);
+      
+      // Create 6 random sized rectangles
+      for (let i = 0; i < 6; i++) {
+        const width = random(50, 150);
+        const height = random(50, 150);
+        const x = random(width, width + 600);
+        const y = random(height, height + 400);
+        objects.push(new DisplayableDraggable(x, y, height, width, colors[i]));
+      }
+    }
+
+    function draw() {
+      // Black background
+      background(0);
+      
+      // Draw all objects
+      for (let obj of objects) {
+        obj.display();
+      }
+      
+      // Update position of objects being dragged
+      for (let obj of DraggableObject.beingDragged) {
+        // Pass mouseX and mouseY to the drag method
+        obj.drag(mouseX, mouseY);
+      }
+      
+      // Display instructions
+      fill(255);
+      textSize(16);
+      text("Click and drag the colored rectangles", 20, 30);
+    }
+
+    function mousePressed() {
+      // Check if mouse is over an object in reverse order (to select top object first)
+      for (let i = objects.length - 1; i >= 0; i--) {
+        if (objects[i].pointIsWithin(mouseX, mouseY)) {
+          // Move this object to the end of the array (top of visual stack)
+          const obj = objects.splice(i, 1)[0];
+          objects.push(obj);
+          
+          // Calculate offsets
+          obj.offsetX = mouseX - obj.x;
+          obj.offsetY = mouseY - obj.y;
+          
+          // Start dragging the object
+          obj.startDragging();
+          //break; // Only select one object
+        }
+      }
+    }
+
+    function mouseReleased() {
+      // Stop dragging all objects
+      for (let obj of DraggableObject.beingDragged.slice()) {
+        obj.stopDragging();
+      }
+    }
+  </script>
+</body>
+</html>

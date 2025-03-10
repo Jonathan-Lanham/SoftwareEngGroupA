@@ -208,7 +208,7 @@
                         </li>
                         <li>
                             <code>inputs[]</code>
-                            <p>Directly references the output state of "connected" gates. Every frame, gates will reference what is in inputs[] and use that to recompute output.</p>
+                            <p>Directly references input Node objects. Every frame, gates will reference what is in inputs[] and use that to recompute output.</p>
                         </li>
                         <li>
                             <code>maxInputs</code>
@@ -216,16 +216,7 @@
                         </li>
                         <li>
                             <code>output</code>
-                            <p>Boolean; Stores the current output state of an object, based on what is evaluated from the connected inputs.</p>
-                        </li>
-
-                        <li>
-                            <code>inputNodes</code>
-                            <p>x, y, x2, y2. node.nodeOverlaps(node)</p>
-                        </li>
-                        <li>
-                            <code>outputNode</code>
-                            <p>x, y, x2, y2</p>
+                            <p>Boolean; References the output Node object, changes based on what is evaluated from the connected inputs.</p>
                         </li>
                         
                     </ul>
