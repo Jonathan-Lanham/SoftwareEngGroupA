@@ -1,5 +1,5 @@
 
-class Node{
+class GateNode{
     constructor(x, y, width, height, parentObject){
         this.x = x;
         this.y = y;
@@ -20,14 +20,20 @@ class Node{
     }
     collidesWithList(){
         let result = [];
-        let candidates = Node.NodeSHG.findNearbyObjects(this);
+        let candidates = GateNode.NodeSHG.findNearbyObjects(this);
         //console.log("CANDIDATES: " + JSON.stringify(candidates))
         for (let node of candidates){
-            if (Node.NodeSHG.checkCollision(node, this)){
+            if (GateNode.NodeSHG.checkCollision(node, this)){
                 result.push(node);
             }
         }
         //console.log("RESULT: " + JSON.stringify(result));
         return result;
+    }
+    display(){
+        //change 15/2 to make circle larger
+        fill(this.state ? "green" : "red");
+        ellipse(this.x+ LogicGate.gNodeSize/2, this.y+LogicGate.gNodeSize/2, this.width, this.height);
+        rect(this.x, this.y, this.width, this.height);
     }
 }

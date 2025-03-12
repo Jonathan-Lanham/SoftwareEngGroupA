@@ -112,22 +112,46 @@
                 <li id="Game">
                     <strong>Game</strong>
                     <p>
-                        Stores necessary information for the Game Engine, including the 2D Spatial Hash Grid, and variables about scale/size
+                        Stores basic information for the game, and drives game updates and displays.
                         <br>
                         <br>
                     </p>
                     <h4>Member Variables:</h4>
                     <ul>
                         <li>
-                            <code>int scale</code>
-                            <p>The scale of the game canvas, used to scale up the display of every object and whatnot</p>
+                            <code>gameWidth, gameHeight</code>
+                            <p>Width and Height of the Canvas element.</p>
+                        </li>
+                        <li>
+                            <code>backColor</code>
+                            <p>Color of the background of the Canvas element.</p>
+                        </li>
+                        <li id="Being-Dragged">
+                            <code>beingDragged[]</code>
+                            <p>Holds all objects currently being dragged. Is looped over every frame to re-display every moving object.</p>
+                            <p>Moved from global scope to the Game class.</p>
+                        </li>
+                        <li id="collidingNodes">
+                            <code>collidingNodes[]</code>
+                            <p>Will eventually hold pairs of colliding nodes, for the goal of establishing a persistent state transfer between them (ie, a connection)</p>
+                            <p>Not currently working.</p>
+                        </li>
+                        
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>update()</code>
+                            <p>Drives the entire game loop. Moves every Gate being dragged, then updates its position in the Spatial Hash Grid. </p>
+                            <p>Then Using that hash, checks for collision.  Then displays every logic gate in the queried canvas region (Probably the entire canvas).</p>
                         </li>
                     </ul>
                 </li>
                 <li id="SpatialHashGrid">
                     <strong>SpatialHashGrid</strong>
+                    <p>I did not implement this one myself, so docs may be lacking here.</p>
                     <p>
-                        Used to reference every node in the game, for efficient collision detection.
+                        Used to reference every node and gate in the game, for efficient collision detection.
                         <br>
                         <br>
                     </p>
@@ -135,7 +159,7 @@
                     <ul>
                         <li>
                             <code>cellSize</code>
-                            <p>Size of each grid hash cell. Should about the size of each node.</p>
+                            <p>Size of each grid hash cell. Should about the size of each node, min max it for performance.</p>
                         </li>
                     </ul>
                 </li>
@@ -150,21 +174,12 @@
                     <h4>Member Variables:</h4>
                     <ul>
                         <li>
-                            <code>(x, y), (x2, y2)</code>
-                            <p>Represents the top left and bottom right coordinates of the object.</p>
+                            <code>(x, y), width, height</code>
+                            <p>Coordinate location, size of object.</p>
                         </li>
                         <li>
                             <code>offsetX, offsetY</code>
                             <p>Used to calculate the offsets for dragging objects. Makes dragging smooth, instead of snappy.</p>
-                        </li>
-                        
-                    </ul>
-                    <h4>Static Member Variables:</h4>
-                    <p>Static variables are shared by ALL instances of the same class. Including objects that inherit from said class.</p>
-                    <ul>
-                        <li id="Being-Dragged">
-                            <code>beingDragged[]</code>
-                            <p>Holds all objects currently being dragged. Is looped over every frame to re-display every object that needs to be.</p>
                         </li>
                         
                     </ul>
@@ -178,18 +193,21 @@
                         </li>
                         <li>
                             <code>startDragging()</code>
-                            <p>Pushes the Object into to the static <a href="Being-Dragged"><code>beingDragged[]</code></a> array.</p>
+                            <p>Pushes the Object into to the static <a href="#Being-Dragged"><code>beingDragged[]</code></a> array.</p>
                             <p>Will be called within mouse_click event</p>
                         </li>
                         <li>
                             <code>stopDragging()</code>
-                            <p>Removes the Object from the static <a href="Being-Dragged"><code>beingDragged[]</code></a> array.</p>
+                            <p>Removes the Object from the static <a href="#Being-Dragged"><code>beingDragged[]</code></a> array.</p>
                         </li>
                         <li>
-                            <code>drag()</code>
-                            <p>Drags the object when called. </p>
-                            <p><code>this.x = <a href="#mouseX-mouseY">mouseX</a> - this.offsetX<br>this.y = <a href="#mouseX-mouseY">mouseY</a> - this.offsetY</code></p>
-                            
+                            <code>changeOffsets(x, y)</code>
+                            <p>Changes the value of offsetX, offsetY to x, y</p>
+                        </li>
+                        <li>
+                            <code>drag(xc, yc)</code>
+                            <p>Moves the object to x,y when called.</p>
+                            <p><code>this.x = xc - this.offsetX;<br>this.y = yc - this.offsetY;</code></p>
                         </li>
                         
                     </ul>
@@ -290,20 +308,7 @@
         </code>
     </p>
 
-    <p>
-        <code>
-        function evaluateOutput() { //get whats in inputs, recompute output based on gateCompute() function }
-        </code>
-    </p>
 
-    <p>
-        <code>
-            doNodesCollide() Need node collision. Nodes are associated with gates. if nodes overlap, then the output state is  sent to  the  inputs[] of gate
-            Performance Tip
-            Choose the right cell size for your game. If your cell size is too small, objects will span many cells, increasing overhead. If it's too large, you'll check too many non-colliding objects. A good rule of thumb is to make cells roughly the size of your average game object.
-            Is there a specific aspect of using this class that you'd like me to elaborate on?
-        </code>
-    </p>
 
     <footer>
         <p>Written by Andrew Cash • <a href="https://github.com/Jonathan-Lanham/SoftwareEngGroupA">GitHub Repo</a>
