@@ -1,189 +1,59 @@
-export class SpatialHashGrid {
-    constructor(cellSize) {
-      this.cellSize = cellSize;
-      this.grid = new Map(); // Maps cell keys to arrays of objects
-    }
-  
-    // Generate a string key for a grid cell from world coordinates
-    getCellKey(x, y) {
-      const cellX = Math.floor(x / this.cellSize);
-      const cellY = Math.floor(y / this.cellSize);
-      return `${cellX},${cellY}`;
-    }
-  
-    // Get all cell keys that an object overlaps
-    getObjectCellKeys(object) {
-      // Calculate the min and max cells the object touches
-      const minCellX = Math.floor(object.x / this.cellSize);
-      const minCellY = Math.floor(object.y / this.cellSize);
-      const maxCellX = Math.floor((object.x + object.width) / this.cellSize);
-      const maxCellY = Math.floor((object.y + object.height) / this.cellSize);
-      
-      const keys = [];
-      // Generate all cell keys this object overlaps
-      for (let x = minCellX; x <= maxCellX; x++) {
-        for (let y = minCellY; y <= maxCellY; y++) {
-          keys.push(`${x},${y}`);
-        }
-      }
-      return keys;
-    }
-  
-    // Insert an object into the grid
-    insert(object) {
-      const cellKeys = this.getObjectCellKeys(object);
-      
-      // Add object to each cell it overlaps
-      for (const key of cellKeys) {
-        if (!this.grid.has(key)) {
-          this.grid.set(key, []);
-        }
-        this.grid.get(key).push(object);
-        
-        // Store the cell keys with the object for faster removal
-        if (!object._cellKeys) {
-          object._cellKeys = [];
-        }
-        object._cellKeys.push(key);
-      }
-    }
-  
-    // Remove an object from the grid
-    remove(object) {
-      if (!object._cellKeys) return;
-      
-      // Remove from all cells it was inserted into
-      for (const key of object._cellKeys) {
-        const cell = this.grid.get(key);
-        if (cell) {
-          const index = cell.indexOf(object);
-          if (index !== -1) {
-            cell.splice(index, 1);
-            // Clean up empty cells
-            if (cell.length === 0) {
-              this.grid.delete(key);
-            }
-          }
-        }
-      }
-      
-      // Clear the cached cell keys
-      object._cellKeys = [];
-    }
-  
-    // Update an object's position in the grid
-    update(object) {
-      this.remove(object);
-      this.insert(object);
-    }
-  
-    // Find all objects that might collide with the given object
-    findNearbyObjects(object) {
-      const cellKeys = this.getObjectCellKeys(object);
-      const nearbyObjects = new Set();
-      
-      // Check all cells this object overlaps
-      for (const key of cellKeys) {
-        const cell = this.grid.get(key);
-        if (cell) {
-          for (const otherObject of cell) {
-            if (otherObject !== object) {
-              nearbyObjects.add(otherObject);
-            }
-          }
-        }
-      }
-      
-      return Array.from(nearbyObjects);
-    }
-  
-    // Check all potential collisions in the entire grid
-    checkAllCollisions(collisionCallback) {
-      const checked = new Set(); // Track already checked pairs
-      
-      // For each cell in the grid
-      for (const [_, objects] of this.grid) {
-        // Check each pair of objects in this cell
-        for (let i = 0; i < objects.length; i++) {
-          for (let j = i + 1; j < objects.length; j++) {
-            const objA = objects[i];
-            const objB = objects[j];
-            
-            // Create a unique key for this pair
-            const pairKey = objA._shg_id < objB._shg_id ? 
-              `${objA._shg_id},${objB._shg_id}` : `${objB._shg_id},${objA._shg_id}`;
-            
-            // Skip if this pair was already checked
-            if (checked.has(pairKey)) continue;
-            checked.add(pairKey);
-            
-            // Check if they actually collide
-            if (this.checkCollision(objA, objB)) {
-              collisionCallback(objA, objB);
-            }
-          }
-        }
-      }
-    }
-  
-    // Simple AABB collision check
-    checkCollision(objA, objB) {
-      return !(
-        objA.x + objA.width < objB.x ||
-        objA.x > objB.x + objB.width ||
-        objA.y + objA.height < objB.y ||
-        objA.y > objB.y + objB.height
-      );
-    }
-  
-    // Clear all objects from the grid
-    clear() {
-      this.grid.clear();
-    }
-  
-    // Get all objects in a specific region (for debugging/visualization)
-    queryRegion(x, y, width, height) {
-      const minCellX = Math.floor(x / this.cellSize);
-      const minCellY = Math.floor(y / this.cellSize);
-      const maxCellX = Math.floor((x + width) / this.cellSize);
-      const maxCellY = Math.floor((y + height) / this.cellSize);
-      
-      const result = new Set();
-      
-      for (let cx = minCellX; cx <= maxCellX; cx++) {
-        for (let cy = minCellY; cy <= maxCellY; cy++) {
-          const key = `${cx},${cy}`;
-          const cell = this.grid.get(key);
-          if (cell) {
-            for (const obj of cell) {
-              result.add(obj);
-            }
-          }
-        }
-      }
-      
-      return Array.from(result);
-    }
-}
-
 class Game{
-    constructor(gameScale = 1) {
-        this.gameScale = gameScale;
+    constructor(gameWidth, gameHeight, backColor, scale=1){
+        let x = (windowWidth - width) / 2 - gameWidth/2;
+        let y = (windowHeight - height) / 2 - gameHeight/2;
+        canvas = createCanvas(gameWidth, gameHeight);
+        canvas.position(x, y);
+        canvas.style('border', '2px solid black')
+        background(backColor);
+
+        this.gameWidth = gameWidth;
+        this.gameHeight = gameHeight;
+        this.backColor = backColor;
     }
+
+    static beingDragged = []
+
+    //NOT FINISHED
     update(){
-        for (const obj of DraggableObject.beingDragged) {
+        for (const obj of Game.beingDragged) {
+            //background(this.backColor)
+            fill(this.backColor);
+            noStroke();
+            rect(obj.x-1, obj.y-1, obj.width+2, obj.height+2)
+
+            //redraw only nearby gates
+            let nbObjs = obj.collidesWithList()
+            // for (let nb of nbObjs){
+            //     rect(nb.x, nb.y, nb.width, nb.height)
+            // }
+            for (let nb of nbObjs){
+                nb.display()
+            }
+
             obj.drag(mouseX, mouseY);
+
+            LogicGate.GateSHG.update(obj)
+            
+            //test
+            obj.display()
+            
         }
+        
+        //console.log("test")
         //for each draggable object
             //drag it
             //if object has Nodes (ie, is a gate/wire)
                 //for each Node, SHG.update(Node)
         //for each Node object
     }
+
+
+
 }
 
-export class DraggableObject{
-    constructor(x, y, height, width){
+class DraggableObject{
+    constructor(x, y, width ,height){
         this.x = x;
         this.y = y;
         this.height = height;
@@ -192,7 +62,7 @@ export class DraggableObject{
         this.offsetY = 0;
     }
 
-    static beingDragged = [];
+    //static beingDragged = [];
 
     pointIsWithin(x_coord, y_coord){
         return (x_coord > this.x && x_coord < this.x + this.width && y_coord > this.y && y_coord < this.y + this.height);
@@ -206,44 +76,101 @@ export class DraggableObject{
         DraggableObject.beingDragged = [];
     }
 
+    changeOffsets(x, y){
+        this.offsetX = x;
+        this.offsetY = y;
+    }
+
     drag(mx, my){
         this.x = mx - this.offsetX;
         this.y = my - this.offsetY;
     }
+
+    display(){ rect(this.x, this.y, this.width, this.height) }
+
 }
 
-export class Node{
-    constructor(x, y, width, height, parentObject){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.parentObject = parentObject;
-        this.state = false
+class LogicGate extends DraggableObject{
+    // constructor(inputNodes = []){
+    //     this.inputNodes = inputNodes;
+    // }
+
+    inputNodes = [];
+    //change size later
+    static GateSHG = new SpatialHashGrid(20);
+
+    //NOT FINISHED
+    display(){
+        image(img, this.x, this.y, this.width, this.height);
     }
-    //will have to adjust manually
-    static NodeSHG = new SpatialHashGrid(20)
-    //goesInto.push(obj) JS by default references objects, not copies
-    move(x_coord, y_coord){
-        this.x = x_coord
-        this.y = y_coord
+
+    static createObject(x, y, width, height){
+        let newObj = new LogicGate(x, y, width, height)
+        LogicGate.GateSHG.insert(newObj)
+        newObj.display()
+        console.log(newObj)
     }
+
     collidesWithList(){
         let result = [];
-        let candidates = Node.NodeSHG.findNearbyObjects(this);
+        let candidates = LogicGate.GateSHG.findNearbyObjects(this);
         //console.log("CANDIDATES: " + JSON.stringify(candidates))
         for (let node of candidates){
-            if (Node.NodeSHG.checkCollision(node, this)){
+            if (LogicGate.GateSHG.checkCollision(node, this)){
                 result.push(node);
             }
         }
         //console.log("RESULT: " + JSON.stringify(result));
         return result;
     }
+
 }
 
-class LogicGate extends DraggableObject{
+//put into global scope
+let game;
 
+function preload() {
+    // Load the sprite image before setup runs
+    // Replace 'sprite.png' with your actual sprite image file
+    img = loadImage('AND.png');
+}
 
+function setup(){
+
+    game = new Game(1100, 600, '#4287f5');
+    LogicGate.createObject(100, 100, 60, 50);
+    LogicGate.createObject(200, 100, 60, 50);
+    LogicGate.createObject(300, 100, 60, 50);
+
+}
+
+function draw(){
+
+    //console.log(Game.beingDragged)
+    game.update()
+    //game.display()
+
+}
+
+function mouseReleased(){
+
+    bd = Game.beingDragged
+
+    for (let obj of bd){
+        LogicGate.GateSHG.update(obj);
+        bd.splice(bd.indexOf(obj), 1);
+    }
+
+    Game.beingDragged = []
+}
+
+function mousePressed(){
+
+    //reference DraggableObjects Grid, push them into being dragged
+    gatesThatMouseOverlaps = LogicGate.GateSHG.queryPoint(mouseX, mouseY);
+    for (let gate of gatesThatMouseOverlaps){
+        gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
+        Game.beingDragged.push(gate)
+    }
 
 }
