@@ -105,7 +105,6 @@
 
         <section id="GateKeeper-Objects">
             <h2>GateKeeper Classes</h2>
-            <p>We used Object Oriented Programming to manage our game's complexity by organizing code into reusable classes.</p>
             <p>Below are the classes we created for this game, their methods, their member variables, and a description of what they do.</p>
             
             <ul>
@@ -126,40 +125,58 @@
                             <code>backColor</code>
                             <p>Color of the background of the Canvas element.</p>
                         </li>
-                        <li id="Being-Dragged">
-                            <code>beingDragged[]</code>
-                            <p>Holds all objects currently being dragged. Is looped over every frame to re-display every moving object.</p>
-                            <p>Moved from global scope to the Game class.</p>
-                        </li>
-                        <li id="collidingNodes">
-                            <code>collidingNodes[]</code>
-                            <p>Will eventually hold pairs of colliding nodes, for the goal of establishing a persistent state transfer between them (ie, a connection)</p>
-                            <p>Not currently working.</p>
-                        </li>
-                        
+                        <li>
+                            <code>beingDragged, exitPoints, entrancePoints, connectionLines</code>
+                            <p>Stores references to various objects within the game. These are referred to all throughout the project.</p>
+                        </li> 
                     </ul>
                     <h4>Methods:</h4>
                     <ul>
                         <li>
                             <code>update()</code>
                             <p>Drives the entire game loop. Moves every Gate being dragged, then updates its position in the Spatial Hash Grid. </p>
-                            <p>Then Using that hash, checks for collision.  Then displays every logic gate in the queried canvas region (Probably the entire canvas).</p>
+                            <p>Then using the node hash, checks for node collision. Nodes are updated upon collision, then used to compute gate output. 
+                                Displays every logic gate in the queried canvas region (Probably the entire canvas).
+                            </p>
                         </li>
                     </ul>
                 </li>
                 <li id="SpatialHashGrid">
                     <strong>SpatialHashGrid</strong>
-                    <p>I did not implement this one myself, so docs may be lacking here.</p>
                     <p>
                         Used to reference every node and gate in the game, for efficient collision detection.
-                        <br>
-                        <br>
+                    </p>
+                    <p>
+                        Works by splitting the game space into a 2D grid of cells, and mapping each object to cell. The key for this map is the object's x and y coordinates, so every class that you want to use a SHG for MUST have x and y properties.
                     </p>
                     <h4>Member Variables:</h4>
                     <ul>
                         <li>
                             <code>cellSize</code>
                             <p>Size of each grid hash cell. Should about the size of each node, min max it for performance.</p>
+                        </li>
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>.insert(obj), .update(obj), .remove(obj)</code>
+                            <p>You're not gonna believe this... inserts/removes/updates objects for the Spatial Hash Grid.</p>
+                        </li>
+                        <li>
+                            <code>findNearbyObjects(object)</code>
+                            <p>Returns a set of all objects that fall within the same cell as the argument. Checks all cells that the argument overlaps</p>
+                        </li>
+                        <li>
+                            <code>checkCollision(objA, objB)</code>
+                            <p>Returns true if the two objects overlap each other.</p>
+                        </li>
+                        <li>
+                            <code>queryRegion(x, y, width, height)</code>
+                            <p>Returns all objects within the defined query region of the SHG. Right now, it is used to query the entire visible canvas. Likely can be min-maxed to query only local changes.</p>
+                        </li>
+                        <li>
+                            <code>queryPoint(x, y)</code>
+                            <p>Returns all objects that overlap a point on the canvas, (x, y).</p>
                         </li>
                     </ul>
                 </li>
@@ -221,75 +238,96 @@
                     <h4>Member Variables:</h4>
                     <ul>
                         <li>
-                            <code>label</code>
-                            <p>Mostly for metadata/debugging. Default value is "GATE", will be overridden by child classes.</p>
-                        </li>
-                        <li>
-                            <code>inputs[]</code>
+                            <code>inputNodes[]</code>
                             <p>Directly references input Node objects. Every frame, gates will reference what is in inputs[] and use that to recompute output.</p>
                         </li>
                         <li>
-                            <code>maxInputs</code>
-                            <p>Maximum inputs allowed for a gate. Default is 2, can be overridden by child classes (ie NOT gate). </p>
-                        </li>
-                        <li>
-                            <code>output</code>
+                            <code>outputNode</code>
                             <p>Boolean; References the output Node object, changes based on what is evaluated from the connected inputs.</p>
                         </li>
                         
                     </ul>
+                    <h4>Static Member Variables:</h4>
+                    <p>Static variables are shared by ALL instances of the same class. Including objects that inherit from said class.</p>
+                    <ul>
+                        <li>
+                            <code>GateSHG</code>
+                            <p>A Spatial Hash Grid used to efficiently query gates on the canvas, withing checking every gate.</p>
+                        </li>
+                        <li>
+                            <code>gNodeLeftOffset, gNodeRightOffset, gNodeSize</code>
+                            <p>Defines the size of Node objects attached to the gate, as well as the offsets (i.e. how far away from the gate they are).</p>
+                        </li>
+                    </ul>
                     <h4>Methods:</h4>
                     <ul>
                         <li>
-                            <code>connectInto(LogicGate gate)</code>
-                            <p>If possible based on max input constraint, pushes a reference of this.output into gate.inputs[]</p>
+                            <code>display()</code>
+                            <p>Draws the gate and the gate's nodes onto the canvas.</p>
                         </li>
                         <li>
-                            <code>inputs[]</code>
-                            <p>Directly references the output state of "connected" gates. </p>
+                            <code>createObject(x, y, width, height)</code>
+                            <p>Called by setup() to create a LogicGate object and push it into the GateSHG</p>
                         </li>
-                        
+                        <li>
+                            <code>calculateOutput()</code>
+                            <p>Considering the input node(s) of the gate, returns the appropriate output (e.g. AND, OR, NOT)</p>
+                        </li>
                     </ul>
                         
                 </li>
                 <li id="GateNode">
                     <strong>GateNode</strong>
                     <p>
-                        Defines the behavior of Logic Gate Nodes: do nodes collide?
+                        Represents connection points in a logic gate system. Each node can have a state (true/false) and is designed to be used with a spatial hash grid for efficient collision detection.
                         <br>
                     </p>
                     <h4>Member Variables:</h4>
                     <ul>
                         <li>
-                            <code>x, y, x2, y2</code>
-                            <p>Position of Node</p>
+                            <code>(x, y)</code>
+                            <p>Coordinates of the node on the canvas.</p>
                         </li>
                         <li>
-                            <code>parentGate</code>
-                            <p>Stores a reference to the parent of the Node object</p>
+                            <code>width, height</code>
+                            <p>Dimensions of the node for display and collision detection.</p>
+                        </li>
+                        <li>
+                            <code>parentObject</code>
+                            <p>Reference to the parent logic gate this node belongs to.</p>
+                        </li>
+                        <li>
+                            <code>state</code>
+                            <p>Boolean; Current state of the node (true/false).</p>
                         </li>
                     </ul>
                     <h4>Static Member Variables:</h4>
-                    <p>Static variables are shared by ALL instances of the same class. Including objects that inherit from said class.</p>
+                    <p>Static variables are shared by ALL instances of the same class.</p>
                     <ul>
                         <li>
-                            <code>nodeSprite???</code>
-                            <p>sprite to display for every node object</p>
-                        </li>
-                        <li>
-                            <code>SpatialHashGrid grid</code>
-                            <p>Used to index the location of each node in the game, for efficient collision detection between nodes.</p>
+                            <code>NodeSHG</code>
+                            <p>A Spatial Hash Grid used to efficiently detect collisions between nodes. Uses a cell size of 20 right now, may change it later if we want to test the most efficient size.</p>
                         </li>
                     </ul>
                     <h4>Methods:</h4>
                     <ul>
                         <li>
-                            <code>node.collidesWith(GateNode node)</code> https://www.geeksforgeeks.org/find-two-rectangles-overlap/
-                            Prune nodes. Create a searchNode() function that effectively searches nodes in a 2d space. Look at notebook.
-                            <p>If possible based on max input constraint, pushes a reference of this.output into gate.inputs[]</p>
-                        </li>         
+                            <code>constructor(x, y, width, height, parentObject)</code>
+                            <p>Initializes a new GateNode at the specified position with the given dimensions and parent object reference.</p>
+                        </li>
+                        <li>
+                            <code>move(x_coord, y_coord)</code>
+                            <p>moves the node to the specified coordinates.</p>
+                        </li>
+                        <li>
+                            <code>collidesWithList()</code>
+                            <p>Returns an array of nodes that collide with this node using the spatial hash grid for efficiency.</p>
+                        </li>
+                        <li>
+                            <code>display()</code>
+                            <p>displays the node on the canvas. Can change the style later if we prefer.</p>
+                        </li>
                     </ul>
-                        
                 </li>
             </ul>
             
@@ -298,17 +336,6 @@
     </main>
 
     <br>
-
-    <strong>
-        Important Considerations
-    </strong>
-    <p>
-        <code>
-        function mouseReleased() { gates_being_dragged = []; } // Clear all dragged objects on release
-        </code>
-    </p>
-
-
 
     <footer>
         <p>Written by Andrew Cash • <a href="https://github.com/Jonathan-Lanham/SoftwareEngGroupA">GitHub Repo</a>

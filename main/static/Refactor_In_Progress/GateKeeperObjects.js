@@ -295,18 +295,19 @@ class LogicGate extends DraggableObject{
         return !(this.inputNodes[0].state && this.inputNodes[1].state);
     }
 
-    collidesWithList(){
-        let result = [];
-        let candidates = LogicGate.GateSHG.findNearbyObjects(this);
-        //console.log("CANDIDATES: " + JSON.stringify(candidates))
-        for (let node of candidates){
-            if (LogicGate.GateSHG.checkCollision(node, this)){
-                result.push(node);
-            }
-        }
-        //console.log("RESULT: " + JSON.stringify(result));
-        return result;
-    }
+    //Finds all Logic Gates that this gate collides with; May be useful later on;
+    // collidesWithList(){
+    //     let result = [];
+    //     let candidates = LogicGate.GateSHG.findNearbyObjects(this);
+    //     //console.log("CANDIDATES: " + JSON.stringify(candidates))
+    //     for (let node of candidates){
+    //         if (LogicGate.GateSHG.checkCollision(node, this)){
+    //             result.push(node);
+    //         }
+    //     }
+    //     //console.log("RESULT: " + JSON.stringify(result));
+    //     return result;
+    // }
 
 }
 
