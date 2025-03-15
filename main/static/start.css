@@ -117,7 +117,14 @@
   text-shadow: 0px 3px black;
 }
 
+.terms-btn{
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 1px 1px black;
+  color: white;
+  text-decoration: none;
 
+}
 
 
 
