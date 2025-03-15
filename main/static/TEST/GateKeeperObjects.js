@@ -18,36 +18,57 @@ class Game{
     beingDragged = [];
     collidingNodes = [];
 
-    //Easy solution, not the most optimal
+    //Not the most optimal
     //Ideally, only loop over gates that are being moved, since that's the only case where the game updates.
     //Then create a function to cascade node updates up the chain, so only candidate change are computed.
     update(){
         background(this.backColor)
 
-        for (let obj of game.beingDragged){
+        for (let obj of this.beingDragged){
             //console.log("BEING DRAGGED :" + o)
+
+            //Y axis offset to reposition nodes
+            let yOffsetBefore = obj.y;
             
             obj.drag(mouseX, mouseY)
             LogicGate.GateSHG.update(obj)
+
+            //Y axis offset to reposition nodes
+            let yOffsetAfter = obj.y;
+
             //UPDATE AND CHECK EVERY INPUT NODE ON GATE BEING DRAGGED
             for (let node of obj.inputNodes){ 
                 
-                node.move(obj.x-LogicGate.gNodeLeftOffset, obj.y+obj.height/2-LogicGate.gNodeSize/2);
+                node.move(obj.x-LogicGate.gNodeLeftOffset, node.y+yOffsetAfter-yOffsetBefore);
+
                 GateNode.NodeSHG.update(node);
+
                 //check for collision
                 let collidingWithInputNodes = node.collidesWithList();
-                for (let collider of collidingWithInputNodes){
-                    //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
-                    console.log(collider)
-                }
+
+                //if (collidingWithInputNodes.length <= 0) { node.state = false; } 
+                //else{
+                    for (let collider of collidingWithInputNodes){
+                        //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
+
+                        node.state = collider.state;
+                        this.collidingNodes.push(collider)
+
+                    }
+                //}
             }
+
             //UPDATE AND CHECK THE SINGLE OUTPUT NODE ON GATE BEING DRAGGED
             obj.outputNode.move(obj.x+obj.width+LogicGate.gNodeRightOffset, obj.y+obj.height/2-LogicGate.gNodeSize/2)
             GateNode.NodeSHG.update(obj.outputNode)
             let collidingWithOutputNode = obj.outputNode.collidesWithList();
+            //if (collidingWithOutputNode.length <= 0) { node.state = false; } 
             for (let collider of collidingWithOutputNode){
                 //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
-                console.log(collider)
+
+                collider.state = obj.outputNode.state;
+                this.collidingNodes.push(collider)
+
             }
         }
 
@@ -55,8 +76,25 @@ class Game{
         //May be able to improve performance by restricting query to only sections of the canvas that have been updated.
         //But alas, that is much harder than O(n) for-loop
         for (let gate of LogicGate.GateSHG.queryRegion(0,0,this.gameWidth,this.gameHeight)){
+
+            gate.outputNode.state = gate.calculateOutput()
+
             gate.display() 
+
+            //If not colliding node
+            //RESET, make sure non-connected nodes are false
+            for (let inNode of gate.inputNodes){
+                if (this.collidingNodes.indexOf(inNode) === -1){
+                    inNode.state = false;
+                }
+            }
         }
+
+        this.collidingNodes = [];
+    }
+
+    handleDraggedObjects() {
+
     }
 }
 
@@ -107,13 +145,11 @@ class LogicGate extends DraggableObject{
 
     //NOT FINISHED. MAY USE SPRITES LATER.
     display() {
-        // STYLE SETTINGS (SIMULATE CSS)
-
         drawGenericGate(this.x, this.y, this.width, this.height, this.width/4);
         drawGateNodes(this);
-
     }
 
+    //Override for subclasses of Gates. eg, NOT will only have one node.
     static createObject(x, y, width, height){
         let newObj = new LogicGate(x, y, width, height)
         LogicGate.GateSHG.insert(newObj)
@@ -121,7 +157,10 @@ class LogicGate extends DraggableObject{
         console.log(newObj)
 
         //Create nodes for gate; Change 15 here for bigger values
-        let newInNode = new GateNode(x-LogicGate.gNodeLeftOffset, y+height/2 - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, newObj);
+        let newInNode = new GateNode(x-LogicGate.gNodeLeftOffset, y+3*height/4 - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, newObj);
+        GateNode.NodeSHG.insert(newInNode)
+        newObj.inputNodes.push(newInNode)
+        newInNode = new GateNode(x-LogicGate.gNodeLeftOffset, y+height/4 - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, newObj);
         GateNode.NodeSHG.insert(newInNode)
         newObj.inputNodes.push(newInNode)
 
@@ -130,6 +169,11 @@ class LogicGate extends DraggableObject{
         GateNode.NodeSHG.insert(newOutNode);
         newObj.outputNode = newOutNode;
 
+    }
+
+    calculateOutput(){
+        //console.log(this.inputNodes[0])
+        return !this.inputNodes[0].state;
     }
 
     collidesWithList(){
@@ -154,11 +198,11 @@ function preload() {
 
 function setup(){
 
-    game = new Game(1100, 600, '#4287f5');
-    LogicGate.createObject(100, 100, 60, 50);
-    LogicGate.createObject(200, 100, 90, 90);
-    LogicGate.createObject(300, 100, 100, 500);
-    LogicGate.createObject(300, 100, 600, 500);
+    game = new Game(1500, 900, '#4287f5');
+    LogicGate.createObject(100, 100, 100, 80);
+    LogicGate.createObject(200, 200, 100, 80);
+    LogicGate.createObject(300, 100, 100, 80);
+    LogicGate.createObject(300, 400, 100, 80);
 
 }
 
