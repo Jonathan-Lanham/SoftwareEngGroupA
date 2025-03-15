@@ -37,28 +37,3 @@ class GateNode{
         rect(this.x, this.y, this.width, this.height);
     }
 }
-
-class EntrancePoint extends Node{
-    constructor(x, y, width, height, state){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.state = state;
-    }
-
-    static createEntranceNode(x, y, state){
-        let newInNode = new EntranceNode(x, y, LogicGate.gNodeSize, LogicGate.gNodeSize, state);
-        GateNode.NodeSHG.insert(newInNode)
-    }
-  
-    // display() {
-    //   stroke(0);
-    //   strokeWeight(3);
-    //   let s = this.scalar
-  
-    //   fill(this.state ? "green" : "red");
-    //   strokeWeight(1);
-    //   ellipse(this.x * s, this.y * s, 15 * s, 15 * s);
-    // }
-  }
