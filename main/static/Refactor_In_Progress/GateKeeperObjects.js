@@ -313,22 +313,22 @@ class LogicGate extends DraggableObject{
     }
 
     //Override for subclasses of Gates. eg, NOT will only have one node.
-    static createObject(x, y, width, height){
-        let newObj = new LogicGate(x, y, width, height)
-        LogicGate.GateSHG.insert(newObj)
-        newObj.display()
-        console.log(newObj)
+    static createObject(x, y, width, height, gateClass=LogicGate){
+        let newObj = new gateClass(x, y, width, height);
+        gateClass.GateSHG.insert(newObj);
+        newObj.display();
+        console.log(newObj);
 
         //Create nodes for gate; Change 15 here for bigger values
-        let newInNode = new GateNode(x-LogicGate.gNodeLeftOffset, y+3*height/4 - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, newObj);
-        GateNode.NodeSHG.insert(newInNode)
-        newObj.inputNodes.push(newInNode)
-        newInNode = new GateNode(x-LogicGate.gNodeLeftOffset, y+height/4 - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, newObj);
-        GateNode.NodeSHG.insert(newInNode)
-        newObj.inputNodes.push(newInNode)
+        let newInNode = new GateNode(x-gateClass.gNodeLeftOffset, y+3*height/4 - gateClass.gNodeSize/2, gateClass.gNodeSize, gateClass.gNodeSize, newObj);
+        GateNode.NodeSHG.insert(newInNode);
+        newObj.inputNodes.push(newInNode);
+        newInNode = new GateNode(x-gateClass.gNodeLeftOffset, y+height/4 - gateClass.gNodeSize/2, gateClass.gNodeSize, gateClass.gNodeSize, newObj);
+        GateNode.NodeSHG.insert(newInNode);
+        newObj.inputNodes.push(newInNode);
 
         //Create output Node
-        let newOutNode = new GateNode(x+width+LogicGate.gNodeRightOffset, y+height/2 - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, newObj);
+        let newOutNode = new GateNode(x+width+gateClass.gNodeRightOffset, y+height/2 - gateClass.gNodeSize/2, gateClass.gNodeSize, gateClass.gNodeSize, newObj);
         GateNode.NodeSHG.insert(newOutNode);
         newObj.outputNode = newOutNode;
 
@@ -355,12 +355,24 @@ class LogicGate extends DraggableObject{
 
 }
 
+class AndGate extends LogicGate{
+    display(){
+        drawAndGate(this.x, this.y, this.width, this.height, this.width/4);
+        drawGateNodes(this);
+    }
+    calculateOutput(){
+        return (this.inputNodes[0].state && this.inputNodes[1].state);
+    }
+}
+
 function preload() {
     // Load the sprite image before setup runs
     //img = loadImage('AND.png');
 }
 
 function setup(){
+
+    //Read From JSON File
 
     //Directly tied to game instance
     game = new Game(1500, 900, '#4287f5');
@@ -375,6 +387,7 @@ function setup(){
     LogicGate.createObject(200, 200, 100, 80);
     LogicGate.createObject(300, 100, 100, 80);
     LogicGate.createObject(300, 400, 100, 80);
+    AndGate.createObject(700, 400, 100, 80, AndGate);
 
 }
 
