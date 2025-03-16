@@ -377,6 +377,16 @@ class NandGate extends LogicGate{
     }
 }
 
+class OrGate extends LogicGate{
+    display(){
+        drawOrGate(this.x, this.y, this.width, this.height, this.width/4);
+        drawGateNodes(this);
+    }
+    calculateOutput(){
+        return (this.inputNodes[0].state || this.inputNodes[1].state);
+    }
+}
+
 function preload() {
     // Load the sprite image before setup runs
     //img = loadImage('AND.png');
@@ -396,11 +406,14 @@ function setup(){
 
     //Tied to Logic Gate SHG
     LogicGate.createObject(100, 100, 100, 80);
-    LogicGate.createObject(200, 200, 100, 80);
-    LogicGate.createObject(300, 100, 100, 80);
-    LogicGate.createObject(300, 400, 100, 80);
-    AndGate.createObject(700, 400, 100, 80, AndGate);
-    NandGate.createObject(700, 600, 100, 80, NandGate);
+    // LogicGate.createObject(200, 200, 100, 80);
+    // LogicGate.createObject(300, 100, 100, 80);
+    // LogicGate.createObject(300, 400, 100, 80);
+    AndGate.createObject(700, 400, 200, 800, AndGate);
+    AndGate.createObject(700, 400, 300, 200, AndGate);
+    NandGate.createObject(500, 600, 100, 80, NandGate);
+    OrGate.createObject(800, 250, 400, 80, OrGate);
+    OrGate.createObject(500, 250, 300, 200, OrGate);
 
 }
 
