@@ -71,6 +71,17 @@ class Game{
     }
 
     transferStateToCollidingNodes(nodeObject){// this.transferStateToCollidingNodes(gate.outputNode)
+        //console.log(nodeObject)
+        //VISUALIZE HASH
+        if (nodeObject._cellKeys){
+            stroke('purple')
+            noFill()
+            for (let key of nodeObject._cellKeys){
+                let xAndy = key.split(',')
+                rect(xAndy[0]*20, xAndy[1]*20, 20, 20);
+            }
+        }
+        //-----
         let collidesWithNode = nodeObject.collidesWithList();
         for (let collider of collidesWithNode){
             //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
@@ -78,6 +89,7 @@ class Game{
         }
     }
 
+    //NOT USED, LEAVING HERE IN CASE IT'S USEFUL
     takeStateFromCollidingNodes(nodeObject){
         let collidesWithNode = nodeObject.collidesWithList();
         for (let collider of collidesWithNode){
@@ -105,7 +117,8 @@ class Game{
         //Process and display Connection Line Nodes
         for (let line of this.connectionLines){
 
-            this.takeStateFromCollidingNodes(line.inputNode)
+            //Don't need to pull state, everything else is pushing state
+            //this.takeStateFromCollidingNodes(line.inputNode)
 
             line.outputNode.state = line.inputNode.state;
 
@@ -159,7 +172,9 @@ class Connection{
     constructor(arrayOfLines){
         this.arrayOfLines = arrayOfLines
         this.inputNode = new GateNode(arrayOfLines[0].x- LogicGate.gNodeSize/2, arrayOfLines[0].y - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        GateNode.NodeSHG.insert(this.inputNode);
         this.outputNode = new GateNode(arrayOfLines[arrayOfLines.length-1].x- LogicGate.gNodeSize/2, arrayOfLines[arrayOfLines.length-1].y - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        GateNode.NodeSHG.insert(this.outputNode);
     }
 
     static createConnection(lineArray){
