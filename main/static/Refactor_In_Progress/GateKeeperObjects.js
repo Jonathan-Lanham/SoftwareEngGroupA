@@ -19,7 +19,7 @@ class Game{
     exitPoints = null;
     entrancePoints = null;
     //Not Finished With Connections
-    connectionLines = null;
+    connectionLines = [];
 
     handleDraggedObjects(){
         for (let obj of this.beingDragged){
@@ -80,7 +80,7 @@ class Game{
         this.handleDraggedObjects();
 
         //Display entrance points, transfer state to input nodes.
-        this.entrancePoints.display()
+        this.entrancePoints.display();
         for (let entrNode of this.entrancePoints.entNodes){
             let collidingWithEntNode = entrNode.collidesWithList();
             for (let collider of collidingWithEntNode){
@@ -88,6 +88,25 @@ class Game{
                 collider.state = entrNode.state;
             }
 
+        }
+
+        //Process and display Connection Line Nodes
+        for (let line of this.connectionLines){
+
+            let collidingWithInpNode = line.inputNode.collidesWithList();
+            for (let collider of collidingWithInpNode){
+                line.inputNode.state = collider.state
+            }
+
+            line.outputNode.state = line.inputNode.state;
+
+            let collidingWithOutNode = line.outputNode.collidesWithList();
+            for (let collider of collidingWithOutNode){
+                collider.state = line.outputNode.state
+            }
+            line.display();
+
+            line.outputNode.state = line.inputNode.state = false;
         }
 
         //QUERY A REGION OF THE CANVAS; queryRegion(0,0,this.gameWidth,this.gameHeight) is the entire canvas.
@@ -135,8 +154,33 @@ class Game{
 
 //Not finished
 class Connection{
-    constructor(arrayOfPoints){
-        this.arrayOfLines = arrayOfPoints
+    constructor(arrayOfLines){
+        this.arrayOfLines = arrayOfLines
+        this.inputNode = new GateNode(arrayOfLines[0].x- LogicGate.gNodeSize/2, arrayOfLines[0].y - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        this.outputNode = new GateNode(arrayOfLines[arrayOfLines.length-1].x- LogicGate.gNodeSize/2, arrayOfLines[arrayOfLines.length-1].y - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+    }
+
+    static createConnection(lineArray){
+        let newLine = new Connection(lineArray);
+        game.connectionLines.push(newLine);
+    }
+
+    display(){
+        noFill();
+        stroke('#00008B');
+        beginShape();
+    
+        // Add each point to the shape
+        for (let i = 0; i < this.arrayOfLines.length; i++) {
+            const point = this.arrayOfLines[i];
+            vertex(point.x, point.y);
+        }
+        
+        // End the shape without closing it (we just want a line, not a closed shape)
+        endShape();
+
+        this.inputNode.display();
+        this.outputNode.display();
     }
 }
 
@@ -323,13 +367,14 @@ function setup(){
     game.entrancePoints = new EntrancePoints(100, 200, 50, 500, [false, true, true]);
     game.exitPoints = new ExitPoints(1350, 200, 50, 500, [false, true, true]);
 
+    Connection.createConnection([{x: 200, y: 200}, {x: 500, y: 200}, {x: 500, y: 300}, {x: 700, y: 300}]);
+    Connection.createConnection([{x: 200, y: 500}, {x: 500, y: 500}, {x: 500, y: 600}, {x: 700, y: 600}]);
+
     //Tied to Logic Gate SHG
     LogicGate.createObject(100, 100, 100, 80);
     LogicGate.createObject(200, 200, 100, 80);
     LogicGate.createObject(300, 100, 100, 80);
     LogicGate.createObject(300, 400, 100, 80);
-
-    
 
 }
 

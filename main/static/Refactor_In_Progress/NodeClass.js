@@ -31,6 +31,7 @@ class GateNode{
         return result;
     }
     display(){
+        stroke('black')
         //change 15/2 to make circle larger
         fill(this.state ? "green" : "red");
         ellipse(this.x+ LogicGate.gNodeSize/2, this.y+LogicGate.gNodeSize/2, this.width, this.height);
