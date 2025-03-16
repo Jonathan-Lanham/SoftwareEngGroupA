@@ -70,7 +70,24 @@ class Game{
         return true;
     }
 
-    //Not the most optimal
+    transferStateToCollidingNodes(nodeObject){// this.transferStateToCollidingNodes(gate.outputNode)
+        let collidesWithNode = nodeObject.collidesWithList();
+        for (let collider of collidesWithNode){
+            //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
+            collider.state = nodeObject.state;
+        }
+    }
+
+    takeStateFromCollidingNodes(nodeObject){
+        let collidesWithNode = nodeObject.collidesWithList();
+        for (let collider of collidesWithNode){
+            //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
+            nodeObject.state = collider.state;
+        }
+    }
+
+    //Not the most optimal, may refactor later, separate some things into functions, but for now it works.
+    //The most complicated part of the project, so its fine for now.
     //Ideally, only loop over gates that are being moved, since that's the only case where the game updates.
     //Then create a function to cascade node updates up the chain, so only candidate change are computed.
     //But that's REALLY hard. I salute you, if you want to try. $10 if you manage to do it.
@@ -82,28 +99,17 @@ class Game{
         //Display entrance points, transfer state to input nodes.
         this.entrancePoints.display();
         for (let entrNode of this.entrancePoints.entNodes){
-            let collidingWithEntNode = entrNode.collidesWithList();
-            for (let collider of collidingWithEntNode){
-                //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
-                collider.state = entrNode.state;
-            }
-
+            this.transferStateToCollidingNodes(entrNode);
         }
 
         //Process and display Connection Line Nodes
         for (let line of this.connectionLines){
 
-            let collidingWithInpNode = line.inputNode.collidesWithList();
-            for (let collider of collidingWithInpNode){
-                line.inputNode.state = collider.state
-            }
+            this.takeStateFromCollidingNodes(line.inputNode)
 
             line.outputNode.state = line.inputNode.state;
 
-            let collidingWithOutNode = line.outputNode.collidesWithList();
-            for (let collider of collidingWithOutNode){
-                collider.state = line.outputNode.state
-            }
+            this.transferStateToCollidingNodes(line.outputNode);
             line.display();
 
             line.outputNode.state = line.inputNode.state = false;
@@ -123,11 +129,7 @@ class Game{
 
             //Input Nodes get state from ONLY output Nodes, and vice versa.
             //Only check things that collide with output nodes, essentially.
-            let collidingWithOutputNode = gate.outputNode.collidesWithList();
-            for (let collider of collidingWithOutputNode){
-                //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
-                collider.state = gate.outputNode.state;
-            }
+            this.transferStateToCollidingNodes(gate.outputNode)
 
             //Calculate output of the gate object, ie, AND OR NOT XOR NAND logic
             gate.outputNode.state = gate.calculateOutput()
