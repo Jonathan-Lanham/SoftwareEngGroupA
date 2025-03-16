@@ -387,6 +387,17 @@ class OrGate extends LogicGate{
     }
 }
 
+class XorGate extends LogicGate{
+    display(){
+        drawXorGate(this.x, this.y, this.width, this.height, this.width/4);
+        drawGateNodes(this);
+    }
+    calculateOutput(){
+        //(a && !b) || (!a && b)
+        return (this.inputNodes[0].state ^ this.inputNodes[1].state);
+    }
+}
+
 class NotGate extends LogicGate{
     display(){
         drawNotGate(this.x, this.y, this.width, this.height, this.width/4);
@@ -443,8 +454,11 @@ function setup(){
     AndGate.createObject(200, 200, 100, 80, AndGate);
     AndGate.createObject(300, 100, 100, 80, AndGate);
     NandGate.createObject(600, 700, 100, 80, NandGate);
-    OrGate.createObject(800, 100, 100, 80, OrGate);
+    //OrGate.createObject(800, 100, 100, 80, OrGate);
     OrGate.createObject(500, 100, 100, 80, OrGate);
+    XorGate.createObject(700, 100, 100, 120, XorGate);
+    XorGate.createObject(900, 100, 100, 80, XorGate);
+    //XorGate.createObject(1100, 100, 400, 200, XorGate);
     NotGate.createObject(900, 500, 100, 80, NotGate);
 
 }
