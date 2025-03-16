@@ -137,3 +137,25 @@ function drawOrGate(x, y, w, h, textsize){
     line(x, y, x + w/2, y);
     line(x, y + h, x + w/2, y + h);
 }
+
+function drawNotGate(x, y, w, h, textsize){
+
+    let textColor = 'black';
+
+    stroke(0);
+
+    textSize(textsize);
+
+    fill(textColor);
+    strokeWeight(1);
+    text("NOT", x + w/2.5 - textsize*1.5 , y + h/2 + textsize/3);
+    strokeWeight(4)
+    noFill();
+    triangle(
+        x+w-20,y+h/2,
+        x,y,
+        x, y + h
+      );
+      circle(x + w-10, y + h/2, 15);
+  
+}

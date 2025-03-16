@@ -387,6 +387,34 @@ class OrGate extends LogicGate{
     }
 }
 
+class NotGate extends LogicGate{
+    display(){
+        drawNotGate(this.x, this.y, this.width, this.height, this.width/4);
+        drawGateNodes(this);
+    }
+    calculateOutput(){
+        return !(this.inputNodes[0].state);
+    }
+    //Only one node; Exceptional; Hide the parent static method
+    static createObject(x, y, width, height, gateClass=LogicGate){
+        let newObj = new gateClass(x, y, width, height);
+        gateClass.GateSHG.insert(newObj);
+        newObj.display();
+        console.log(newObj);
+
+        //Create nodes for gate; Change 15 here for bigger values
+        let newInNode = new GateNode(x-gateClass.gNodeLeftOffset, y+height/2 - gateClass.gNodeSize/2, gateClass.gNodeSize, gateClass.gNodeSize, newObj);
+        GateNode.NodeSHG.insert(newInNode);
+        newObj.inputNodes.push(newInNode);
+
+        //Create output Node
+        let newOutNode = new GateNode(x+width+gateClass.gNodeRightOffset, y+height/2 - gateClass.gNodeSize/2, gateClass.gNodeSize, gateClass.gNodeSize, newObj);
+        GateNode.NodeSHG.insert(newOutNode);
+        newObj.outputNode = newOutNode;
+
+    }
+}
+
 function preload() {
     // Load the sprite image before setup runs
     //img = loadImage('AND.png');
@@ -395,31 +423,52 @@ function preload() {
 function setup(){
 
     //Read From JSON File
+    //Until then, sample a level here
 
     //Directly tied to game instance
     game = new Game(1500, 900, '#4287f5');
-    game.entrancePoints = new EntrancePoints(100, 200, 50, 500, [false, true, true]);
+    game.entrancePoints = new EntrancePoints(100, 200, 50, 500, [true, false, true, true, true, true, true, false, true, true]);
     game.exitPoints = new ExitPoints(1350, 200, 50, 500, [false, true, true]);
 
-    Connection.createConnection([{x: 200, y: 200}, {x: 500, y: 200}, {x: 500, y: 300}, {x: 700, y: 300}]);
-    Connection.createConnection([{x: 200, y: 500}, {x: 500, y: 500}, {x: 500, y: 600}, {x: 700, y: 600}]);
+    Connection.createConnection([{x: 265, y: 275}, {x: 500, y: 275}, {x: 500, y: 300}]);
+    Connection.createConnection([{x: 265, y: 355}, {x: 500, y: 355}, {x: 500, y: 325}]);
+    Connection.createConnection([{x: 135, y: 425}, {x: 635, y: 425}, {x: 635, y: 375}]);
+    Connection.createConnection([{x: 135, y: 650}, {x: 1370, y: 650}]);
 
     //Tied to Logic Gate SHG
     LogicGate.createObject(100, 100, 100, 80);
     // LogicGate.createObject(200, 200, 100, 80);
     // LogicGate.createObject(300, 100, 100, 80);
     // LogicGate.createObject(300, 400, 100, 80);
-    AndGate.createObject(700, 400, 200, 800, AndGate);
-    AndGate.createObject(700, 400, 300, 200, AndGate);
-    NandGate.createObject(500, 600, 100, 80, NandGate);
-    OrGate.createObject(800, 250, 400, 80, OrGate);
-    OrGate.createObject(500, 250, 300, 200, OrGate);
+    AndGate.createObject(200, 200, 100, 80, AndGate);
+    AndGate.createObject(300, 100, 100, 80, AndGate);
+    NandGate.createObject(600, 700, 100, 80, NandGate);
+    OrGate.createObject(800, 100, 100, 80, OrGate);
+    OrGate.createObject(500, 100, 100, 80, OrGate);
+    NotGate.createObject(900, 500, 100, 80, NotGate);
 
+}
+
+//For visualization/debugging
+function visualizeGridCells(){
+    stroke(55, 55, 55, 50)
+    // Draw vertical lines
+    for (let x = 0; x <= width; x += 20) {
+        line(x, 0, x, height);
+    }
+  
+    // Draw horizontal lines
+    for (let y = 0; y <= height; y += 20) {
+        line(0, y, width, y);
+    }
 }
 
 function draw(){
 
+    
     game.update()
+    //For visualization/debugging
+    visualizeGridCells();
 
 }
 
