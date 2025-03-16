@@ -60,7 +60,7 @@ class Game{
 
         // Compare each element
         for (let i = 0; i < statesArray.length; i++) {
-          if (statesArray[i] !== objectsArray[i].state) {
+          if (statesArray[i] != objectsArray[i].state) {
             return false; // Found a mismatch
           }
         }
