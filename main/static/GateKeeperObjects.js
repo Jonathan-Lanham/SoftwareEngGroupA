@@ -112,6 +112,7 @@ class Game{
     //Then create a function to cascade node updates up the chain, so only candidate change are computed.
     //But that's REALLY hard. I salute you, if you want to try. $10 if you manage to do it.
     update(){
+
         background(this.backColor)
 
         this.handleDraggedObjects();
@@ -222,13 +223,22 @@ class ExitPoints{
         let i = 0;
         //How far away should Nodes be from the edge?
         let offsetYAxis = 100
-        let equallySpaceNodes = (height-offsetYAxis)/(arrayOfNodeStates.length - 1)
+
+        let yOff;
 
         for (let state of arrayOfNodeStates){
+            if (arrayOfNodeStates.length > 1){
+                let equallySpaceNodes = (height - offsetYAxis) / (arrayOfNodeStates.length - 1);
+                yOff = y + (offsetYAxis/2) + i * equallySpaceNodes - LogicGate.gNodeSize/2;
+            } 
+            else{
+                //Can handle one node
+                yOff = y + height/2 - LogicGate.gNodeSize/2;
+            }
             //Borrow Logic Gate Node Size; May change Later.
             //Do something with states later?
 
-            let newNode = new GateNode(x + this.width/2 - LogicGate.gNodeSize/2, y + (offsetYAxis/2) + i * equallySpaceNodes - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+            let newNode = new GateNode(x + this.width/2 - LogicGate.gNodeSize/2, yOff, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
             GateNode.NodeSHG.insert(newNode);
             this.endNodes.push(newNode);
             ++i;
@@ -489,9 +499,6 @@ function setup(){
         "XnorGate": XnorGate,
         "NotGate": NotGate
     };
-
-    //Reference JSON file, load it into local storage
-    loadLevels();
     
     //Reference local storage for gates.
     const storedObjects = localStorage.getItem('initialize_objects');
@@ -502,11 +509,12 @@ function setup(){
         io = JSON.parse(storedObjects);
         console.log(io);
         console.log(io.Name);
+        document.getElementById("Level-Name").innerHTML = io.Name;
     }
 
     //Until then, sample a level here
     //Directly tied to game instance
-    game = new Game(1500, 900, '#4287f5');
+    game = new Game(io.CanvasSize.w, io.CanvasSize.h, '#4287f5');
     game.entrancePoints = new EntrancePoints(io.EntrancePoints.x, io.EntrancePoints.y, io.EntrancePoints.w, io.EntrancePoints.h, io.EntrancePoints.states);
     game.exitPoints = new ExitPoints(io.ExitPoints.x, io.ExitPoints.y, io.ExitPoints.w, io.ExitPoints.h, io.ExitPoints.states);
 
@@ -518,39 +526,6 @@ function setup(){
         game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type])
     }
 
-    //Tied to Logic Gate SHG
-    //game.insertGate(100, 100, 100, 80);
-    // game.insertGate(200, 200, 100, 80, AndGate);
-    // game.insertGate(300, 100, 100, 80, AndGate);
-    // game.insertGate(600, 700, 100, 80, NandGate);
-    // game.insertGate(500, 100, 100, 80, OrGate);
-    // game.insertGate(700, 100, 100, 120, XorGate);
-    // game.insertGate(900, 100, 100, 80, XorGate);
-    // game.insertGate(900, 500, 100, 80, NotGate);
-
-}
-
-//Move to other file eventually
-async function loadLevels() {
-    try {
-        const response = await fetch('levels.json');
-        if (!response.ok) {
-            throw new Error('Failed to load levels.json');
-        }
-        const levels = await response.json();
-        
-
-        levels.forEach(level => {
-
-            //store gates from selected level in local storage. Will allow users to start from the level they ended on.
-            localStorage.setItem('initialize_objects', JSON.stringify(level));
-            // delay the page change by 1 second (1000 ms)
-            console.log(`Selected level: ${level.Name}`);
-            console.log('Object:', JSON.stringify(level));
-        });
-    } catch (error) {
-        console.error('Error loading levels:', error);
-    }
 }
 
 //For visualization/debugging
