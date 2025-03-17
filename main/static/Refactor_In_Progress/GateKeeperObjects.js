@@ -21,6 +21,14 @@ class Game{
     //Not Finished With Connections
     connectionLines = [];
 
+    insertGate(x, y, width, height, gateClass=LogicGate){
+        gateClass.createObject(x, y, width, height, gateClass);
+    }
+
+    insertConnection(arrayOfPoints){
+        Connection.createConnection(arrayOfPoints);
+    }
+
     handleDraggedObjects(){
         for (let obj of this.beingDragged){
             console.log("BEING DRAGGED :" + obj)
@@ -422,7 +430,7 @@ class NotGate extends LogicGate{
         return !(this.inputNodes[0].state);
     }
     //Only one node; Exceptional; Hide the parent static method
-    static createObject(x, y, width, height, gateClass=LogicGate){
+    static createObject(x, y, width, height, gateClass=NotGate){
         let newObj = new gateClass(x, y, width, height);
         gateClass.GateSHG.insert(newObj);
         newObj.display();
@@ -449,33 +457,77 @@ function preload() {
 function setup(){
 
     //Read From JSON File
-    //Until then, sample a level here
+    //Used to load classes from the JSON file
+    gateClassMap = {
+        "LogicGate": LogicGate,
+        "AndGate": AndGate,
+        "NandGate": NandGate,
+        "OrGate": OrGate,
+        "XorGate": XorGate,
+        "NotGate": NotGate
+    };
 
+    //Reference JSON file, load it into local storage
+    loadLevels();
+    
+    //Reference local storage for gates.
+    const storedObjects = localStorage.getItem('initialize_objects');
+    console.log(storedObjects);
+
+    let io = null;
+    if (storedObjects) {
+        io = JSON.parse(storedObjects);
+        console.log(io);
+        console.log(io.Name);
+    }
+
+    //Until then, sample a level here
     //Directly tied to game instance
     game = new Game(1500, 900, '#4287f5');
-    game.entrancePoints = new EntrancePoints(100, 200, 50, 500, [true, false, true, true, true, true, true, false, true, true]);
-    game.exitPoints = new ExitPoints(1350, 200, 50, 500, [false, true, true]);
+    game.entrancePoints = new EntrancePoints(io.EntrancePoints.x, io.EntrancePoints.y, io.EntrancePoints.w, io.EntrancePoints.h, io.EntrancePoints.states);
+    game.exitPoints = new ExitPoints(io.ExitPoints.x, io.ExitPoints.y, io.ExitPoints.w, io.ExitPoints.h, io.ExitPoints.states);
 
-    Connection.createConnection([{x: 265, y: 275}, {x: 500, y: 275}, {x: 500, y: 300}]);
-    Connection.createConnection([{x: 265, y: 355}, {x: 500, y: 355}, {x: 500, y: 325}]);
-    Connection.createConnection([{x: 135, y: 425}, {x: 635, y: 425}, {x: 635, y: 375}]);
-    Connection.createConnection([{x: 135, y: 650}, {x: 1370, y: 650}]);
+    for (let con of io.Connections){
+        game.insertConnection(con)
+    }
+
+    for (let gate of io.Gates){
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type])
+    }
 
     //Tied to Logic Gate SHG
-    LogicGate.createObject(100, 100, 100, 80);
-    // LogicGate.createObject(200, 200, 100, 80);
-    // LogicGate.createObject(300, 100, 100, 80);
-    // LogicGate.createObject(300, 400, 100, 80);
-    AndGate.createObject(200, 200, 100, 80, AndGate);
-    AndGate.createObject(300, 100, 100, 80, AndGate);
-    NandGate.createObject(600, 700, 100, 80, NandGate);
-    //OrGate.createObject(800, 100, 100, 80, OrGate);
-    OrGate.createObject(500, 100, 100, 80, OrGate);
-    XorGate.createObject(700, 100, 100, 120, XorGate);
-    XorGate.createObject(900, 100, 100, 80, XorGate);
-    //XorGate.createObject(1100, 100, 400, 200, XorGate);
-    NotGate.createObject(900, 500, 100, 80, NotGate);
+    //game.insertGate(100, 100, 100, 80);
+    // game.insertGate(200, 200, 100, 80, AndGate);
+    // game.insertGate(300, 100, 100, 80, AndGate);
+    // game.insertGate(600, 700, 100, 80, NandGate);
+    // game.insertGate(500, 100, 100, 80, OrGate);
+    // game.insertGate(700, 100, 100, 120, XorGate);
+    // game.insertGate(900, 100, 100, 80, XorGate);
+    // game.insertGate(900, 500, 100, 80, NotGate);
 
+}
+
+//Move to other file eventually
+async function loadLevels() {
+    try {
+        const response = await fetch('levels.json');
+        if (!response.ok) {
+            throw new Error('Failed to load levels.json');
+        }
+        const levels = await response.json();
+        
+
+        levels.forEach(level => {
+
+            //store gates from selected level in local storage. Will allow users to start from the level they ended on.
+            localStorage.setItem('initialize_objects', JSON.stringify(level));
+            // delay the page change by 1 second (1000 ms)
+            console.log(`Selected level: ${level.Name}`);
+            console.log('Object:', JSON.stringify(level));
+        });
+    } catch (error) {
+        console.error('Error loading levels:', error);
+    }
 }
 
 //For visualization/debugging
