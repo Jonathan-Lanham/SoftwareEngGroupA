@@ -410,6 +410,16 @@ class OrGate extends LogicGate{
     }
 }
 
+class NorGate extends LogicGate{
+    display(){
+        drawNorGate(this.x, this.y, this.width, this.height, this.width/4);
+        drawGateNodes(this);
+    }
+    calculateOutput(){
+        return !(this.inputNodes[0].state || this.inputNodes[1].state);
+    }
+}
+
 class XorGate extends LogicGate{
     display(){
         drawXorGate(this.x, this.y, this.width, this.height, this.width/4);
@@ -418,6 +428,17 @@ class XorGate extends LogicGate{
     calculateOutput(){
         //(a && !b) || (!a && b)
         return (this.inputNodes[0].state ^ this.inputNodes[1].state);
+    }
+}
+
+class XnorGate extends LogicGate{
+    display(){
+        drawXnorGate(this.x, this.y, this.width, this.height, this.width/4);
+        drawGateNodes(this);
+    }
+    calculateOutput(){
+        //(a && !b) || (!a && b)
+        return !(this.inputNodes[0].state ^ this.inputNodes[1].state);
     }
 }
 
@@ -463,7 +484,9 @@ function setup(){
         "AndGate": AndGate,
         "NandGate": NandGate,
         "OrGate": OrGate,
+        "NorGate": NorGate,
         "XorGate": XorGate,
+        "XnorGate": XnorGate,
         "NotGate": NotGate
     };
 

@@ -140,6 +140,39 @@ function drawOrGate(x, y, w, h, textsize){
     line(x, y + h, x + w/2, y + h);
 }
 
+function drawNorGate(x, y, w, h, textsize){
+
+    let textColor = 'black';
+
+    stroke(0);
+
+    textSize(textsize);
+
+    fill(textColor);
+    strokeWeight(1);
+    text("NOR", x + w/1.55 - textsize*1.5 , y + h/2 + textsize/3);
+    strokeWeight(4)
+    noFill();
+    arc(
+        x + w/2 ,
+        y + h/2 ,
+        w ,
+        h ,
+      PI + HALF_PI,
+      TWO_PI + HALF_PI
+    );
+    bezier(
+        x, y,                         // Start point (left corner)
+        x + w * 0.25, y + h/4,          // First control point 
+        x + w * 0.25, y + 3*h/4, // Second control point
+        x, y + h        // End point (middle bottom)
+    );
+    line(x, y, x + w/2, y);
+    line(x, y + h, x + w/2, y + h);
+
+    ellipse(x + w, y + h/2, 15, 15)
+}
+
 function drawXorGate(x, y, w, h, textsize){
 
     let textColor = 'black';
@@ -180,6 +213,50 @@ function drawXorGate(x, y, w, h, textsize){
       );
     line(x, y, x + w/2, y);
     line(x, y + h, x + w/2, y + h);
+}
+
+function drawXnorGate(x, y, w, h, textsize){
+
+    let textColor = 'black';
+
+    stroke(0);
+
+    textSize(textsize);
+
+    fill(textColor);
+    strokeWeight(1);
+    text("XNOR", x + w/1.7 - textsize*1.5 , y + h/2 + textsize/3);
+    strokeWeight(4)
+    noFill();
+    arc(
+        x + w/2 ,
+        y + h/2 ,
+        w ,
+        h ,
+      PI + HALF_PI,
+      TWO_PI + HALF_PI
+    );
+    bezier(
+        x, y,                         // Start point (left corner)
+        x + w * 0.25, y + h/4,          // First control point 
+        x + w * 0.25, y + 3*h/4, // Second control point
+        x, y + h        // End point (middle bottom)
+    );
+    //Second line, to the left of gate
+    let xoff = w/18;
+    let yoff = h/20;
+    bezier(
+        x-xoff, y + yoff,                         // Start point (left corner)
+        x + w * 0.25 - xoff, y + h/4,          // First control point 
+        x + w * 0.25 - xoff, y + 3*h/4, // Second control point
+        x-xoff , y + h - yoff      // End point (middle bottom)
+
+
+      );
+    line(x, y, x + w/2, y);
+    line(x, y + h, x + w/2, y + h);
+
+    ellipse(x + w, y + h/2, 15, 15);
 }
 
 function drawNotGate(x, y, w, h, textsize){
