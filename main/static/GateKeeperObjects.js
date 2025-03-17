@@ -21,6 +21,14 @@ class Game{
     //Not Finished With Connections
     connectionLines = [];
 
+    insertGate(x, y, width, height, gateClass=LogicGate){
+        gateClass.createObject(x, y, width, height, gateClass);
+    }
+
+    insertConnection(arrayOfPoints){
+        Connection.createConnection(arrayOfPoints);
+    }
+
     handleDraggedObjects(){
         for (let obj of this.beingDragged){
             console.log("BEING DRAGGED :" + obj)
@@ -71,6 +79,17 @@ class Game{
     }
 
     transferStateToCollidingNodes(nodeObject){// this.transferStateToCollidingNodes(gate.outputNode)
+        //console.log(nodeObject)
+        //VISUALIZE HASH
+        if (nodeObject._cellKeys){
+            stroke('purple')
+            noFill()
+            for (let key of nodeObject._cellKeys){
+                let xAndy = key.split(',')
+                rect(xAndy[0]*20, xAndy[1]*20, 20, 20);
+            }
+        }
+        //-----
         let collidesWithNode = nodeObject.collidesWithList();
         for (let collider of collidesWithNode){
             //THIS NODE COLLIDED WITH COLLIDER, DO SOMETHING
@@ -78,6 +97,7 @@ class Game{
         }
     }
 
+    //NOT USED, LEAVING HERE IN CASE IT'S USEFUL
     takeStateFromCollidingNodes(nodeObject){
         let collidesWithNode = nodeObject.collidesWithList();
         for (let collider of collidesWithNode){
@@ -92,6 +112,7 @@ class Game{
     //Then create a function to cascade node updates up the chain, so only candidate change are computed.
     //But that's REALLY hard. I salute you, if you want to try. $10 if you manage to do it.
     update(){
+
         background(this.backColor)
 
         this.handleDraggedObjects();
@@ -105,7 +126,8 @@ class Game{
         //Process and display Connection Line Nodes
         for (let line of this.connectionLines){
 
-            this.takeStateFromCollidingNodes(line.inputNode)
+            //Don't need to pull state, everything else is pushing state
+            //this.takeStateFromCollidingNodes(line.inputNode)
 
             line.outputNode.state = line.inputNode.state;
 
@@ -159,7 +181,9 @@ class Connection{
     constructor(arrayOfLines){
         this.arrayOfLines = arrayOfLines
         this.inputNode = new GateNode(arrayOfLines[0].x- LogicGate.gNodeSize/2, arrayOfLines[0].y - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        GateNode.NodeSHG.insert(this.inputNode);
         this.outputNode = new GateNode(arrayOfLines[arrayOfLines.length-1].x- LogicGate.gNodeSize/2, arrayOfLines[arrayOfLines.length-1].y - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        GateNode.NodeSHG.insert(this.outputNode);
     }
 
     static createConnection(lineArray){
@@ -199,13 +223,22 @@ class ExitPoints{
         let i = 0;
         //How far away should Nodes be from the edge?
         let offsetYAxis = 100
-        let equallySpaceNodes = (height-offsetYAxis)/(arrayOfNodeStates.length - 1)
+
+        let yOff;
 
         for (let state of arrayOfNodeStates){
+            if (arrayOfNodeStates.length > 1){
+                let equallySpaceNodes = (height - offsetYAxis) / (arrayOfNodeStates.length - 1);
+                yOff = y + (offsetYAxis/2) + i * equallySpaceNodes - LogicGate.gNodeSize/2;
+            } 
+            else{
+                //Can handle one node
+                yOff = y + height/2 - LogicGate.gNodeSize/2;
+            }
             //Borrow Logic Gate Node Size; May change Later.
             //Do something with states later?
 
-            let newNode = new GateNode(x + this.width/2 - LogicGate.gNodeSize/2, y + (offsetYAxis/2) + i * equallySpaceNodes - LogicGate.gNodeSize/2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+            let newNode = new GateNode(x + this.width/2 - LogicGate.gNodeSize/2, yOff, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
             GateNode.NodeSHG.insert(newNode);
             this.endNodes.push(newNode);
             ++i;
@@ -387,6 +420,16 @@ class OrGate extends LogicGate{
     }
 }
 
+class NorGate extends LogicGate{
+    display(){
+        drawNorGate(this.x, this.y, this.width, this.height, this.width/4);
+        drawGateNodes(this);
+    }
+    calculateOutput(){
+        return !(this.inputNodes[0].state || this.inputNodes[1].state);
+    }
+}
+
 class XorGate extends LogicGate{
     display(){
         drawXorGate(this.x, this.y, this.width, this.height, this.width/4);
@@ -395,6 +438,17 @@ class XorGate extends LogicGate{
     calculateOutput(){
         //(a && !b) || (!a && b)
         return (this.inputNodes[0].state ^ this.inputNodes[1].state);
+    }
+}
+
+class XnorGate extends LogicGate{
+    display(){
+        drawXnorGate(this.x, this.y, this.width, this.height, this.width/4);
+        drawGateNodes(this);
+    }
+    calculateOutput(){
+        //(a && !b) || (!a && b)
+        return !(this.inputNodes[0].state ^ this.inputNodes[1].state);
     }
 }
 
@@ -407,7 +461,7 @@ class NotGate extends LogicGate{
         return !(this.inputNodes[0].state);
     }
     //Only one node; Exceptional; Hide the parent static method
-    static createObject(x, y, width, height, gateClass=LogicGate){
+    static createObject(x, y, width, height, gateClass=NotGate){
         let newObj = new gateClass(x, y, width, height);
         gateClass.GateSHG.insert(newObj);
         newObj.display();
@@ -434,32 +488,43 @@ function preload() {
 function setup(){
 
     //Read From JSON File
+    //Used to load classes from the JSON file
+    gateClassMap = {
+        "LogicGate": LogicGate,
+        "AndGate": AndGate,
+        "NandGate": NandGate,
+        "OrGate": OrGate,
+        "NorGate": NorGate,
+        "XorGate": XorGate,
+        "XnorGate": XnorGate,
+        "NotGate": NotGate
+    };
+    
+    //Reference local storage for gates.
+    const storedObjects = localStorage.getItem('initialize_objects');
+    console.log(storedObjects);
+
+    let io = null;
+    if (storedObjects) {
+        io = JSON.parse(storedObjects);
+        console.log(io);
+        console.log(io.Name);
+        document.getElementById("Level-Name").innerHTML = io.Name;
+    }
+
     //Until then, sample a level here
-
     //Directly tied to game instance
-    game = new Game(1500, 900, '#4287f5');
-    game.entrancePoints = new EntrancePoints(100, 200, 50, 500, [true, false, true, true, true, true, true, false, true, true]);
-    game.exitPoints = new ExitPoints(1350, 200, 50, 500, [false, true, true]);
+    game = new Game(io.CanvasSize.w, io.CanvasSize.h, '#4287f5');
+    game.entrancePoints = new EntrancePoints(io.EntrancePoints.x, io.EntrancePoints.y, io.EntrancePoints.w, io.EntrancePoints.h, io.EntrancePoints.states);
+    game.exitPoints = new ExitPoints(io.ExitPoints.x, io.ExitPoints.y, io.ExitPoints.w, io.ExitPoints.h, io.ExitPoints.states);
 
-    Connection.createConnection([{x: 265, y: 275}, {x: 500, y: 275}, {x: 500, y: 300}]);
-    Connection.createConnection([{x: 265, y: 355}, {x: 500, y: 355}, {x: 500, y: 325}]);
-    Connection.createConnection([{x: 135, y: 425}, {x: 635, y: 425}, {x: 635, y: 375}]);
-    Connection.createConnection([{x: 135, y: 650}, {x: 1370, y: 650}]);
+    for (let con of io.Connections){
+        game.insertConnection(con)
+    }
 
-    //Tied to Logic Gate SHG
-    LogicGate.createObject(100, 100, 100, 80);
-    // LogicGate.createObject(200, 200, 100, 80);
-    // LogicGate.createObject(300, 100, 100, 80);
-    // LogicGate.createObject(300, 400, 100, 80);
-    AndGate.createObject(200, 200, 100, 80, AndGate);
-    AndGate.createObject(300, 100, 100, 80, AndGate);
-    NandGate.createObject(600, 700, 100, 80, NandGate);
-    //OrGate.createObject(800, 100, 100, 80, OrGate);
-    OrGate.createObject(500, 100, 100, 80, OrGate);
-    XorGate.createObject(700, 100, 100, 120, XorGate);
-    XorGate.createObject(900, 100, 100, 80, XorGate);
-    //XorGate.createObject(1100, 100, 400, 200, XorGate);
-    NotGate.createObject(900, 500, 100, 80, NotGate);
+    for (let gate of io.Gates){
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type])
+    }
 
 }
 
