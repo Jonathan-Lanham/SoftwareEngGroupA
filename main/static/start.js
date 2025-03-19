@@ -51,6 +51,37 @@ supportExitBtn.addEventListener('click', () => {
     }
 });
 
+// grabbing the elements for the credits menu button
+const creditsBtn = document.querySelector('.credits-btn');
+const creditsHiddenMenu = document.getElementById('creditPopup');
+const creditsExitBtn = document.querySelector('.credits-exit-btn');
+
+
+// code for the credits button to showcase the credits popup
+creditsBtn.addEventListener('click', () => {
+    if(creditsHiddenMenu.style.display === 'none'){
+        creditsHiddenMenu.style.display = 'block';
+    }
+    else{
+        creditsHiddenMenu.style.display = 'none';
+    }
+});
+// code for the credits exit button to get rid of the credits menu
+creditsExitBtn.addEventListener('click', () => {
+    if(creditsHiddenMenu.style.display === 'block' ){
+        creditsHiddenMenu.style.display = 'none';
+    }
+    else{
+        creditsHiddenMenu.style.display = 'block';
+    }
+});
+
+
+
+
+
+
+
 // grabbing the elements for all buttons
 const allBtns = document.querySelectorAll('button');
 const allAtags = document.querySelectorAll('a');
