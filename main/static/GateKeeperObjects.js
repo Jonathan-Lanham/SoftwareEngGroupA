@@ -509,7 +509,9 @@ function setup(){
         io = JSON.parse(storedObjects);
         console.log(io);
         console.log(io.Name);
+        console.log(io.Description);
         document.getElementById("Level-Name").innerHTML = io.Name;
+        document.getElementById("Description").innerHTML = io.Description;
     }
 
     //Until then, sample a level here

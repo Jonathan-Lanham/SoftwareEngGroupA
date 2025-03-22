@@ -1,6 +1,7 @@
 [
     {
         "Name": "DEMO",
+        "Description": "This is DEMO text.",
         "CanvasSize": {"w": 1500, "h": 900},
         "EntrancePoints": {
             "x": 100, 
@@ -96,6 +97,7 @@
     },
     {
         "Name": "Level 1",
+        "Description": "Connect the right gate.",
         "CanvasSize": {"w": 600, "h": 500},
         "EntrancePoints": {
             "x": 195, 
@@ -133,6 +135,7 @@
     },
     {
         "Name": "Level 2",
+        "Description": "Connect the right gate.",
         "CanvasSize": {"w": 600, "h": 500},
         "EntrancePoints": {
             "x": 145, 
