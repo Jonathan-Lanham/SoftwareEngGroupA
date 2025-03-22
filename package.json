@@ -1,0 +1,26 @@
+{
+  "name": "gatekeeper",
+  "version": "1.0.0",
+  "description": "An educational game where players must solve digital logic puzzles",
+  "main": "main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jonathan-Lanham/SoftwareEngGroupA.git"
+  },
+  "author": "Team Alpha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jonathan-Lanham/SoftwareEngGroupA/issues"
+  },
+  "homepage": "https://github.com/Jonathan-Lanham/SoftwareEngGroupA#readme",
+  "devDependencies": {
+    "electron": "^35.0.3"
+  }
+}
