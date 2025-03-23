@@ -1,0 +1,344 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Documentation</title>
+</head>
+<body>
+    <header>
+        <h1>GateKeeper Main File Docs</h1>
+        <p>For internal use within Team Alpha; Written on March 8th, 2025</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#core-functions">Core Functions of p5.js</a></li>
+            <li><a href="#GateKeeper-Objects">GateKeeper Classes</a></li>
+    </nav>
+
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>These are the docs for the main JavaScript code that runs the game. Things are getting complicated, so it's best to write stuff down.</p>
+
+            <p>As it is required by the course, this project's graphics are handled by p5.js, a beginner-friendly library for creating interactive visuals and experiences. </p>
+
+            <p>Listed below are some of the most important methods and member variables of p5.js: </p>
+
+        </section>
+
+        <section id="core-functions">
+            <h2>Core Functions of p5.js</h2>
+            
+            <ul>
+                <li id="setup">
+                    <strong>setup()</strong>
+                    <p>
+                        Called once when the program starts.
+                        <br>
+                        Use it to define initial environment properties such as canvas size and background color and to load media such as images and fonts.
+                        <br>
+                        Example: <code>function setup() { createCanvas(800, 600); }</code>
+                    </p>
+                </li>
+                
+                <li id="draw">
+                    <strong>draw()</strong>
+                    <p>
+                        Is called directly after <code><a href="#setup">setup()</a></code>
+                        <br>
+                        Executes the lines of code inside its curly brackets 60 times per second until the program is stopped or the <code>noLoop()</code> function is called.
+                        <br>
+                        Example: <code>function draw() { background(220); ellipse(50, 50, 80, 80); }</code>
+                    </p>
+                </li>
+                
+                <li id="preload">
+                    <strong>preload()</strong>
+                    <p>
+                        Called before <code><a href="#setup">setup()</a></code>, used to handle asynchronous loading of external files.
+                        <br>
+                        Ensures assets are loaded before sketch starts.
+                        <br>
+                        Example: <code>function preload() { img = loadImage('assets/image.jpg'); }</code>
+                    </p>
+                </li>
+                
+                <li id="createCanvas">
+                    <strong>createCanvas(width, height)</strong>
+                    <p>
+                        Creates a canvas element in the document with given width and height in pixels.
+                        <br>
+                        Usually called in setup().
+                        <br>
+                        Example: <code>createCanvas(640, 480);</code>
+                    </p>
+                </li>
+                <li id="background">
+                    <strong>background(color)</strong>
+                    <p>
+                        Sets the background color of the canvas.
+                        <br>
+                        Example: <code>background(200);</code> or <code>background(255, 0, 0);</code>
+                    </p>
+                </li>
+                <li id="mouseX-mouseY">
+                    <strong>mouseX, mouseY</strong>
+                    <p>
+                        System variables that contain the current horizontal and vertical mouse position.
+                        <br>
+                        Example: <code>ellipse(mouseX, mouseY, 50, 50);</code>
+                    </p>
+                </li>
+                
+                <li id="mousePressed">
+                    <strong>mousePressed()</strong>
+                    <p>
+                        Called once after every time a mouse button is pressed.
+                        <br>
+                        Example: <code>function mousePressed() { background(random(255)); }</code>
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="GateKeeper-Objects">
+            <h2>GateKeeper Classes</h2>
+            <p>Below are the classes we created for this game, their methods, their member variables, and a description of what they do.</p>
+            
+            <ul>
+                <li id="Game">
+                    <strong>Game</strong>
+                    <p>
+                        Stores basic information for the game, and drives game updates and displays.
+                        <br>
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>gameWidth, gameHeight</code>
+                            <p>Width and Height of the Canvas element.</p>
+                        </li>
+                        <li>
+                            <code>backColor</code>
+                            <p>Color of the background of the Canvas element.</p>
+                        </li>
+                        <li>
+                            <code>beingDragged, exitPoints, entrancePoints, connectionLines</code>
+                            <p>Stores references to various objects within the game. These are referred to all throughout the project.</p>
+                        </li> 
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>update()</code>
+                            <p>Drives the entire game loop. Moves every Gate being dragged, then updates its position in the Spatial Hash Grid. </p>
+                            <p>Then using the node hash, checks for node collision. Nodes are updated upon collision, then used to compute gate output. 
+                                Displays every logic gate in the queried canvas region (Probably the entire canvas).
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li id="SpatialHashGrid">
+                    <strong>SpatialHashGrid</strong>
+                    <p>
+                        Used to reference every node and gate in the game, for efficient collision detection.
+                    </p>
+                    <p>
+                        Works by splitting the game space into a 2D grid of cells, and mapping each object to cell. The key for this map is the object's x and y coordinates, so every class that you want to use a SHG for MUST have x and y properties.
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>cellSize</code>
+                            <p>Size of each grid hash cell. Should about the size of each node, min max it for performance.</p>
+                        </li>
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>.insert(obj), .update(obj), .remove(obj)</code>
+                            <p>You're not gonna believe this... inserts/removes/updates objects for the Spatial Hash Grid.</p>
+                        </li>
+                        <li>
+                            <code>findNearbyObjects(object)</code>
+                            <p>Returns a set of all objects that fall within the same cell as the argument. Checks all cells that the argument overlaps</p>
+                        </li>
+                        <li>
+                            <code>checkCollision(objA, objB)</code>
+                            <p>Returns true if the two objects overlap each other.</p>
+                        </li>
+                        <li>
+                            <code>queryRegion(x, y, width, height)</code>
+                            <p>Returns all objects within the defined query region of the SHG. Right now, it is used to query the entire visible canvas. Likely can be min-maxed to query only local changes.</p>
+                        </li>
+                        <li>
+                            <code>queryPoint(x, y)</code>
+                            <p>Returns all objects that overlap a point on the canvas, (x, y).</p>
+                        </li>
+                    </ul>
+                </li>
+                <li id="DraggableObject">
+                    <strong>DraggableObject</strong>
+                    <p>
+                        Defines the behavior of every draggable object, mostly gates. These will all be rectangular.
+                        <br>
+                        Used to define the size of the "drag object hit-box". Will also store offsets for smooth dragging, and will manage whether objects are being dragged or not.
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>(x, y), width, height</code>
+                            <p>Coordinate location, size of object.</p>
+                        </li>
+                        <li>
+                            <code>offsetX, offsetY</code>
+                            <p>Used to calculate the offsets for dragging objects. Makes dragging smooth, instead of snappy.</p>
+                        </li>
+                        
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>pointIsWithin(x_coord, y_coord)</code>
+                            <p>Checks if the coordinate point <code>(x_coord, y_coord)</code> falls between the range of <code>(x, y)</code> and <code>(x2, y2)</code></p>
+                            <p><code>return (x_coord > this.x && x_coord < this.x2 && y_coord > this.y && y_coord < this.y2)</code></p>
+                            <p>Typical use: <code>if (gate.pointIsWithin(mouseX, mouseY)){ gate.startDragging() }</code></p>
+                        </li>
+                        <li>
+                            <code>startDragging()</code>
+                            <p>Pushes the Object into to the static <a href="#Being-Dragged"><code>beingDragged[]</code></a> array.</p>
+                            <p>Will be called within mouse_click event</p>
+                        </li>
+                        <li>
+                            <code>stopDragging()</code>
+                            <p>Removes the Object from the static <a href="#Being-Dragged"><code>beingDragged[]</code></a> array.</p>
+                        </li>
+                        <li>
+                            <code>changeOffsets(x, y)</code>
+                            <p>Changes the value of offsetX, offsetY to x, y</p>
+                        </li>
+                        <li>
+                            <code>drag(xc, yc)</code>
+                            <p>Moves the object to x,y when called.</p>
+                            <p><code>this.x = xc - this.offsetX;<br>this.y = yc - this.offsetY;</code></p>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li id="LogicGate">
+                    <strong>LogicGate (Extends <a href="#DraggableObject">DraggableObject</a>)</strong>
+                    <p>
+                        Defines the behavior of Logic Gates: input state, output state, labeling of gates, and graphical display.
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>inputNodes[]</code>
+                            <p>Directly references input Node objects. Every frame, gates will reference what is in inputs[] and use that to recompute output.</p>
+                        </li>
+                        <li>
+                            <code>outputNode</code>
+                            <p>Boolean; References the output Node object, changes based on what is evaluated from the connected inputs.</p>
+                        </li>
+                        
+                    </ul>
+                    <h4>Static Member Variables:</h4>
+                    <p>Static variables are shared by ALL instances of the same class. Including objects that inherit from said class.</p>
+                    <ul>
+                        <li>
+                            <code>GateSHG</code>
+                            <p>A Spatial Hash Grid used to efficiently query gates on the canvas, withing checking every gate.</p>
+                        </li>
+                        <li>
+                            <code>gNodeLeftOffset, gNodeRightOffset, gNodeSize</code>
+                            <p>Defines the size of Node objects attached to the gate, as well as the offsets (i.e. how far away from the gate they are).</p>
+                        </li>
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>display()</code>
+                            <p>Draws the gate and the gate's nodes onto the canvas.</p>
+                        </li>
+                        <li>
+                            <code>createObject(x, y, width, height)</code>
+                            <p>Called by setup() to create a LogicGate object and push it into the GateSHG</p>
+                        </li>
+                        <li>
+                            <code>calculateOutput()</code>
+                            <p>Considering the input node(s) of the gate, returns the appropriate output (e.g. AND, OR, NOT)</p>
+                        </li>
+                    </ul>
+                        
+                </li>
+                <li id="GateNode">
+                    <strong>GateNode</strong>
+                    <p>
+                        Represents connection points in a logic gate system. Each node can have a state (true/false) and is designed to be used with a spatial hash grid for efficient collision detection.
+                        <br>
+                    </p>
+                    <h4>Member Variables:</h4>
+                    <ul>
+                        <li>
+                            <code>(x, y)</code>
+                            <p>Coordinates of the node on the canvas.</p>
+                        </li>
+                        <li>
+                            <code>width, height</code>
+                            <p>Dimensions of the node for display and collision detection.</p>
+                        </li>
+                        <li>
+                            <code>parentObject</code>
+                            <p>Reference to the parent logic gate this node belongs to.</p>
+                        </li>
+                        <li>
+                            <code>state</code>
+                            <p>Boolean; Current state of the node (true/false).</p>
+                        </li>
+                    </ul>
+                    <h4>Static Member Variables:</h4>
+                    <p>Static variables are shared by ALL instances of the same class.</p>
+                    <ul>
+                        <li>
+                            <code>NodeSHG</code>
+                            <p>A Spatial Hash Grid used to efficiently detect collisions between nodes. Uses a cell size of 20 right now, may change it later if we want to test the most efficient size.</p>
+                        </li>
+                    </ul>
+                    <h4>Methods:</h4>
+                    <ul>
+                        <li>
+                            <code>constructor(x, y, width, height, parentObject)</code>
+                            <p>Initializes a new GateNode at the specified position with the given dimensions and parent object reference.</p>
+                        </li>
+                        <li>
+                            <code>move(x_coord, y_coord)</code>
+                            <p>moves the node to the specified coordinates.</p>
+                        </li>
+                        <li>
+                            <code>collidesWithList()</code>
+                            <p>Returns an array of nodes that collide with this node using the spatial hash grid for efficiency.</p>
+                        </li>
+                        <li>
+                            <code>display()</code>
+                            <p>displays the node on the canvas. Can change the style later if we prefer.</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+        </section>
+
+    </main>
+
+    <br>
+
+    <footer>
+        <p>Written by Andrew Cash • <a href="https://github.com/Jonathan-Lanham/SoftwareEngGroupA">GitHub Repo</a>
+    </footer>
+</body>
+</html>

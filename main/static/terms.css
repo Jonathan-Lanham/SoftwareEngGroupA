@@ -1,0 +1,104 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+body{
+    height: 100vh;
+    width: 100%;
+    
+}
+#mainContainer{
+    height: 100vh;
+    width: 100%;
+    
+}
+header{
+    height: 5em;
+    width: 100%;
+    border-bottom: 1px solid rgb(177, 177, 177);
+    display: flex;
+    align-items: center;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    margin-top: .6em;
+    margin-left: 2em;
+    
+}
+.logo-text{
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 1px 1px black;
+    color: white;
+    font-size: 1.8em;
+}
+.logo p{
+    padding-right: .5em;
+}
+.terms-text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4em;
+}
+.list-items ul{
+    display: flex;
+    padding-left: 1em;
+}
+ul li{
+    list-style-type: none;
+    padding: 1em;
+    border-bottom: 1px solid black;
+}
+li a{
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+}
+a{
+    text-decoration: none;
+    list-style-type: none;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+.gatekeeper-home{
+    font-family: "Modak", serif;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 1px 1px black;
+    color: white;
+}
+#leftBar{
+    height: 160vh;
+    width: 19em;
+    border-right: 1px solid rgb(177, 177, 177);
+}
+
+#mainContent{
+    display: flex;
+}
+#mainText{
+    height: 100vh;
+    width: 80%;
+    margin: 3em;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
+}
+#mainText h2{
+    text-align: center;
+    font-size: 2em;
+}
+#mainText h3{
+    padding-top: .5em;
+    text-align: center;
+    font-size: 1.2em;
+}
+#mainText p{
+    padding-top: 1em;
+    width: 60%;
+    margin: 0 auto;
+    font-size: 1.2em;
+}
