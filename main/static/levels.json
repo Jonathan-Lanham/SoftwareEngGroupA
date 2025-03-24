@@ -97,6 +97,7 @@
     },
     {
         "Name": "Level 1",
+        "lvlNum": 1,
         "Description": "Connect the right gate.",
         "CanvasSize": {"w": 600, "h": 500},
         "EntrancePoints": {
@@ -135,6 +136,7 @@
     },
     {
         "Name": "Level 2",
+        "lvlNum": 2,
         "Description": "Connect the right gate.",
         "CanvasSize": {"w": 600, "h": 500},
         "EntrancePoints": {
