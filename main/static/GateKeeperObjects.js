@@ -74,7 +74,8 @@ class Game{
         }
         
         // Winner winner chicken dinner
-        window.alert("You Won!");
+        // window.alert("You Won!");
+        showWin();
         return true;
     }
 
@@ -575,4 +576,16 @@ function mousePressed(){
         game.beingDragged.push(gate)
     }
 
+}
+
+function showWin() {
+    let popup = document.getElementById("popup");
+    if (popup) {
+        popup.style.display = "flex";
+    }
+}
+
+function loadNextLevel() {
+    console.log("next level button clicked");
+    window.location.href = "level_select.html";
 }

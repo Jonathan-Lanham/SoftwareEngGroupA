@@ -50,10 +50,22 @@
           <button id="back-to-main">Home</button>
       </div>
   </div>
+  <section>
+    <div class="popup-overlay" id="popup" onclick="closePopup(event)">
+      <div class="win-popup" onclick="event.stopPropagation()">
+        <div class="top-win-section">
+          <div class="win-title">
+            <p>You win!</p>
+          </div>
+        </div>
+  
+        <!-- Next Level Button -->
+        <button class="win-button" onclick="loadNextLevel()">Next Level</button>
+      </div>
+    </div>
+  </section>
+
     <main>
-      
-
-
       <!-- Added background to canvas -->
       <section id="">
         <h1 id="Level-Name"></h1>
