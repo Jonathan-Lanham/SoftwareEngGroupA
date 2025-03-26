@@ -2,7 +2,7 @@
 let game;
 
 class Game {
-    constructor(gameWidth, gameHeight, backColor, scale = 1) {
+    constructor(gameWidth, gameHeight, backColor, sizeOfNodes=15, scale = 1) {
         let x = (windowWidth - width) / 2 - gameWidth / 2;
         let y = (windowHeight - height) / 2 - gameHeight / 2;
         canvas = createCanvas(gameWidth, gameHeight);
@@ -13,6 +13,9 @@ class Game {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.backColor = backColor;
+
+        Game.sizeOfNodes = sizeOfNodes;
+        LogicGate.gNodeSize = sizeOfNodes;
 
     }
 
@@ -523,7 +526,7 @@ function setup() {
 
     //Until then, sample a level here
     //Directly tied to game instance
-    game = new Game(io.CanvasSize.w, io.CanvasSize.h, '#4287f5', sizeOfNodes=30);
+    game = new Game(io.CanvasSize.w, io.CanvasSize.h, '#4287f5', sizeOfNodes=15);
     game.entrancePoints = new EntrancePoints(io.EntrancePoints.x, io.EntrancePoints.y, io.EntrancePoints.w, io.EntrancePoints.h, io.EntrancePoints.states);
     game.exitPoints = new ExitPoints(io.ExitPoints.x, io.ExitPoints.y, io.ExitPoints.w, io.ExitPoints.h, io.ExitPoints.states);
 
