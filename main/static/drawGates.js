@@ -5,8 +5,8 @@ function drawGateNodes(obj){
 
     for (let node of obj.inputNodes){
         //console.log(node)
-        node.display();
-        obj.outputNode.display();
+        node.display(obj);
+        obj.outputNode.display(obj);
     }
 
 }

@@ -13,7 +13,10 @@ class Game {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.backColor = backColor;
+
     }
+
+    static sizeOfNodes = 15;
 
     beingDragged = [];
     exitPoints = null;
@@ -60,7 +63,7 @@ class Game {
 
     updateOutputNode(obj) {
         //UPDATE AND CHECK THE SINGLE OUTPUT NODE ON GATE BEING DRAGGED
-        obj.outputNode.move(obj.x + obj.width + LogicGate.gNodeRightOffset, obj.y + obj.height / 2 - LogicGate.gNodeSize / 2)
+        obj.outputNode.move(obj.x + obj.width + LogicGate.gNodeRightOffset, obj.y + obj.height / 2 - Game.sizeOfNodes / 2)
         GateNode.NodeSHG.update(obj.outputNode)
     }
 
@@ -181,9 +184,9 @@ class Game {
 class Connection {
     constructor(arrayOfLines) {
         this.arrayOfLines = arrayOfLines
-        this.inputNode = new GateNode(arrayOfLines[0].x - LogicGate.gNodeSize / 2, arrayOfLines[0].y - LogicGate.gNodeSize / 2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        this.inputNode = new GateNode(arrayOfLines[0].x - Game.sizeOfNodes / 2, arrayOfLines[0].y - Game.sizeOfNodes / 2, Game.sizeOfNodes, Game.sizeOfNodes, this);
         GateNode.NodeSHG.insert(this.inputNode);
-        this.outputNode = new GateNode(arrayOfLines[arrayOfLines.length - 1].x - LogicGate.gNodeSize / 2, arrayOfLines[arrayOfLines.length - 1].y - LogicGate.gNodeSize / 2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        this.outputNode = new GateNode(arrayOfLines[arrayOfLines.length - 1].x - Game.sizeOfNodes / 2, arrayOfLines[arrayOfLines.length - 1].y - Game.sizeOfNodes / 2, Game.sizeOfNodes, Game.sizeOfNodes, this);
         GateNode.NodeSHG.insert(this.outputNode);
     }
 
@@ -230,16 +233,16 @@ class ExitPoints {
         for (let state of arrayOfNodeStates) {
             if (arrayOfNodeStates.length > 1) {
                 let equallySpaceNodes = (height - offsetYAxis) / (arrayOfNodeStates.length - 1);
-                yOff = y + (offsetYAxis / 2) + i * equallySpaceNodes - LogicGate.gNodeSize / 2;
+                yOff = y + (offsetYAxis / 2) + i * equallySpaceNodes - Game.sizeOfNodes / 2;
             }
             else {
                 //Can handle one node
-                yOff = y + height / 2 - LogicGate.gNodeSize / 2;
+                yOff = y + height / 2 - Game.sizeOfNodes / 2;
             }
             //Borrow Logic Gate Node Size; May change Later.
             //Do something with states later?
 
-            let newNode = new GateNode(x + this.width / 2 - LogicGate.gNodeSize / 2, yOff, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+            let newNode = new GateNode(x + this.width / 2 - Game.sizeOfNodes / 2, yOff, Game.sizeOfNodes, Game.sizeOfNodes, this);
             GateNode.NodeSHG.insert(newNode);
             this.endNodes.push(newNode);
             ++i;
@@ -276,7 +279,7 @@ class EntrancePoints {
             //Borrow Logic Gate Node Size; May change Later.
             //Do something with states later?
 
-            let newNode = new GateNode(x + this.width / 2 - LogicGate.gNodeSize / 2, y + (offsetYAxis / 2) + i * equallySpaceNodes - LogicGate.gNodeSize / 2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+            let newNode = new GateNode(x + this.width / 2 - Game.sizeOfNodes / 2, y + (offsetYAxis / 2) + i * equallySpaceNodes - Game.sizeOfNodes / 2, Game.sizeOfNodes, Game.sizeOfNodes, this);
             newNode.state = state;
             GateNode.NodeSHG.insert(newNode);
             this.entNodes.push(newNode);
@@ -340,7 +343,10 @@ class LogicGate extends DraggableObject {
     //change node offsets and size
     static gNodeLeftOffset = 25;
     static gNodeRightOffset = 10;
-    static gNodeSize = 15;
+
+    //Can override later if need be.
+    static gNodeSize = Game.sizeOfNodes;
+
 
     //NOT FINISHED. MAY USE SPRITES LATER.
     display() {
@@ -517,7 +523,7 @@ function setup() {
 
     //Until then, sample a level here
     //Directly tied to game instance
-    game = new Game(io.CanvasSize.w, io.CanvasSize.h, '#4287f5');
+    game = new Game(io.CanvasSize.w, io.CanvasSize.h, '#4287f5', sizeOfNodes=30);
     game.entrancePoints = new EntrancePoints(io.EntrancePoints.x, io.EntrancePoints.y, io.EntrancePoints.w, io.EntrancePoints.h, io.EntrancePoints.states);
     game.exitPoints = new ExitPoints(io.ExitPoints.x, io.ExitPoints.y, io.ExitPoints.w, io.ExitPoints.h, io.ExitPoints.states);
 
