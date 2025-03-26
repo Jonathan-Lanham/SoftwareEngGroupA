@@ -263,8 +263,13 @@ class ExitPoints {
         stroke('#5E5C6C')
         rect(this.x, this.y, this.width, this.height)
         stroke('black')
+        let i = 0;
         for (let eNode of this.endNodes) {
+            //Red or green line depending on state
+            stroke(this.arrayOfNodeStates[i] ? "green" : "red");
+            line(eNode.x, eNode.y + eNode.height/2, eNode.x + 500, eNode.y + eNode.height/2);
             eNode.display();
+            ++i;
         }
     }
 }
