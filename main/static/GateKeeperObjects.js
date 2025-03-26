@@ -2,7 +2,7 @@
 let game;
 
 class Game {
-    constructor(gameWidth, gameHeight, backColor, sizeOfNodes=15, scale = 1) {
+    constructor(gameWidth, gameHeight, backColor, sizeOfNodes=15) {
         let x = (windowWidth - width) / 2 - gameWidth / 2;
         let y = (windowHeight - height) / 2 - gameHeight / 2;
         canvas = createCanvas(gameWidth, gameHeight);
@@ -16,6 +16,8 @@ class Game {
 
         Game.sizeOfNodes = sizeOfNodes;
         LogicGate.gNodeSize = sizeOfNodes;
+        LogicGate.gNodeLeftOffset = sizeOfNodes*2;
+        LogicGate.gNodeRightOffset = sizeOfNodes;
 
     }
 
@@ -27,12 +29,12 @@ class Game {
     //Not Finished With Connections
     connectionLines = [];
 
-    insertGate(x, y, width, height, gateClass = LogicGate) {
-        gateClass.createObject(x, y, width, height, gateClass);
+    insertGate(x, y, width, height, gateClass = LogicGate, scale=1) {
+        gateClass.createObject(x * scale, y * scale, width * scale, height * scale, gateClass);
     }
 
-    insertConnection(arrayOfPoints) {
-        Connection.createConnection(arrayOfPoints);
+    insertConnection(arrayOfPoints, scale=1) {
+        Connection.createConnection(arrayOfPoints, scale=scale);
     }
 
     handleDraggedObjects() {
@@ -193,7 +195,11 @@ class Connection {
         GateNode.NodeSHG.insert(this.outputNode);
     }
 
-    static createConnection(lineArray) {
+    static createConnection(lineArray, scale=1) {
+        for (let point of lineArray){
+            point.x *= scale;
+            point.y *= scale;
+        }
         let newLine = new Connection(lineArray);
         game.connectionLines.push(newLine);
     }
@@ -229,7 +235,7 @@ class ExitPoints {
         //Equally Space Nodes Across ExitPoints object range
         let i = 0;
         //How far away should Nodes be from the edge?
-        let offsetYAxis = 100
+        let offsetYAxis = Game.sizeOfNodes*4
 
         let yOff;
 
@@ -275,7 +281,7 @@ class EntrancePoints {
         //Equally Space Nodes Across ExitPoints object range
         let i = 0;
         //How far away should Nodes be from the edge?
-        let offsetYAxis = 100
+        let offsetYAxis = Game.sizeOfNodes*4
         let equallySpaceNodes = (height - offsetYAxis) / (arrayOfNodeStates.length - 1)
 
         for (let state of arrayOfNodeStates) {
@@ -344,8 +350,8 @@ class LogicGate extends DraggableObject {
     static GateSHG = new SpatialHashGrid(20);
 
     //change node offsets and size
-    static gNodeLeftOffset = 25;
-    static gNodeRightOffset = 10;
+    static gNodeLeftOffset = Game.sizeOfNodes*2;
+    static gNodeRightOffset = Game.sizeOfNodes;
 
     //Can override later if need be.
     static gNodeSize = Game.sizeOfNodes;
@@ -524,18 +530,22 @@ function setup() {
         document.getElementById("Description").innerHTML = io.Description;
     }
 
+    //Base scale off of viewport size.
+    let scale = window.innerWidth/2560;
+    console.log(window.innerWidth)
+
     //Until then, sample a level here
     //Directly tied to game instance
-    game = new Game(io.CanvasSize.w, io.CanvasSize.h, '#4287f5', sizeOfNodes=15);
-    game.entrancePoints = new EntrancePoints(io.EntrancePoints.x, io.EntrancePoints.y, io.EntrancePoints.w, io.EntrancePoints.h, io.EntrancePoints.states);
-    game.exitPoints = new ExitPoints(io.ExitPoints.x, io.ExitPoints.y, io.ExitPoints.w, io.ExitPoints.h, io.ExitPoints.states);
+    game = new Game(io.CanvasSize.w * scale, io.CanvasSize.h * scale, '#4287f5', sizeOfNodes=15 * scale);
+    game.entrancePoints = new EntrancePoints(io.EntrancePoints.x * scale, io.EntrancePoints.y * scale, io.EntrancePoints.w * scale, io.EntrancePoints.h * scale, io.EntrancePoints.states);
+    game.exitPoints = new ExitPoints(io.ExitPoints.x * scale, io.ExitPoints.y * scale, io.ExitPoints.w * scale, io.ExitPoints.h * scale, io.ExitPoints.states);
 
     for (let con of io.Connections) {
-        game.insertConnection(con)
+        game.insertConnection(con, scale=scale)
     }
 
     for (let gate of io.Gates) {
-        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type])
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
     }
 
 }

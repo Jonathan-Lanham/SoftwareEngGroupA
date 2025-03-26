@@ -26,7 +26,7 @@ function drawGenericGate(x, y, w, h, textsize){
     fill(textColor);
     strokeWeight(1);
     text("GATE", x + w/2 - textsize*1.5 , y + h/2 + textsize/3);
-    strokeWeight(4)
+    strokeWeight(4 * w / 80)
     noFill();
     arc(
     x + w/2 ,
@@ -49,7 +49,7 @@ function drawNandGate(x, y, w, h, textsize){
     // 
     stroke(0);
 
-    let circSize = 15;
+    let circSize = 15 * w / 80;
     
     // 
     //let s = scalar;
@@ -60,7 +60,7 @@ function drawNandGate(x, y, w, h, textsize){
     fill(textColor);
     strokeWeight(1);
     text("NAND", x + w/2.1 - textsize*1.5 , y + h/2 + textsize/3);
-    strokeWeight(4)
+    strokeWeight(4 * w / 80)
     noFill();
     arc(
     x + w/2 - circSize/2,
@@ -95,7 +95,7 @@ function drawAndGate(x, y, w, h, textsize){
     fill(textColor);
     strokeWeight(1);
     text("AND", x + w/2 - textsize*1.25 , y + h/2 + textsize/3);
-    strokeWeight(4)
+    strokeWeight(4 * w / 80)
     noFill();
     arc(
     x + w/2 ,
@@ -123,7 +123,7 @@ function drawOrGate(x, y, w, h, textsize){
     fill(textColor);
     strokeWeight(1);
     text("OR", x + w/1.45 - textsize*1.5 , y + h/2 + textsize/3);
-    strokeWeight(4)
+    strokeWeight(4 * w / 80)
     noFill();
     arc(
         x + w/2 ,
@@ -151,12 +151,12 @@ function drawNorGate(x, y, w, h, textsize){
 
     textSize(textsize);
 
-    let circSize = 15;
+    let circSize = 15 * w / 80;
 
     fill(textColor);
     strokeWeight(1);
     text("NOR", x + w/1.6 - textsize*1.5 , y + h/2 + textsize/3);
-    strokeWeight(4)
+    strokeWeight(4 * w / 80)
     noFill();
     arc(
         x + w/2 -circSize/2,
@@ -190,7 +190,7 @@ function drawXorGate(x, y, w, h, textsize){
     fill(textColor);
     strokeWeight(1);
     text("XOR", x + w/1.45 - textsize*1.5 , y + h/2 + textsize/3);
-    strokeWeight(4)
+    strokeWeight(4 * w / 80)
     noFill();
     arc(
         x + w/2 ,
@@ -231,12 +231,12 @@ function drawXnorGate(x, y, w, h, textsize){
 
     textSize(textsize);
 
-    let circSize = 15;
+    let circSize = 15 * w / 80;
 
     fill(textColor);
     strokeWeight(1);
     text("XNOR", x + w/1.8 - textsize*1.5 , y + h/2 + textsize/3);
-    strokeWeight(4)
+    strokeWeight(4 * w / 80)
     noFill();
     arc(
         x + w/2 - circSize/2,
@@ -274,7 +274,9 @@ function drawNotGate(x, y, w, h, textsize){
 
     let textColor = 'black';
 
-    let circSize = 15;
+    let circSize = 15 * w / 80;
+
+    let circOffset = w/20
 
     stroke(0);
 
@@ -283,13 +285,14 @@ function drawNotGate(x, y, w, h, textsize){
     fill(textColor);
     strokeWeight(1);
     text("NOT", x + w/2.5 - textsize*1.5 , y + h/2 + textsize/3);
-    strokeWeight(4)
+    strokeWeight(4 * w / 80)
     noFill();
     triangle(
-        x+w-20,y+h/2,
+        x+w-circOffset/0.4,y+h/2,
         x,y,
         x, y + h
       );
-      circle(x + w-10, y + h/2, circSize);
+      fill('#4287f5')
+      circle(x-circOffset + w, y + h/2, circSize);
   
 }
