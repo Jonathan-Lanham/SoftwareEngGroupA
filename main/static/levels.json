@@ -103,16 +103,16 @@
         "CanvasSize": {"w": 600, "h": 500},
         "EntrancePoints": {
             "x": 195, 
-            "y": 50, 
+            "y": 75, 
             "w": 50, 
-            "h": 150, 
+            "h": 100, 
             "states": [true, false]
         },
         "ExitPoints": {
             "x": 335, 
-            "y": 50, 
+            "y": 100, 
             "w": 50, 
-            "h": 150, 
+            "h": 50, 
             "states": [true]
         },
         "Connections": [
@@ -142,20 +142,20 @@
         "CanvasSize": {"w": 600, "h": 500},
         "EntrancePoints": {
             "x": 145, 
-            "y": 50, 
+            "y": 75, 
             "w": 50, 
-            "h": 200, 
+            "h": 150, 
             "states": [true, true ,true]
         },
         "ExitPoints": {
             "x": 385, 
-            "y": 50, 
+            "y": 75, 
             "w": 50, 
-            "h": 200, 
+            "h": 150, 
             "states": [true, true]
         },
         "Connections": [
-            [{"x": 170, "y": 200}, {"x": 410, "y": 200}],
+            [{"x": 170, "y": 195}, {"x": 410, "y": 195}],
             [{"x": 310, "y": 130}, {"x": 370, "y": 130}, {"x": 370, "y": 100}, {"x": 410, "y": 100}]
 
         ],
