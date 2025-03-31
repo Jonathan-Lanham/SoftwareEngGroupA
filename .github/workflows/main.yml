@@ -17,9 +17,7 @@ jobs:
         install -m 600 -D /dev/null ~/.ssh/id_rsa
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-    - name: connect and pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
-    - name: run http server
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && screen -x GateKeeper && python -m http.server ${{ secrets.HTTP_PORT }}"
+    - name: connect and pull and run
+      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && screen -x GateKeeper && python -m http.server ${{ secrets.HTTP_PORT }} && exit"
     - name: cleanup
       run: rm -rf ~/.ssh
