@@ -20,10 +20,6 @@ Sharpen your problem-solving skills and master digital logic in this fun and edu
 3. Test your design
 4. Adjust until you succeed!
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a83cc7372884a0bd1a822d9611bf0b7c54b6710b
 ### Access
 Local server access from Github Repository.
 

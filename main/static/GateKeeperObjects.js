@@ -14,6 +14,8 @@ class Game {
         this.gameHeight = gameHeight;
         this.backColor = backColor;
 
+        this.levelCompleted = false;
+
         Game.sizeOfNodes = sizeOfNodes;
         LogicGate.gNodeSize = sizeOfNodes;
         LogicGate.gNodeLeftOffset = sizeOfNodes*2;
@@ -89,6 +91,7 @@ class Game {
         // Winner winner chicken dinner
         // window.alert("You Won!");
         showWin();
+        this.levelCompleted = true;
         return true;
     }
 
@@ -174,13 +177,15 @@ class Game {
 
             //RESET, make sure non-connected nodes are false. Gets recomputed before displayed.
             for (let inNode of gate.inputNodes) {
-                inNode.state = false;
+                inNode.state = null;
             }
         }
 
         this.exitPoints.display();
 
-        this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
+        if (this.levelCompleted === false){
+            this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
+        }
 
         for (let eNode of this.exitPoints.endNodes) {
             //else, reset these to be recomputed next frame.
@@ -422,6 +427,10 @@ class AndGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        //If both nodes not colliding
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return (this.inputNodes[0].state && this.inputNodes[1].state);
     }
 }
@@ -432,6 +441,9 @@ class NandGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return !(this.inputNodes[0].state && this.inputNodes[1].state);
     }
 }
@@ -442,6 +454,9 @@ class OrGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return (this.inputNodes[0].state || this.inputNodes[1].state);
     }
 }
@@ -452,6 +467,9 @@ class NorGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return !(this.inputNodes[0].state || this.inputNodes[1].state);
     }
 }
@@ -463,6 +481,9 @@ class XorGate extends LogicGate {
     }
     calculateOutput() {
         //(a && !b) || (!a && b)
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return (this.inputNodes[0].state ^ this.inputNodes[1].state);
     }
 }
@@ -473,6 +494,9 @@ class XnorGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         //(a && !b) || (!a && b)
         return !(this.inputNodes[0].state ^ this.inputNodes[1].state);
     }
@@ -484,6 +508,9 @@ class NotGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[0].state === null){
+            return null;
+        }
         return !(this.inputNodes[0].state);
     }
     //Only one node; Exceptional; Hide the parent static method
@@ -618,6 +645,11 @@ function showWin() {
     if (popup) {
         popup.style.display = "flex";
     }
+}
+
+function closePopupWin(){
+    let popup = document.getElementById("popup");
+    popup.style.display = 'none'
 }
 
 async function loadNextLevel() {
