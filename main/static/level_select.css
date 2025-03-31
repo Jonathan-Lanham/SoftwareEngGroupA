@@ -12,6 +12,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  font-family: "Modak", serif;
+  height: 100vh;
+  width: 100%;
+  background-image: url(images/circuit.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: #4287f5;
+  align-items: center;
+  overflow: hidden;
+  gap: 2em;
+  color: white; 
 }
 
 /* Title Styling */
