@@ -2,7 +2,7 @@
 let game;
 
 class Game {
-    constructor(gameWidth, gameHeight, backColor, scale = 1) {
+    constructor(gameWidth, gameHeight, backColor, sizeOfNodes=15) {
         let x = (windowWidth - width) / 2 - gameWidth / 2;
         let y = (windowHeight - height) / 2 - gameHeight / 2;
         canvas = createCanvas(gameWidth, gameHeight);
@@ -13,7 +13,22 @@ class Game {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.backColor = backColor;
+
+        this.levelCompleted = false;
+
+        Game.sizeOfNodes = sizeOfNodes;
+        LogicGate.gNodeSize = sizeOfNodes;
+        LogicGate.gNodeLeftOffset = sizeOfNodes*2;
+        LogicGate.gNodeRightOffset = sizeOfNodes;
+
+        this.gameSounds = new GameSounds();
+  
+        // Load sounds
+        
+
     }
+
+    static sizeOfNodes = 15;
 
     beingDragged = [];
     exitPoints = null;
@@ -21,12 +36,12 @@ class Game {
     //Not Finished With Connections
     connectionLines = [];
 
-    insertGate(x, y, width, height, gateClass = LogicGate) {
-        gateClass.createObject(x, y, width, height, gateClass);
+    insertGate(x, y, width, height, gateClass = LogicGate, scale=1) {
+        gateClass.createObject(x * scale, y * scale, width * scale, height * scale, gateClass);
     }
 
-    insertConnection(arrayOfPoints) {
-        Connection.createConnection(arrayOfPoints);
+    insertConnection(arrayOfPoints, scale=1) {
+        Connection.createConnection(arrayOfPoints, scale=scale);
     }
 
     handleDraggedObjects() {
@@ -60,7 +75,7 @@ class Game {
 
     updateOutputNode(obj) {
         //UPDATE AND CHECK THE SINGLE OUTPUT NODE ON GATE BEING DRAGGED
-        obj.outputNode.move(obj.x + obj.width + LogicGate.gNodeRightOffset, obj.y + obj.height / 2 - LogicGate.gNodeSize / 2)
+        obj.outputNode.move(obj.x + obj.width + LogicGate.gNodeRightOffset, obj.y + obj.height / 2 - Game.sizeOfNodes / 2)
         GateNode.NodeSHG.update(obj.outputNode)
     }
 
@@ -76,6 +91,7 @@ class Game {
         // Winner winner chicken dinner
         // window.alert("You Won!");
         showWin();
+        this.levelCompleted = true;
         return true;
     }
 
@@ -161,13 +177,15 @@ class Game {
 
             //RESET, make sure non-connected nodes are false. Gets recomputed before displayed.
             for (let inNode of gate.inputNodes) {
-                inNode.state = false;
+                inNode.state = null;
             }
         }
 
         this.exitPoints.display();
 
-        this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
+        if (this.levelCompleted === false){
+            this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
+        }
 
         for (let eNode of this.exitPoints.endNodes) {
             //else, reset these to be recomputed next frame.
@@ -181,13 +199,17 @@ class Game {
 class Connection {
     constructor(arrayOfLines) {
         this.arrayOfLines = arrayOfLines
-        this.inputNode = new GateNode(arrayOfLines[0].x - LogicGate.gNodeSize / 2, arrayOfLines[0].y - LogicGate.gNodeSize / 2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        this.inputNode = new GateNode(arrayOfLines[0].x - Game.sizeOfNodes / 2, arrayOfLines[0].y - Game.sizeOfNodes / 2, Game.sizeOfNodes, Game.sizeOfNodes, this);
         GateNode.NodeSHG.insert(this.inputNode);
-        this.outputNode = new GateNode(arrayOfLines[arrayOfLines.length - 1].x - LogicGate.gNodeSize / 2, arrayOfLines[arrayOfLines.length - 1].y - LogicGate.gNodeSize / 2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+        this.outputNode = new GateNode(arrayOfLines[arrayOfLines.length - 1].x - Game.sizeOfNodes / 2, arrayOfLines[arrayOfLines.length - 1].y - Game.sizeOfNodes / 2, Game.sizeOfNodes, Game.sizeOfNodes, this);
         GateNode.NodeSHG.insert(this.outputNode);
     }
 
-    static createConnection(lineArray) {
+    static createConnection(lineArray, scale=1) {
+        for (let point of lineArray){
+            point.x *= scale;
+            point.y *= scale;
+        }
         let newLine = new Connection(lineArray);
         game.connectionLines.push(newLine);
     }
@@ -223,23 +245,23 @@ class ExitPoints {
         //Equally Space Nodes Across ExitPoints object range
         let i = 0;
         //How far away should Nodes be from the edge?
-        let offsetYAxis = 100
+        let offsetYAxis = Game.sizeOfNodes*4
 
         let yOff;
 
         for (let state of arrayOfNodeStates) {
             if (arrayOfNodeStates.length > 1) {
                 let equallySpaceNodes = (height - offsetYAxis) / (arrayOfNodeStates.length - 1);
-                yOff = y + (offsetYAxis / 2) + i * equallySpaceNodes - LogicGate.gNodeSize / 2;
+                yOff = y + (offsetYAxis / 2) + i * equallySpaceNodes - Game.sizeOfNodes / 2;
             }
             else {
                 //Can handle one node
-                yOff = y + height / 2 - LogicGate.gNodeSize / 2;
+                yOff = y + height / 2 - Game.sizeOfNodes / 2;
             }
             //Borrow Logic Gate Node Size; May change Later.
             //Do something with states later?
 
-            let newNode = new GateNode(x + this.width / 2 - LogicGate.gNodeSize / 2, yOff, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+            let newNode = new GateNode(x + this.width / 2 - Game.sizeOfNodes / 2, yOff, Game.sizeOfNodes, Game.sizeOfNodes, this);
             GateNode.NodeSHG.insert(newNode);
             this.endNodes.push(newNode);
             ++i;
@@ -251,8 +273,13 @@ class ExitPoints {
         stroke('#5E5C6C')
         rect(this.x, this.y, this.width, this.height)
         stroke('black')
+        let i = 0;
         for (let eNode of this.endNodes) {
+            //Red or green line depending on state
+            stroke(this.arrayOfNodeStates[i] ? "green" : "red");
+            line(eNode.x, eNode.y + eNode.height/2, eNode.x + 500, eNode.y + eNode.height/2);
             eNode.display();
+            ++i;
         }
     }
 }
@@ -269,14 +296,14 @@ class EntrancePoints {
         //Equally Space Nodes Across ExitPoints object range
         let i = 0;
         //How far away should Nodes be from the edge?
-        let offsetYAxis = 100
+        let offsetYAxis = Game.sizeOfNodes*4
         let equallySpaceNodes = (height - offsetYAxis) / (arrayOfNodeStates.length - 1)
 
         for (let state of arrayOfNodeStates) {
             //Borrow Logic Gate Node Size; May change Later.
             //Do something with states later?
 
-            let newNode = new GateNode(x + this.width / 2 - LogicGate.gNodeSize / 2, y + (offsetYAxis / 2) + i * equallySpaceNodes - LogicGate.gNodeSize / 2, LogicGate.gNodeSize, LogicGate.gNodeSize, this);
+            let newNode = new GateNode(x + this.width / 2 - Game.sizeOfNodes / 2, y + (offsetYAxis / 2) + i * equallySpaceNodes - Game.sizeOfNodes / 2, Game.sizeOfNodes, Game.sizeOfNodes, this);
             newNode.state = state;
             GateNode.NodeSHG.insert(newNode);
             this.entNodes.push(newNode);
@@ -338,9 +365,12 @@ class LogicGate extends DraggableObject {
     static GateSHG = new SpatialHashGrid(20);
 
     //change node offsets and size
-    static gNodeLeftOffset = 25;
-    static gNodeRightOffset = 10;
-    static gNodeSize = 15;
+    static gNodeLeftOffset = Game.sizeOfNodes*2;
+    static gNodeRightOffset = Game.sizeOfNodes;
+
+    //Can override later if need be.
+    static gNodeSize = Game.sizeOfNodes;
+
 
     //NOT FINISHED. MAY USE SPRITES LATER.
     display() {
@@ -397,6 +427,10 @@ class AndGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        //If both nodes not colliding
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return (this.inputNodes[0].state && this.inputNodes[1].state);
     }
 }
@@ -407,6 +441,9 @@ class NandGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return !(this.inputNodes[0].state && this.inputNodes[1].state);
     }
 }
@@ -417,6 +454,9 @@ class OrGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return (this.inputNodes[0].state || this.inputNodes[1].state);
     }
 }
@@ -427,6 +467,9 @@ class NorGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return !(this.inputNodes[0].state || this.inputNodes[1].state);
     }
 }
@@ -438,6 +481,9 @@ class XorGate extends LogicGate {
     }
     calculateOutput() {
         //(a && !b) || (!a && b)
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         return (this.inputNodes[0].state ^ this.inputNodes[1].state);
     }
 }
@@ -448,6 +494,9 @@ class XnorGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
+            return null;
+        }
         //(a && !b) || (!a && b)
         return !(this.inputNodes[0].state ^ this.inputNodes[1].state);
     }
@@ -459,6 +508,9 @@ class NotGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[0].state === null){
+            return null;
+        }
         return !(this.inputNodes[0].state);
     }
     //Only one node; Exceptional; Hide the parent static method
@@ -515,19 +567,28 @@ function setup() {
         document.getElementById("Description").innerHTML = io.Description;
     }
 
+    //Base scale off of viewport size.
+    let scale = window.innerWidth/2560;
+    console.log(window.innerWidth)
+
     //Until then, sample a level here
     //Directly tied to game instance
-    game = new Game(io.CanvasSize.w, io.CanvasSize.h, '#4287f5');
-    game.entrancePoints = new EntrancePoints(io.EntrancePoints.x, io.EntrancePoints.y, io.EntrancePoints.w, io.EntrancePoints.h, io.EntrancePoints.states);
-    game.exitPoints = new ExitPoints(io.ExitPoints.x, io.ExitPoints.y, io.ExitPoints.w, io.ExitPoints.h, io.ExitPoints.states);
+    game = new Game(io.CanvasSize.w * scale, io.CanvasSize.h * scale, '#4287f5', sizeOfNodes=15 * scale);
+    game.entrancePoints = new EntrancePoints(io.EntrancePoints.x * scale, io.EntrancePoints.y * scale, io.EntrancePoints.w * scale, io.EntrancePoints.h * scale, io.EntrancePoints.states);
+    game.exitPoints = new ExitPoints(io.ExitPoints.x * scale, io.ExitPoints.y * scale, io.ExitPoints.w * scale, io.ExitPoints.h * scale, io.ExitPoints.states);
 
     for (let con of io.Connections) {
-        game.insertConnection(con)
+        game.insertConnection(con, scale=scale)
     }
 
     for (let gate of io.Gates) {
-        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type])
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
     }
+
+    console.log("GAME" + JSON.stringify(game.gameSounds));
+    game.gameSounds.loadSounds({
+        gate_pickup: '../static/music/pickup_gate.wav',
+    });
 
 }
 
@@ -572,6 +633,7 @@ function mousePressed() {
     //reference DraggableObjects Grid, push them into being dragged
     gatesThatMouseOverlaps = LogicGate.GateSHG.queryPoint(mouseX, mouseY);
     for (let gate of gatesThatMouseOverlaps) {
+        game.gameSounds.play('gate_pickup', volume=1)
         gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
         game.beingDragged.push(gate)
     }
@@ -583,6 +645,11 @@ function showWin() {
     if (popup) {
         popup.style.display = "flex";
     }
+}
+
+function closePopupWin(){
+    let popup = document.getElementById("popup");
+    popup.style.display = 'none'
 }
 
 async function loadNextLevel() {
