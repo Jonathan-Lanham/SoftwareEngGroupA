@@ -30,11 +30,11 @@ class GateNode{
         //console.log("RESULT: " + JSON.stringify(result));
         return result;
     }
-    display(){
+    display(parentGate){
         stroke('black')
         //change 15/2 to make circle larger
         fill(this.state ? "green" : "red");
-        ellipse(this.x+ LogicGate.gNodeSize/2, this.y+LogicGate.gNodeSize/2, this.width, this.height);
+        ellipse(this.x+ Game.sizeOfNodes/2, this.y+Game.sizeOfNodes/2, this.width, this.height);
         rect(this.x, this.y, this.width, this.height);
     }
 }
