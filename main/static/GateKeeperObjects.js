@@ -260,7 +260,7 @@ class ExitPoints {
             }
             //Borrow Logic Gate Node Size; May change Later.
             //Do something with states later?
-
+            console.log("END NODES: " + (x + this.width / 2 - Game.sizeOfNodes / 2) + "," + yOff)
             let newNode = new GateNode(x + this.width / 2 - Game.sizeOfNodes / 2, yOff, Game.sizeOfNodes, Game.sizeOfNodes, this);
             GateNode.NodeSHG.insert(newNode);
             this.endNodes.push(newNode);

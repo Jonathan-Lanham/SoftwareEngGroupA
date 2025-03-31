@@ -140,7 +140,7 @@
         "Name": "Level 2",
         "lvlNum": 2,
         "Description": "Xor or And?",
-        "CanvasSize": {"w": 600, "h": 500},
+        "CanvasSize": {"w": 1000, "h": 1000},
         "EntrancePoints": {
             "x": 145, 
             "y": 75, 
@@ -217,6 +217,59 @@
             "type": "AndGate"
           }
         ]
-    }
+    },
+    {
+        "Name": "Level 4",
+        "lvlNum": 4,
+        "Description": "Double Negative?",
+        "CanvasSize": {"w": 1000, "h": 800},
+        "EntrancePoints": {
+          "x": 145, 
+          "y": 75, 
+          "w": 50, 
+          "h": 150, 
+          "states": [true, false, true]
+        },
+        "ExitPoints": {
+          "x": 445, 
+          "y": 75, 
+          "w": 50, 
+          "h": 150, 
+          "states": [true, true]
+        },
+        "Connections": [
+          [{"x": 330, "y": 125}, {"x": 470, "y": 105}]
+        ],
+        "Gates": [
+          {            
+            "x": 50, 
+            "y": 600, 
+            "w": 100, 
+            "h": 80,
+            "type": "AndGate"
+          },
+          {            
+            "x": 250, 
+            "y": 600, 
+            "w": 100, 
+            "h": 80,
+            "type": "OrGate"
+          },
+          {            
+            "x": 450, 
+            "y": 600, 
+            "w": 100, 
+            "h": 80,
+            "type": "NotGate"
+          },
+          {            
+            "x": 650, 
+            "y": 600, 
+            "w": 100, 
+            "h": 80,
+            "type": "NotGate"
+          }
+        ]
+      }
     
 ]
