@@ -15,7 +15,7 @@
             "y": 200, 
             "w": 50, 
             "h": 500, 
-            "states": [true, true, true]
+            "states": [true, false, true]
         },
         "Connections": [
             [
@@ -38,6 +38,7 @@
                 {"x": 590, "y": 55},
                 {"x": 1000, "y": 125}
               ],
+            [{"x": 65, "y": 160},{"x": 1000, "y": 165}],
             [{"x": 270, "y": 245}, {"x": 500, "y": 285}, {"x": 500, "y": 300}],
             [{"x": 270, "y": 350}, {"x": 500, "y": 350}, {"x": 500, "y": 345}],
             [{"x": 125, "y": 425}, {"x": 635, "y": 425}, {"x": 645, "y": 355}],
@@ -99,7 +100,7 @@
     {
         "Name": "Level 1",
         "lvlNum": 1,
-        "Description": "Connect the right gate.",
+        "Description": "Or or And?",
         "CanvasSize": {"w": 600, "h": 500},
         "EntrancePoints": {
             "x": 195, 
@@ -138,7 +139,7 @@
     {
         "Name": "Level 2",
         "lvlNum": 2,
-        "Description": "Connect the right gate.",
+        "Description": "Xor or And?",
         "CanvasSize": {"w": 600, "h": 500},
         "EntrancePoints": {
             "x": 145, 
@@ -175,5 +176,47 @@
                 "type": "AndGate"
             }
         ]
+    },
+    {
+        "Name": "Level 3",
+        "lvlNum": 3,
+        "Description": "From zero to one",
+        "CanvasSize": {"w": 1000, "h": 800},
+        "EntrancePoints": {
+          "x": 295, 
+          "y": 300, 
+          "w": 50, 
+          "h": 150, 
+          "states": [false, false]
+        },
+        "ExitPoints": {
+          "x": 605, 
+          "y": 300, 
+          "w": 50, 
+          "h": 150, 
+          "states": [true, false]
+        },
+        "Connections": [
+          [{"x": 320, "y": 325}, {"x": 400, "y": 325}],
+          [{"x": 320, "y": 425}, {"x": 620, "y": 425}],
+          [{"x": 560, "y": 325}, {"x": 620, "y": 325}]
+        ],
+        "Gates": [
+          {            
+            "x": 250, 
+            "y": 525, 
+            "w": 100, 
+            "h": 80,
+            "type": "NotGate"
+          },
+          {            
+            "x": 450, 
+            "y": 525, 
+            "w": 100, 
+            "h": 80,
+            "type": "AndGate"
+          }
+        ]
     }
+    
 ]
