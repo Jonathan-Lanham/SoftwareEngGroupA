@@ -24,6 +24,10 @@ const gateDescriptions = {
     if (!stored) return;
   
     const level = JSON.parse(stored);
+    const levelDesc = document.getElementById("levelDesc");
+  if (level.Description) {
+    levelDesc.textContent = level.Description;
+  }
     const gatesInLevel = [...new Set(level.Gates.map(g => g.type))];
   
     gateList.innerHTML = '';

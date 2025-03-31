@@ -23,6 +23,7 @@ h1 {
   -webkit-text-stroke: 4px black;
   text-shadow: 3px 2px black;
   display: flex;
+  border-bottom: 2px solid black;
 }
 p {
   font-size: 1.5em;
@@ -31,13 +32,13 @@ p {
   display: flex;
 }
 
-.description-border {
+/*.description-border {
   width: 320px;
   height: 50px;
   padding: 10px;
   border: 2px solid black;
   margin: 0;
-}
+}*/
 
 canvas {
   display: flex;
@@ -305,9 +306,11 @@ canvas {
 
 .side-panel {
   position: absolute;
+  margin-top: 120px;
+  margin-bottom: 0;
   top: 0;
-  left: -260px; /* Hide the panel off-screen, except the tab */
-  width: 260px;
+  left: -300px; /* Hide the panel off-screen, except the tab */
+  width: 300px;
   height: 100%;
   background-color: #4287f5;
   color: white;
@@ -331,8 +334,8 @@ canvas {
   transform: translateY(-50%);
   background-color: white;
   color: #4287f5;
-  border: none;
-  padding: 20px 10px;
+  border: 2px solid black;
+  padding: 20px 6px;
   font-size: 18px;
   cursor: pointer;
   border-radius: 0 5px 5px 0;
@@ -341,15 +344,23 @@ canvas {
 
 .panel-content h3 {
   margin-bottom: 15px;
-  font-size: 18px;
+  font-size: 25px;
+  font-style: bold;
   text-align: center;
-  border-bottom: 1px solid #555;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
   padding-bottom: 5px;
 }
 
 #gateList {
   list-style: none;
   padding-left: 0;
+  text-align:center;
 }
 
 #gateList li {
@@ -358,7 +369,7 @@ canvas {
   padding: 8px 10px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
   transition: background-color 0.2s ease;
 }
 
