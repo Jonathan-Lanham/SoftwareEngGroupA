@@ -26,6 +26,30 @@ optionsExitBtn.addEventListener('click', () => {
 });
 
 
+// grabbing the elements for the credits popup menu
+const creditsBtn = document.querySelector('.credits-btn');
+const creditsHiddenMenu = document.getElementById('creditsPopup');
+const creditsExitBtn = document.querySelector('.credits-exit-btn');
+
+// code for the credits button to showcase the credits menu
+creditsBtn.addEventListener('click', () => {
+    if(creditsHiddenMenu.style.display === 'none'){
+        creditsHiddenMenu.style.display = 'block';
+    }
+    else{
+        creditsHiddenMenu.style.display = 'none';
+    }
+});
+// code for the credits exit button to get rid of the credits menu
+creditsExitBtn.addEventListener('click', () => {
+    if(creditsHiddenMenu.style.display === 'block' ){
+        creditsHiddenMenu.style.display = 'none';
+    }
+    else{
+        creditsHiddenMenu.style.display = 'block';
+    }
+});
+
 // grabbing the elements for the support menu buttons
 const supportBtn = document.querySelector('.support-btn');
 const supportHiddenMenu = document.getElementById('supportPopup');
