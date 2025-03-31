@@ -90,6 +90,7 @@ class Game {
 
         // Winner winner chicken dinner
         // window.alert("You Won!");
+        game.gameSounds.play('win_sound', volume=1)
         showWin();
         this.levelCompleted = true;
         return true;
@@ -588,6 +589,9 @@ function setup() {
     console.log("GAME" + JSON.stringify(game.gameSounds));
     game.gameSounds.loadSounds({
         gate_pickup: '../static/music/pickup_gate.wav',
+        //Difficult to implement since collision is checked every frame, will come back to it later
+        //connect_circuit: '../static/music/connect_circuit.wav',
+        win_sound: '../static/music/win_sound.mp3'
     });
 
 }
