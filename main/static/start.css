@@ -8,8 +8,14 @@
 
 /* Start page styles */
 #startPage{
+  font-family: "Modak", serif;
   height: 100vh;
   width: 100%;
+  background-image: url(images/circuit.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   background-color: #4287f5;
   display: flex;
   justify-content: center;
@@ -34,6 +40,7 @@
   font-family: "Modak", serif;
   -webkit-text-stroke: 4px black;
   text-shadow: 5px 5px black;
+  z-index: 1;
 }
 /* position the 3 buttons */
 .start-buttons{
@@ -41,7 +48,7 @@
   flex-direction: column;
   width: 20em;
   gap: 1em;
-  
+  z-index: 1;
 }
 /* style the three buttons */
 .start-buttons button{
@@ -87,6 +94,7 @@
   border: 4px solid rgb(0, 0, 0);
   border-radius: 15px;
   color: white;
+  z-index: 1;
 }
 /* Styling for the exit button */
 .exit-btn{
@@ -853,6 +861,7 @@
   display: none;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 
 .top-about-section{
