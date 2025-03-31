@@ -309,7 +309,7 @@ canvas {
   margin-top: 120px;
   margin-bottom: 0;
   top: 0;
-  left: -300px; /* Hide the panel off-screen, except the tab */
+  left: -300px; 
   width: 300px;
   height: 100%;
   background-color: #4287f5;
@@ -321,7 +321,6 @@ canvas {
   border-radius: 5px;
 }
 
-/* Slide it in when open */
 .side-panel.open {
   left: 0;
 }
@@ -378,7 +377,7 @@ canvas {
 }
 
 .desc-popup {
-  display: none; /* hidden by default */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;

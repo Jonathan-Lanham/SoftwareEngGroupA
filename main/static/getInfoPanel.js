@@ -42,7 +42,6 @@ const gateDescriptions = {
         desc.textContent = gateDescriptions[gate] || "No description.";
         popup.style.display = "flex";
   
-        // ⏱ Add outside click listener slightly delayed to prevent immediate close
         setTimeout(() => {
           window.addEventListener("click", closePopupOnClickOutside);
         }, 10);
