@@ -1,60 +1,55 @@
+play.html
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <title>GateKeeper - Main</title>
+    <meta charset="utf-8" />
 
-<head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="../static/style.css">
-  <title>GateKeeper - Main</title>
-  <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&family=Belanosima:wght@400;600;700&family=Modak&family=Rampart+One&display=swap" rel="stylesheet">
+    <!-- Link the font icons from font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&family=Belanosima:wght@400;600;700&family=Modak&family=Rampart+One&display=swap"
-    rel="stylesheet">
-  <!-- Link the font icons from font awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-</head>
-
-<body>
-  <button id="options-btn">
-    <i class="fa fa-cog"></i>
+  </head>
+  <body>
+    <button id="options-btn">
+      <i class="fa fa-cog"></i>
   </button>
-
+  
   <!-- Options Menu (Initially Hidden) -->
   <div id="options-menu">
-    <button class="exit-btn" id="close-options">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-    <div class="options-title">
-      <p>Settings</p>
-    </div>
-    <div class="volume-container">
-      <div class="volume-icon">
-        <i class="fa-solid fa-volume-off"></i>
+         <button class="exit-btn" id="close-options">
+              <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="options-title">
+              <p>Settings</p>
+        </div>
+          <div class="volume-container">
+              <div class="volume-icon">
+                  <i class="fa-solid fa-volume-off"></i>
+              </div>
+              <div class="volume-slider">
+                  <input type="range" id="volume-slider" min="0" max="100" value="50">
+              </div>
+          </div>
+  
+          <div class="music-container">
+              <div class="music-icon">
+                  <i class="fa-solid fa-music"></i>
+              </div>
+              <div class="music-slider">
+                  <input type="range" id="music-slider" min="0" max="100" value="50">
+              </div>
+          </div>
+  
+      <!-- Bottom Section with Back Button -->
+      <div class="bottom-options-section">
+          <button id="back-to-main">Home</button>
       </div>
-      <div class="volume-slider">
-        <input type="range" id="volume-slider" min="0" max="100" value="50">
-      </div>
-    </div>
-
-    <div class="music-container">
-      <div class="music-icon">
-        <i class="fa-solid fa-music"></i>
-      </div>
-      <div class="music-slider">
-        <input type="range" id="music-slider" min="0" max="100" value="50">
-      </div>
-    </div>
-
-    <!-- Bottom Section with Back Button -->
-    <div class="bottom-options-section">
-      <button id="back-to-main">Home</button>
-    </div>
   </div>
   <section>
     <div class="popup-overlay" id="popup" onclick="closePopup(event)">
@@ -64,7 +59,7 @@
             <p>You win!</p>
           </div>
         </div>
-
+  
         <!-- Next Level Button -->
         <button class="win-button" onclick="loadNextLevel()">Next Level</button>
       </div>
@@ -80,38 +75,43 @@
     </div>
   </div>
 
-      <!-- Gate Description Popup -->
-      <div id="gateDescPopup" class="desc-popup" style="display: none;">
-        <div class="desc-content" id="descContent">
-          <p id="descText"></p>
-        </div>
-      </div>
-
-  <main>
-    <!-- Added background to canvas -->
-    <section id="">
-      <h1 id="Level-Name"></h1>
-
-    </section>
-
-    <div class="description-border">
-      <p id="Description"></p>
+  <!-- Gate Description Popup -->
+  <div id="gateDescPopup" class="desc-popup" style="display: none;">
+    <div class="desc-content" id="descContent">
+      <p id="descText"></p>
     </div>
-  </main>
-  <script src="../static/spatialHash.js"></script>
-
-  <script src="../static/NodeClass.js"></script>
-
-  <script src="../static/drawGates.js"></script>
+  </div>
 
 
-  <script src="../static/GateKeeperObjects.js"></script>
-  <script src="../static/sound_effect.js"></script>
-  <script src="../static/options.js"></script>
-  <script src="../static/getInfoPanel.js"></script>
+    <main>
+      <!-- Added background to canvas -->
+      <section id="">
+        <h1 id="Level-Name"></h1>
+        
+      </section>
+
+      <div class="description-border">
+        <p id="Description"></p>
+      </div>
+      
 
 
 
-</body>
 
+
+
+
+    </main>
+    <script src="../static/spatialHash.js"></script>
+    
+    <script src="../static/NodeClass.js"></script>
+
+    <script src="../static/drawGates.js"></script>
+    
+    
+    <script src="../static/GateKeeperObjects.js"></script>
+    <script src="../static/sound_effect.js"></script>
+    <script src="../static/options.js"></script>
+    <script src="../static/getInfoPanel.js"></script>
+  </body>
 </html>
