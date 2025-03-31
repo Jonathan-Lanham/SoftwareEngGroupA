@@ -19,6 +19,11 @@ class Game {
         LogicGate.gNodeLeftOffset = sizeOfNodes*2;
         LogicGate.gNodeRightOffset = sizeOfNodes;
 
+        this.gameSounds = new GameSounds();
+  
+        // Load sounds
+        
+
     }
 
     static sizeOfNodes = 15;
@@ -553,6 +558,11 @@ function setup() {
         game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
     }
 
+    console.log("GAME" + JSON.stringify(game.gameSounds));
+    game.gameSounds.loadSounds({
+        gate_pickup: '../static/music/pickup_gate.wav',
+    });
+
 }
 
 //For visualization/debugging
@@ -596,6 +606,7 @@ function mousePressed() {
     //reference DraggableObjects Grid, push them into being dragged
     gatesThatMouseOverlaps = LogicGate.GateSHG.queryPoint(mouseX, mouseY);
     for (let gate of gatesThatMouseOverlaps) {
+        game.gameSounds.play('gate_pickup', volume=1)
         gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
         game.beingDragged.push(gate)
     }
