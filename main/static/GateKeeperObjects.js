@@ -14,6 +14,8 @@ class Game {
         this.gameHeight = gameHeight;
         this.backColor = backColor;
 
+        this.levelCompleted = false;
+
         Game.sizeOfNodes = sizeOfNodes;
         LogicGate.gNodeSize = sizeOfNodes;
         LogicGate.gNodeLeftOffset = sizeOfNodes*2;
@@ -84,6 +86,7 @@ class Game {
         // Winner winner chicken dinner
         // window.alert("You Won!");
         showWin();
+        this.levelCompleted = true;
         return true;
     }
 
@@ -175,7 +178,9 @@ class Game {
 
         this.exitPoints.display();
 
-        this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
+        if (this.levelCompleted === false){
+            this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
+        }
 
         for (let eNode of this.exitPoints.endNodes) {
             //else, reset these to be recomputed next frame.
@@ -607,6 +612,11 @@ function showWin() {
     if (popup) {
         popup.style.display = "flex";
     }
+}
+
+function closePopupWin(){
+    let popup = document.getElementById("popup");
+    popup.style.display = 'none'
 }
 
 async function loadNextLevel() {
