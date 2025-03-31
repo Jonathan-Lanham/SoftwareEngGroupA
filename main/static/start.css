@@ -40,7 +40,7 @@
   font-family: "Modak", serif;
   -webkit-text-stroke: 4px black;
   text-shadow: 5px 5px black;
-  z-index: 1;
+  
 }
 /* position the 3 buttons */
 .start-buttons{
@@ -48,7 +48,7 @@
   flex-direction: column;
   width: 20em;
   gap: 1em;
-  z-index: 1;
+  
 }
 /* style the three buttons */
 .start-buttons button{
@@ -94,7 +94,7 @@
   border: 4px solid rgb(0, 0, 0);
   border-radius: 15px;
   color: white;
-  z-index: 1;
+  
 }
 /* Styling for the exit button */
 .exit-btn{
