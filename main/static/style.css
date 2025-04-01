@@ -367,6 +367,8 @@ canvas {
   margin-bottom: 10px;
   padding: 8px 10px;
   border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
   cursor: pointer;
   font-size: 18px;
   transition: background-color 0.2s ease;
