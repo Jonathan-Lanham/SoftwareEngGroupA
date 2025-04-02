@@ -6,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GateKeeper - Start</title>
     <link rel="stylesheet" href="../static/start.css">
-
     
     <!-- Link the google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&family=Belanosima:wght@400;600;700&family=Modak&family=Rampart+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- Link the font icons from font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <!--<img src="../static/images/circuit.png" alt="Circuit Background" class="background-image">   -->    
     <!-- Section for the startpage -->
     <section id="startPage">
         <div class="start-page-container">
@@ -23,15 +26,13 @@
             <div class="start-title">
                 <p>GateKeeper</p>
             </div>
+            
             <!-- The 3 buttons that control start, options, and level select -->
             <div class="start-buttons">
                 <a href="play.html" id="GoToPlayPage"><button class="start-btn">Start</button></a>
                 <button class="options-btn">Options</button>
                 <a href="level_select.html"><button class="start-btn">Level Select</button></a>
             </div>
-            
-
-
 
             <!-- the options menu popup -->
             <div id="optionsMenu" style="display: none;" >
@@ -74,7 +75,7 @@
                     <button class="language-btn">Language</button>
                     <button class="support-btn">Support</button>
                     <button class="credits-btn">Credits</button>
-                    <button class="terms-btn">Terms & Privacy</button>
+                    <button class="terms-btn"><a class="terms-btn" href="../templates/terms.html">Terms & Privacy</a></button>
 
                 </div>
             </div>
@@ -139,6 +140,34 @@
                 </form>
             </div>
         </div>
+        <!-- credits Popup when clicked in the options menu popup -->
+        <div id="creditsPopup" style="display: none;">
+            <!-- Support Popup Exit Button -->
+            <div class="exit-button">
+                <button class="credits-exit-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+             <!-- Credits title -->
+             <div class="top-credits-section">
+                <div class="credits-title">
+                    <p>Credits</p>
+                </div>
+             </div>
+             <div class="credits-container">
+                <div class="credits-content">
+                    <p><span class="credits-dev">Front-End Developer</span>Caitlyn Hartmann</p>
+                    <p><span class="credits-dev">Front-End Developer</span> Mario Stanic</p>
+                    <p><span class="credits-dev">Front-End Developer</span> Jeffrey Felger</p>
+                    <p><span class="credits-dev">Front-End Developer</span> Madelyn Washer</p>
+                    <hr class="credits-hr">
+                    <p><span class="credits-dev">Back-End Developer</span> Andrew Cash</p>
+                    <p><span class="credits-dev">Back-End Developer</span> Isha Gupta</p>
+                    <p><span class="credits-dev">Back-End Developer</span> Sam Markus</p>
+                    <p><span class="credits-dev">Back-End Developer</span> Jonathan Lanham</p>
+                    <p><span class="credits-dev">Back-End Developer</span> Vasu Ravindra Rabadia</p>
+                    
+                </div>
+             </div>
+        </div>
 
     </section>
     <section>
@@ -165,18 +194,307 @@
                 <div class="tab-body">
                     <div id="game-info" class="tab-content active">
                         <h3>About the Game</h3>
-                        <p><br>Gatekeeper is a puzzle game where players use logic gates to complete circuits. <br><br></p>
+                        <p><br>Gatekeeper is a puzzle game where players use logic gates to manipulate circuits and achieve specific outputs. 
+                            Each level presents a unique challenge, helping players learn how to design and optimize digital circuits. 
+                            The game is both educational and engaging, sharpening problem-solving skills while allowing players to climb the leaderboard.<br><br></p>
                     </div>
                     <div id="logic-gates" class="tab-content">
                         <h3>Logic Gates Overview</h3>
-                        <p><br>Learn how AND, OR, NOT, XOR, and other gates function in circuits.<br><br></p>
+                        <p><br>Logic gates are the fundamental building blocks of digital circuits. 
+                            They perform Boolean operations on binary inputs (0 and 1) to produce a single output. 
+                            These gates are essential in computing and digital systems, enabling everything from basic calculations to complex processing.<br><br></p>
+                    </div>
+                    <div id="how-to-play" class="tab-content">
+                        <h3>How to Play</h3>
+                        <p><br>
+                            <ol>
+                                <li>Select a Level – Choose a puzzle to solve.</li>
+                                <li>Build Your Circuit – Drag and drop logic gates, adjust switches, and connect components.</li>
+                                <li>Test Your Design – Run the circuit to see if it meets the objective.</li>
+                                <li>Refine and Solve – Adjust your circuit as needed to succeed.</li>
+                            </ol>
+                            <br><br></p>
+                    </div>
+                    <div id="truth-tables" class="tab-content">
+                        <h3>AND:</h3>
+                        <table>
+	                        <tr>
+		                        <th>x</th>
+		                        <th>y</th>
+		                        <th>x AND y</th>
+	                        </tr>
+	                        <tr>
+		                        <td>TRUE</td>
+		                        <td>TRUE</td>
+		                        <td>TRUE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>TRUE</td>
+		                        <td>FALSE</td>
+		                        <td>FALSE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>FALSE</td>
+		                        <td>TRUE</td>
+		                        <td>FALSE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>FALSE</td>
+		                        <td>FALSE</td>
+		                        <td>FALSE</td>
+	                        </tr>
+                        </table>
+
+                        <h3>OR:</h3>
+                        <table>
+	                        <tr>
+		                        <th>x</th>
+		                        <th>y</th>
+		                        <th>x OR y</th>
+	                        </tr>
+	                        <tr>
+		                        <td>TRUE</td>
+		                        <td>TRUE</td>
+		                        <td>TRUE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>TRUE</td>
+		                        <td>FALSE</td>
+		                        <td>TRUE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>FALSE</td>
+		                        <td>TRUE</td>
+		                        <td>TRUE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>FALSE</td>
+		                        <td>FALSE</td>
+		                        <td>FALSE</td>
+	                        </tr>
+                        </table>
+
+                        <h3>NOT:</h3>
+                        <table>
+	                        <tr>
+		                        <th>x</th>
+		                        <th>NOT x</th>
+	                        </tr>
+	                        <tr>
+		                        <td>TRUE</td>
+		                        <td>FALSE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>FALSE</td>
+		                        <td>TRUE</td>
+	                        </tr>
+                        </table>
+
+                        <h3>XOR:</h3>
+                        <table>
+	                        <tr>
+		                        <th>x</th>
+		                        <th>y</th>
+		                        <th>x XOR y</th>
+	                        </tr>
+	                        <tr>
+		                        <td>TRUE</td>
+		                        <td>TRUE</td>
+		                        <td>FALSE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>TRUE</td>
+		                        <td>FALSE</td>
+		                        <td>TRUE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>FALSE</td>
+		                        <td>TRUE</td>
+		                        <td>TRUE</td>
+	                        </tr>
+	                        <tr>
+		                        <td>FALSE</td>
+		                        <td>FALSE</td>
+		                        <td>FALSE</td>
+	                        </tr>
+                        </table>
+
+                        <h3>NOR:</h3>
+                            <table>
+                            	<tr>
+	                            	<th>x</th>
+	                            	<th>y</th>
+                            		<th>x NOR y</th>
+                            	</tr>
+                            	<tr>
+                            		<td>TRUE</td>
+                               		<td>TRUE</td>
+	                            	<td>FALSE</td>
+	                            </tr>
+	                            <tr>
+	                            	<td>TRUE</td>
+	                            	<td>FALSE</td>
+	                            	<td>FALSE</td>
+                            	</tr>
+                            	<tr>
+                            		<td>FALSE</td>
+                            		<td>TRUE</td>
+                            		<td>FALSE</td>
+                            	</tr>
+                            	<tr>
+                            		<td>FALSE</td>
+                            		<td>FALSE</td>
+                            		<td>TRUE</td>
+                            	</tr>
+                            </table>
+
+                            <h3>NAND:</h3>
+                            <table>
+                            	<tr>
+                            		<th>x</th>
+                            		<th>y</th>
+                            		<th>x NAND y</th>
+	                            </tr>
+                            	<tr>
+	                            	<td>TRUE</td>
+	                            	<td>TRUE</td>
+	                            	<td>FALSE</td>
+                            	</tr>
+                            	<tr>
+                            		<td>TRUE</td>
+                            		<td>FALSE</td>
+                            		<td>TRUE</td>
+                            	</tr>
+                            	<tr>
+                            		<td>FALSE</td>
+	                            	<td>TRUE</td>
+	                            	<td>TRUE</td>
+	                            </tr>
+	                            <tr>
+	                            	<td>FALSE</td>
+	                            	<td>FALSE</td>
+	                            	<td>TRUE</td>
+                            	</tr>
+                            </table>
+
                     </div>
                 </div> 
             </div>
         </div>
     </section>
+    <section>
+        <style>
+            #bot-wrapper {
+                position: fixed;
+                bottom: 2%;
+                left: 1%;
+                display: inline-block;
+            }
+        
+            #bot {
+                width: 240px;
+                height: 187.5px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                background-image: url('../static/images/bot1.png');
+                background-size: auto 100%;
+            }
+        
+            #bot.animated {
+                background-image: url('../static/images/botmove-Sheet.png');
+                background-repeat: steps(14);
+                animation: spriteAnimation 2s steps(14) 2;
+            }
+        
+            @keyframes spriteAnimation {
+                100% { background-position: -3360px 0; }
+            }
+        
+            #bot-text {
+                position: absolute;
+                background-color: white;
+                padding: 10px 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                left: 250px;
+                top: 100px; /* Adjusted to lower the text box */
+                display: none;
+                border: 1px solid #ccc;
+            }
+        
+            #bot-text-inner {
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        
+            .typewriter {
+                animation: typing 1.5s steps(40, end) forwards; /* Faster typing */
+            }
+        
+            @keyframes typing {
+                from { width: 0; }
+                to { width: 100%; }
+            }
+        </style>
+        
+        <div id="bot-wrapper">
+            <div id="bot"></div>
+            <div id="bot-text"><div id="bot-text-inner"></div></div>
+        </div>
+        
+        <script>
+            const bot = document.getElementById('bot');
+            const botText = document.getElementById('bot-text');
+            const botTextInner = document.getElementById('bot-text-inner');
+            let isAnimating = false;
+            const dialogue = "Hi! I am LUNA. I am here to guide you in understanding logic gates.";
+        
+            bot.addEventListener('click', () => {
+    if (!isAnimating) {
+        isAnimating = true;
+
+        bot.style.transform = 'scale(1.1)';
+
+        setTimeout(() => {
+            bot.style.transform = 'scale(1)';
+            bot.classList.add('animated');
+
+            // Ensure the text box is fully reset
+            botTextInner.style.animation = 'none';
+            botTextInner.offsetWidth; // Force reflow
+            botTextInner.textContent = ''; // Clear previous text
+            botText.style.display = 'block'; // Ensure visibility
+
+            setTimeout(() => {
+                // Set new text and reapply animation
+                botTextInner.textContent = dialogue;
+                botTextInner.style.animation = `typing 1.5s steps(40, end) forwards`;
+
+                setTimeout(() => {
+                    // Ensure the text remains after animation
+                    botTextInner.style.width = botTextInner.scrollWidth + 'px';
+                    botTextInner.style.animation = 'none'; // Stop further animation
+
+                    setTimeout(() => {
+                        botText.style.display = 'none';
+                        botTextInner.textContent = ''; // Clear text for next cycle
+                        isAnimating = false;
+                    }, 2000); // Keeps text visible before hiding
+                }, 1500); // Wait for typing animation to complete
+
+            }, 50); // Slight delay to ensure reset completes
+
+            bot.addEventListener('animationend', function animationEndHandler() {
+                bot.classList.remove('animated');
+                bot.removeEventListener('animationend', animationEndHandler);
+            });
+
+        }, 300);
+    }
+});
 
 
+        </script>
 
 
         <script>
@@ -206,10 +524,9 @@
                 document.getElementById("GoToPlayPage").href = "level_select.html"
             }
         </script>
-        
 
-        
-        
+
+    
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../static/start.js"></script>
     <script src="../static/sound_effect.js"></script>

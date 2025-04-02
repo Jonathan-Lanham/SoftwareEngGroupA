@@ -50,15 +50,33 @@
           <button id="back-to-main">Home</button>
       </div>
   </div>
+  <section>
+    <div class="popup-overlay" id="popup" onclick="closePopup(event)">
+      <div class="win-popup" onclick="event.stopPropagation()">
+        <div class="top-win-section">
+          <div class="win-title">
+            <p>You win!</p>
+          </div>
+        </div>
+  
+        <!-- Next Level Button -->
+        <button class="win-button" onclick="loadNextLevel()">Next Level</button>
+        <button class="win-button" onclick="closePopupWin()">Stay here</button>
+        <button class="win-button" onclick="window.location.href='./index.html'">Bring Me Home</button>
+      </div>
+    </div>
+  </section>
+
     <main>
-      
-
-
       <!-- Added background to canvas -->
-      <section id="level-background">
+      <section id="">
         <h1 id="Level-Name"></h1>
-
+        
       </section>
+
+      <div class="description-border">
+        <p id="Description"></p>
+      </div>
       
 
 
@@ -68,7 +86,15 @@
 
 
     </main>
-    <script src="../static/sketch.js"></script>
+    <script src="../static/spatialHash.js"></script>
+    
+    <script src="../static/NodeClass.js"></script>
+
+    <script src="../static/drawGates.js"></script>
+    
+    <script src="../static/GameSounds.js"></script>
+    <script src="../static/GateKeeperObjects.js"></script>
     <script src="../static/sound_effect.js"></script>
+    <script src="../static/options.js"></script>
   </body>
 </html>
