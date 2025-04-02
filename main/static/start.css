@@ -563,6 +563,27 @@
 }
 
 
+/* Language slider container and styling */
+
+
+.language-content{
+  height: 3.4em;
+  width: 15em;
+  box-shadow: 0px 5px 5px 1px black;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 1px 1px black;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .1s;
+  color: white;
+  position: fixed;
+  top: 41.9vh;
+  left: 60vw;
+}
+
 
 /* Start Media Queries-------------------------------------------------------------------------- */
 
