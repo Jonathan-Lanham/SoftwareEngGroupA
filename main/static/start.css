@@ -87,7 +87,7 @@
 
 /* the options menu white space with black border */
 #optionsMenu{
-  height: 36em;
+  height: 38em;
   width: 34em;
   position: absolute;
   background-color:white;
@@ -163,6 +163,7 @@
 /* styling and positioning on the volume and music mixers */
 .middle-options-section{
   height: 10em;
+  margin-bottom: 2em;
 }
 /* for the volume mixer */
 .volume-container{
@@ -567,8 +568,8 @@
 
 
 .language-content{
-  height: 3.4em;
-  width: 15em;
+  height: 5em;
+  width: 23em;
   box-shadow: 0px 5px 5px 1px black;
   font-family: "Modak", serif;
   -webkit-text-stroke: 1px black;
@@ -576,12 +577,54 @@
   background-color: rgb(255, 255, 255);
   border: 2px solid black;
   border-radius: 5px;
-  cursor: pointer;
   transition: .1s;
   color: white;
-  position: fixed;
-  top: 41.9vh;
-  left: 60vw;
+  position: absolute;
+  top: 36%;
+  left: 16.6%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: language-animation .5s ease-out forwards;
+}
+@keyframes language-animation{
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(.6);
+  }
+}
+.language-content img{
+  height: 3.5em;
+  cursor: pointer;
+  transition: .2s;
+}
+.language-content img:hover{
+  transform: scale(1.1);
+}
+.language-content img:active{
+  transform: scale(.9);
+}
+.language-content-div{
+  height: 4.8em;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.language-content .spanish-icon{
+  height: 3.7em;
+}
+.language-outline{
+  border: 2px solid rgb(1, 248, 1);
+  border-radius: 50em;
+  opacity: .8;
 }
 
 
@@ -846,6 +889,9 @@
   .bottom-options-section{
     display: none;
     
+  }
+  .language-content{
+    display: none;
   }
 }
 

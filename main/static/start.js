@@ -19,6 +19,7 @@ optionsBtn.addEventListener('click', () => {
 optionsExitBtn.addEventListener('click', () => {
     if(optionsHiddenMenu.style.display === 'block' ){
         optionsHiddenMenu.style.display = 'none';
+        languageHiddenMenu.style.display = 'none';
     }
     else{
         optionsHiddenMenu.style.display = 'block';
@@ -74,6 +75,48 @@ supportExitBtn.addEventListener('click', () => {
         supportHiddenMenu.style.display = 'block';
     }
 });
+
+// grabbing the elements for the Language menu buttons
+const languageBtn = document.querySelector('.language-btn');
+const languageHiddenMenu = document.querySelector('.language-content');
+const languageExitBtn = document.querySelector('.support-exit-btn');
+
+
+// code for the language button to showcase the language popup
+languageBtn.addEventListener('click', () => {
+    if(languageHiddenMenu.style.display === 'none'){
+        languageHiddenMenu.style.display = 'block';
+    }
+    else{
+        languageHiddenMenu.style.display = 'none';
+    }
+});
+
+// Code to make the popup close whenever anything else on screen is clicked
+document.addEventListener("click", (event) => {
+    if (!event.target.closest(".language-content") && !event.target.closest(".language-btn")) {
+        languageHiddenMenu.style.display = 'none';
+    }
+}); 
+
+
+
+const languageIcons = document.querySelectorAll('.english-icon, .spanish-icon, .german-icon, .french-icon');
+
+// first have english be preset for green outline
+languageIcons[0].classList.add("language-outline");
+
+languageIcons.forEach(icon => {
+    icon.addEventListener('click', () => {
+        // when a icon is clicked remove the previous selection
+        languageIcons.forEach(i => i.classList.remove("language-outline"));
+        // adds it to clicked selection
+        icon.classList.add("language-outline");
+    });
+});
+
+
+
 
 // grabbing the elements for all buttons
 const allBtns = document.querySelectorAll('button');
