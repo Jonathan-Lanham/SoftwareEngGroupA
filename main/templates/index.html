@@ -24,7 +24,7 @@
         <div class="start-page-container">
             <!-- title for the start page -->
             <div class="start-title">
-                <p>GateKeeper</p>
+                <p class="gatekeeper-title">GateKeeper</p>
             </div>
             
             <!-- The 3 buttons that control start, options, and level select -->
@@ -43,7 +43,7 @@
                 <!-- top section involving the title options -->
                 <div class="top-options-section">
                     <div class="options-title">
-                        <p>Options</p>
+                        <p class="option-title">Options</p>
                     </div>
                 </div>
                 <!-- middle section involving the volume and music mixers in the option menu -->
@@ -75,14 +75,14 @@
                     <button class="language-btn">Language</button>
                     <button class="support-btn">Support</button>
                     <button class="credits-btn">Credits</button>
-                    <a class="terms-btn" href="../templates/terms.html"><button class="terms-btn">Terms & Privacy</button></a>
+                    <a class="terms-btn-atag" href="../templates/terms.html"><button class="terms-btn">Terms & Privacy</button></a>
                 </div>
                 <div class="language-content" style="display: none;">
                     <div class="language-content-div">
-                        <img class="english-icon" src="../static/images/united-kingdom.png">
-                        <img class="spanish-icon" src="../static/images/spanish.png">
-                        <img class="german-icon" src="../static/images/german.png">
-                        <img class="french-icon" src="../static/images/french.png">
+                        <img onclick="changeLanguage('en')" class="english-icon" src="../static/images/united-kingdom.png">
+                        <img onclick="changeLanguage('es')" class="spanish-icon" src="../static/images/spanish.png">
+                        <img onclick="changeLanguage('de')" class="german-icon" src="../static/images/german.png">
+                        <img onclick="changeLanguage('fr')" class="french-icon" src="../static/images/french.png">
                     </div>
                     
                 </div>
@@ -539,5 +539,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../static/start.js"></script>
     <script src="../static/sound_effect.js"></script>
+    <script src="../static/language.js"></script>
 </body>
 </html>

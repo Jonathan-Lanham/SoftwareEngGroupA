@@ -336,7 +336,7 @@
 
 /* Support Popup Styling and Positioning */
 #supportPopup{
-  height: 44em;
+  height: 46em;
   width: 40em;
   background-color: #2b71f3;
   position: absolute;
@@ -478,7 +478,7 @@
 
 /* Credits Popup Styling and Positioning */
 #creditsPopup{
-  height: 44em;
+  height: 46em;
   width: 55em;
   background-color: #2b71f3;
   position: absolute;
