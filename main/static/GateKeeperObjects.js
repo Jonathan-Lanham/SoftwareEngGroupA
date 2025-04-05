@@ -14,6 +14,7 @@ class Game {
         this.gameHeight = gameHeight;
         this.backColor = backColor;
 
+        this.running = false; // Checks if gates are running
         this.levelCompleted = false;
 
         Game.sizeOfNodes = sizeOfNodes;
@@ -184,8 +185,13 @@ class Game {
 
         this.exitPoints.display();
 
-        if (this.levelCompleted === false){
-            this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
+        // Will only check if level is complete once gates are running
+        if (this.running)
+        {
+            if (this.levelCompleted === false){
+                this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
+                this.running = false;
+            }
         }
 
         for (let eNode of this.exitPoints.endNodes) {
@@ -698,4 +704,11 @@ async function loadNextLevel() {
     } catch (error) {
         console.error('Error loading levels:', error);
     }
+}
+
+// Run button functionality: 
+const runBtn = document.getElementById("run-btn");
+runBtn.onclick = function()
+{
+    game.running = true;
 }
