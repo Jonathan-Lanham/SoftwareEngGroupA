@@ -429,6 +429,9 @@ class AndGate extends LogicGate {
     }
     calculateOutput() {
         //If both nodes not colliding
+        if (this.inputNodes[0].state === null || this.inputNodes[1].state === null){
+            return null;
+        }
         if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
             return null;
         }
@@ -442,6 +445,9 @@ class NandGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].state === null || this.inputNodes[1].state === null){
+            return null;
+        }
         if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
             return null;
         }
@@ -455,6 +461,9 @@ class OrGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].state === null || this.inputNodes[1].state === null){
+            return null;
+        }
         if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
             return null;
         }
@@ -468,6 +477,9 @@ class NorGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].state === null || this.inputNodes[1].state === null){
+            return null;
+        }
         if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
             return null;
         }
@@ -482,6 +494,9 @@ class XorGate extends LogicGate {
     }
     calculateOutput() {
         //(a && !b) || (!a && b)
+        if (this.inputNodes[0].state === null || this.inputNodes[1].state === null){
+            return null;
+        }
         if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
             return null;
         }
@@ -495,6 +510,9 @@ class XnorGate extends LogicGate {
         drawGateNodes(this);
     }
     calculateOutput() {
+        if (this.inputNodes[0].state === null || this.inputNodes[1].state === null){
+            return null;
+        }
         if (this.inputNodes[0].collidesWithList().length === 0 || this.inputNodes[1].collidesWithList().length === 0){
             return null;
         }
@@ -634,13 +652,28 @@ function mouseReleased() {
 
 function mousePressed() {
 
+    //OLD: DRAGS EVERY OVERLAPPING GATE
     //reference DraggableObjects Grid, push them into being dragged
+    // gatesThatMouseOverlaps = LogicGate.GateSHG.queryPoint(mouseX, mouseY);
+    // for (let gate of gatesThatMouseOverlaps) {
+    //     game.gameSounds.play('gate_pickup', volume=1)
+    //     gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
+    //     game.beingDragged.push(gate)
+    // }
+
     gatesThatMouseOverlaps = LogicGate.GateSHG.queryPoint(mouseX, mouseY);
-    for (let gate of gatesThatMouseOverlaps) {
+
+    if(gatesThatMouseOverlaps[gatesThatMouseOverlaps.length - 1]){
+        let gate = gatesThatMouseOverlaps[gatesThatMouseOverlaps.length - 1]
         game.gameSounds.play('gate_pickup', volume=1)
         gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
         game.beingDragged.push(gate)
     }
+    // for (let gate of gatesThatMouseOverlaps) {
+    //     game.gameSounds.play('gate_pickup', volume=1)
+    //     gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
+    //     game.beingDragged.push(gate)
+    // }
 
 }
 
