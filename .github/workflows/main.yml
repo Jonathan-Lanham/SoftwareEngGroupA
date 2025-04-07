@@ -23,6 +23,6 @@ jobs:
     
     - name: run server
       run:
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "python -m http.server 8765"
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && python -m http.server ${{ secrets.HTTP_PORT }}"
     - name: cleanup
       run: rm -rf ~/.ssh
