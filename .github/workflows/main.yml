@@ -22,6 +22,6 @@ jobs:
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull"
     - name: run server
       run:
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && nohup python -m http.server ${{ secrets.HTTP_PORT }}"
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && nohup python -m http.server ${{ secrets.HTTP_PORT }} && exit"
     - name: cleanup
       run: rm -rf ~/.ssh
