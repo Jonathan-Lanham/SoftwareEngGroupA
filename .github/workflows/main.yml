@@ -22,6 +22,7 @@ jobs:
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull"
     - name: run server
       run:
+        scp -r SoftwareEngineeringGroupA gatekeeper@cassini.cs.kent.edu
         ssh -t ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "screen -dmS GateKeeperServer bash -c “cd ~/${{ secrets.WORK_DIR }} && python -m http.server ${{ secrets.HTTP_PORT }}”
     - name: cleanup
       run: rm -rf ~/.ssh
