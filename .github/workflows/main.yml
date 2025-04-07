@@ -23,6 +23,6 @@ jobs:
     
     - name: run server
       run:
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "python -m http.server 8765 && screen -d"
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "python -m http.server 8765"
     - name: cleanup
       run: rm -rf ~/.ssh
