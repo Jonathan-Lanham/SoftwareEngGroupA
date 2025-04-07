@@ -6,7 +6,7 @@ class Game {
         let x = (windowWidth - width) / 2 - gameWidth / 2;
         let y = (windowHeight - height) / 2 - gameHeight / 2;
         canvas = createCanvas(gameWidth, gameHeight);
-        canvas.position(x, y);
+        //canvas.position(x, y);
         canvas.style('border', '2px solid black')
         background(backColor);
 
@@ -142,6 +142,8 @@ class Game {
             this.transferStateToCollidingNodes(entrNode);
         }
 
+        this.exitPoints.displayOnlyBox();
+
         //Process and display Connection Line Nodes
         for (let line of this.connectionLines) {
 
@@ -183,15 +185,15 @@ class Game {
             }
         }
 
-        this.exitPoints.display();
+        this.exitPoints.displayOnlyChildNodes();
 
         // Will only check if level is complete once gates are running
         if (this.running)
         {
-            if (this.levelCompleted === false){
+            // if (this.levelCompleted === false){
                 this.checkForWin(this.exitPoints.arrayOfNodeStates, this.exitPoints.endNodes)
                 this.running = false;
-            }
+            // }
         }
 
         for (let eNode of this.exitPoints.endNodes) {
@@ -227,7 +229,7 @@ class Connection {
         beginShape();
 
         // Add each point to the shape
-        for (let i = 0; i < this.arrayOfLines.length; i++) {
+        for (let i = 0; i < this.arrayOfLines.length; i++) { 
             const point = this.arrayOfLines[i];
             vertex(point.x, point.y);
         }
@@ -289,6 +291,25 @@ class ExitPoints {
             ++i;
         }
     }
+
+    displayOnlyBox() {
+        fill('#5E5C6C');
+        stroke('black')
+        rect(this.x, this.y, this.width, this.height)
+        stroke('black')
+        noFill();
+    }
+
+    displayOnlyChildNodes(){
+        let i = 0;
+        for (let eNode of this.endNodes) {
+            //Red or green line depending on state
+            stroke(this.arrayOfNodeStates[i] ? "green" : "red");
+            line(eNode.x, eNode.y + eNode.height/2, eNode.x + 500, eNode.y + eNode.height/2);
+            eNode.display();
+            ++i;
+        }
+    }
 }
 
 class EntrancePoints {
@@ -319,10 +340,15 @@ class EntrancePoints {
     }
     static eNodeOffsetY = 20;
     display() {
-        noFill();
-        stroke('#5E5C6C')
+        fill('#5E5C6C');
+        stroke('black')
         rect(this.x, this.y, this.width, this.height)
         stroke('black')
+        noFill();
+        // noFill();
+        // stroke('#5E5C6C')
+        // rect(this.x, this.y, this.width, this.height)
+        // stroke('black')
         for (let eNode of this.entNodes) {
             eNode.display();
         }
@@ -589,7 +615,7 @@ function setup() {
         console.log(io.Name);
         console.log(io.Description);
         document.getElementById("Level-Name").innerHTML = io.Name;
-        document.getElementById("Description").innerHTML = io.Description;
+        //document.getElementById("Description").innerHTML = io.Description;
     }
 
     //Base scale off of viewport size.
@@ -598,7 +624,7 @@ function setup() {
 
     //Until then, sample a level here
     //Directly tied to game instance
-    game = new Game(io.CanvasSize.w * scale, io.CanvasSize.h * scale, '#4287f5', sizeOfNodes=15 * scale);
+    game = new Game(io.CanvasSize.w * scale, window.innerHeight-122, '#4287f5', sizeOfNodes=15 * scale);
     game.entrancePoints = new EntrancePoints(io.EntrancePoints.x * scale, io.EntrancePoints.y * scale, io.EntrancePoints.w * scale, io.EntrancePoints.h * scale, io.EntrancePoints.states);
     game.exitPoints = new ExitPoints(io.ExitPoints.x * scale, io.ExitPoints.y * scale, io.ExitPoints.w * scale, io.ExitPoints.h * scale, io.ExitPoints.states);
 
