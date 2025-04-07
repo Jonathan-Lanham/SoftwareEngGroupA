@@ -20,8 +20,11 @@ jobs:
     - name: connect and pull
       run:
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull"
+    - name: run screen
+      run:
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "screen -S GateKeeper"
     - name: run server
       run:
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "screen -S GateKeeper && python -m http.server 8765"
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "python -m http.server 8765 && screen -d"
     - name: cleanup
       run: rm -rf ~/.ssh
