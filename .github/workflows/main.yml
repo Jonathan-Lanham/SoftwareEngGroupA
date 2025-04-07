@@ -22,7 +22,7 @@ jobs:
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull"
     - name : run screen
       run:
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "screen -S gatekeeper"
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && screen -S gatekeeper"
     - name: run server
       run:
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && python -m http.server ${{ secrets.HTTP_PORT }}"
