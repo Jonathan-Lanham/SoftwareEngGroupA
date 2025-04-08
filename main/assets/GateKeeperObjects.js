@@ -638,10 +638,10 @@ function setup() {
 
     console.log("GAME" + JSON.stringify(game.gameSounds));
     game.gameSounds.loadSounds({
-        gate_pickup: '../assets/music/pickup_gate.wav',
+        gate_pickup: '../assets/sounds/pickup_gate.wav',
         //Difficult to implement since collision is checked every frame, will come back to it later
-        //connect_circuit: '../assets/music/connect_circuit.wav',
-        win_sound: '../assets/music/win_sound.mp3'
+        //connect_circuit: '../assets/sounds/connect_circuit.wav',
+        win_sound: '../assets/sounds/win_sound.mp3'
     });
 
 }

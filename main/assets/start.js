@@ -121,7 +121,7 @@ languageIcons.forEach(icon => {
 // grabbing the elements for all buttons
 const allBtns = document.querySelectorAll('button');
 const allAtags = document.querySelectorAll('a');
-const btnSound = new Audio('../assets/music/music_button-click.mp3');
+const btnSound = new Audio('../assets/sounds/sounds_button-click.mp3');
 
 // when any button is clicked, it plays a sound effect
 allBtns.forEach(button => {
@@ -152,7 +152,7 @@ allAtags.forEach(aTag => {
 // grabbing the elements for the sound button
 const soundBtn = document.querySelector('.sound-button');
 const soundIcon = document.querySelector('.fa-volume-xmark');
-const music = new Audio('../assets/music/game-8-bit-on-278083.mp3')
+const music = new Audio('../assets/sounds/game-8-bit-on-278083.mp3')
 
 // when sound button is clicked, replace the icons and play music
 soundBtn.addEventListener('click', () =>{
