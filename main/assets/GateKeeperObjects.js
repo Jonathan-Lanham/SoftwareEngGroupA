@@ -638,10 +638,10 @@ function setup() {
 
     console.log("GAME" + JSON.stringify(game.gameSounds));
     game.gameSounds.loadSounds({
-        gate_pickup: '../static/music/pickup_gate.wav',
+        gate_pickup: '../assets/music/pickup_gate.wav',
         //Difficult to implement since collision is checked every frame, will come back to it later
-        //connect_circuit: '../static/music/connect_circuit.wav',
-        win_sound: '../static/music/win_sound.mp3'
+        //connect_circuit: '../assets/music/connect_circuit.wav',
+        win_sound: '../assets/music/win_sound.mp3'
     });
 
 }
@@ -725,7 +725,7 @@ async function loadNextLevel() {
     console.log("next level button clicked");
     //window.location.href = "level_select.html";
     try {
-        const response = await fetch('../static/levels.json');
+        const response = await fetch('../assets/levels.json');
         if (!response.ok) {
             throw new Error('Failed to load levels.json');
         }

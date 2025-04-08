@@ -1,7 +1,7 @@
 // grabbing the elements for all buttons
 const allBtns = document.querySelectorAll('button');
 const allAtags = document.querySelectorAll('a');
-const btnSound = new Audio('../static/music/music_button-click.mp3');
+const btnSound = new Audio('../assets/music/music_button-click.mp3');
 
 // when any button is clicked, it plays a sound effect
 allBtns.forEach(button => {

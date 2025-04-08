@@ -13,7 +13,7 @@ closeOptions.addEventListener("click", () => {
 });
 
 backToMain.addEventListener("click", () => {
-  window.location.href = "../templates/index.html";
+  window.location.href = "../pages/index.html";
 });
 
 document.addEventListener("click", (event) => {

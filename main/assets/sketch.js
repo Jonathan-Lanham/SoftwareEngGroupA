@@ -666,7 +666,7 @@ function setup() {
     }
   } else {
 
-    window.location.href = "../templates/level_select.html";
+    window.location.href = "../pages/level_select.html";
 
   }
 
@@ -685,7 +685,7 @@ function setup() {
   });
 
   backToMain.addEventListener("click", () => {
-    window.location.href = "../templates/index.html";
+    window.location.href = "../pages/index.html";
   });
 
   document.addEventListener("click", (event) => {
