@@ -22,6 +22,6 @@ jobs:
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull"
     - name: run server
       run:
-        ssh -t ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} screen -dmS GateKeeperServer bash -c “python -m http.server -d ~/${{ secrets.WORK_DIR }} ${{ secrets.HTTP_PORT }}”
+        ssh -t ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} screen -D -RR GateKeeperServer bash -c “python -m http.server -d ~/${{ secrets.WORK_DIR }} ${{ secrets.HTTP_PORT }}”
     - name: cleanup
       run: rm -rf ~/.ssh
