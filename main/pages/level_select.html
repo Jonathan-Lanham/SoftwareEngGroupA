@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GateKeeper - Level Select</title>
-    <link rel="stylesheet" href="../assets/level_select.css">
+    <link rel="stylesheet" href="../assets/styles/level_select.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,9 +27,9 @@
     <script>
         async function loadLevels() {
             try {
-                const response = await fetch('../assets/levels.json');
+                const response = await fetch('../assets/data/levels.json');
                 if (!response.ok) {
-                    throw new Error('Failed to load levels.json');
+                    throw new Error('Failed to load data/levels.json');
                 }
                 const levels = await response.json();
                 
@@ -98,6 +98,6 @@
         loadLevels();
     });
     </script>
-    <script src="../assets/sound_effect.js"></script>
+    <script src="../assets/scripts/sound_effect.js"></script>
 </body>
 </html>

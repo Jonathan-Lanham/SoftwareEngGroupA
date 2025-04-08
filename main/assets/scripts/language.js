@@ -2,7 +2,7 @@
 function changeLanguage(lang){
 
 
-    fetch('../assets/language.json')
+    fetch('../assets/data/language.json')
     .then(response => response.json())
     .then(data => {
 

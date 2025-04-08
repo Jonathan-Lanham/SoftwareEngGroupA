@@ -22,7 +22,7 @@
 
 # @app.route("/dev")
 # def dev():
-#     return send_from_directory("assets", "levels.json")
+#     return send_from_directory("assets", "data/levels.json")
 
 
 # if __name__ == "__main__":

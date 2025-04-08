@@ -725,9 +725,9 @@ async function loadNextLevel() {
     console.log("next level button clicked");
     //window.location.href = "level_select.html";
     try {
-        const response = await fetch('../assets/levels.json');
+        const response = await fetch('../assets/data/levels.json');
         if (!response.ok) {
-            throw new Error('Failed to load levels.json');
+            throw new Error('Failed to load data/levels.json');
         }
         const levels = await response.json();
         const storedObjects = localStorage.getItem('initialize_objects');
@@ -742,7 +742,7 @@ async function loadNextLevel() {
         levels.forEach(level => {
             if (level.lvlNum == io.lvlNum+1) {
                 // play the btn sound effect when any listItem is clicked
-                btnSound.play();
+                btnSound2.play();
                 //store gates from selected level in local storage. Will allow users to start from the level they ended on.
                 localStorage.setItem('initialize_objects', JSON.stringify(level));
                 // delay the page change by 1 second (1000 ms)
