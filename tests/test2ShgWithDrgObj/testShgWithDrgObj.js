@@ -2,7 +2,7 @@
 const assert = require('assert');
 const skObjects = require('../skGateObjects.js');
 const DraggableObject = skObjects.DraggableObject;
-const spatialHash = require('../spatialHash.js');
+const spatialHash = require('../scripts/spatialHash.js');
 const SpatialHashGrid = spatialHash.SpatialHashGrid;
 
 
