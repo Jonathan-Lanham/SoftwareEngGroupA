@@ -1,0 +1,230 @@
+{
+    "en": {
+      "startPage": {
+        "title": "GateKeeper",
+        "startBtn": "Start",
+        "optionsBtn": "Options",
+        "levelSelectBtn": "Level Select",
+        "optionsPopupTitle": "Options",
+        "optionsPopupSupport": "Support",
+        "optionsPopupCredits": "Credits",
+        "optionsPopupTerms": "Terms & Privacy",
+        "supportPopupTitle": "Help is on its way!",
+        "supportPopupSubject": "",
+        "supportPopupSubjectPlaceholder": "",
+        "supportPopupEmail": "",
+        "supportPopupEmailPlaceholder": "",
+        "supportPopupQuestion": "",
+        "supportPopupQuestionPlaceholder": "",
+        "supportPopupMessage": "",
+        "supportPopupMessagePlaceholder": "",
+        "supportPopupUpload": "",
+        "supportPopupSubmit": "",
+        "creditsPopupTitle": "",
+        "creditsPopupCaitlyn": "",
+        "creditsPopupMario": "",
+        "creditsPopupJeffrey": "",
+        "creditsPopupMadelyn": "",
+        "creditsPopupAndrew": "",
+        "creditsPopupIsha": "",
+        "creditsPopupSam": "",
+        "creditsPopupJonathan": "",
+        "creditsPopupVasu": "",
+        "termsAndPrivacy": "",
+        "lunaBot": "",
+        "aboutPopupTitle": "",
+        "aboutPopupGameInfo": "",
+        "aboutPopupLogicGates": "",
+        "aboutPopupAboutTheGame": "",
+        "aboutPopupGameInfoDesc": "",
+        "aboutPopupLogicGatesDesc": ""
+      },
+
+
+      "playPage": {
+       
+      },
+
+
+      "levelPage": {
+        
+      }
+    },
+
+
+
+
+
+
+    "es": {
+      "startPage": {
+        "title": "Portero",
+        "startBtn": "Comenzar",
+        "optionsBtn": "Opciones",
+        "levelSelectBtn": "Seleccionar nivel",
+        "optionsPopupTitle": "Opciones",
+        "optionsPopupLanguage": "Idioma",
+        "optionsPopupSupport": "Apoyo",
+        "optionsPopupCredits": "Créditos",
+        "optionsPopupTerms": "Términos y privacidad",
+        "supportPopupTitle": "¡La ayuda está en camino!",
+        "supportPopupSubject": "",
+        "supportPopupSubjectPlaceholder": "",
+        "supportPopupEmail": "",
+        "supportPopupEmailPlaceholder": "",
+        "supportPopupQuestion": "",
+        "supportPopupQuestionPlaceholder": "",
+        "supportPopupMessage": "",
+        "supportPopupMessagePlaceholder": "",
+        "supportPopupUpload": "",
+        "supportPopupSubmit": "",
+        "creditsPopupTitle": "",
+        "creditsPopupCaitlyn": "",
+        "creditsPopupMario": "",
+        "creditsPopupJeffrey": "",
+        "creditsPopupMadelyn": "",
+        "creditsPopupAndrew": "",
+        "creditsPopupIsha": "",
+        "creditsPopupSam": "",
+        "creditsPopupJonathan": "",
+        "creditsPopupVasu": "",
+        "termsAndPrivacy": "",
+        "lunaBot": "",
+        "aboutPopupTitle": "",
+        "aboutPopupGameInfo": "",
+        "aboutPopupLogicGates": "",
+        "aboutPopupAboutTheGame": "",
+        "aboutPopupGameInfoDesc": "",
+        "aboutPopupLogicGatesDesc": ""
+      },
+
+
+      "playPage": {
+        
+      },
+
+
+      "levelPage": {
+        
+      }
+    },
+
+
+
+
+
+
+    "de": {
+      "startPage": {
+        "title": "GateKeeper",
+        "startBtn": "Start",
+        "optionsBtn": "Optionen",
+        "levelSelectBtn": "Levelauswahl",
+        "optionsPopupTitle": "Optionen",
+        "optionsPopupLanguage": "Sprache",
+        "optionsPopupSupport": "Unterstützung",
+        "optionsPopupCredits": "Credits",
+        "optionsPopupTerms": "Bedingungen und Datenschutz",
+        "supportPopupTitle": "Hilfe ist unterwegs!",
+        "supportPopupSubject": "",
+        "supportPopupSubjectPlaceholder": "",
+        "supportPopupEmail": "",
+        "supportPopupEmailPlaceholder": "",
+        "supportPopupQuestion": "",
+        "supportPopupQuestionPlaceholder": "",
+        "supportPopupMessage": "",
+        "supportPopupMessagePlaceholder": "",
+        "supportPopupUpload": "",
+        "supportPopupSubmit": "",
+        "creditsPopupTitle": "",
+        "creditsPopupCaitlyn": "",
+        "creditsPopupMario": "",
+        "creditsPopupJeffrey": "",
+        "creditsPopupMadelyn": "",
+        "creditsPopupAndrew": "",
+        "creditsPopupIsha": "",
+        "creditsPopupSam": "",
+        "creditsPopupJonathan": "",
+        "creditsPopupVasu": "",
+        "termsAndPrivacy": "",
+        "lunaBot": "",
+        "aboutPopupTitle": "",
+        "aboutPopupGameInfo": "",
+        "aboutPopupLogicGates": "",
+        "aboutPopupAboutTheGame": "",
+        "aboutPopupGameInfoDesc": "",
+        "aboutPopupLogicGatesDesc": ""
+      },
+
+
+      "playPage": {
+        
+      },
+
+
+      "levelPage": {
+       
+      }
+    },
+
+
+
+
+
+
+
+
+    "fr": {
+      "startPage": {
+       "title": "Portier",
+       "startBtn": "Commencer",
+        "optionsBtn": "Possibilités",
+        "levelSelectBtn": "Sélection du niveau",
+        "optionsPopupTitle": "Possibilités",
+        "optionsPopupLanguage": "Langue",
+        "optionsPopupSupport": "Soutien",
+        "optionsPopupCredits": "Crédits",
+        "optionsPopupTerms": "Conditions et confidentialité",
+        "supportPopupTitle": "L'aide est en route !",
+        "supportPopupSubject": "",
+        "supportPopupSubjectPlaceholder": "",
+        "supportPopupEmail": "",
+        "supportPopupEmailPlaceholder": "",
+        "supportPopupQuestion": "",
+        "supportPopupQuestionPlaceholder": "",
+        "supportPopupMessage": "",
+        "supportPopupMessagePlaceholder": "",
+        "supportPopupUpload": "",
+        "supportPopupSubmit": "",
+        "creditsPopupTitle": "",
+        "creditsPopupCaitlyn": "",
+        "creditsPopupMario": "",
+        "creditsPopupJeffrey": "",
+        "creditsPopupMadelyn": "",
+        "creditsPopupAndrew": "",
+        "creditsPopupIsha": "",
+        "creditsPopupSam": "",
+        "creditsPopupJonathan": "",
+        "creditsPopupVasu": "",
+        "termsAndPrivacy": "",
+        "lunaBot": "",
+        "aboutPopupTitle": "",
+        "aboutPopupGameInfo": "",
+        "aboutPopupLogicGates": "",
+        "aboutPopupAboutTheGame": "",
+        "aboutPopupGameInfoDesc": "",
+        "aboutPopupLogicGatesDesc": ""
+      },
+
+
+      "playPage": {
+        
+      },
+
+
+      "levelPage": {
+       
+      }
+    }
+}
+  
