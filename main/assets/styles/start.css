@@ -627,7 +627,25 @@
   opacity: .8;
 }
 
-
+body.lang-es .level-select-btn,
+body.lang-es .start-btn,
+body.lang-es .options-btn {
+  width: 11em;
+}
+body.lang-es .support-title-p{
+  font-size: 1.8em;
+}
+body.lang-es .start-buttons{
+  width: 25em;
+}
+body.lang-fr .level-select-btn,
+body.lang-fr .start-btn,
+body.lang-fr .options-btn {
+  width: 12em;
+}
+body.lang-fr .start-buttons{
+  width: 28em;
+}
 /* Start Media Queries-------------------------------------------------------------------------- */
 
 

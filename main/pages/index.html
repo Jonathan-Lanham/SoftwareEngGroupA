@@ -31,7 +31,7 @@
             <div class="start-buttons">
                 <a href="play.html" id="GoToPlayPage"><button class="start-btn">Start</button></a>
                 <button class="options-btn">Options</button>
-                <a href="level_select.html"><button class="start-btn">Level Select</button></a>
+                <a href="level_select.html"><button class="start-btn level-select-btn">Level Select</button></a>
             </div>
 
             <!-- the options menu popup -->
@@ -106,7 +106,7 @@
             <!-- Support title -->
             <div class="top-support-section">
                 <div class="support-title">
-                    <p>Help is on its way!</p>
+                    <p class="support-title-p">Help is on its way!</p>
                 </div>
                 <!-- the form for the support popup and action is sent to email after submission -->
                 <form id="supportForm" action="https://formsubmit.co/g6830926@gmail.com" method="post">
@@ -114,27 +114,27 @@
                     <!-- subject section -->
                     <div class="support-subject">
                         <label class="subject-label">Subject</label><br>
-                        <input type="text" name="subject" id="subject-input" class="support-inputs" placeholder="Enter the Subject of your Message..." required>
+                        <input type="text" name="subject" id="subject-input" class="support-inputs subject-lang" placeholder="Enter the Subject of your Message..." required>
                     </div>
                     <!-- username section -->
                     <div class="support-username">
                         <label class="username-label">Email</label><br>
-                        <input type="email" name="email" id="username-input" class="support-inputs" placeholder="Enter your Email..." required>
+                        <input type="email" name="email" id="username-input" class="support-inputs email-lang" placeholder="Enter your Email..." required>
                     </div>
                     <!-- type of question section -->
                     <div class="support-type-question">
                         <label class="question-label">Type of Question</label><br>
-                        <select type="text" name="text" id="type-question-input" class="support-inputs" placeholder="Writing to us Regarding..." >
-                            <option value="">Account Issues (e.g., Login Problems, Password Reset)</option>
-                            <option value="">Technical Issues (e.g, Errors, Crashes, Bugs)</option>
-                            <option value="">Content/Feature Requests</option>
-                            <option value="">Other (Please Describe)</option>
+                        <select type="text" name="text" id="type-question-input" class="support-inputs question-lang" placeholder="Writing to us Regarding..." >
+                            <option class="question-1" value="">Account Issues (e.g., Login Problems, Password Reset)</option>
+                            <option class="question-2" value="">Technical Issues (e.g, Errors, Crashes, Bugs)</option>
+                            <option class="question-3" value="">Content/Feature Requests</option>
+                            <option class="question-4" value="">Other (Please Describe)</option>
                         </select>
                     </div>
                     <!-- message section -->
                     <div class="support-message">
                         <label class="message-label">Message</label><br>
-                        <textarea type="text" name="message" id="message-input" class="support-inputs" placeholder="Please Provide your Message..." required></textarea>
+                        <textarea  name="message" id="message-input" class="support-inputs message-lang" required></textarea>
                     </div>
                     <!-- attachments section -->
                     <div class="support-attachments">
@@ -143,7 +143,7 @@
                     </div>
                     <!-- form submission button -->
                     <div class="support-submit">
-                        <input type="submit" name="submit"><a href="#"></a>
+                        <input class="support-submit-btn" type="submit" name="submit" value="Submit"><a href="#"></a>
                     </div>
                 </form>
             </div>
