@@ -16,7 +16,7 @@ function changeLanguage(lang){
         document.querySelector('.support-btn').textContent = data[lang].startPage.optionsPopupSupport;
         document.querySelector('.credits-btn').textContent = data[lang].startPage.optionsPopupCredits;
         document.querySelector('.terms-btn').textContent = data[lang].startPage.optionsPopupTerms;
-        document.querySelector('.support-title').textContent = data[lang].startPage.supportPopupTitle;
+        document.querySelector('.support-title-p').textContent = data[lang].startPage.supportPopupTitle;
 
 
     })
