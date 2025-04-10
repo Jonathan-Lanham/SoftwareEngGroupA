@@ -22,3 +22,4 @@ function changeLanguage(lang){
     })
     .catch(error => console.error('Error loading language data:', error));
 }
+
