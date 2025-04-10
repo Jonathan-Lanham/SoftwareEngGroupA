@@ -2,7 +2,7 @@
     {
         "Name": "DEMO",
         "Description": "This is DEMO text.",
-        "CanvasSize": {"w": 1500, "h": 900},
+        "CanvasSize": {"w": 2560, "h": 1440},
         "EntrancePoints": {
             "x": 100, 
             "y": 200, 
@@ -101,7 +101,7 @@
         "Name": "Level 1",
         "lvlNum": 1,
         "Description": "Or or And?",
-        "CanvasSize": {"w": 600, "h": 500},
+        "CanvasSize": {"w": 2560, "h": 1440},
         "EntrancePoints": {
             "x": 195, 
             "y": 75, 
@@ -140,7 +140,7 @@
         "Name": "Level 2",
         "lvlNum": 2,
         "Description": "Xor or And?",
-        "CanvasSize": {"w": 1000, "h": 1000},
+        "CanvasSize": {"w": 2560, "h": 1440},
         "EntrancePoints": {
             "x": 145, 
             "y": 75, 
@@ -181,7 +181,7 @@
         "Name": "Level 3",
         "lvlNum": 3,
         "Description": "From zero to one",
-        "CanvasSize": {"w": 1000, "h": 800},
+        "CanvasSize": {"w": 2560, "h": 1440},
         "EntrancePoints": {
           "x": 295, 
           "y": 300, 
@@ -222,7 +222,7 @@
         "Name": "Level 4",
         "lvlNum": 4,
         "Description": "Double Negative?",
-        "CanvasSize": {"w": 1000, "h": 800},
+        "CanvasSize": {"w": 2560, "h": 1440},
         "EntrancePoints": {
           "x": 145, 
           "y": 75, 
