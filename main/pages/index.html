@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GateKeeper - Start</title>
-    <link rel="stylesheet" href="../static/start.css">
+    <link rel="stylesheet" href="../assets/styles/start.css">
     
     <!-- Link the google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <!--<img src="../static/images/circuit.png" alt="Circuit Background" class="background-image">   -->    
+    <!--<img src="../assets/images/circuit.png" alt="Circuit Background" class="background-image">   -->    
     <!-- Section for the startpage -->
     <section id="startPage">
         <div class="start-page-container">
@@ -75,14 +75,14 @@
                     <button class="language-btn">Language</button>
                     <button class="support-btn">Support</button>
                     <button class="credits-btn">Credits</button>
-                    <a class="terms-btn-atag" href="../templates/terms.html"><button class="terms-btn">Terms & Privacy</button></a>
+                    <a class="terms-btn-atag" href="../pages/terms.html"><button class="terms-btn">Terms & Privacy</button></a>
                 </div>
                 <div class="language-content" style="display: none;">
                     <div class="language-content-div">
-                        <img onclick="changeLanguage('en')" class="english-icon" src="../static/images/united-kingdom.png">
-                        <img onclick="changeLanguage('es')" class="spanish-icon" src="../static/images/spanish.png">
-                        <img onclick="changeLanguage('de')" class="german-icon" src="../static/images/german.png">
-                        <img onclick="changeLanguage('fr')" class="french-icon" src="../static/images/french.png">
+                        <img onclick="changeLanguage('en')" class="english-icon" src="../assets/images/united-kingdom.png">
+                        <img onclick="changeLanguage('es')" class="spanish-icon" src="../assets/images/spanish.png">
+                        <img onclick="changeLanguage('de')" class="german-icon" src="../assets/images/german.png">
+                        <img onclick="changeLanguage('fr')" class="french-icon" src="../assets/images/french.png">
                     </div>
                     
                 </div>
@@ -110,7 +110,7 @@
                 </div>
                 <!-- the form for the support popup and action is sent to email after submission -->
                 <form id="supportForm" action="https://formsubmit.co/g6830926@gmail.com" method="post">
-                    <input type="hidden" name="_url" value="https://jonathan-lanham.github.io/SoftwareEngGroupA/main/templates/index.html">
+                    <input type="hidden" name="_url" value="https://jonathan-lanham.github.io/SoftwareEngGroupA/main/pages/index.html">
                     <!-- subject section -->
                     <div class="support-subject">
                         <label class="subject-label">Subject</label><br>
@@ -405,12 +405,12 @@
                 height: 187.5px;
                 cursor: pointer;
                 transition: transform 0.3s ease;
-                background-image: url('../static/images/bot1.png');
+                background-image: url('../assets/images/bot1.png');
                 background-size: auto 100%;
             }
         
             #bot.animated {
-                background-image: url('../static/images/botmove-Sheet.png');
+                background-image: url('../assets/images/botmove-Sheet.png');
                 background-repeat: steps(14);
                 animation: spriteAnimation 2s steps(14) 2;
             }
@@ -537,8 +537,8 @@
 
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="../static/start.js"></script>
-    <script src="../static/sound_effect.js"></script>
-    <script src="../static/language.js"></script>
+    <script src="../assets/scripts/start.js"></script>
+    <script src="../assets/scripts/sound_effect.js"></script>
+    <script src="../assets/scripts/language.js"></script>
 </body>
 </html>
