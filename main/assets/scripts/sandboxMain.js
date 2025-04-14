@@ -2,11 +2,14 @@ function setup() {
 
     //Base scale off of viewport size.
     let scale = window.innerWidth/2560;
+
     console.log(window.innerWidth)
 
     //Until then, sample a level here
     //Directly tied to game instance
     game = new Game(2560 * scale, window.innerHeight-122, '#4287f5', sizeOfNodes=15 * scale);
+
+    game.gameScale = scale;
 
     console.log("GAME" + JSON.stringify(game.gameSounds));
     game.gameSounds.loadSounds({
@@ -17,12 +20,8 @@ function setup() {
         win_sound: '../assets/sounds/win_sound.mp3'
     });
 
-    game.insertGate(500, 500, 100, 80, AndGate, scale=scale)
-    game.insertComponent(300, 300, 30, 30, scale=scale)
-    game.insertComponent(300, 300, 30, 30, scale=scale)
+    //game.insertGate(500, 500, 100, 80, AndGate, scale=scale)
     
-
-
 }
 
 //For visualization/debugging
@@ -113,4 +112,16 @@ function doubleClicked() {
     } else{
         game.gameSounds.play('reverse_circuit', volume=1)
     }
+}
+
+//functions for inserting things into sandbox
+
+function insertSwitchComponent(){
+    console.log("Inserting Component...")
+    game.insertComponent(400, 300, 38, 38, game.gameScale)
+}
+
+function insertGateIntoGame(logicGate){
+    console.log("Inserting Gate...")
+    game.insertGate(500, 500, 100, 80, logicGate, game.gameScale)
 }

@@ -41,6 +41,7 @@ function drawGenericGate(x, y, w, h, textsize){
     line(x, y, x, y + h);
 
     //line(x, y + h/2, x + width, y + h/2);
+    strokeWeight(1);
 }
 
 function drawNandGate(x, y, w, h, textsize){ 
@@ -78,6 +79,7 @@ function drawNandGate(x, y, w, h, textsize){
     ellipse(x + w - circSize/4 , y + h/2, circSize, circSize)
 
     //line(x, y + h/2, x + width, y + h/2);
+    strokeWeight(1);
 }
 
 function drawAndGate(x, y, w, h, textsize){ 
@@ -110,6 +112,7 @@ function drawAndGate(x, y, w, h, textsize){
     line(x, y, x, y + h);
 
     //line(x, y + h/2, x + width, y + h/2);
+    strokeWeight(1);
 }
 
 function drawOrGate(x, y, w, h, textsize){
@@ -141,6 +144,7 @@ function drawOrGate(x, y, w, h, textsize){
     );
     line(x, y, x + w/2, y);
     line(x, y + h, x + w/2, y + h);
+    strokeWeight(1);
 }
 
 function drawNorGate(x, y, w, h, textsize){
@@ -177,6 +181,7 @@ function drawNorGate(x, y, w, h, textsize){
 
     fill('#4287f5')
     ellipse(x + w - circSize/4 , y + h/2, circSize, circSize)
+    strokeWeight(1);
 }
 
 function drawXorGate(x, y, w, h, textsize){
@@ -209,6 +214,7 @@ function drawXorGate(x, y, w, h, textsize){
     //Second line, to the left of gate
     let xoff = w/18;
     let yoff = h/20;
+    strokeWeight(2 * w / 80);
     bezier(
         x-xoff, y + yoff,                         // Start point (left corner)
         x + w * 0.25 - xoff, y + h/4,          // First control point 
@@ -217,8 +223,10 @@ function drawXorGate(x, y, w, h, textsize){
 
 
       );
+    strokeWeight(4 * w / 80)
     line(x, y, x + w/2, y);
     line(x, y + h, x + w/2, y + h);
+    strokeWeight(1);
 }
 
 function drawXnorGate(x, y, w, h, textsize){
@@ -255,6 +263,7 @@ function drawXnorGate(x, y, w, h, textsize){
     //Second line, to the left of gate
     let xoff = w/18;
     let yoff = h/20;
+    strokeWeight(2 * w / 80);
     bezier(
         x-xoff, y + yoff,                         // Start point (left corner)
         x + w * 0.25 - xoff, y + h/4,          // First control point 
@@ -263,11 +272,13 @@ function drawXnorGate(x, y, w, h, textsize){
 
 
       );
+    strokeWeight(4 * w / 80)
     line(x, y, x + w/2 - circSize/2, y);
     line(x, y + h, x + w/2 - circSize/2, y + h);
 
     fill('#4287f5')
     ellipse(x + w - circSize/4 , y + h/2, circSize, circSize)
+    strokeWeight(1);
 }
 
 function drawNotGate(x, y, w, h, textsize){
@@ -294,5 +305,6 @@ function drawNotGate(x, y, w, h, textsize){
       );
       fill('#4287f5')
       circle(x-circOffset + w, y + h/2, circSize);
+      strokeWeight(1);
   
 }

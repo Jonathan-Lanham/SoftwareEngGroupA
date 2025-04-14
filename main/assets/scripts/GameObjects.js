@@ -14,6 +14,8 @@ class Game {
         this.gameHeight = gameHeight;
         this.backColor = backColor;
 
+        this.gameScale = null;
+
         this.running = false; // Checks if gates are running
         this.levelCompleted = false;
 
