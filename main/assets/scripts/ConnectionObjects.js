@@ -17,6 +17,7 @@ class Connection {
     }
 
     display() {
+        strokeWeight(2);
         noFill();
         stroke('#00008B');
         beginShape();
@@ -32,5 +33,6 @@ class Connection {
 
         this.inputNode.display();
         this.outputNode.display();
+        strokeWeight(1);
     }
 }

@@ -31,6 +31,7 @@ class GateNode{
         return result;
     }
     display(){
+        strokeWeight(2);
         stroke('black')
         //change 15/2 to make circle larger
         fill(this.state ? "green" : "red");
@@ -39,5 +40,6 @@ class GateNode{
         }
         ellipse(this.x+ Game.sizeOfNodes/2, this.y+Game.sizeOfNodes/2, this.width, this.height);
         rect(this.x, this.y, this.width, this.height);
+        strokeWeight(1)
     }
 }

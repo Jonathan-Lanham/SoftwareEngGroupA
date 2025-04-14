@@ -15,11 +15,10 @@
 
   </head>
   <body>
+    <div id="topDiv">Click on the screen to place a vertex. Press Shift to finish placing the Connection.</div>
     <button id="options-btn">
       <i class="fa fa-cog"></i>
   </button>
-
-  <button id="run-btn">Run</button>
   
   <!-- Options Menu (Initially Hidden) -->
   <div id="options-menu">
@@ -52,31 +51,43 @@
           <button id="back-to-main">Home</button>
       </div>
   </div>
-  <section>
-    <div class="popup-overlay" id="popup" onclick="closePopup(event)">
-      <div class="win-popup" onclick="event.stopPropagation()">
-        <div class="top-win-section">
-          <div class="win-title">
-            <p>You win!</p>
-          </div>
-        </div>
-  
-        <!-- Next Level Button -->
-        <button class="win-button" onclick="loadNextLevel()">Next Level</button>
-        <button class="win-button" onclick="closePopupWin()">Stay here</button>
-        <button class="win-button" onclick="window.location.href='./index.html'">Bring Me Home</button>
-      </div>
-    </div>
-  </section>
 
   <!-- Slide-out Gate Info Panel -->
   <div id="gateInfoPanel" class="side-panel">
     <button id="togglePanelBtn">☰</button>
     <div id="gateInfoContent" class="panel-content">
       <h3>Level Instructions</h3>
-      <p id="levelDesc" style="padding: 0 22%;"></p>
-      <h3>Gate Descriptions</h3>
-      <ul id="gateList"></ul>
+      <p id="levelDesc" style="padding: 0 22%;">Feel Free to Play Around!</p>
+      <h3>Add Gates to Canvas</h3>
+      <ul id="gateList">
+          <li onclick="insertGateIntoGame(AndGate)">
+            And Gate
+          </li>
+          <li onclick="insertGateIntoGame(NandGate)">
+            Nand Gate
+          </li>
+          <li onclick="insertGateIntoGame(OrGate)">
+            Or Gate
+          </li>
+          <li onclick="insertGateIntoGame(XorGate)">
+            Xor Gate
+          </li>
+          <li onclick="insertGateIntoGame(NotGate)">
+            Not Gate
+          </li>
+          <li onclick="insertGateIntoGame(NorGate)">
+            Nor Gate
+          </li>
+          <li onclick="insertGateIntoGame(XnorGate)">
+            Xnor Gate
+          </li>
+          <li onclick="insertSwitchComponent()">
+            Switch Component
+          </li>
+          <li onclick="insertConnectionLineIntoGame()">
+            Connection Line
+          </li>
+      </ul>
     </div>
   </div>
 
@@ -91,7 +102,7 @@
     <main>
       <!-- Added background to canvas -->
       <section id="">
-        <h1 id="Level-Name"></h1>
+        <h1 id="Level-Name">Sandbox Mode</h1>
         
       </section>
 
@@ -116,9 +127,11 @@
     <script src="../assets/scripts/DraggableObjects.js"></script>
     <script src="../assets/scripts/LogicGateObjects.js"></script>
     <script src="../assets/scripts/ComponentsObjects.js"></script>
-    <script src="../assets/scripts/playMain.js"></script>
+
+    <script src="../assets/scripts/sandboxMain.js"></script>
+
     <script src="../assets/scripts/sound_effect.js"></script>
     <script src="../assets/scripts/options.js"></script>
-    <script src="../assets/scripts/getInfoPanel.js"></script>
+    <script src="../assets/scripts/sandboxSidePanel.js"></script>
   </body>
 </html>
