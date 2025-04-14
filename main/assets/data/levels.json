@@ -1,275 +1,636 @@
 [
-    {
-        "Name": "DEMO",
-        "Description": "This is DEMO text.",
-        "CanvasSize": {"w": 2560, "h": 1440},
-        "EntrancePoints": {
-            "x": 100, 
-            "y": 200, 
-            "w": 50, 
-            "h": 500, 
-            "states": [true, false, true, true, true, true, true, false, true, true]
-        },
-        "ExitPoints": {
-            "x": 1350, 
-            "y": 200, 
-            "w": 50, 
-            "h": 500, 
-            "states": [true, false, true]
-        },
-        "Connections": [
-            [
-                {"x": 65, "y": 100},
-                {"x": 180, "y": 45},
-                {"x": 350, "y": 215},
-                {"x": 150, "y": 145},
-                {"x": 420, "y": 75},
-                {"x": 380, "y": 205},
-                {"x": 450, "y": 35},
-                {"x": 500, "y": 100},
-                {"x": 600, "y": 215},
-                {"x": 720, "y": 45},
-                {"x": 650, "y": 165},
-                {"x": 800, "y": 105},
-                {"x": 750, "y": 35},
-                {"x": 900, "y": 185},
-                {"x": 830, "y": 75},
-                {"x": 680, "y": 215},
-                {"x": 590, "y": 55},
-                {"x": 1000, "y": 125}
-              ],
-            [{"x": 65, "y": 160},{"x": 1000, "y": 165}],
-            [{"x": 270, "y": 245}, {"x": 500, "y": 285}, {"x": 500, "y": 300}],
-            [{"x": 270, "y": 350}, {"x": 500, "y": 350}, {"x": 500, "y": 345}],
-            [{"x": 125, "y": 425}, {"x": 635, "y": 425}, {"x": 645, "y": 355}],
-            [{"x": 125, "y": 670}, {"x": 1370, "y": 670}]
-
-        ],
-        "Gates": [
-            {            
-                "x": 100, 
-                "y": 800, 
-                "w": 100, 
-                "h": 80,
-                "type": "NandGate"
-            },
-            {            
-                "x": 300, 
-                "y": 800, 
-                "w": 100, 
-                "h": 80,
-                "type": "AndGate"
-            },
-            {            
-                "x": 500, 
-                "y": 800, 
-                "w": 100, 
-                "h": 80,
-                "type": "OrGate"
-            },
-            {            
-                "x": 700, 
-                "y": 800, 
-                "w": 100, 
-                "h": 80,
-                "type": "XorGate"
-            },
-            {            
-                "x": 900, 
-                "y": 800, 
-                "w": 100, 
-                "h": 80,
-                "type": "NotGate"
-            },
-            {            
-                "x": 1100, 
-                "y": 800, 
-                "w": 100, 
-                "h": 80,
-                "type": "NorGate"
-            },
-            {            
-                "x": 1300, 
-                "y": 800, 
-                "w": 100, 
-                "h": 80,
-                "type": "XnorGate"
-            }
-        ]
+  {
+    "Name": "DEMO",
+    "Description": "This is DEMO text.",
+    "CanvasSize": {
+      "w": 2560,
+      "h": 1440
     },
-    {
-        "Name": "Level 1",
-        "lvlNum": 1,
-        "Description": "Or or And?",
-        "CanvasSize": {"w": 2560, "h": 1440},
-        "EntrancePoints": {
-            "x": 195, 
-            "y": 75, 
-            "w": 50, 
-            "h": 100, 
-            "states": [true, false]
-        },
-        "ExitPoints": {
-            "x": 335, 
-            "y": 100, 
-            "w": 50, 
-            "h": 50, 
-            "states": [true]
-        },
-        "Connections": [
-            
-        ],
-        "Gates": [
-            {            
-                "x": 100, 
-                "y": 300, 
-                "w": 100, 
-                "h": 80,
-                "type": "OrGate"
-            },
-            {            
-                "x": 300, 
-                "y": 300, 
-                "w": 100, 
-                "h": 80,
-                "type": "AndGate"
-            }
-        ]
+    "EntrancePoints": {
+      "x": 100,
+      "y": 200,
+      "w": 50,
+      "h": 500,
+      "states": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true
+      ]
     },
-    {
-        "Name": "Level 2",
-        "lvlNum": 2,
-        "Description": "Xor or And?",
-        "CanvasSize": {"w": 2560, "h": 1440},
-        "EntrancePoints": {
-            "x": 145, 
-            "y": 75, 
-            "w": 50, 
-            "h": 150, 
-            "states": [true, true ,true]
-        },
-        "ExitPoints": {
-            "x": 385, 
-            "y": 75, 
-            "w": 50, 
-            "h": 150, 
-            "states": [true, true]
-        },
-        "Connections": [
-            [{"x": 170, "y": 195}, {"x": 410, "y": 195}],
-            [{"x": 310, "y": 130}, {"x": 370, "y": 130}, {"x": 370, "y": 100}, {"x": 410, "y": 100}]
-
-        ],
-        "Gates": [
-            {            
-                "x": 100, 
-                "y": 300, 
-                "w": 100, 
-                "h": 80,
-                "type": "XorGate"
-            },
-            {            
-                "x": 300, 
-                "y": 300, 
-                "w": 100, 
-                "h": 80,
-                "type": "AndGate"
-            }
-        ]
+    "ExitPoints": {
+      "x": 1350,
+      "y": 200,
+      "w": 50,
+      "h": 500,
+      "states": [
+        true,
+        false,
+        true
+      ]
     },
-    {
-        "Name": "Level 3",
-        "lvlNum": 3,
-        "Description": "From zero to one",
-        "CanvasSize": {"w": 2560, "h": 1440},
-        "EntrancePoints": {
-          "x": 295, 
-          "y": 300, 
-          "w": 50, 
-          "h": 150, 
-          "states": [false, false]
+    "Connections": [
+      [
+        {
+          "x": 65,
+          "y": 100
         },
-        "ExitPoints": {
-          "x": 605, 
-          "y": 300, 
-          "w": 50, 
-          "h": 150, 
-          "states": [true, false]
+        {
+          "x": 180,
+          "y": 45
         },
-        "Connections": [
-          [{"x": 320, "y": 325}, {"x": 400, "y": 325}],
-          [{"x": 320, "y": 425}, {"x": 620, "y": 425}],
-          [{"x": 560, "y": 325}, {"x": 620, "y": 325}]
-        ],
-        "Gates": [
-          {            
-            "x": 250, 
-            "y": 525, 
-            "w": 100, 
-            "h": 80,
-            "type": "NotGate"
-          },
-          {            
-            "x": 450, 
-            "y": 525, 
-            "w": 100, 
-            "h": 80,
-            "type": "AndGate"
-          }
-        ]
-    },
-    {
-        "Name": "Level 4",
-        "lvlNum": 4,
-        "Description": "Double Negative?",
-        "CanvasSize": {"w": 2560, "h": 1440},
-        "EntrancePoints": {
-          "x": 145, 
-          "y": 75, 
-          "w": 50, 
-          "h": 150, 
-          "states": [true, false, true]
+        {
+          "x": 350,
+          "y": 215
         },
-        "ExitPoints": {
-          "x": 445, 
-          "y": 75, 
-          "w": 50, 
-          "h": 150, 
-          "states": [true, true]
+        {
+          "x": 150,
+          "y": 145
         },
-        "Connections": [
-          [{"x": 330, "y": 125}, {"x": 470, "y": 105}]
-        ],
-        "Gates": [
-          {            
-            "x": 50, 
-            "y": 600, 
-            "w": 100, 
-            "h": 80,
-            "type": "AndGate"
-          },
-          {            
-            "x": 250, 
-            "y": 600, 
-            "w": 100, 
-            "h": 80,
-            "type": "OrGate"
-          },
-          {            
-            "x": 450, 
-            "y": 600, 
-            "w": 100, 
-            "h": 80,
-            "type": "NotGate"
-          },
-          {            
-            "x": 650, 
-            "y": 600, 
-            "w": 100, 
-            "h": 80,
-            "type": "NotGate"
-          }
-        ]
+        {
+          "x": 420,
+          "y": 75
+        },
+        {
+          "x": 380,
+          "y": 205
+        },
+        {
+          "x": 450,
+          "y": 35
+        },
+        {
+          "x": 500,
+          "y": 100
+        },
+        {
+          "x": 600,
+          "y": 215
+        },
+        {
+          "x": 720,
+          "y": 45
+        },
+        {
+          "x": 650,
+          "y": 165
+        },
+        {
+          "x": 800,
+          "y": 105
+        },
+        {
+          "x": 750,
+          "y": 35
+        },
+        {
+          "x": 900,
+          "y": 185
+        },
+        {
+          "x": 830,
+          "y": 75
+        },
+        {
+          "x": 680,
+          "y": 215
+        },
+        {
+          "x": 590,
+          "y": 55
+        },
+        {
+          "x": 1000,
+          "y": 125
+        }
+      ],
+      [
+        {
+          "x": 65,
+          "y": 160
+        },
+        {
+          "x": 1000,
+          "y": 165
+        }
+      ],
+      [
+        {
+          "x": 270,
+          "y": 245
+        },
+        {
+          "x": 500,
+          "y": 285
+        },
+        {
+          "x": 500,
+          "y": 300
+        }
+      ],
+      [
+        {
+          "x": 270,
+          "y": 350
+        },
+        {
+          "x": 500,
+          "y": 350
+        },
+        {
+          "x": 500,
+          "y": 345
+        }
+      ],
+      [
+        {
+          "x": 125,
+          "y": 425
+        },
+        {
+          "x": 635,
+          "y": 425
+        },
+        {
+          "x": 645,
+          "y": 355
+        }
+      ],
+      [
+        {
+          "x": 125,
+          "y": 670
+        },
+        {
+          "x": 1370,
+          "y": 670
+        }
+      ]
+    ],
+    "Gates": [
+      {
+        "x": 100,
+        "y": 800,
+        "w": 100,
+        "h": 80,
+        "type": "NandGate"
+      },
+      {
+        "x": 300,
+        "y": 800,
+        "w": 100,
+        "h": 80,
+        "type": "AndGate"
+      },
+      {
+        "x": 500,
+        "y": 800,
+        "w": 100,
+        "h": 80,
+        "type": "OrGate"
+      },
+      {
+        "x": 700,
+        "y": 800,
+        "w": 100,
+        "h": 80,
+        "type": "XorGate"
+      },
+      {
+        "x": 900,
+        "y": 800,
+        "w": 100,
+        "h": 80,
+        "type": "NotGate"
+      },
+      {
+        "x": 1100,
+        "y": 800,
+        "w": 100,
+        "h": 80,
+        "type": "NorGate"
+      },
+      {
+        "x": 1300,
+        "y": 800,
+        "w": 100,
+        "h": 80,
+        "type": "XnorGate"
       }
-    
+    ]
+  },
+  {
+    "Name": "Level 1",
+    "lvlNum": 1,
+    "Description": "Or or And?",
+    "CanvasSize": {
+      "w": 2560,
+      "h": 1440
+    },
+    "EntrancePoints": {
+      "x": 195,
+      "y": 75,
+      "w": 50,
+      "h": 100,
+      "states": [
+        true,
+        false
+      ]
+    },
+    "ExitPoints": {
+      "x": 335,
+      "y": 100,
+      "w": 50,
+      "h": 50,
+      "states": [
+        true
+      ]
+    },
+    "Connections": [],
+    "Gates": [
+      {
+        "x": 100,
+        "y": 300,
+        "w": 100,
+        "h": 80,
+        "type": "OrGate"
+      },
+      {
+        "x": 300,
+        "y": 300,
+        "w": 100,
+        "h": 80,
+        "type": "AndGate"
+      }
+    ]
+  },
+  {
+    "Name": "Level 2",
+    "lvlNum": 2,
+    "Description": "Xor or And?",
+    "CanvasSize": {
+      "w": 2560,
+      "h": 1440
+    },
+    "EntrancePoints": {
+      "x": 145,
+      "y": 75,
+      "w": 50,
+      "h": 150,
+      "states": [
+        true,
+        true,
+        true
+      ]
+    },
+    "ExitPoints": {
+      "x": 385,
+      "y": 75,
+      "w": 50,
+      "h": 150,
+      "states": [
+        true,
+        true
+      ]
+    },
+    "Connections": [
+      [
+        {
+          "x": 170,
+          "y": 195
+        },
+        {
+          "x": 410,
+          "y": 195
+        }
+      ],
+      [
+        {
+          "x": 310,
+          "y": 130
+        },
+        {
+          "x": 370,
+          "y": 130
+        },
+        {
+          "x": 370,
+          "y": 100
+        },
+        {
+          "x": 410,
+          "y": 100
+        }
+      ]
+    ],
+    "Gates": [
+      {
+        "x": 100,
+        "y": 300,
+        "w": 100,
+        "h": 80,
+        "type": "XorGate"
+      },
+      {
+        "x": 300,
+        "y": 300,
+        "w": 100,
+        "h": 80,
+        "type": "AndGate"
+      }
+    ]
+  },
+  {
+    "Name": "Level 3",
+    "lvlNum": 3,
+    "Description": "From zero to one",
+    "CanvasSize": {
+      "w": 2560,
+      "h": 1440
+    },
+    "EntrancePoints": {
+      "x": 295,
+      "y": 300,
+      "w": 50,
+      "h": 150,
+      "states": [
+        false,
+        false
+      ]
+    },
+    "ExitPoints": {
+      "x": 605,
+      "y": 300,
+      "w": 50,
+      "h": 150,
+      "states": [
+        true,
+        false
+      ]
+    },
+    "Connections": [
+      [
+        {
+          "x": 320,
+          "y": 325
+        },
+        {
+          "x": 400,
+          "y": 325
+        }
+      ],
+      [
+        {
+          "x": 320,
+          "y": 425
+        },
+        {
+          "x": 620,
+          "y": 425
+        }
+      ],
+      [
+        {
+          "x": 560,
+          "y": 325
+        },
+        {
+          "x": 620,
+          "y": 325
+        }
+      ]
+    ],
+    "Gates": [
+      {
+        "x": 250,
+        "y": 525,
+        "w": 100,
+        "h": 80,
+        "type": "NotGate"
+      },
+      {
+        "x": 450,
+        "y": 525,
+        "w": 100,
+        "h": 80,
+        "type": "AndGate"
+      }
+    ]
+  },
+  {
+    "Name": "Level 4",
+    "lvlNum": 4,
+    "Description": "Double Negative?",
+    "CanvasSize": {
+      "w": 2560,
+      "h": 1440
+    },
+    "EntrancePoints": {
+      "x": 145,
+      "y": 75,
+      "w": 50,
+      "h": 150,
+      "states": [
+        true,
+        false,
+        true
+      ]
+    },
+    "ExitPoints": {
+      "x": 445,
+      "y": 75,
+      "w": 50,
+      "h": 150,
+      "states": [
+        true,
+        true
+      ]
+    },
+    "Connections": [
+      [
+        {
+          "x": 330,
+          "y": 125
+        },
+        {
+          "x": 470,
+          "y": 105
+        }
+      ]
+    ],
+    "Gates": [
+      {
+        "x": 50,
+        "y": 600,
+        "w": 100,
+        "h": 80,
+        "type": "AndGate"
+      },
+      {
+        "x": 250,
+        "y": 600,
+        "w": 100,
+        "h": 80,
+        "type": "OrGate"
+      },
+      {
+        "x": 450,
+        "y": 600,
+        "w": 100,
+        "h": 80,
+        "type": "NotGate"
+      },
+      {
+        "x": 650,
+        "y": 600,
+        "w": 100,
+        "h": 80,
+        "type": "NotGate"
+      }
+    ]
+  },
+  {
+    "Name": "Level 5",
+    "lvlNum": 5,
+    "Description": "AND XOR NOT",
+    "CanvasSize": {
+      "w": 2560,
+      "h": 1440
+    },
+    "EntrancePoints": {
+      "x": 295,
+      "y": 300,
+      "w": 50,
+      "h": 200,
+      "states": [
+        true,
+        true,
+        true
+      ]
+    },
+    "ExitPoints": {
+      "x": 640,
+      "y": 300,
+      "w": 50,
+      "h": 200,
+      "states": [
+        true
+      ]
+    },
+    "Connections": [
+      [
+        {
+          "x": 320,
+          "y": 325
+        },
+        {
+          "x": 360,
+          "y": 365
+        }
+      ],
+      [
+        {
+          "x": 320,
+          "y": 400
+        },
+        {
+          "x": 360,
+          "y": 400
+        }
+      ],
+      [
+        {
+          "x": 460,
+          "y": 475
+        },
+        {
+          "x": 515,
+          "y": 420
+        }
+      ]
+    ],
+    "Gates": [
+      {
+        "x": 250,
+        "y": 525,
+        "w": 100,
+        "h": 80,
+        "type": "XorGate"
+      },
+      {
+        "x": 450,
+        "y": 525,
+        "w": 100,
+        "h": 80,
+        "type": "AndGate"
+      },
+      {
+        "x": 650,
+        "y": 525,
+        "w": 100,
+        "h": 80,
+        "type": "NotGate"
+      }
+    ]
+  },
+  {
+    "Name": "Level 6",
+    "lvlNum": 6,
+    "Description": "2 to And",
+    "CanvasSize": {"w": 2560, "h": 1440},
+    "EntrancePoints": {
+      "x": 145, 
+      "y": 75, 
+      "w": 50, 
+      "h": 200, 
+      "states": [false, false, true, false]
+    },
+    "ExitPoints": {
+      "x": 445, 
+      "y": 75, 
+      "w": 50, 
+      "h": 150, 
+      "states": [true, true]
+    },
+    "Connections": [
+      [{"x": 315, "y": 105}, {"x": 470, "y": 105}],
+      [{"x": 315, "y": 250}, {"x": 315, "y": 215}]
+    ],
+    "Gates": [
+      {
+        "x": 50, 
+        "y": 600, 
+        "w": 100, 
+        "h": 80,
+        "type": "AndGate"
+      },
+      {
+        "x": 250, 
+        "y": 600, 
+        "w": 100, 
+        "h": 80,
+        "type": "NandGate"
+      },
+      {
+        "x": 450, 
+        "y": 600, 
+        "w": 100, 
+        "h": 80,
+        "type": "NotGate"
+      },
+      {
+        "x": 650, 
+        "y": 600, 
+        "w": 100, 
+        "h": 80,
+        "type": "NotGate"
+      }
+    ]
+  }
 ]
