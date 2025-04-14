@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GateKeeper - Level Select</title>
-    <link rel="stylesheet" href="../static/level_select.css">
+    <link rel="stylesheet" href="../assets/styles/level_select.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,9 +27,9 @@
     <script>
         async function loadLevels() {
             try {
-                const response = await fetch('../static/levels.json');
+                const response = await fetch('../assets/data/levels.json');
                 if (!response.ok) {
-                    throw new Error('Failed to load levels.json');
+                    throw new Error('Failed to load data/levels.json');
                 }
                 const levels = await response.json();
                 
@@ -46,7 +46,7 @@
                     //If user clicks on button, then print level name and attributes
                     listItem.addEventListener('click', () => {
                         // play the btn sound effect when any listItem is clicked
-                        btnSound.play();
+                        btnSound2.play();
                         //store gates from selected level in local storage. Will allow users to start from the level they ended on.
                         localStorage.setItem('initialize_objects', JSON.stringify(level));
                         // delay the page change by 1 second (1000 ms)
@@ -77,7 +77,7 @@
         // When any button is clicked, it plays a sound effect
         allBtns.forEach(button => {
             button.addEventListener('click', () => {
-                btnSound.play();  // Play the button sound
+                btnSound2.play();  // Play the button sound
             });
         });
 
@@ -85,7 +85,7 @@
         allAtags.forEach(aTag => {
             aTag.addEventListener('click', (event) => {
                 event.preventDefault();  // Prevent default link behavior
-                btnSound.play();  // Play the button sound
+                btnSound2.play();  // Play the button sound
 
                 // Hardcoded 125ms timeout to let the button sound play before redirecting
                 setTimeout(() => {
@@ -98,6 +98,6 @@
         loadLevels();
     });
     </script>
-    <script src="../static/sound_effect.js"></script>
+    <script src="../assets/scripts/sound_effect.js"></script>
 </body>
 </html>

@@ -22,5 +22,8 @@
   "homepage": "https://github.com/Jonathan-Lanham/SoftwareEngGroupA#readme",
   "devDependencies": {
     "electron": "^35.0.3"
+  },
+  "dependencies": {
+    "gatekeeper": "file:"
   }
 }

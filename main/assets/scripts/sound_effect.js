@@ -1,19 +1,19 @@
 // grabbing the elements for all buttons
-const allBtns = document.querySelectorAll('button');
-const allAtags = document.querySelectorAll('a');
-const btnSound = new Audio('../static/music/music_button-click.mp3');
+const allBtns2 = document.querySelectorAll('button');
+const allAtags2 = document.querySelectorAll('a');
+const btnSound2 = new Audio('../assets/sounds/sounds_button-click.mp3');
 
 // when any button is clicked, it plays a sound effect
-allBtns.forEach(button => {
+allBtns2.forEach(button => {
     button.addEventListener('click', ()  =>{
-       btnSound.play();
+       btnSound2.play();
     });
 });
 // when any a-tag is clicked, it plays a sound effect
-allAtags.forEach(aTag => {
+allAtags2.forEach(aTag => {
     aTag.addEventListener('click', (event)  =>{
         event.preventDefault();
-        btnSound.play();
+        btnSound2.play();
 
         //Hardcoded 125ms timeout to let the button sound play. Can remove if preferred.
         setTimeout(() => {
