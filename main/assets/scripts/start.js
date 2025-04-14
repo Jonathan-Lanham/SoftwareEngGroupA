@@ -100,24 +100,6 @@ document.addEventListener("click", (event) => {
 }); 
 
 
-
-const languageIcons = document.querySelectorAll('.english-icon, .spanish-icon, .german-icon, .french-icon');
-
-// first have english be preset for green outline
-languageIcons[0].classList.add("language-outline");
-
-languageIcons.forEach(icon => {
-    icon.addEventListener('click', () => {
-        // when a icon is clicked remove the previous selection
-        languageIcons.forEach(i => i.classList.remove("language-outline"));
-        // adds it to clicked selection
-        icon.classList.add("language-outline");
-    });
-});
-
-
-
-
 // grabbing the elements for all buttons
 const allBtns = document.querySelectorAll('button');
 const allAtags = document.querySelectorAll('a');
