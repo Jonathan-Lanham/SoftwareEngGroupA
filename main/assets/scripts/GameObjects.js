@@ -158,6 +158,11 @@ class Game {
 
         this.handleDraggedObjects();
 
+        for (let comp of switchComponent.ComponentSHG.queryRegion(0, 0, this.gameWidth, this.gameHeight)) {
+            comp.gameNode.state = comp.state;
+            comp.display()
+        }
+
         //Display entrance points, transfer state to input nodes.
         if (this.entrancePoints){
             this.entrancePoints.display();
@@ -168,10 +173,6 @@ class Game {
 
         if (this.exitPoints){
             this.exitPoints.displayOnlyBox();
-        }
-
-        for (let comp of switchComponent.ComponentSHG.queryRegion(0, 0, this.gameWidth, this.gameHeight)) {
-            comp.display()
         }
 
         //Process and display Connection Line Nodes

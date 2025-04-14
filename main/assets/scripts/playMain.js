@@ -52,11 +52,18 @@ function setup() {
         game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
     }
 
+    game.insertComponent(300, 300, 30, 30, scale=scale)
+    game.insertComponent(300, 300, 30, 30, scale=scale)
+    game.insertComponent(300, 300, 30, 30, scale=scale)
+    game.insertComponent(300, 300, 30, 30, scale=scale)
+    game.insertComponent(300, 300, 30, 30, scale=scale)
+
     console.log("GAME" + JSON.stringify(game.gameSounds));
     game.gameSounds.loadSounds({
         gate_pickup: '../assets/sounds/pickup_gate.wav',
         //Difficult to implement since collision is checked every frame, will come back to it later
-        //connect_circuit: '../assets/sounds/connect_circuit.wav',
+        reverse_circuit: '../assets/sounds/reverse_circuit.wav',
+        connect_circuit: '../assets/sounds/connect_circuit.wav',
         win_sound: '../assets/sounds/win_sound.mp3'
     });
 
@@ -90,7 +97,13 @@ function mouseReleased() {
     bd = game.beingDragged
 
     for (let obj of bd) {
-        LogicGate.GateSHG.update(obj);
+        if (obj instanceof LogicGate){
+            LogicGate.GateSHG.update(obj);
+        }
+        //change later to parent class
+        if (obj instanceof switchComponent){
+            switchComponent.ComponentSHG.update(obj);
+        }
         //Remove object from array
         //bd.splice(bd.indexOf(obj), 1);
     }
@@ -110,12 +123,19 @@ function mousePressed() {
     // }
 
     gatesThatMouseOverlaps = LogicGate.GateSHG.queryPoint(mouseX, mouseY);
+    componentsThatMouseOverlaps = switchComponent.ComponentSHG.queryPoint(mouseX, mouseY);
 
     if(gatesThatMouseOverlaps[gatesThatMouseOverlaps.length - 1]){
         let gate = gatesThatMouseOverlaps[gatesThatMouseOverlaps.length - 1]
         game.gameSounds.play('gate_pickup', volume=1)
         gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
         game.beingDragged.push(gate)
+    } 
+    else if (componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]){
+        let comp = componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]
+        game.gameSounds.play('gate_pickup', volume=1)
+        comp.changeOffsets(mouseX - comp.x, mouseY - comp.y)
+        game.beingDragged.push(comp)
     }
     // for (let gate of gatesThatMouseOverlaps) {
     //     game.gameSounds.play('gate_pickup', volume=1)
@@ -123,6 +143,19 @@ function mousePressed() {
     //     game.beingDragged.push(gate)
     // }
 
+}
+
+function doubleClicked() {
+    // Code to run.
+    componentsThatMouseOverlaps = switchComponent.ComponentSHG.queryPoint(mouseX, mouseY);
+    let comp = componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]
+    comp.changeState()
+
+    if (comp.state){
+        game.gameSounds.play('connect_circuit', volume=1)
+    } else{
+        game.gameSounds.play('reverse_circuit', volume=1)
+    }
 }
 
 function showWin() {

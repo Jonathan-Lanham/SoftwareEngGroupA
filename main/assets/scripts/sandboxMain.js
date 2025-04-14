@@ -20,6 +20,7 @@ function setup() {
     game.insertGate(500, 500, 100, 80, AndGate, scale=scale)
     game.insertComponent(300, 300, 30, 30, scale=scale)
     game.insertComponent(300, 300, 30, 30, scale=scale)
+    
 
 
 }
