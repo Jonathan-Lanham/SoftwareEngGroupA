@@ -41,6 +41,10 @@ class Game {
         gateClass.createObject(x * scale, y * scale, width * scale, height * scale, gateClass);
     }
 
+    insertComponent(x, y, width, height, scale=1){
+        switchComponent.createObject(x * scale, y * scale, width * scale, height * scale)
+    }
+
     insertConnection(arrayOfPoints, scale=1) {
         Connection.createConnection(arrayOfPoints, scale=scale);
     }
@@ -63,7 +67,25 @@ class Game {
                 this.updateOutputNode(obj);
             }
 
+            if (obj instanceof switchComponent) {
+                switchComponent.ComponentSHG.update(obj)
+                this.updateCompNodes(obj)
+                // this.updateInputNodes(obj, yOffsetAfter - yOffsetBefore);
+                // this.updateOutputNode(obj);
+            }
+
         }
+    }
+
+    updateCompNodes(comp) {
+        //UPDATE AND CHECK EVERY INPUT NODE ON GATE BEING DRAGGED
+        //console.log(comp)
+        comp.gameNode.move(comp.x + comp.width  + LogicGate.gNodeSize, comp.y + comp.height/2 - LogicGate.gNodeSize/2)
+        GateNode.NodeSHG.update(comp.gameNode);
+        // for (let node of gate.inputNodes) {
+        //     node.move(comp.x, comp.y);
+        //     GateNode.NodeSHG.update(node);
+        // }
     }
 
     updateInputNodes(gate, changeInY) {
@@ -137,12 +159,20 @@ class Game {
         this.handleDraggedObjects();
 
         //Display entrance points, transfer state to input nodes.
-        this.entrancePoints.display();
-        for (let entrNode of this.entrancePoints.entNodes) {
-            this.transferStateToCollidingNodes(entrNode);
+        if (this.entrancePoints){
+            this.entrancePoints.display();
+            for (let entrNode of this.entrancePoints.entNodes) {
+                this.transferStateToCollidingNodes(entrNode);
+            }
         }
 
-        this.exitPoints.displayOnlyBox();
+        if (this.exitPoints){
+            this.exitPoints.displayOnlyBox();
+        }
+
+        for (let comp of switchComponent.ComponentSHG.queryRegion(0, 0, this.gameWidth, this.gameHeight)) {
+            comp.display()
+        }
 
         //Process and display Connection Line Nodes
         for (let line of this.connectionLines) {
@@ -156,6 +186,10 @@ class Game {
             line.display();
 
             line.outputNode.state = line.inputNode.state = false;
+        }
+
+        for (let comp of switchComponent.ComponentSHG.queryRegion(0, 0, this.gameWidth, this.gameHeight)) {
+            this.transferStateToCollidingNodes(comp.gameNode)
         }
 
         //QUERY A REGION OF THE CANVAS; queryRegion(0,0,this.gameWidth,this.gameHeight) is the entire canvas.
@@ -185,8 +219,10 @@ class Game {
             }
         }
 
-        this.exitPoints.displayOnlyChildNodes();
-
+        if (this.exitPoints){
+            this.exitPoints.displayOnlyChildNodes();
+        }
+        
         // Will only check if level is complete once gates are running
         if (this.running)
         {
@@ -196,10 +232,13 @@ class Game {
             // }
         }
 
-        for (let eNode of this.exitPoints.endNodes) {
-            //else, reset these to be recomputed next frame.
-            eNode.state = false;
+        if (this.exitPoints){
+            for (let eNode of this.exitPoints.endNodes) {
+                //else, reset these to be recomputed next frame.
+                eNode.state = false;
+            }
         }
+
     }
 
 }
