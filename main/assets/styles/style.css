@@ -17,6 +17,14 @@
   
 }
 
+#topDiv {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+
 h1 {
   font-size: 5em;
   font-family: "Modak", serif;

@@ -52,11 +52,11 @@ function setup() {
         game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
     }
 
-    game.insertComponent(300, 300, 30, 30, scale=scale)
-    game.insertComponent(300, 300, 30, 30, scale=scale)
-    game.insertComponent(300, 300, 30, 30, scale=scale)
-    game.insertComponent(300, 300, 30, 30, scale=scale)
-    game.insertComponent(300, 300, 30, 30, scale=scale)
+    // game.insertComponent(300, 300, 30, 30, scale=scale)
+    // game.insertComponent(300, 300, 30, 30, scale=scale)
+    // game.insertComponent(300, 300, 30, 30, scale=scale)
+    // game.insertComponent(300, 300, 30, 30, scale=scale)
+    // game.insertComponent(300, 300, 30, 30, scale=scale)
 
     console.log("GAME" + JSON.stringify(game.gameSounds));
     game.gameSounds.loadSounds({

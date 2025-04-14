@@ -114,14 +114,65 @@ function doubleClicked() {
     }
 }
 
+connectionBuffer = [];
+placeConnectionMode = false;
+
+function mouseClicked(){
+
+    if (placeConnectionMode){
+        connectionBuffer.push({
+            x: mouseX/game.gameScale,
+            y: mouseY/game.gameScale
+        })
+    }
+
+}
+
+function keyPressed() {
+
+    if (placeConnectionMode){
+    // keyCode 32 is the spacebar
+    // keyCode 16 is Shift
+        if (keyCode === 16) {
+            //Push connection, end mode
+            game.insertConnection(connectionBuffer, game.gameScale)
+            connectionBuffer = []
+            placeConnectionMode = false;
+            hideTipDiv();
+        }
+    }
+  }
+
 //functions for inserting things into sandbox
+
+function showTipDiv() {
+    document.getElementById('topDiv').style.display = 'block';
+  }
+
+  function hideTipDiv() {
+    document.getElementById('topDiv').style.display = 'none';
+  }
 
 function insertSwitchComponent(){
     console.log("Inserting Component...")
-    game.insertComponent(400, 300, 38, 38, game.gameScale)
+    game.insertComponent(game.gameWidth/game.gameScale/2, game.gameHeight/game.gameScale/2, 38, 38, game.gameScale)
 }
 
 function insertGateIntoGame(logicGate){
     console.log("Inserting Gate...")
-    game.insertGate(500, 500, 100, 80, logicGate, game.gameScale)
+    game.insertGate(game.gameWidth/game.gameScale/2, game.gameHeight/game.gameScale/2, 100, 80, logicGate, game.gameScale)
 }
+
+function insertConnectionLineIntoGame(){
+
+    showTipDiv();
+    gateInfoPanel.classList.toggle("open");
+
+    setTimeout(() => {
+        placeConnectionMode = true;
+      }, 500);
+    
+
+    //game.insertConnection(linesPlaced, game.gameScale)
+}
+
