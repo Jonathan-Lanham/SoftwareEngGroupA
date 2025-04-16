@@ -924,7 +924,7 @@ body.lang-fr .start-buttons{
   border: 2px solid black;
   border-radius: 50%;
   padding: 0;
-  box-shadow: 0px 5px 5px 1px black;
+  box-shadow: 0px 4px 15px 1px rgb(31, 31, 31);
   font-family: "Modak", serif;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 2px black;
@@ -947,11 +947,15 @@ body.lang-fr .start-buttons{
   align-items: center;
   justify-content: center;
   z-index: 1;
+  
 }
 
 .top-about-section{
   display: flex;
   justify-content: center;
+}
+.fa-info{
+  font-size: 1.3em;
 }
 
 .popup-content {
@@ -959,21 +963,25 @@ body.lang-fr .start-buttons{
     color: black;
     fill:rgb(247, 58, 58);
     border-radius: 8px;
-    width: 34em;
+    width: 40em;
+    height: 34em;
     text-align: center;
     position: relative;
+    border: 3px solid black;
 }
 
 .close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 30px;
-  height: 30px;
-  background: rgb(247, 58, 58);
-  color: white;
+  padding: .5em .6em;
+  font-size: 1.4em;
+  background-color: rgb(247, 58, 58);
+  color: rgb(255, 255, 255);
   cursor: pointer;
-  border: 2px solid black;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 0px 2px 5px 1px rgb(148, 148, 148);
+  border-radius: 50em;
   box-shadow: 0px 2px 5px 1px rgb(148, 148, 148);
   border-radius: 50%;
   font-size: 20px;
@@ -996,6 +1004,8 @@ body.lang-fr .start-buttons{
   padding: 5px 10px;
   cursor: pointer;
   border-bottom: 2px solid transparent;
+  margin-top: 1em;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .tab.active {
@@ -1009,4 +1019,56 @@ body.lang-fr .start-buttons{
 
 .tab-content.active {
   display: block;
+}
+.tab-body{
+  
+}
+.about-game-pTag{
+  font-size: 2em;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  color: white;
+  margin-top: 1em;
+}
+.about-desc-pTag{
+  width: 82%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.6em;
+  margin-top: 1em;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4em;
+
+}
+.logic-overview-pTag{
+  font-size: 2em;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  color: white;
+  margin-top: 1em;
+}
+.logic-desc-pTag{
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.6em;
+  margin-top: 2em;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4em;
+}
+body.lang-es .about-desc-pTag{
+  width: 85%;
+  font-size: 1.5em;
+}
+body.lang-de .about-desc-pTag{
+  width: 90%;
+  font-size: 1.5em;
+}
+body.lang-fr .about-desc-pTag{
+  width: 90%;
+  font-size: 1.5em;
 }
