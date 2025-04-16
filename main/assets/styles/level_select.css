@@ -12,51 +12,55 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   font-family: "Modak", serif;
-  height: 100vh;
-  width: 100%;
   background-image: url(../images/circuit.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-color: #4287f5;
-  align-items: center;
-  overflow: hidden;
   gap: 2em;
   color: white; 
 }
 
 /* Title Styling */
 .level-select-title p {
-    font-size: 10em;
-    font-family: "Modak", serif;
-    -webkit-text-stroke: 4px black;
-    text-shadow: 5px 5px black;
+  font-size: 10em;
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 4px black;
+  text-shadow: 5px 5px black;
 }
 
 /* Grid Layout for Level Buttons */
 .level-buttons {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Two rows of five buttons */
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
   gap: 1em;
-  margin-top: 2em;
+  align-items: center;
+  overflow-y: auto; 
+  scroll-behavior: smooth; 
+}
+
+.level-buttons::-webkit-scrollbar {
+  display: none;
 }
 
 /* Style the Level Buttons */
 .level-buttons button {
-    font-size: 2.2em;
-    background-color: rgb(247, 58, 58);
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: .5em 1.2em;
-    box-shadow: 0px 5px 5px 1px black; 
-    font-family: "Modak", serif;
-    -webkit-text-stroke: 1px black;
-    text-shadow: 3px 2px black;
-    cursor: pointer;
-    transition: .1s;
+  font-size: 2.2em;
+  background-color: rgb(247, 58, 58);
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: .5em 1.2em;
+  box-shadow: 0px 5px 5px 1px black; 
+  font-family: "Modak", serif;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 2px black;
+  cursor: pointer;
+  transition: .1s;
+  width: 250px; 
+  text-align: center;
 }
 
 .level-buttons button:hover {
@@ -69,16 +73,14 @@
 
 /* Back Button */
 .back-btn {
-  margin-top: 2em;
-  font-size: 1.5em;
-  background-color: white ;
-  color: black;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
+  height: 52px;
+  width: 52px;
+  position: absolute;
+  top: 2em;
+  left: 2em;
+  fill: white;
+  background: none;
+  border: none;
+  outline: none;
   cursor: pointer;
-}
-
-.back-btn:hover {
-  background-color: gray;
 }
