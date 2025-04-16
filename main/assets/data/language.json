@@ -5,6 +5,7 @@
         "startBtn": "Start",
         "optionsBtn": "Options",
         "levelSelectBtn": "Level Select",
+        "sandboxBtn": "Sandbox",
         "optionsPopupTitle": "Options",
         "optionsPopupSupport": "Support",
         "optionsPopupCredits": "Credits",
@@ -34,12 +35,13 @@
         "creditsPopupVasu": "",
         "termsAndPrivacy": "",
         "lunaBot": "",
-        "aboutPopupTitle": "",
-        "aboutPopupGameInfo": "",
-        "aboutPopupLogicGates": "",
-        "aboutPopupAboutTheGame": "",
-        "aboutPopupGameInfoDesc": "",
-        "aboutPopupLogicGatesDesc": ""
+        "aboutPopupTitle": "About",
+        "aboutPopupGameInfo": "Game Info",
+        "aboutPopupLogicGates": "Logic Gates",
+        "aboutPopupAboutTheGame": "About the Game",
+        "aboutPopupLogicGatesOverview": "Logic Gates Overview",
+        "aboutPopupGameInfoDesc": "Gatekeeper is a puzzle game where players use logic gates to manipulate circuits and achieve specific outputs. Each level presents a unique challenge, helping players learn how to design and optimize digital circuits. The game is both educational and engaging, sharpening problem-solving skills while allowing players to climb the leaderboard.",
+        "aboutPopupLogicGatesDesc": "Logic gates are the fundamental building blocks of digital circuits. They perform Boolean operations on binary inputs (0 and 1) to produce a single output. These gates are essential in computing and digital systems, enabling everything from basic calculations to complex processing."
       },
 
 
@@ -64,6 +66,7 @@
         "startBtn": "Comenzar",
         "optionsBtn": "Opciones",
         "levelSelectBtn": "Seleccionar nivel",
+        "sandboxBtn": "Salvadera",
         "optionsPopupTitle": "Opciones",
         "optionsPopupLanguage": "Idioma",
         "optionsPopupSupport": "Apoyo",
@@ -94,12 +97,13 @@
         "creditsPopupVasu": "",
         "termsAndPrivacy": "",
         "lunaBot": "",
-        "aboutPopupTitle": "",
-        "aboutPopupGameInfo": "",
-        "aboutPopupLogicGates": "",
-        "aboutPopupAboutTheGame": "",
-        "aboutPopupGameInfoDesc": "",
-        "aboutPopupLogicGatesDesc": ""
+        "aboutPopupTitle": "Acerca de",
+        "aboutPopupGameInfo": "Información del juego",
+        "aboutPopupLogicGates": "Puertas lógicas",
+        "aboutPopupAboutTheGame": "Acerca del juego",
+        "aboutPopupLogicGatesOverview": "Resumen de las puertas lógicas",
+        "aboutPopupGameInfoDesc": "Gatekeeper es un juego de puzles donde los jugadores usan puertas lógicas para manipular circuitos y obtener resultados específicos. Cada nivel presenta un desafío único, que ayuda a los jugadores a aprender a diseñar y optimizar circuitos digitales. El juego es educativo y atractivo, y agudiza las habilidades de resolución de problemas a la vez que permite a los jugadores ascender en la clasificación.",
+        "aboutPopupLogicGatesDesc": "Las puertas lógicas son los componentes fundamentales de los circuitos digitales. Realizan operaciones booleanas en entradas binarias (0 y 1) para generar una única salida. Estas puertas son esenciales en la informática y los sistemas digitales, permitiendo desde cálculos básicos hasta procesamiento complejo."
       },
 
 
@@ -124,6 +128,7 @@
         "startBtn": "Start",
         "optionsBtn": "Optionen",
         "levelSelectBtn": "Levelauswahl",
+        "sandboxBtn": "Sandkasten",
         "optionsPopupTitle": "Optionen",
         "optionsPopupLanguage": "Sprache",
         "optionsPopupSupport": "Unterstützung",
@@ -154,12 +159,13 @@
         "creditsPopupVasu": "",
         "termsAndPrivacy": "",
         "lunaBot": "",
-        "aboutPopupTitle": "",
-        "aboutPopupGameInfo": "",
-        "aboutPopupLogicGates": "",
-        "aboutPopupAboutTheGame": "",
-        "aboutPopupGameInfoDesc": "",
-        "aboutPopupLogicGatesDesc": ""
+        "aboutPopupTitle": "Über",
+        "aboutPopupGameInfo": "Spielinfos",
+        "aboutPopupLogicGates": "Logikgatter",
+        "aboutPopupAboutTheGame": "Über das Spiel",
+        "aboutPopupLogicGatesOverview": "Logikgatter-Übersicht",
+        "aboutPopupGameInfoDesc": "Gatekeeper ist ein Puzzlespiel, bei dem Spieler Logikgatter verwenden, um Schaltkreise zu manipulieren und bestimmte Ergebnisse zu erzielen. Jeder Level stellt eine einzigartige Herausforderung dar und hilft den Spielern, digitale Schaltkreise zu entwerfen und zu optimieren. Das Spiel ist lehrreich und spannend zugleich. Es schärft die Problemlösungsfähigkeiten und ermöglicht es den Spielern, in der Bestenliste aufzusteigen.",
+        "aboutPopupLogicGatesDesc": "Logikgatter sind die grundlegenden Bausteine ​​digitaler Schaltungen. Sie führen boolesche Operationen an binären Eingängen (0 und 1) aus, um einen einzelnen Ausgang zu erzeugen. Diese Gatter sind in der Computertechnik und in digitalen Systemen unverzichtbar und ermöglichen alles von einfachen Berechnungen bis hin zu komplexen Verarbeitungen."
       },
 
 
@@ -186,6 +192,7 @@
        "startBtn": "Commencer",
         "optionsBtn": "Possibilités",
         "levelSelectBtn": "Sélection du niveau",
+        "sandboxBtn": "Bac à sable",
         "optionsPopupTitle": "Possibilités",
         "optionsPopupLanguage": "Langue",
         "optionsPopupSupport": "Soutien",
@@ -217,12 +224,13 @@
         "creditsPopupVasu": "",
         "termsAndPrivacy": "",
         "lunaBot": "",
-        "aboutPopupTitle": "",
-        "aboutPopupGameInfo": "",
-        "aboutPopupLogicGates": "",
-        "aboutPopupAboutTheGame": "",
-        "aboutPopupGameInfoDesc": "",
-        "aboutPopupLogicGatesDesc": ""
+        "aboutPopupTitle": "À propos",
+        "aboutPopupGameInfo": "Informations sur le jeu",
+        "aboutPopupLogicGates": "Logic Gates",
+        "aboutPopupAboutTheGame": "À propos du jeu",
+        "aboutPopupLogicGatesOverview": "Présentation de Logic Gates",
+        "aboutPopupGameInfoDesc": "Gatekeeper est un jeu de réflexion où les joueurs utilisent des portes logiques pour manipuler des circuits et obtenir des résultats spécifiques. Chaque niveau présente un défi unique, permettant aux joueurs d'apprendre à concevoir et à optimiser des circuits numériques. Ce jeu à la fois éducatif et captivant développe les compétences de résolution de problèmes tout en permettant aux joueurs de grimper au classement.",
+        "aboutPopupLogicGatesDesc": "Les portes logiques sont les éléments fondamentaux des circuits numériques. Elles effectuent des opérations booléennes sur des entrées binaires (0 et 1) pour produire une sortie unique. Ces portes sont essentielles aux systèmes informatiques et numériques, permettant des opérations allant des calculs de base aux traitements complexes."
       },
 
 

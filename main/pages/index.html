@@ -192,25 +192,25 @@
                 <!-- using options menu popup css for title -->
                 <div class="top-about-section">
                     <div class="options-title">
-                        <p>About</p>
+                        <p class="about-pTag">About</p>
                     </div>
                 </div>
                 <!-- this is for the toggling between 'tabs' -->
                 <div class="tab-container">
-                    <div class="tab active" onclick="openTab('game-info')">Game Info</div>
-                    <div class="tab" onclick="openTab('logic-gates')">Logic Gates</div>
+                    <div class="tab active game-info-pTag" onclick="openTab('game-info')">Game Info</div>
+                    <div class="tab logic-gates-pTag" onclick="openTab('logic-gates')">Logic Gates</div>
                 </div>
                 <!-- div for body of tabs bc they were being janky-->
                 <div class="tab-body">
                     <div id="game-info" class="tab-content active">
-                        <h3>About the Game</h3>
-                        <p><br>Gatekeeper is a puzzle game where players use logic gates to manipulate circuits and achieve specific outputs. 
+                        <h3 class="about-game-pTag">About the Game</h3>
+                        <p class="about-desc-pTag"><br>Gatekeeper is a puzzle game where players use logic gates to manipulate circuits and achieve specific outputs. 
                             Each level presents a unique challenge, helping players learn how to design and optimize digital circuits. 
                             The game is both educational and engaging, sharpening problem-solving skills while allowing players to climb the leaderboard.<br><br></p>
                     </div>
                     <div id="logic-gates" class="tab-content">
-                        <h3>Logic Gates Overview</h3>
-                        <p><br>Logic gates are the fundamental building blocks of digital circuits. 
+                        <h3 class="logic-overview-pTag">Logic Gates Overview</h3>
+                        <p class="logic-desc-pTag"><br>Logic gates are the fundamental building blocks of digital circuits. 
                             They perform Boolean operations on binary inputs (0 and 1) to produce a single output. 
                             These gates are essential in computing and digital systems, enabling everything from basic calculations to complex processing.<br><br></p>
                     </div>
