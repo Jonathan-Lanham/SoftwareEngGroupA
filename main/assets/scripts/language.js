@@ -51,6 +51,19 @@ function changeLanguage(lang){
             document.querySelector('.logic-overview-pTag').textContent = data[lang].startPage.aboutPopupLogicGatesOverview;
             document.querySelector('.about-desc-pTag').textContent = data[lang].startPage.aboutPopupGameInfoDesc;
             document.querySelector('.logic-desc-pTag').textContent = data[lang].startPage.aboutPopupLogicGatesDesc;
+            // for credits popup
+            document.querySelector('.credits-title-pTag').textContent = data[lang].startPage.creditsPopupTitle;
+            document.querySelector('.front-end-span1').textContent = data[lang].startPage.creditsPopupFrontEnd;
+            document.querySelector('.front-end-span2').textContent = data[lang].startPage.creditsPopupFrontEnd;
+            document.querySelector('.front-end-span3').textContent = data[lang].startPage.creditsPopupFrontEnd;
+            document.querySelector('.front-end-span4').textContent = data[lang].startPage.creditsPopupFrontEnd;
+
+            document.querySelector('.back-end-span1').textContent = data[lang].startPage.creditsPopupBackEnd;
+            document.querySelector('.back-end-span2').textContent = data[lang].startPage.creditsPopupBackEnd;
+            document.querySelector('.back-end-span3').textContent = data[lang].startPage.creditsPopupBackEnd;
+            document.querySelector('.back-end-span4').textContent = data[lang].startPage.creditsPopupBackEnd;
+            document.querySelector('.back-end-span5').textContent = data[lang].startPage.creditsPopupBackEnd;
+
 
 
 
