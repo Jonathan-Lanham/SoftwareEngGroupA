@@ -18,14 +18,18 @@ function changeLanguage(lang){
 
 
             // update content based on selected language and page
+            // for start page buttons and title
             document.querySelector('.gatekeeper-title').textContent = data[lang].startPage.title;
             document.querySelector('.start-btn').textContent = data[lang].startPage.startBtn;
             document.querySelector('.options-btn').textContent = data[lang].startPage.optionsBtn;
             document.querySelector('.level-select-btn').textContent = data[lang].startPage.levelSelectBtn;
+            document.querySelector('.sandbox-btn').textContent = data[lang].startPage.sandboxBtn;
+            // for buttons title and btns within options popup menu
             document.querySelector('.option-title').textContent = data[lang].startPage.optionsPopupTitle;
             document.querySelector('.support-btn').textContent = data[lang].startPage.optionsPopupSupport;
             document.querySelector('.credits-btn').textContent = data[lang].startPage.optionsPopupCredits;
             document.querySelector('.terms-btn').textContent = data[lang].startPage.optionsPopupTerms;
+            // for support popup menu
             document.querySelector('.support-title-p').textContent = data[lang].startPage.supportPopupTitle;
             document.querySelector('.subject-label').textContent = data[lang].startPage.supportPopupSubject;
             document.querySelector('.subject-lang').placeholder= data[lang].startPage.supportPopupSubjectPlaceholder;
@@ -39,6 +43,15 @@ function changeLanguage(lang){
             document.querySelector('.message-label').textContent = data[lang].startPage.supportPopupMessage;
             document.querySelector('.attachments-label').textContent = data[lang].startPage.supportPopupUpload;
             document.querySelector('.support-submit-btn').value = data[lang].startPage.supportPopupSubmit;
+            // for about popup in the start page
+            document.querySelector('.about-pTag').textContent = data[lang].startPage.aboutPopupTitle;
+            document.querySelector('.game-info-pTag').textContent = data[lang].startPage.aboutPopupGameInfo;
+            document.querySelector('.logic-gates-pTag').textContent = data[lang].startPage.aboutPopupLogicGates;
+            document.querySelector('.about-game-pTag').textContent = data[lang].startPage.aboutPopupAboutTheGame;
+            document.querySelector('.logic-overview-pTag').textContent = data[lang].startPage.aboutPopupLogicGatesOverview;
+            document.querySelector('.about-desc-pTag').textContent = data[lang].startPage.aboutPopupGameInfoDesc;
+            document.querySelector('.logic-desc-pTag').textContent = data[lang].startPage.aboutPopupLogicGatesDesc;
+
 
 
 
