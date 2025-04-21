@@ -104,6 +104,11 @@ function mousePressed() {
 function doubleClicked() {
     // Code to run.
     componentsThatMouseOverlaps = switchComponent.ComponentSHG.queryPoint(mouseX, mouseY);
+
+    if (componentsThatMouseOverlaps.length === 0){
+        return
+    }
+
     let comp = componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]
     comp.changeState()
 
@@ -176,3 +181,53 @@ function insertConnectionLineIntoGame(){
     //game.insertConnection(linesPlaced, game.gameScale)
 }
 
+function outputGameAsJSON(){
+
+    outputObject = {}
+
+    //Query all gates
+    //Query all connections
+    //Query all components
+
+    //Create a labeled json object for each of these, such that it can be copy pasted into level creator
+
+    //components
+    // console.log(switchComponent.ComponentSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight))
+    // console.log(game.connectionLines)
+    // console.log("All Logic Gates: " + LogicGate.GateSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight))
+
+    //Handle Connection Lines
+    outputObject.Connections = [];
+    for (let line of game.connectionLines) {
+        outputObject.Connections.push(line.arrayOfLines)
+    }
+    //console.log(JSON.stringify(outputObject.Connections))
+
+    //Handle Logic Gates
+    outputObject.Gates = [];
+    for (let gate of LogicGate.GateSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight)) {
+        outputObject.Gates.push({
+            "x": gate.x,
+            "y": gate.y,
+            "w": gate.width,
+            "h": gate.height,
+            "type": gate.constructor.name
+        })
+    }
+    //console.log(JSON.stringify(outputObject.Gates))
+
+    //Handle Components
+    outputObject.Components = [];
+    for (let comp of switchComponent.ComponentSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight)) {
+        outputObject.Components.push({
+            "x": comp.x,
+            "y": comp.y,
+            "w": comp.width,
+            "h": comp.height,
+            "type": comp.constructor.name
+        })
+    }
+    //console.log(JSON.stringify(outputObject.Components))
+
+    console.log(JSON.stringify(outputObject))
+}
