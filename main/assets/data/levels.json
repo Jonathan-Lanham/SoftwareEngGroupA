@@ -736,6 +736,9 @@
         "h": 80,
         "type": "NotGate"
       }
+    ],
+    "Components": [
+      
     ]
   },
   {
@@ -820,6 +823,9 @@
         "h": 80,
         "type": "NandGate"
       }
+    ],
+    "Components": [
+      
     ]
   }
 ]
