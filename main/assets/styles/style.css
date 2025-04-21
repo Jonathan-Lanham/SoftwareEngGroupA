@@ -72,7 +72,7 @@ canvas {
 }
 
 #options-btn:hover {
-  color: #ccc;
+  color: #797979;
 }
 
 /* Options Menu (Hidden by Default) */
@@ -133,7 +133,7 @@ canvas {
   margin-right: .2em;
   padding: .3em .5em;
   font-size: 1.4em;
-  background-color: rgb(247, 58, 58) !important;
+  background-color: #f0b047 !important;
   color: black;
   cursor: pointer;
   border: 2px solid rgb(0, 0, 0);
@@ -144,7 +144,7 @@ canvas {
 }
 
 .exit-btn:hover {
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 
 .fa-xmark{
@@ -154,11 +154,11 @@ canvas {
 /* Run Button */
 #run-btn {
   position: fixed;
-  bottom: 10px;  /* Moves it to the bottom /
-  right: 10px;   / Moves it to the right */
+  bottom: 10px;  /* Moves it to the bottom */
+  right: 10px;   /* Moves it to the right */
   width: 100px;
   height: 100px;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   border: 2px solid black;
   border-radius: 50%;
   padding: 0;
@@ -188,7 +188,7 @@ canvas {
 .volume-icon i {
   font-size: 1.2em;
   color: white;
-  background-color: rgb(247, 58, 58) !important;
+  background-color: #f0b047 !important;
   padding: .3em .5em;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 2px black;
@@ -200,7 +200,7 @@ canvas {
 .music-icon i {
   font-size: 1.2em;
   color: white;
-  background-color: rgb(247, 58, 58) !important;
+  background-color: #f0b047 !important;
   padding: .3em .4em .3em .2em;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 2px black;
@@ -223,7 +223,7 @@ canvas {
   -webkit-appearance: none;
   appearance: none;
   height: 25px;
-  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%) !important;
+  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, #f0b047 65%) !important;
   border: 2px solid black;
   cursor: pointer;
   margin-right: -18em;
@@ -235,7 +235,7 @@ canvas {
   appearance: none;
   width: 25px;
   height: 35px;
-  background: rgb(247, 58, 58);
+  background: #f0b047;
   cursor: pointer;
   border: 2px solid black;
 }
@@ -243,7 +243,7 @@ canvas {
 .volume-slider input::-moz-range-thumb, .music-slider input::-moz-range-thumb {
   width: 25px;
   height: 35px;
-  background: rgb(247, 58, 58);
+  background: #f0b047;
   cursor: pointer;
   border: 2px solid black;
   box-shadow: 0px 5px 5px 1px black;  
@@ -258,7 +258,7 @@ canvas {
   font-family: "Modak", serif;
   -webkit-text-stroke: 1px black;
   text-shadow: 1px 1px black;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   border: 2px solid black;
   border-radius: 5px;
   cursor: pointer;
@@ -286,7 +286,7 @@ canvas {
 .win-popup {
   background: white;
   color: black;
-  fill: rgb(247, 58, 58);
+  fill: #f0b047;
   border-radius: 8px;
   width: 34em;
   text-align: center;
@@ -301,7 +301,7 @@ canvas {
   padding: 12px 24px;
   font-size: 18px;
   font-weight: bold;
-  background: #f73a3a;
+  background: #f0b047;
   color: white;
   border: 2px solid black;
   border-radius: 8px;
@@ -312,7 +312,7 @@ canvas {
 }
 
 .win-button:hover {
-  background: #ff6666;
+  background: #bd780a;
   transform: scale(1.05);
 }
 
@@ -414,7 +414,7 @@ canvas {
 }
 
 #gateList li {
-  background-color: rgb(247,58,58);
+  background-color: #f0b047;
   font-family: "Modak", serif;
   -webkit-text-stroke: 1px black;
   margin-bottom: 10px;
@@ -431,7 +431,7 @@ canvas {
 }
 
 #gateList li:hover {
-  background-color: #99aab5;
+  background-color: #bd780a;
 }
 
 .desc-popup {

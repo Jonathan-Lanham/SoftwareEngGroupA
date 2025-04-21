@@ -53,7 +53,7 @@
 /* style the three buttons */
 .start-buttons button{
   font-size: 2.2em;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   border: 2px solid black;
   border-radius: 5px;
   padding: .5em 1.2em;
@@ -70,7 +70,7 @@
 }
 /* the hover effect over buttons */
 .start-buttons button:hover{
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 /* the push in effect with buttons when clicked */
 .start-buttons button:active{
@@ -104,7 +104,7 @@
   margin-top: .2em;
   padding: .3em .5em;
   font-size: 1.4em;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   color: black;
   cursor: pointer;
   border: 2px solid rgb(0, 0, 0);
@@ -115,7 +115,7 @@
   color: white; 
 }
 .exit-btn:hover{
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 .exit-btn:active{
   transform: scale(.8);
@@ -143,7 +143,7 @@
   justify-content: center;
 }
 .options-title{
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   width: 50%;
   text-align: center;
   box-shadow: 0px 3px 6px 1px rgb(104, 104, 104);
@@ -176,7 +176,7 @@
 .volume-icon i{
   font-size: 2em;
   color: white;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   padding: .3em .5em;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 2px black;
@@ -193,7 +193,7 @@
   -webkit-appearance: none;
   appearance: none;
   height: 25px;
-  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%);
+  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, #f0b047 65%);
   border: 2px solid black;
   cursor: pointer;
 }
@@ -202,14 +202,14 @@
   appearance: none;
   width: 25px;
   height: 35px;
-  background: rgb(247, 58, 58);
+  background: #f0b047;
   cursor: pointer;
   border: 2px solid black;
 }
 .volume-slider input::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  background: rgb(247, 58, 58);
+  background: #f0b047;
   cursor: pointer;
 }
 
@@ -223,7 +223,7 @@
 .music-icon i{
   font-size: 2em;
   color: white;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   padding: .3em .4em .3em .2em;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 2px black;
@@ -240,7 +240,7 @@
   -webkit-appearance: none;
   appearance: none;
   height: 25px;
-  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%);
+  background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, #f0b047 65%);
   border: 2px solid black;
   cursor: pointer;
 }
@@ -249,14 +249,14 @@
   appearance: none;
   width: 25px;
   height: 35px;
-  background: rgb(247, 58, 58);
+  background: #f0b047;
   cursor: pointer;
   border: 2px solid black;
 }
 .music-slider input::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  background: rgb(247, 58, 58);
+  background: #f0b047;
   cursor: pointer;
 }
 
@@ -278,7 +278,7 @@
   font-family: "Modak", serif;
   -webkit-text-stroke: 1px black;
   text-shadow: 1px 1px black;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   border: 2px solid black;
   border-radius: 5px;
   cursor: pointer;
@@ -287,7 +287,7 @@
 }
 /* hover effect to buttons in options menu popup */
 .bottom-options-section button:hover{
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 /* the push in effect with buttons when clicked */
 .bottom-options-section button:active{
@@ -309,7 +309,7 @@
   margin-top: 4em;
 }
 .sound-button button{
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   padding: 1.4em;
   transition: .1s;
   cursor: pointer;
@@ -320,7 +320,7 @@
   border-radius: 5px;
 }
 .sound-button button:hover{
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 .sound-button button:active{
   transform: scale(.9);
@@ -351,7 +351,7 @@
   margin-top: .2em;
   padding: .3em .5em;
   font-size: 1.4em;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   color: black;
   cursor: pointer;
   border: 2px solid rgb(0, 0, 0);
@@ -362,7 +362,7 @@
   color: white; 
 }
 .support-exit-btn:hover{
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 .support-exit-btn:active{
   transform: scale(.8);
@@ -384,7 +384,7 @@
   gap: 1.8em;
 }
 .support-title{
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   width: 60%;
   text-align: center;
   box-shadow: 0px 3px 6px 1px rgb(37, 37, 37);
@@ -455,7 +455,7 @@
   padding: .2em 4.5em;
   border-radius: 5px;
   border: 2px solid black;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   font-size: 1.6em;
   font-family: "Modak", serif;
   -webkit-text-stroke: 1px black;
@@ -467,7 +467,7 @@
   box-shadow: 0px 2px 5px 1px rgb(37, 37, 37);
 }
 .support-submit button:hover{
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 .support-submit button:active{
   transform: scale(.9);
@@ -493,7 +493,7 @@
   margin-top: .2em;
   padding: .3em .5em;
   font-size: 1.4em;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   color: black;
   cursor: pointer;
   border: 2px solid rgb(0, 0, 0);
@@ -504,7 +504,7 @@
   color: white; 
 }
 .credits-exit-btn:hover{
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 .credits-exit-btn:active{
   transform: scale(.8);
@@ -516,7 +516,7 @@
   gap: 1.8em;
 }
 .credits-title{
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   width: 52%;
   text-align: center;
   box-shadow: 0px 3px 6px 1px rgb(37, 37, 37);
@@ -674,7 +674,7 @@ body.lang-fr .start-buttons{
   /* style the three buttons */
   .start-buttons button{
     font-size: 2.0em;
-    background-color: rgb(247, 58, 58);
+    background-color: #f0b047;
     border: 2px solid black;
     border-radius: 5px;
     padding: .4em 1.1em;
@@ -690,7 +690,7 @@ body.lang-fr .start-buttons{
   }
   /* the hover effect over buttons */
   .start-buttons button:hover{
-    background-color: rgb(242, 95, 95);
+    background-color: #bd780a;
   }
   /* the push in effect with buttons when clicked */
   .start-buttons button:active{
@@ -724,7 +724,7 @@ body.lang-fr .start-buttons{
   /* style the three buttons */
   .start-buttons button{
     font-size: 1.8em;
-    background-color: rgb(247, 58, 58);
+    background-color: #f0b047;
     border: 2px solid black;
     border-radius: 5px;
     padding: .4em 1.0em;
@@ -740,7 +740,7 @@ body.lang-fr .start-buttons{
   }
   /* the hover effect over buttons */
   .start-buttons button:hover{
-    background-color: rgb(242, 95, 95);
+    background-color: #bd780a;
   }
   /* the push in effect with buttons when clicked */
   .start-buttons button:active{
@@ -776,7 +776,7 @@ body.lang-fr .start-buttons{
   /* style the three buttons */
   .start-buttons button{
     font-size: 1.4em;
-    background-color: rgb(247, 58, 58);
+    background-color: #f0b047;
     border: 2px solid black;
     border-radius: 5px;
     padding: .4em .2em;
@@ -792,7 +792,7 @@ body.lang-fr .start-buttons{
   }
   /* the hover effect over buttons */
   .start-buttons button:hover{
-    background-color: rgb(242, 95, 95);
+    background-color: #bd780a;
   }
   /* the push in effect with buttons when clicked */
   .start-buttons button:active{
@@ -817,7 +817,7 @@ body.lang-fr .start-buttons{
     justify-content: center;
   }
   .options-title{
-    background-color: rgb(247, 58, 58);
+    background-color: #f0b047;
     width: 50%;
     text-align: center;
     box-shadow: 0px 3px 6px 1px rgb(104, 104, 104);
@@ -849,7 +849,7 @@ body.lang-fr .start-buttons{
   .volume-icon i{
     font-size: 2em;
     color: white;
-    background-color: rgb(247, 58, 58);
+    background-color: #f0b047;
     padding: .3em .5em;
     -webkit-text-stroke: 1px black;
     text-shadow: 3px 2px black;
@@ -866,7 +866,7 @@ body.lang-fr .start-buttons{
     -webkit-appearance: none;
     appearance: none;
     height: 25px;
-    background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%);
+    background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, #f0b047 65%);
     border: 2px solid black;
     cursor: pointer;
   }
@@ -881,7 +881,7 @@ body.lang-fr .start-buttons{
   .music-icon i{
     font-size: 2em;
     color: white;
-    background-color: rgb(247, 58, 58);
+    background-color: #f0b047;
     padding: .3em .4em .3em .2em;
     -webkit-text-stroke: 1px black;
     text-shadow: 3px 2px black;
@@ -898,7 +898,7 @@ body.lang-fr .start-buttons{
     -webkit-appearance: none;
     appearance: none;
     height: 25px;
-    background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, rgb(247, 58, 58) 65%);
+    background: linear-gradient(90deg,hsla(197, 100%, 64%, 1) 35%, #f0b047 65%);
     border: 2px solid black;
     cursor: pointer;
   }
@@ -920,7 +920,7 @@ body.lang-fr .start-buttons{
   right: 10px;
   width: 50px;
   height: 50px;
-  background-color: rgb(247, 58, 58);  
+  background-color: #f0b047;  
   border: 2px solid black;
   border-radius: 50%;
   padding: 0;
@@ -934,6 +934,10 @@ body.lang-fr .start-buttons{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.about-button:hover{
+  background-color: #bd780a;
 }
 
 .popup-overlay {
@@ -961,7 +965,7 @@ body.lang-fr .start-buttons{
 .popup-content {
     background: white;
     color: black;
-    fill:rgb(247, 58, 58);
+    fill:#f0b047;
     border-radius: 8px;
     width: 40em;
     height: 34em;
@@ -976,7 +980,7 @@ body.lang-fr .start-buttons{
   right: 10px;
   padding: .5em .6em;
   font-size: 1.4em;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   color: rgb(255, 255, 255);
   cursor: pointer;
   border: 2px solid rgb(0, 0, 0);
@@ -989,6 +993,10 @@ body.lang-fr .start-buttons{
   align-items: center;
   justify-content: center;
   transition: .1s;
+}
+
+.close-btn:hover{
+  background-color: #bd780a;
 }
 
 .tab-container {
@@ -1009,7 +1017,7 @@ body.lang-fr .start-buttons{
 }
 
 .tab.active {
-  border-bottom: 2px solid rgb(247, 58, 58);
+  border-bottom: 2px solid #f0b047;
   font-weight: bold;
 }
 
