@@ -49,7 +49,7 @@
 /* Style the Level Buttons */
 .level-buttons button {
   font-size: 2.2em;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   border: 2px solid black;
   border-radius: 5px;
   padding: .5em 1.2em;
@@ -64,7 +64,7 @@
 }
 
 .level-buttons button:hover {
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 
 .level-buttons button:active {
