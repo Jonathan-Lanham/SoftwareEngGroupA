@@ -170,7 +170,7 @@ canvas {
   background-color: #f0b047;
 }
 .fa-xmark:hover{
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 
 /* Run Button */
@@ -304,7 +304,7 @@ canvas {
 }
 
 #back-to-main:hover {
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 
 /* Win Button Styling */
