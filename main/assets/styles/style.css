@@ -467,6 +467,24 @@ canvas {
   cursor: pointer;
 }
 
+.sandbox-output-btn{
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  transform: translateX(-50%);
+  margin: 20px auto;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #f73a3a;
+  color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 5002;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s, transform 0.1s;
+}
 
 /* Selector to style the entire page */
 
