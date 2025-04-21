@@ -224,3 +224,30 @@ runBtn.onclick = function()
 {
     game.running = true;
 }
+
+
+// grabbing the elements for the options menu buttons
+const optionsBtn = document.querySelector('.fa-cog');
+const optionsHiddenMenu = document.getElementById('options-menu');
+const optionsExitBtn = document.querySelector('.exit-button');
+const optionsHome = document.getElementById('back-to-main');
+
+// code for the options button to showcase the options menu
+optionsBtn.addEventListener('click', () => {
+    if(optionsHiddenMenu.style.display === 'none'){
+        optionsHiddenMenu.style.display = 'block';
+    }
+    else{
+        optionsHiddenMenu.style.display = 'none';
+    }
+});
+// code for the options exit button to get rid of the options menu
+optionsExitBtn.addEventListener('click', () => {
+    if(optionsHiddenMenu.style.display === 'block' ){
+        optionsHiddenMenu.style.display = 'none';
+        languageHiddenMenu.style.display = 'none';
+    }
+    else{
+        optionsHiddenMenu.style.display = 'block';
+    }
+});
