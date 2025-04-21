@@ -52,6 +52,10 @@ function setup() {
         game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
     }
 
+    for (let comp of io.Components) {
+        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scale=scale)
+    }
+
     // game.insertComponent(300, 300, 30, 30, scale=scale)
     // game.insertComponent(300, 300, 30, 30, scale=scale)
     // game.insertComponent(300, 300, 30, 30, scale=scale)

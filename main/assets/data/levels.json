@@ -223,6 +223,9 @@
         "h": 80,
         "type": "XnorGate"
       }
+    ],
+    "Components": [
+
     ]
   },
   {
@@ -268,6 +271,9 @@
         "h": 80,
         "type": "AndGate"
       }
+    ],
+    "Components": [
+
     ]
   },
   {
@@ -344,6 +350,9 @@
         "h": 80,
         "type": "AndGate"
       }
+    ],
+    "Components": [
+
     ]
   },
   {
@@ -421,6 +430,9 @@
         "h": 80,
         "type": "AndGate"
       }
+    ],
+    "Components": [
+
     ]
   },
   {
@@ -493,6 +505,9 @@
         "h": 80,
         "type": "NotGate"
       }
+    ],
+    "Components": [
+
     ]
   },
   {
@@ -577,6 +592,9 @@
         "h": 80,
         "type": "NotGate"
       }
+    ],
+    "Components": [
+
     ]
   },
   {
@@ -631,6 +649,9 @@
         "h": 80,
         "type": "NotGate"
       }
+    ],
+    "Components": [
+      
     ]
   }
 ]
