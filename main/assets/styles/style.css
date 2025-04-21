@@ -110,7 +110,7 @@ canvas {
   
 }
 .settings-title{
-  background-color: #f73a3a;
+  background-color: #f0b047;
   border: 2px solid black;
   display: flex;
   justify-content: center;
@@ -152,7 +152,7 @@ canvas {
   margin-right: .2em;
   padding: .3em .5em;
   font-size: 1.2em;
-  background-color: #f73a3a;
+  background-color: #f0b047;
   color: black;
   cursor: pointer;
   border: 2px solid rgb(0, 0, 0);
@@ -167,7 +167,7 @@ canvas {
 
 .fa-xmark{
   text-shadow: 0px 3px black;
-  background-color: #f73a3a;
+  background-color: #f0b047;
 }
 .fa-xmark:hover{
   background-color: rgb(242, 95, 95);
@@ -213,7 +213,7 @@ canvas {
 .volume-icon i {
   font-size: 1.5em;
   color: white;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   padding: .5em .83em;
   margin-right: .5em;
   -webkit-text-stroke: 1px black;
@@ -228,7 +228,7 @@ canvas {
 .music-icon i {
   font-size: 1.5em;
   color: white;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   padding: .5em .65em;
   margin-right: .5em;
   -webkit-text-stroke: 1px black;
@@ -514,7 +514,7 @@ canvas {
   padding: 12px 24px;
   font-size: 18px;
   font-weight: bold;
-  background: #f73a3a;
+  background: #f0b047;
   color: white;
   border: 2px solid black;
   border-radius: 8px;
