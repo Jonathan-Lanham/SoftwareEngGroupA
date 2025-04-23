@@ -510,8 +510,7 @@ canvas {
 .sandbox-output-btn{
   position: absolute;
   top: -5px;
-  right: 0px;
-  transform: translateX(-50%);
+  right: 85px;
   margin: 20px auto;
   padding: 12px 24px;
   font-size: 18px;
@@ -523,7 +522,16 @@ canvas {
   cursor: pointer;
   z-index: 5002;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-  transition: background 0.2s, transform 0.1s;
+
+}
+
+/* the hover effect over buttons */
+.sandbox-output-btn:hover{
+  background-color: #bd780a;
+}
+
+.sandbox-output-btn:active{
+  transform: scale(.9);
 }
 
 /* Selector to style the entire page */
