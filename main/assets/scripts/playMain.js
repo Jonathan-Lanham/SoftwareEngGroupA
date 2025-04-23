@@ -251,3 +251,7 @@ optionsExitBtn.addEventListener('click', () => {
         optionsHiddenMenu.style.display = 'block';
     }
 });
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight-122);
+}

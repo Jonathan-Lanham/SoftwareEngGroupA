@@ -383,7 +383,7 @@ canvas {
   top: 0;
   left: -300px; 
   width: 300px;
-  height: 47.5em;
+  height: calc(100vh - 122px);
   background: linear-gradient(90deg,rgb(125,125,125),rgb(220,220,220),rgb(220,220,220),rgb(125,125,125));
   color: white;
   transition: left 0.3s ease;
@@ -423,6 +423,8 @@ canvas {
 .panel-content{
   background: linear-gradient(90deg,rgb(125,125,125),rgb(220,220,220),rgb(220,220,220),rgb(125,125,125));
   border-radius: 15px;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .panel-content h3 {
