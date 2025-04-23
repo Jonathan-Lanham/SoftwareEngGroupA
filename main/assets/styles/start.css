@@ -295,17 +295,10 @@
 }
 
 
-/* Styling and position on the sound button */
-.sound-container{
-  position: absolute;
-  bottom: calc(10vh + 10%);
-  width: 100%;
-  height: 10vh;
-  display: flex;
-  justify-content: flex-end;
-
-}
 .sound-button{
+  position: absolute;
+  bottom: calc(10vh);
+  right: 3vh;
   height: 10vh;
   width: 10em;
   margin-top: 4em;
