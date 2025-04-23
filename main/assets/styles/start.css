@@ -297,6 +297,8 @@
 
 /* Styling and position on the sound button */
 .sound-container{
+  position: absolute;
+  bottom: calc(10vh + 10%);
   width: 100%;
   height: 10vh;
   display: flex;
