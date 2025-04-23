@@ -303,3 +303,7 @@ function outputGameAsJSON(){
 
     console.log(JSON.stringify(outputObject))
 }
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight-122);
+}
