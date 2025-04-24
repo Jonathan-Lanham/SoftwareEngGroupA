@@ -68,7 +68,9 @@ function setup() {
         //Difficult to implement since collision is checked every frame, will come back to it later
         reverse_circuit: '../assets/sounds/reverse_circuit.wav',
         connect_circuit: '../assets/sounds/connect_circuit.wav',
-        win_sound: '../assets/sounds/win_sound.mp3'
+        win_sound: '../assets/sounds/win_sound.mp3',
+        incorrect: '../assets/sounds/extremely-loud-incorrect-buzzer_0cDaG20.mp3',
+        yippeee: '../assets/sounds/yippeeeeeeeeeeeeee.mp3',
     });
 
 }
@@ -152,6 +154,9 @@ function mousePressed() {
 function doubleClicked() {
     // Code to run.
     componentsThatMouseOverlaps = switchComponent.ComponentSHG.queryPoint(mouseX, mouseY);
+
+    if (componentsThatMouseOverlaps.length === 0){ return }
+
     let comp = componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]
     comp.changeState()
 

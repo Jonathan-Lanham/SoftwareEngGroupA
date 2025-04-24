@@ -43,7 +43,7 @@
 }
 
 .level-buttons::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 /* Style the Level Buttons */
@@ -83,4 +83,29 @@
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+  border-radius: 20px;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #636363; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555555; 
 }

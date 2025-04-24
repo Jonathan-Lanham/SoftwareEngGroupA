@@ -27,7 +27,7 @@
           <button class="exit-btn"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="options-title">
-              <p class="settings-title">Settings</p>
+              <p class="settings-title prevent-select">Settings</p>
         </div>
         <div class="settings-container">
           <div class="volume-container">
@@ -59,8 +59,8 @@
     <div class="popup-overlay" id="popup" onclick="closePopup(event)">
       <div class="win-popup" onclick="event.stopPropagation()">
         <div class="top-win-section">
-          <div class="win-title">
-            <p>Circuit completed!</p>
+          <div class="win-title prevent-select">
+            Circuit completed!
           </div>
         </div>
   
@@ -76,9 +76,9 @@
   <div id="gateInfoPanel" class="side-panel">
     <button id="togglePanelBtn">☰</button>
     <div id="gateInfoContent" class="panel-content">
-      <h3>Level Instructions</h3>
-      <p id="levelDesc" style="padding: 0 22%;"></p>
-      <h3>Gate Descriptions</h3>
+      <h3 class="prevent-select">Level Instructions</h3>
+      <p id="levelDesc" style="padding: 0 10%; text-align:center;"></p>
+      <h3 class="prevent-select">Gate Descriptions</h3>
       <ul id="gateList"></ul>
     </div>
   </div>
@@ -94,7 +94,7 @@
     <main>
       <!-- Added background to canvas -->
       <section id="">
-        <h1 id="Level-Name"></h1>
+        <h1 id="Level-Name" class="prevent-select"></h1>
         
       </section>
 

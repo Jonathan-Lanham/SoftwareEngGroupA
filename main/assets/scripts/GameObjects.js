@@ -109,13 +109,17 @@ class Game {
         // Compare each element
         for (let i = 0; i < statesArray.length; i++) {
             if (statesArray[i] != objectsArray[i].state) {
+                //Loud Incorrect Buzzer
+                game.gameSounds.play('incorrect', 0.2)
                 return false; // Found a mismatch
             }
         }
 
         // Winner winner chicken dinner
         // window.alert("You Won!");
-        game.gameSounds.play('win_sound', volume=1)
+        //Second arg is volume, 0-1
+        game.gameSounds.play('win_sound', 1)
+        game.gameSounds.play('yippeee', 1)
         showWin();
         this.levelCompleted = true;
         return true;
@@ -124,14 +128,14 @@ class Game {
     transferStateToCollidingNodes(nodeObject) {// this.transferStateToCollidingNodes(gate.outputNode)
         //console.log(nodeObject)
         //VISUALIZE HASH
-        if (nodeObject._cellKeys) {
-            stroke('purple')
-            noFill()
-            for (let key of nodeObject._cellKeys) {
-                let xAndy = key.split(',')
-                rect(xAndy[0] * 20, xAndy[1] * 20, 20, 20);
-            }
-        }
+        // if (nodeObject._cellKeys) {
+        //     stroke('purple')
+        //     noFill()
+        //     for (let key of nodeObject._cellKeys) {
+        //         let xAndy = key.split(',')
+        //         rect(xAndy[0] * 20, xAndy[1] * 20, 20, 20);
+        //     }
+        // }
         //-----
         let collidesWithNode = nodeObject.collidesWithList();
         for (let collider of collidesWithNode) {
@@ -188,7 +192,7 @@ class Game {
             this.transferStateToCollidingNodes(line.outputNode);
             line.display();
 
-            line.outputNode.state = line.inputNode.state = false;
+            line.outputNode.state = line.inputNode.state = null;
         }
 
         for (let comp of switchComponent.ComponentSHG.queryRegion(0, 0, this.gameWidth, this.gameHeight)) {
@@ -238,7 +242,7 @@ class Game {
         if (this.exitPoints){
             for (let eNode of this.exitPoints.endNodes) {
                 //else, reset these to be recomputed next frame.
-                eNode.state = false;
+                eNode.state = null;
             }
         }
 
