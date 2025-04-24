@@ -6,7 +6,7 @@ class GateNode{
         this.width = width;
         this.height = height;
         this.parentObject = parentObject;
-        this.state = false;
+        this.state = null;
     }
     //will have to adjust manually
     static NodeSHG = new SpatialHashGrid(20)

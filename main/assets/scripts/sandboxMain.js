@@ -1,3 +1,9 @@
+let trashcan;
+
+function preload() {
+    trashcan = loadImage('../assets/images/trash-bin-3.png');
+}
+
 function setup() {
 
     //Base scale off of viewport size.
@@ -40,12 +46,49 @@ function visualizeGridCells() {
 
 function draw() {
 
-
     game.update()
+
+    if (point1){
+        noFill()
+        stroke('black')
+        rect(point1[0], point1[1], mouseX-point1[0], mouseY-point1[1])
+    }
     //For visualization/debugging
     visualizeGridCells();
 
+    //Query point in center of trashcan
+    //If they are, remove from being_dragged, remove from SHG
+    image(trashcan, game.gameWidth - 65, 0, 60, 70);
+    //rect(game.gameWidth - 40, 30, 10, 15)
+
+    gates_to_delete = LogicGate.GateSHG.queryRegion(game.gameWidth - 40, 30, 10, 15)
+    for (let gate of gates_to_delete){
+        LogicGate.GateSHG.remove(gate)
+    }
+    components_to_delete = switchComponent.ComponentSHG.queryRegion(game.gameWidth - 40, 30, 10, 15)
+    for (let comp of components_to_delete){
+        switchComponent.ComponentSHG.remove(comp)
+    }
 }
+
+selectingMultiple = false;
+point1 = null;
+
+function getCornerPoints(point1, point2) {
+    // Find the top-left point (minimum x and y values)
+    const topLeft = [
+      Math.min(point1[0], point2[0]),
+      Math.min(point1[1], point2[1])
+    ];
+    
+    // Find the bottom-right point (maximum x and y values)
+    const bottomRight = [
+      Math.max(point1[0], point2[0]),
+      Math.max(point1[1], point2[1])
+    ];
+    
+    return { topLeft, bottomRight };
+  }
 
 function mouseReleased() {
 
@@ -64,6 +107,32 @@ function mouseReleased() {
     }
 
     game.beingDragged = []
+    
+    //messy but it works
+    if (selectingMultiple){
+        selectingMultiple = false;
+        point2 = [mouseX, mouseY]
+        rect(point1[0], point1[1], mouseX-point1[0], mouseY-point1[1]);
+        //query every gate between point1 and [mouseX, mouseY], start dragging
+
+        //find which point is closer to top left, make that topPoint
+
+        findPoints = getCornerPoints(point1, point2)
+
+        topPoint = findPoints.topLeft
+        botPoint = findPoints.bottomRight
+
+        for (let gate of LogicGate.GateSHG.queryRegion(topPoint[0], topPoint[1], botPoint[0]-topPoint[0], botPoint[1]-topPoint[1])) {
+            gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
+            game.beingDragged.push(gate)
+        }
+        for (let comp of switchComponent.ComponentSHG.queryRegion(topPoint[0], topPoint[1], botPoint[0]-topPoint[0], botPoint[1]-topPoint[1])) {
+            comp.changeOffsets(mouseX - comp.x, mouseY - comp.y)
+            game.beingDragged.push(comp)
+        }
+
+        point1 = null;
+    }
 }
 
 function mousePressed() {
@@ -91,6 +160,9 @@ function mousePressed() {
         game.gameSounds.play('gate_pickup', volume=1)
         comp.changeOffsets(mouseX - comp.x, mouseY - comp.y)
         game.beingDragged.push(comp)
+    } else{
+        selectingMultiple = true;
+        point1 = [mouseX, mouseY];
     }
 
     // for (let gate of gatesThatMouseOverlaps) {
@@ -104,6 +176,11 @@ function mousePressed() {
 function doubleClicked() {
     // Code to run.
     componentsThatMouseOverlaps = switchComponent.ComponentSHG.queryPoint(mouseX, mouseY);
+
+    if (componentsThatMouseOverlaps.length === 0){
+        return
+    }
+
     let comp = componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]
     comp.changeState()
 
@@ -176,3 +253,57 @@ function insertConnectionLineIntoGame(){
     //game.insertConnection(linesPlaced, game.gameScale)
 }
 
+function outputGameAsJSON(){
+
+    outputObject = {}
+
+    //Query all gates
+    //Query all connections
+    //Query all components
+
+    //Create a labeled json object for each of these, such that it can be copy pasted into level creator
+
+    //components
+    // console.log(switchComponent.ComponentSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight))
+    // console.log(game.connectionLines)
+    // console.log("All Logic Gates: " + LogicGate.GateSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight))
+
+    //Handle Connection Lines
+    outputObject.Connections = [];
+    for (let line of game.connectionLines) {
+        outputObject.Connections.push(line.arrayOfLines)
+    }
+    //console.log(JSON.stringify(outputObject.Connections))
+
+    //Handle Logic Gates
+    outputObject.Gates = [];
+    for (let gate of LogicGate.GateSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight)) {
+        outputObject.Gates.push({
+            "x": gate.x,
+            "y": gate.y,
+            "w": gate.width,
+            "h": gate.height,
+            "type": gate.constructor.name
+        })
+    }
+    //console.log(JSON.stringify(outputObject.Gates))
+
+    //Handle Components
+    outputObject.Components = [];
+    for (let comp of switchComponent.ComponentSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight)) {
+        outputObject.Components.push({
+            "x": comp.x,
+            "y": comp.y,
+            "w": comp.width,
+            "h": comp.height,
+            "type": comp.constructor.name
+        })
+    }
+    //console.log(JSON.stringify(outputObject.Components))
+
+    console.log(JSON.stringify(outputObject))
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight-122);
+}

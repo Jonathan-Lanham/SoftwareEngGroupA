@@ -43,13 +43,13 @@
 }
 
 .level-buttons::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 /* Style the Level Buttons */
 .level-buttons button {
   font-size: 2.2em;
-  background-color: rgb(247, 58, 58);
+  background-color: #f0b047;
   border: 2px solid black;
   border-radius: 5px;
   padding: .5em 1.2em;
@@ -64,7 +64,7 @@
 }
 
 .level-buttons button:hover {
-  background-color: rgb(242, 95, 95);
+  background-color: #bd780a;
 }
 
 .level-buttons button:active {
@@ -83,4 +83,29 @@
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+  border-radius: 20px;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #636363; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555555; 
 }
