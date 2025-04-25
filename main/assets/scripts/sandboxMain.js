@@ -44,6 +44,8 @@ function visualizeGridCells() {
     }
 }
 
+let draggingConnections = [];
+
 function draw() {
 
     game.update()
@@ -69,6 +71,26 @@ function draw() {
     for (let comp of components_to_delete){
         switchComponent.ComponentSHG.remove(comp)
     }
+
+    //Delete Connections
+    //Query Node SHG For overlapping with delete
+    //If Nodes parent is a Connection object, reference game.connectionLines and delete it
+    connections_to_delete = GateNode.NodeSHG.queryRegion(game.gameWidth - 40, 30, 10, 15);
+    for (let conn_node of connections_to_delete){
+        if(conn_node.parentObject instanceof Connection){
+            parentConn = conn_node.parentObject
+            GateNode.NodeSHG.remove(parentConn.inputNode)
+            GateNode.NodeSHG.remove(parentConn.outputNode)
+            game.connectionLines.splice(game.connectionLines.indexOf(conn_node.parentObject), 1);
+            draggingConnections.splice(draggingConnections.indexOf(conn_node.parentObject), 1);
+        }
+    }
+
+    for (let conn_to_drag of draggingConnections){
+        console.log(conn_to_drag)
+        conn_to_drag.drag(mouseX, mouseY)
+    }
+
 }
 
 selectingMultiple = false;
@@ -107,6 +129,7 @@ function mouseReleased() {
     }
 
     game.beingDragged = []
+    draggingConnections = []
     
     //messy but it works
     if (selectingMultiple){
@@ -130,6 +153,23 @@ function mouseReleased() {
             comp.changeOffsets(mouseX - comp.x, mouseY - comp.y)
             game.beingDragged.push(comp)
         }
+
+        //Query region for nodes
+        //If any nodes belong to Connection class
+        //set offsets based on current mouse position (mouseX, mouseY)
+        //push to drag connection array
+        //Every frame, loop over drag connection array and call drag(), also change the nodes x y
+        //on mouse release, clear out drag connection array
+        //update the connection nodes
+        connections_to_drag = GateNode.NodeSHG.queryRegion(topPoint[0], topPoint[1], botPoint[0]-topPoint[0], botPoint[1]-topPoint[1]);
+        for (let conn_node of connections_to_drag){
+            if(conn_node.parentObject instanceof Connection){
+                parentConn = conn_node.parentObject
+                parentConn.setOffsets(mouseX, mouseY)
+                draggingConnections.push(parentConn);
+            }
+        }
+
 
         point1 = null;
     }
