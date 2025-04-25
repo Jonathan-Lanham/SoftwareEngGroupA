@@ -81,8 +81,8 @@ function draw() {
             parentConn = conn_node.parentObject
             GateNode.NodeSHG.remove(parentConn.inputNode)
             GateNode.NodeSHG.remove(parentConn.outputNode)
-            game.connectionLines.splice(game.connectionLines.indexOf(conn_node.parentObject), 1);
             draggingConnections.splice(draggingConnections.indexOf(conn_node.parentObject), 1);
+            game.connectionLines.splice(game.connectionLines.indexOf(conn_node.parentObject), 1);
         }
     }
 
