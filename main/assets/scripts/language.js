@@ -5,6 +5,7 @@ const LANG_PATH = '../assets/data/language.json';
 
 
 function changeLanguage(lang){
+    
     // saving the language choice
     localStorage.setItem('language', lang);
 
@@ -64,50 +65,54 @@ function changeLanguage(lang){
             document.querySelector('.back-end-span5').textContent = data[lang].startPage.creditsPopupBackEnd;
 
             // for Terms page
-            document.querySelector('.').textContent = data[lang].startPage.termsTitle;
-            document.querySelector('.').textContent = data[lang].startPage.termsSubheading;
-            document.querySelector('.').textContent = data[lang].startPage.termsPrivacyTab;
-            document.querySelector('.').textContent = data[lang].startPage.termsServiceTab;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine1;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine2;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine3;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine4;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine5;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine6;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine7;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine8;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine9;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine10;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine11;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine12;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine13;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine14;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine15;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine16;
-            document.querySelector('.').textContent = data[lang].startPage.termsLine17;
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelector('.gatekeeper-home').textContent = data[lang].startPage.termsTitle;
+            
+                document.querySelector('.terms-text').textContent = data[lang].startPage.termsSubheading;
+                document.querySelector('.privacy-tab').textContent = data[lang].startPage.termsPrivacyTab;
+                document.querySelector('.terms-tab').textContent = data[lang].startPage.termsServiceTab;
+                document.querySelector('.terms-line1').textContent = data[lang].startPage.termsLine1;
+                document.querySelector('.terms-line2').textContent = data[lang].startPage.termsLine2;
+                document.querySelector('.terms-line3').textContent = data[lang].startPage.termsLine3;
+                document.querySelector('.terms-line4').textContent = data[lang].startPage.termsLine4;
+                document.querySelector('.terms-line5').textContent = data[lang].startPage.termsLine5;
+                document.querySelector('.terms-line6').textContent = data[lang].startPage.termsLine6;
+                document.querySelector('.terms-line7').textContent = data[lang].startPage.termsLine7;
+                document.querySelector('.terms-line8').textContent = data[lang].startPage.termsLine8;
+                document.querySelector('.terms-line9').textContent = data[lang].startPage.termsLine9;
+                document.querySelector('.terms-line10').textContent = data[lang].startPage.termsLine10;
+                document.querySelector('.terms-line11').textContent = data[lang].startPage.termsLine11;
+                document.querySelector('.terms-line12').textContent = data[lang].startPage.termsLine12;
+                document.querySelector('.terms-line13').textContent = data[lang].startPage.termsLine13;
+                document.querySelector('.terms-line14').textContent = data[lang].startPage.termsLine14;
+                document.querySelector('.terms-line15').textContent = data[lang].startPage.termsLine15;
+                document.querySelector('.terms-line16').textContent = data[lang].startPage.termsLine16;
+                document.querySelector('.terms-line17').textContent = data[lang].startPage.termsLine17;
+            })
 
 
 
             // for Privacy page
-            document.querySelector('.').textContent = data[lang].startPage.policyTitle;
-            document.querySelector('.').textContent = data[lang].startPage.policySubheading;
-            document.querySelector('.').textContent = data[lang].startPage.policyPrivacyTab;
-            document.querySelector('.').textContent = data[lang].startPage.policyServiceTab;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine1;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine2;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine3;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine4;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine5;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine6;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine7;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine8;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine9;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine10;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine11;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine12;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine13;
-            document.querySelector('.').textContent = data[lang].startPage.policyLine14;
-
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelector('.').textContent = data[lang].startPage.policyTitle;
+                document.querySelector('.').textContent = data[lang].startPage.policySubheading;
+                document.querySelector('.').textContent = data[lang].startPage.policyPrivacyTab;
+                document.querySelector('.').textContent = data[lang].startPage.policyServiceTab;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine1;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine2;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine3;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine4;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine5;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine6;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine7;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine8;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine9;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine10;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine11;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine12;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine13;
+                document.querySelector('.').textContent = data[lang].startPage.policyLine14;
+            })
 
 
 
