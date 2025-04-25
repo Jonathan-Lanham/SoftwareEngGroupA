@@ -59,7 +59,7 @@ function draw() {
     //Query point in center of trashcan
     //If they are, remove from being_dragged, remove from SHG
     image(trashcan, game.gameWidth - 65, 0, 60, 70);
-    //rect(game.gameWidth - 40, 30, 10, 15)
+    rect(game.gameWidth - 40, 30, 10, 15)
 
     gates_to_delete = LogicGate.GateSHG.queryRegion(game.gameWidth - 40, 30, 10, 15)
     for (let gate of gates_to_delete){
@@ -69,6 +69,20 @@ function draw() {
     for (let comp of components_to_delete){
         switchComponent.ComponentSHG.remove(comp)
     }
+
+    //Delete Connections
+    //Query Node SHG For overlapping with delete
+    //If Nodes parent is a Connection object, reference game.connectionLines and delete it
+    connections_to_delete = GateNode.NodeSHG.queryRegion(game.gameWidth - 40, 30, 10, 15);
+    for (let conn_node of connections_to_delete){
+        if(conn_node.parentObject instanceof Connection){
+            parentConn = conn_node.parentObject
+            GateNode.NodeSHG.remove(parentConn.inputNode)
+            GateNode.NodeSHG.remove(parentConn.outputNode)
+            game.connectionLines.splice(game.connectionLines.indexOf(conn_node.parentObject), 1);
+        }
+    }
+
 }
 
 selectingMultiple = false;
