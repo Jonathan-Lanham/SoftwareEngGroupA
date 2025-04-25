@@ -5,6 +5,9 @@ class Connection {
         GateNode.NodeSHG.insert(this.inputNode);
         this.outputNode = new GateNode(arrayOfLines[arrayOfLines.length - 1].x - Game.sizeOfNodes / 2, arrayOfLines[arrayOfLines.length - 1].y - Game.sizeOfNodes / 2, Game.sizeOfNodes, Game.sizeOfNodes, this);
         GateNode.NodeSHG.insert(this.outputNode);
+
+        this.lineOffsets = []
+
     }
 
     static createConnection(lineArray, scale=1) {
@@ -14,6 +17,34 @@ class Connection {
         }
         let newLine = new Connection(lineArray);
         game.connectionLines.push(newLine);
+    }
+
+    setOffsets(x, y){
+
+        this.lineOffsets = []
+        
+        for (let line of this.arrayOfLines){
+            let newOffset = {
+                offsetX: x - line.x,
+                offsetY: y - line.y
+            }
+
+            this.lineOffsets.push(newOffset)
+        }
+
+    }
+
+    drag(mx, my) {
+        for (let i = 0; i < this.arrayOfLines.length; ++i){
+            this.arrayOfLines[i].x = mx - this.lineOffsets[i].offsetX
+            this.arrayOfLines[i].y = my - this.lineOffsets[i].offsetY
+        }
+        //move node to first line
+        this.inputNode.move(this.arrayOfLines[0].x - Game.sizeOfNodes / 2, this.arrayOfLines[0].y - Game.sizeOfNodes / 2)
+        GateNode.NodeSHG.update(this.inputNode);
+
+        this.outputNode.move(this.arrayOfLines[this.arrayOfLines.length - 1].x - Game.sizeOfNodes / 2, this.arrayOfLines[this.arrayOfLines.length - 1].y - Game.sizeOfNodes / 2)
+        GateNode.NodeSHG.update(this.outputNode);
     }
 
     display() {
