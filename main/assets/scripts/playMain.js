@@ -52,6 +52,10 @@ function setup() {
         game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
     }
 
+    for (let comp of io.Components) {
+        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scale=scale)
+    }
+
     // game.insertComponent(300, 300, 30, 30, scale=scale)
     // game.insertComponent(300, 300, 30, 30, scale=scale)
     // game.insertComponent(300, 300, 30, 30, scale=scale)
@@ -64,7 +68,9 @@ function setup() {
         //Difficult to implement since collision is checked every frame, will come back to it later
         reverse_circuit: '../assets/sounds/reverse_circuit.wav',
         connect_circuit: '../assets/sounds/connect_circuit.wav',
-        win_sound: '../assets/sounds/win_sound.mp3'
+        win_sound: '../assets/sounds/win_sound.mp3',
+        incorrect: '../assets/sounds/extremely-loud-incorrect-buzzer_0cDaG20.mp3',
+        yippeee: '../assets/sounds/yippeeeeeeeeeeeeee.mp3',
     });
 
 }
@@ -148,6 +154,9 @@ function mousePressed() {
 function doubleClicked() {
     // Code to run.
     componentsThatMouseOverlaps = switchComponent.ComponentSHG.queryPoint(mouseX, mouseY);
+
+    if (componentsThatMouseOverlaps.length === 0){ return }
+
     let comp = componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]
     comp.changeState()
 
@@ -219,4 +228,35 @@ const runBtn = document.getElementById("run-btn");
 runBtn.onclick = function()
 {
     game.running = true;
+}
+
+
+// grabbing the elements for the options menu buttons
+const optionsBtn = document.querySelector('.fa-cog');
+const optionsHiddenMenu = document.getElementById('options-menu');
+const optionsExitBtn = document.querySelector('.exit-button');
+const optionsHome = document.getElementById('back-to-main');
+
+// code for the options button to showcase the options menu
+optionsBtn.addEventListener('click', () => {
+    if(optionsHiddenMenu.style.display === 'none'){
+        optionsHiddenMenu.style.display = 'block';
+    }
+    else{
+        optionsHiddenMenu.style.display = 'none';
+    }
+});
+// code for the options exit button to get rid of the options menu
+optionsExitBtn.addEventListener('click', () => {
+    if(optionsHiddenMenu.style.display === 'block' ){
+        optionsHiddenMenu.style.display = 'none';
+        languageHiddenMenu.style.display = 'none';
+    }
+    else{
+        optionsHiddenMenu.style.display = 'block';
+    }
+});
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight-122);
 }
