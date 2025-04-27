@@ -179,6 +179,19 @@ function closePopupWin(){
     popup.style.display = 'none'
 }
 
+function showLose() 
+{
+    let popup = document.getElementById("losePop");
+    if (popup) {
+        popup.style.display = "flex";
+    }
+}
+
+function closePopupLose(){
+    let popup = document.getElementById("losePop");
+    popup.style.display = 'none'
+}
+
 async function loadNextLevel() {
     console.log("next level button clicked");
     //window.location.href = "level_select.html";
