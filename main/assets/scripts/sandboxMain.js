@@ -200,7 +200,7 @@ function mousePressed() {
         game.gameSounds.play('gate_pickup', volume=1)
         comp.changeOffsets(mouseX - comp.x, mouseY - comp.y)
         game.beingDragged.push(comp)
-    } else{
+    } else if (GateNode.NodeSHG.queryPoint(mouseX, mouseY).length === 0) {
         selectingMultiple = true;
         point1 = [mouseX, mouseY];
     }
