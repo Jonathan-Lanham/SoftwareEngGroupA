@@ -111,6 +111,7 @@ class Game {
             if (statesArray[i] != objectsArray[i].state) {
                 //Loud Incorrect Buzzer
                 game.gameSounds.play('incorrect', 0.2)
+                showLose();
                 return false; // Found a mismatch
             }
         }
