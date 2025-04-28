@@ -18,7 +18,9 @@
 }
 
 
-
+.soundSlash{
+  display: block;
+}
 #topDiv {
   position: absolute;
   top: 130px;
@@ -77,12 +79,11 @@ canvas {
 
 /* Options Menu (Hidden by Default) */
 #options-menu {
-  height: 22em;
-  width: 34em;
+  height: 24em;
+  width: 22em;
   position: absolute;
   top: 60px;
   right: 20px;
-  width: 320px;
   background: white;
   border: 3px  solid black;
   padding: 1em;
@@ -92,9 +93,6 @@ canvas {
   box-shadow: 0px 3px 10px 1px black;
 }
 
-#options-menu  {
-  
-}
 
 .options-title {
   width: 80%;
@@ -128,7 +126,7 @@ canvas {
 }
 .settings-container{
   background-color: white;
-  margin-top: 3.5em;
+  margin-top: 4.5em;
 }
 .options-title p{
   color: white;
@@ -219,31 +217,45 @@ canvas {
 }
 
 .volume-icon i {
-  font-size: 1.5em;
+  font-size: 1.9em;
   color: white;
   background-color: #f0b047;
-  padding: .5em .83em;
+  padding: .5em .88em;
   margin-right: .5em;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 2px black;
   box-shadow: 0px 5px 5px 1px black;  
   border: 2px solid black;
   border-radius: 5px;
+  cursor: pointer;
 }
 .music-icon{
   background-color: white;
 }
 .music-icon i {
-  font-size: 1.5em;
+  font-size: 1.9em;
   color: white;
   background-color: #f0b047;
-  padding: .5em .65em;
+  padding: .5em .7em;
   margin-right: .5em;
   -webkit-text-stroke: 1px black;
   text-shadow: 3px 2px black;
   box-shadow: 0px 5px 5px 1px black;  
   border: 2px solid black;
   border-radius: 5px;
+  cursor: pointer;
+}
+.slash{
+  width: .2em;
+  height: 3.5em;
+  transform: rotate(45deg);
+  color: white;
+  border: .2px solid rgb(0, 0, 0);
+  position: absolute;
+  left: 4.5em;
+  background-color: white;
+  cursor: pointer;
+  
 }
 
 .volume-slider{

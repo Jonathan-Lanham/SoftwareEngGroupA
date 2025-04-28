@@ -35,3 +35,6 @@ musicSlider.addEventListener("input", (event) => {
   console.log("Music Volume:", event.target.value);
   // Add logic to update background music
 });
+
+
+

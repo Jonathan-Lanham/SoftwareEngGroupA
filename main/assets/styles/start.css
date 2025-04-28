@@ -97,6 +97,23 @@
   color: white;
   
 }
+
+.slash{
+  width: .2em;
+  height: 3.5em;
+  transform: rotate(45deg);
+  color: white;
+  border: .2px solid rgb(0, 0, 0);
+  position: absolute;
+  left: 4.5em;
+  background-color: white;
+  cursor: pointer;
+  
+}
+.soundSlash{
+  display: block;
+}
+
 /* Styling for the exit button */
 .exit-btn{
   display: inline;
