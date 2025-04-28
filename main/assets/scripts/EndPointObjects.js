@@ -83,7 +83,9 @@ class ExitPoints {
             let avgY = totalY / count;
             this.botImageX = this.endNodes[0].x + 485;
             this.botImageY = avgY - botImg.height / 2;
-            image(botImg, this.botImageX, this.botImageY);
+            this.botImageWidth = botImg.width;
+            this.botImageHeight = botImg.height;
+            image(botImg, this.botImageX, this.botImageY, this.botImageWidth, this.botImageHeight);
         }
     }
 }
