@@ -34,8 +34,8 @@
 
                 let levels_allowed = localStorage.getItem("levelsAllowed")
                 if (levels_allowed === null){
-                    levels_allowed = [1]
-                    localStorage.setItem("levelsAllowed", levels_allowed)
+                    levels_allowed = [0, 1];
+                    localStorage.setItem("levelsAllowed", JSON.stringify(levels_allowed))
                 }
                 
                 const levelList = document.getElementById('level-list');
@@ -63,7 +63,7 @@
                             console.log('Object:', JSON.stringify(level));
                         });
                     } else {
-                        listItem.innerHTML = '<button>' + '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"> <!-- Lock Body --> <rect x="16" y="35" width="48" height="40" rx="4" ry="4" fill="black" /> <!-- Lock Shackle --> <path d="M24,35 L24,20 C24,12 56,12 56,20 L56,35" stroke="black" stroke-width="8" fill="none" /> <!-- Keyhole --><circle cx="40" cy="55" r="6" fill="white" /><rect x="38" y="55" width="4" height="12" fill="white" /> </svg>' + '</button>';
+                        listItem.innerHTML = '<button style="height: 92px;">' + '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 80 80"> <!-- Lock Body --> <rect x="16" y="35" width="48" height="40" rx="4" ry="4" fill="black" /> <!-- Lock Shackle --> <path d="M24,35 L24,20 C24,12 56,12 56,20 L56,35" stroke="black" stroke-width="8" fill="none" /> <!-- Keyhole --><circle cx="40" cy="55" r="6" fill="white" /><rect x="38" y="55" width="4" height="12" fill="white" /> </svg>' + '</button>';
                     }
 
 

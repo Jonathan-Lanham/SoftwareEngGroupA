@@ -1,6 +1,7 @@
 [
   {
     "Name": "DEMO",
+    "lvlNum": 0,
     "Description": "This is DEMO text.",
     "CanvasSize": {
       "w": 2560,

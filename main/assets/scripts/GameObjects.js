@@ -125,7 +125,11 @@ class Game {
         // Winner winner chicken dinner
         // window.alert("You Won!");
         //Second arg is volume, 0-1
-
+        const storedObjects = localStorage.getItem('initialize_objects');
+        let nextLevel = JSON.parse(storedObjects).lvlNum+1;
+        let levelsAllowed = JSON.parse(localStorage.getItem('levelsAllowed'));
+        levelsAllowed.indexOf(nextLevel) === -1 ? levelsAllowed.push(nextLevel) : console.log("This Level Has Already Been Cleared");
+        localStorage.setItem('levelsAllowed', JSON.stringify(levelsAllowed))
 
 
         let winNum = int(random(5, 9));
