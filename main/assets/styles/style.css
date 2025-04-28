@@ -160,9 +160,34 @@ canvas {
   font-family: Arial, Helvetica, sans-serif;
   transition: .1s;
 }
-
-.exit-btn:hover {
+.exit-btn:hover{
   background-color: #bd780a;
+}
+.exit-btn:active{
+  transform: scale(.8);
+}
+
+.support-exit-btn{
+  display: inline;
+  position: absolute;
+  right: 5%;
+  padding: .3em .5em;
+  font-size: 1.4em;
+  background-color: #f0b047;
+  color: black;
+  cursor: pointer;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 0px 2px 5px 1px rgb(37, 37, 37);
+  border-radius: 50em;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: .1s;
+  color: white; 
+}
+.support-exit-btn:hover{
+  background-color: #bd780a;
+}
+.support-exit-btn:active{
+  transform: scale(.8);
 }
 
 .fa-xmark{
@@ -612,7 +637,7 @@ canvas {
 }
 
 .object-popup-text-container{
-  height: 30em;
+  height: 33em;
   margin-top: 1em;
 }
 
