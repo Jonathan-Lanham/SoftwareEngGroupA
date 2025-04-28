@@ -72,6 +72,11 @@
         // Grabbing all buttons and links for sound effects
         const allBtns = document.querySelectorAll('button');
         const allAtags = document.querySelectorAll('a');
+
+        const savedVolume = localStorage.getItem('volume');
+        if (savedVolume !== null) { // if the saved volume is not equal to nothing...
+            btnSound2.volume = savedVolume / 100;  // setting the volume of the sound to saved value (0 to 1)
+        };
         
         // When any button is clicked, it plays a sound effect
         allBtns.forEach(button => {
@@ -98,6 +103,6 @@
     });
     </script>
     <script src="../assets/scripts/sound_effect.js"></script>
-    <script src="../assets/scripts/playOptionsSound.js"></script>
+    <!-- <script src="../assets/scripts/playOptionsSound.js"></script> -->
 </body>
 </html>

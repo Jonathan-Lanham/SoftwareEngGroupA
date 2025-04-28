@@ -31,38 +31,39 @@
   </button>
 
   <!-- Options Menu (Initially Hidden) -->
-  <div id="options-menu">
-    <button class="exit-btn" id="close-options">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+  <div id="options-menu" style="display: none;">
+    <div class="exit-button">
+      <button class="exit-btn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
     <div class="options-title">
-      <p class="settings-title prevent-select">Settings</p>
+          <p class="settings-title prevent-select">Settings</p>
     </div>
     <div class="settings-container">
       <div class="volume-container">
         <div class="volume-icon">
-          <i class="fa-solid fa-volume-off"></i>
+            <i class="fa-solid fa-volume-off"></i>
         </div>
         <div class="volume-slider">
-          <input type="range" id="volume-slider" min="1" max="100" value="50">
+            <input type="range" id="volume-slider" min="1" max="100" value="50">
         </div>
       </div>
 
       <div class="music-container">
-        <div class="music-icon">
-          <i class="fa-solid fa-music"></i>
-        </div>
-        <div class="music-slider">
-          <input type="range" id="music-slider" min="1" max="100" value="50">
-          <!-- <div class="slash" style="display: block;"></div> -->
-        </div>
+          <div class="music-icon">
+              <i class="fa-solid fa-music"></i>
+          </div>
+          <div class="music-slider">
+              <input type="range" id="music-slider" min="1" max="100" value="50">
+          </div>
+          <div class="slash-music" style="display: block;"></div>
       </div>
 
       <!-- Bottom Section with Back Button -->
       <div class="bottom-options-section">
-        <button id="back-to-main">Home</button>
+          <a href="../pages/index.html"><button id="back-to-main">Home</button></a>
       </div>
     </div>
+      
   </div>
 
   <!-- Slide-out Gate Info Panel -->
@@ -143,7 +144,7 @@
   
   <script src="../assets/scripts/sandboxMain.js"></script>
 
-  <script src="../assets/scripts/sound_effect.js"></script>
+  <!-- <script src="../assets/scripts/sound_effect.js"></script> -->
   <script src="../assets/scripts/options.js"></script>
   <script src="../assets/scripts/sandboxSidePanel.js"></script>
   <script src="../assets/scripts/playOptionsSound.js"></script>

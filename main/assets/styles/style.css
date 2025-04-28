@@ -245,7 +245,7 @@ canvas {
   border-radius: 5px;
   cursor: pointer;
 }
-.slash{
+.slash-music{
   width: .2em;
   height: 3.5em;
   transform: rotate(45deg);

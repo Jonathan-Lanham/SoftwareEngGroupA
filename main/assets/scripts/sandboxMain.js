@@ -191,13 +191,13 @@ function mousePressed() {
 
     if(gatesThatMouseOverlaps[gatesThatMouseOverlaps.length - 1]){
         let gate = gatesThatMouseOverlaps[gatesThatMouseOverlaps.length - 1]
-        game.gameSounds.play('gate_pickup', volume=1)
+        game.gameSounds.play('gate_pickup', volume=gameVolume)
         gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
         game.beingDragged.push(gate)
     } 
     else if (componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]){
         let comp = componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]
-        game.gameSounds.play('gate_pickup', volume=1)
+        game.gameSounds.play('gate_pickup', volume=gameVolume)
         comp.changeOffsets(mouseX - comp.x, mouseY - comp.y)
         game.beingDragged.push(comp)
     } else if (GateNode.NodeSHG.queryPoint(mouseX, mouseY).length === 0) {
@@ -225,9 +225,9 @@ function doubleClicked() {
     comp.changeState()
 
     if (comp.state){
-        game.gameSounds.play('connect_circuit', volume=1)
+        game.gameSounds.play('connect_circuit', volume=gameVolume)
     } else{
-        game.gameSounds.play('reverse_circuit', volume=1)
+        game.gameSounds.play('reverse_circuit', volume=gameVolume)
     }
 }
 
@@ -343,6 +343,32 @@ function outputGameAsJSON(){
 
     console.log(JSON.stringify(outputObject))
 }
+
+// grabbing the elements for the options menu buttons
+const optionsBtnPlay = document.querySelector('.fa-cog');
+const optionsHiddenMenu = document.getElementById('options-menu');
+const optionsExitBtn = document.querySelector('.exit-button');
+const optionsHome = document.getElementById('back-to-main');
+
+// code for the options button to showcase the options menu
+optionsBtnPlay.addEventListener('click', () => {
+    if(optionsHiddenMenu.style.display === 'none'){
+        optionsHiddenMenu.style.display = 'block';
+    }
+    else{
+        optionsHiddenMenu.style.display = 'none';
+    }
+});
+// code for the options exit button to get rid of the options menu
+optionsExitBtn.addEventListener('click', () => {
+    if(optionsHiddenMenu.style.display === 'block' ){
+        optionsHiddenMenu.style.display = 'none';
+        //languageHiddenMenu.style.display = 'none';
+    }
+    else{
+        optionsHiddenMenu.style.display = 'block';
+    }
+});
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight-122);

@@ -1,6 +1,8 @@
 //put into global scope
 let game;
 
+let gameVolume = 0;
+
 class Game {
     constructor(gameWidth, gameHeight, backColor, sizeOfNodes=15) {
         let x = (windowWidth - width) / 2 - gameWidth / 2;
@@ -110,7 +112,7 @@ class Game {
         for (let i = 0; i < statesArray.length; i++) {
             if (statesArray[i] != objectsArray[i].state) {
                 //Loud Incorrect Buzzer
-                game.gameSounds.play('incorrect', 0.2)
+                game.gameSounds.play('incorrect', gameVolume)
                 showLose();
                 return false; // Found a mismatch
             }
@@ -119,8 +121,8 @@ class Game {
         // Winner winner chicken dinner
         // window.alert("You Won!");
         //Second arg is volume, 0-1
-        game.gameSounds.play('win_sound', 1)
-        game.gameSounds.play('yippeee', 1)
+        game.gameSounds.play('win_sound', gameVolume)
+        game.gameSounds.play('yippeee', gameVolume)
         showWin();
         this.levelCompleted = true;
         return true;

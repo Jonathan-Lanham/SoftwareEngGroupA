@@ -133,13 +133,13 @@ function mousePressed() {
 
     if(gatesThatMouseOverlaps[gatesThatMouseOverlaps.length - 1]){
         let gate = gatesThatMouseOverlaps[gatesThatMouseOverlaps.length - 1]
-        game.gameSounds.play('gate_pickup', volume=1)
+        game.gameSounds.play('gate_pickup', volume=gameVolume)
         gate.changeOffsets(mouseX - gate.x, mouseY - gate.y)
         game.beingDragged.push(gate)
     } 
     else if (componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]){
         let comp = componentsThatMouseOverlaps[componentsThatMouseOverlaps.length - 1]
-        game.gameSounds.play('gate_pickup', volume=1)
+        game.gameSounds.play('gate_pickup', volume=gameVolume)
         comp.changeOffsets(mouseX - comp.x, mouseY - comp.y)
         game.beingDragged.push(comp)
     }
@@ -161,9 +161,9 @@ function doubleClicked() {
     comp.changeState()
 
     if (comp.state){
-        game.gameSounds.play('connect_circuit', volume=1)
+        game.gameSounds.play('connect_circuit', volume=gameVolume)
     } else{
-        game.gameSounds.play('reverse_circuit', volume=1)
+        game.gameSounds.play('reverse_circuit', volume=gameVolume)
     }
 }
 
@@ -213,7 +213,7 @@ async function loadNextLevel() {
         levels.forEach(level => {
             if (level.lvlNum == io.lvlNum+1) {
                 // play the btn sound effect when any listItem is clicked
-                btnSound2.play();
+                //btnSound2.play();
                 //store gates from selected level in local storage. Will allow users to start from the level they ended on.
                 localStorage.setItem('initialize_objects', JSON.stringify(level));
                 // delay the page change by 1 second (1000 ms)
@@ -245,13 +245,13 @@ runBtn.onclick = function()
 
 
 // grabbing the elements for the options menu buttons
-const optionsBtn = document.querySelector('.fa-cog');
+const optionsBtnPlay = document.querySelector('.fa-cog');
 const optionsHiddenMenu = document.getElementById('options-menu');
 const optionsExitBtn = document.querySelector('.exit-button');
 const optionsHome = document.getElementById('back-to-main');
 
 // code for the options button to showcase the options menu
-optionsBtn.addEventListener('click', () => {
+optionsBtnPlay.addEventListener('click', () => {
     if(optionsHiddenMenu.style.display === 'none'){
         optionsHiddenMenu.style.display = 'block';
     }
@@ -263,7 +263,7 @@ optionsBtn.addEventListener('click', () => {
 optionsExitBtn.addEventListener('click', () => {
     if(optionsHiddenMenu.style.display === 'block' ){
         optionsHiddenMenu.style.display = 'none';
-        languageHiddenMenu.style.display = 'none';
+        //languageHiddenMenu.style.display = 'none';
     }
     else{
         optionsHiddenMenu.style.display = 'block';

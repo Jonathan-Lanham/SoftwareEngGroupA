@@ -31,7 +31,7 @@ allAtag.forEach(aTag => {
 
 
 const soundIcon = document.querySelector('.music-icon');
-const musicSlash = document.querySelector('.slash');
+const musicSlash = document.querySelector('.slash-music');
 const music = new Audio('../assets/sounds/game-8-bit-on-278083.mp3')
 
 soundIcon.addEventListener('click', () =>{
@@ -68,12 +68,14 @@ const savedVolume = localStorage.getItem('volume');
 if (savedVolume !== null) { // if the saved volume is not equal to nothing...
     volumeSlider.value = savedVolume;  // setting slider to saved volume
     btnSound.volume = savedVolume / 100;  // setting the volume of the sound to saved value (0 to 1)
+    gameVolume = savedVolume / 100;
 };
 
 // saving volume setting to the localStorage and update the volume
 volumeSlider.addEventListener('input', () => {
     const volumeValue = volumeSlider.value / 100;  // getting volume as a decimal (0 to 1)
     btnSound.volume = volumeValue;  // updating the sound's volume
+    gameVolume = volumeValue
     localStorage.setItem('volume', volumeSlider.value);  // saving the volume slider value to localStorage
 });
 
