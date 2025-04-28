@@ -293,6 +293,17 @@ function insertConnectionLineIntoGame(){
     //game.insertConnection(linesPlaced, game.gameScale)
 }
 
+function toggleObjectPopup(){
+    let popup = document.getElementById("objectPopup")
+
+    if (popup.style.display == "flex"){
+      popup.style.display = "none";
+    } else {
+      popup.style.display = "flex";
+    }
+    
+  }
+
 function outputGameAsJSON(){
 
     outputObject = {}
@@ -342,6 +353,43 @@ function outputGameAsJSON(){
     //console.log(JSON.stringify(outputObject.Components))
 
     console.log(JSON.stringify(outputObject))
+    document.getElementById("obj-text-string").value = JSON.stringify(outputObject)
+    toggleObjectPopup();
+
+}
+
+function changeObject(){
+    const io = JSON.parse(document.getElementById("obj-text-string").value);
+
+    //remove all objects from the game
+    //insert these objects into game
+
+    gateClassMap = {
+        "LogicGate": LogicGate,
+        "AndGate": AndGate,
+        "NandGate": NandGate,
+        "OrGate": OrGate,
+        "NorGate": NorGate,
+        "XorGate": XorGate,
+        "XnorGate": XnorGate,
+        "NotGate": NotGate
+    };
+
+    let scale = 1//window.innerWidth/2560;
+
+    for (let con of io.Connections) {
+        game.insertConnection(con, scale=scale)
+    }
+
+    for (let gate of io.Gates) {
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
+    }
+
+    for (let comp of io.Components) {
+        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scale=scale)
+    }
+
+    toggleObjectPopup();
 }
 
 // grabbing the elements for the options menu buttons

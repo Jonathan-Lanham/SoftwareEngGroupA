@@ -4,6 +4,10 @@ class ExitPoints {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.botImageX = 0;
+        this.botImageY = 0;
+        this.botImageWidth = 0;
+        this.botImageHeight = 0;
         this.arrayOfNodeStates = arrayOfNodeStates;
         this.endNodes = []
 
@@ -56,14 +60,32 @@ class ExitPoints {
         noFill();
     }
 
-    displayOnlyChildNodes(){
+    displayOnlyChildNodes() {
         let i = 0;
+        let totalY = 0;
+        let count = 0;
+        
+        // First pass: draw lines, collect Y positions
         for (let eNode of this.endNodes) {
-            //Red or green line depending on state
+            // Red or green line depending on state
             stroke(this.arrayOfNodeStates[i] ? "green" : "red");
-            line(eNode.x, eNode.y + eNode.height/2, eNode.x + 500, eNode.y + eNode.height/2);
+            line(eNode.x, eNode.y + eNode.height / 2, eNode.x + 500, eNode.y + eNode.height / 2);
+         
+            totalY += eNode.y + eNode.height / 2; // Sum center Y positions
+            count++;
+    
             eNode.display();
             ++i;
+        }
+    
+        // Second pass: after all lines are drawn, place one bot image
+        if (count > 0 && botImg) {
+            let avgY = totalY / count;
+            this.botImageX = this.endNodes[0].x + 485;
+            this.botImageY = avgY - botImg.height / 2;
+            this.botImageWidth = botImg.width;
+            this.botImageHeight = botImg.height;
+            image(botImg, this.botImageX, this.botImageY, this.botImageWidth, this.botImageHeight);
         }
     }
 }

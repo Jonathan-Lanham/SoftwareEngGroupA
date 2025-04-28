@@ -1,8 +1,10 @@
 //Dependent on other objects
+let botImg;
 
 function preload() {
     // Load the sprite image before setup runs
     //img = loadImage('AND.png');
+    botImg = loadImage('../assets/images/flatluna1.png');
 }
 
 function setup() {
@@ -30,6 +32,7 @@ function setup() {
         console.log(io);
         console.log(io.Name);
         console.log(io.Description);
+        console.log(io.Hints);
         document.getElementById("Level-Name").innerHTML = io.Name;
         //document.getElementById("Description").innerHTML = io.Description;
     }
@@ -90,8 +93,6 @@ function visualizeGridCells() {
 }
 
 function draw() {
-
-
     game.update()
     //For visualization/debugging
     visualizeGridCells();

@@ -112,7 +112,11 @@ class Game {
         for (let i = 0; i < statesArray.length; i++) {
             if (statesArray[i] != objectsArray[i].state) {
                 //Loud Incorrect Buzzer
+
+                let loseNum = int(random(1, 5));
+                botImg = loadImage(`../assets/images/answers/answers${loseNum}.png`);
                 game.gameSounds.play('incorrect', gameVolume)
+
                 showLose();
                 return false; // Found a mismatch
             }
@@ -121,9 +125,14 @@ class Game {
         // Winner winner chicken dinner
         // window.alert("You Won!");
         //Second arg is volume, 0-1
+
+
+
+        let winNum = int(random(5, 9));
+        botImg = loadImage(`../assets/images/answers/answers${winNum}.png`);
         game.gameSounds.play('win_sound', gameVolume)
         game.gameSounds.play('yippeee', gameVolume)
-        showWin();
+        setTimeout(showWin, 2000);
         this.levelCompleted = true;
         return true;
     }
