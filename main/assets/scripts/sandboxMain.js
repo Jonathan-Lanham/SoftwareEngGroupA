@@ -297,8 +297,10 @@ function toggleObjectPopup(){
     let popup = document.getElementById("objectPopup")
 
     if (popup.style.display == "flex"){
+      loop();
       popup.style.display = "none";
     } else {
+      noLoop();
       popup.style.display = "flex";
     }
     
