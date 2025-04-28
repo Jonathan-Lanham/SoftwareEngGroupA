@@ -123,10 +123,19 @@
     </div>
 
 
-
-
-
-
+    <section>
+      <div class="popup-overlay" id="objectPopup" onclick="toggleObjectPopup()">
+        <div class="object-popup" onclick="event.stopPropagation()">
+            <h3 class="object-popup-title">Output Object</h3>
+            <div class="object-popup-text-container">
+              <textarea id="obj-text-string" class="object-inputs"></textarea>
+            </div>
+            <div>
+              <button onclick="changeObject()" class="win-button">Change Object</button>
+            </div>
+        </div>
+      </div>
+    </section>
 
   </main>
   <script src="../assets/scripts/spatialHash.js"></script>

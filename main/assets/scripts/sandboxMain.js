@@ -293,6 +293,17 @@ function insertConnectionLineIntoGame(){
     //game.insertConnection(linesPlaced, game.gameScale)
 }
 
+function toggleObjectPopup(){
+    let popup = document.getElementById("objectPopup")
+
+    if (popup.style.display == "flex"){
+      popup.style.display = "none";
+    } else {
+      popup.style.display = "flex";
+    }
+    
+  }
+
 function outputGameAsJSON(){
 
     outputObject = {}
@@ -342,6 +353,15 @@ function outputGameAsJSON(){
     //console.log(JSON.stringify(outputObject.Components))
 
     console.log(JSON.stringify(outputObject))
+    document.getElementById("obj-text-string").innerHTML = JSON.stringify(outputObject)
+    toggleObjectPopup();
+
+}
+
+function changeObject(){
+    newObject = JSON.parse(document.getElementById("obj-text-string").innerHTML)
+
+    
 }
 
 function windowResized() {

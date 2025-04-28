@@ -74,7 +74,7 @@
   </section>
 
   <section>
-    <div class="popup-overlay" id="losePop" onclick="closePopup(event)">
+    <div class="popup-overlay" id="losePop" onclick="closePopupLose()">
       <div class="win-popup" onclick="event.stopPropagation()">
         <div class="top-win-section">
           <div class="win-title prevent-select">
@@ -82,7 +82,7 @@
           </div>
         </div>
 
-        <button class="win-button" onclick="closePopupLose()">Retry</button>
+        <button class="obj-button" onclick="closePopupLose()">Retry</button>
       </div>
     </div>
   </section>
@@ -120,7 +120,19 @@
 
 
 
-
+      <script>
+        // pop up
+        function togglePopup() {
+            document.getElementById("popup").style.display = 
+                document.getElementById("popup").style.display === "flex" ? "none" : "flex";
+        }
+        // pop down
+        function closePopup(event) {
+            if (event.target.id === "popup") {
+                togglePopup();
+            }
+        }
+    </script>
 
 
     </main>
