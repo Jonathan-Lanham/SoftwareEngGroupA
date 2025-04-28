@@ -272,7 +272,7 @@ function showTipDiv() {
 
 function insertSwitchComponent(){
     console.log("Inserting Component...")
-    game.insertComponent(game.gameWidth/game.gameScale/2, game.gameHeight/game.gameScale/2, 38, 38, game.gameScale)
+    game.insertComponent(game.gameWidth/game.gameScale/2, game.gameHeight/game.gameScale/2, 45, 45, game.gameScale)
 }
 
 function insertGateIntoGame(logicGate){
@@ -318,7 +318,9 @@ function getOutputObject(){
     // console.log(game.connectionLines)
     // console.log("All Logic Gates: " + LogicGate.GateSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight))
 
-    let currentScaleOfGame = window.innerWidth/2560;
+    let currentScaleOfGame = width/2560;
+
+    console.log("OUTPUT GAME SCALE: " + currentScaleOfGame)
 
     //Handle Connection Lines
     outputObject.Connections = [];
@@ -372,6 +374,20 @@ function outputGameAsJSON(){
 
 }
 
+function changeGameSetup(gameWidth, gameHeight, sizeOfNodes=15) {
+    resizeCanvas(gameWidth, gameHeight);
+
+
+    game.gameWidth = gameWidth;
+    game.gameHeight = gameHeight;
+
+    Game.sizeOfNodes = sizeOfNodes;
+    LogicGate.gNodeSize = sizeOfNodes;
+    LogicGate.gNodeLeftOffset = sizeOfNodes*2;
+    LogicGate.gNodeRightOffset = sizeOfNodes;
+
+}
+
 function changeObject(){
     const io = JSON.parse(document.getElementById("obj-text-string").value);
 
@@ -403,7 +419,7 @@ function changeObject(){
         game.insertComponent(comp.x, comp.y, comp.w, comp.h, scaleSize=scaleSize)
     }
 
-    toggleObjectPopup();
+    //toggleObjectPopup();
 }
 
 // grabbing the elements for the options menu buttons
@@ -433,54 +449,27 @@ optionsExitBtn.addEventListener('click', () => {
 });
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight-122);
+
+    document.getElementById("obj-text-string").value = JSON.stringify(getOutputObject());
+
+    //Base scaleSize off of viewport size.
+    let scaleSize = window.innerWidth/2560;
+    console.log(window.innerWidth)
+
+    //Until then, sample a level here
+    //Directly tied to game instance
+    changeGameSetup(2560 * scaleSize, window.innerHeight-122, sizeOfNodes=15 * scaleSize)
+    game.gameScale = scaleSize;
 
     //Get Objects From Game
     //Save them in a variable
     //Remove all Objects From Game
     //Insert Objects At New scaleSize
-
-    let io = getOutputObject();
-
     LogicGate.GateSHG.clear();
     switchComponent.ComponentSHG.clear();
     game.connectionLines.length = 0;
-
     GateNode.NodeSHG.clear();
 
-    gateClassMap = {
-        "LogicGate": LogicGate,
-        "AndGate": AndGate,
-        "NandGate": NandGate,
-        "OrGate": OrGate,
-        "NorGate": NorGate,
-        "XorGate": XorGate,
-        "XnorGate": XnorGate,
-        "NotGate": NotGate
-    };
-
-    let scaleOfGame = window.innerWidth/2560;
-    game.gameWidth = windowWidth;
-    game.gameHeight = window.innerHeight-122;
-    game.gameScale = scaleOfGame;
-    Game.sizeOfNodes = 15*scaleOfGame;
-
-    LogicGate.gNodeLeftOffset = Game.sizeOfNodes*2;
-    LogicGate.gNodeRightOffset = Game.sizeOfNodes;
-
-    //Can override later if need be.
-    LogicGate.gNodeSize = Game.sizeOfNodes;
-
-    for (let con of io.Connections) {
-        game.insertConnection(con, scaleSize=scaleOfGame)
-    }
-
-    for (let gate of io.Gates) {
-        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scaleSize=scaleOfGame)
-    }
-
-    for (let comp of io.Components) {
-        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scaleSize=scaleOfGame)
-    }
+    changeObject();
 
 }
