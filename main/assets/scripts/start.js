@@ -1,13 +1,13 @@
 
 
 // grabbing the elements for the options menu buttons
-const optionsBtn = document.querySelector('.options-btn');
+const optionsOpenBtn = document.querySelector('.options-btn');
 const optionsHiddenMenu = document.getElementById('optionsMenu');
 const optionsExitBtn = document.querySelector('.exit-btn');
 
 
 // code for the options button to showcase the options menu
-optionsBtn.addEventListener('click', () => {
+optionsOpenBtn.addEventListener('click', () => {
     if(optionsHiddenMenu.style.display === 'none'){
         optionsHiddenMenu.style.display = 'block';
     }
