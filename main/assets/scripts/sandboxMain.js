@@ -6,16 +6,16 @@ function preload() {
 
 function setup() {
 
-    //Base scale off of viewport size.
-    let scale = window.innerWidth/2560;
+    //Base scaleSize off of viewport size.
+    let scaleSize = window.innerWidth/2560;
 
     console.log(window.innerWidth)
 
     //Until then, sample a level here
     //Directly tied to game instance
-    game = new Game(2560 * scale, window.innerHeight-122, '#4287f5', sizeOfNodes=15 * scale);
+    game = new Game(2560 * scaleSize, window.innerHeight-122, '#4287f5', sizeOfNodes=15 * scaleSize);
 
-    game.gameScale = scale;
+    game.gameScale = scaleSize;
 
     console.log("GAME" + JSON.stringify(game.gameSounds));
     game.gameSounds.loadSounds({
@@ -26,7 +26,7 @@ function setup() {
         win_sound: '../assets/sounds/win_sound.mp3'
     });
 
-    //game.insertGate(500, 500, 100, 80, AndGate, scale=scale)
+    //game.insertGate(500, 500, 100, 80, AndGate, scaleSize=scaleSize)
     
 }
 
@@ -389,18 +389,18 @@ function changeObject(){
         "NotGate": NotGate
     };
 
-    let scale = window.innerWidth/2560;
+    let scaleSize = window.innerWidth/2560;
 
     for (let con of io.Connections) {
-        game.insertConnection(con, scale=scale)
+        game.insertConnection(con, scaleSize=scaleSize)
     }
 
     for (let gate of io.Gates) {
-        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scaleSize=scaleSize)
     }
 
     for (let comp of io.Components) {
-        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scale=scale)
+        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scaleSize=scaleSize)
     }
 
     toggleObjectPopup();
@@ -438,7 +438,7 @@ function windowResized() {
     //Get Objects From Game
     //Save them in a variable
     //Remove all Objects From Game
-    //Insert Objects At New Scale
+    //Insert Objects At New scaleSize
 
     let io = getOutputObject();
 
@@ -472,15 +472,15 @@ function windowResized() {
     LogicGate.gNodeSize = Game.sizeOfNodes;
 
     for (let con of io.Connections) {
-        game.insertConnection(con, scale=scaleOfGame)
+        game.insertConnection(con, scaleSize=scaleOfGame)
     }
 
     for (let gate of io.Gates) {
-        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scaleOfGame)
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scaleSize=scaleOfGame)
     }
 
     for (let comp of io.Components) {
-        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scale=scaleOfGame)
+        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scaleSize=scaleOfGame)
     }
 
 }
