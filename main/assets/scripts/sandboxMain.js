@@ -302,10 +302,9 @@ function toggleObjectPopup(){
       popup.style.display = "flex";
     }
     
-  }
+}
 
-function outputGameAsJSON(){
-
+function getOutputObject(){
     outputObject = {}
 
     //Query all gates
@@ -319,10 +318,18 @@ function outputGameAsJSON(){
     // console.log(game.connectionLines)
     // console.log("All Logic Gates: " + LogicGate.GateSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight))
 
+    let currentScaleOfGame = window.innerWidth/2560;
+
     //Handle Connection Lines
     outputObject.Connections = [];
     for (let line of game.connectionLines) {
-        outputObject.Connections.push(line.arrayOfLines)
+        newLine = []
+        for (let point of line.arrayOfLines){
+            newPoint = {x: point.x/currentScaleOfGame, y: point.y/currentScaleOfGame}
+            newLine.push(newPoint)
+        }
+        console.log(newLine)
+        outputObject.Connections.push(newLine)
     }
     //console.log(JSON.stringify(outputObject.Connections))
 
@@ -330,10 +337,10 @@ function outputGameAsJSON(){
     outputObject.Gates = [];
     for (let gate of LogicGate.GateSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight)) {
         outputObject.Gates.push({
-            "x": gate.x,
-            "y": gate.y,
-            "w": gate.width,
-            "h": gate.height,
+            "x": gate.x/currentScaleOfGame,
+            "y": gate.y/currentScaleOfGame,
+            "w": gate.width/currentScaleOfGame,
+            "h": gate.height/currentScaleOfGame,
             "type": gate.constructor.name
         })
     }
@@ -343,13 +350,20 @@ function outputGameAsJSON(){
     outputObject.Components = [];
     for (let comp of switchComponent.ComponentSHG.queryRegion(0, 0, game.gameWidth, game.gameHeight)) {
         outputObject.Components.push({
-            "x": comp.x,
-            "y": comp.y,
-            "w": comp.width,
-            "h": comp.height,
+            "x": comp.x/currentScaleOfGame,
+            "y": comp.y/currentScaleOfGame,
+            "w": comp.width/currentScaleOfGame,
+            "h": comp.height/currentScaleOfGame,
             "type": comp.constructor.name
         })
     }
+
+    return outputObject;
+}
+
+function outputGameAsJSON(){
+
+    outputObject = getOutputObject();
     //console.log(JSON.stringify(outputObject.Components))
 
     console.log(JSON.stringify(outputObject))
@@ -375,7 +389,7 @@ function changeObject(){
         "NotGate": NotGate
     };
 
-    let scale = 1//window.innerWidth/2560;
+    let scale = window.innerWidth/2560;
 
     for (let con of io.Connections) {
         game.insertConnection(con, scale=scale)
@@ -420,4 +434,53 @@ optionsExitBtn.addEventListener('click', () => {
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight-122);
+
+    //Get Objects From Game
+    //Save them in a variable
+    //Remove all Objects From Game
+    //Insert Objects At New Scale
+
+    let io = getOutputObject();
+
+    LogicGate.GateSHG.clear();
+    switchComponent.ComponentSHG.clear();
+    game.connectionLines.length = 0;
+
+    GateNode.NodeSHG.clear();
+
+    gateClassMap = {
+        "LogicGate": LogicGate,
+        "AndGate": AndGate,
+        "NandGate": NandGate,
+        "OrGate": OrGate,
+        "NorGate": NorGate,
+        "XorGate": XorGate,
+        "XnorGate": XnorGate,
+        "NotGate": NotGate
+    };
+
+    let scaleOfGame = window.innerWidth/2560;
+    game.gameWidth = windowWidth;
+    game.gameHeight = window.innerHeight-122;
+    game.gameScale = scaleOfGame;
+    Game.sizeOfNodes = 15*scaleOfGame;
+
+    LogicGate.gNodeLeftOffset = Game.sizeOfNodes*2;
+    LogicGate.gNodeRightOffset = Game.sizeOfNodes;
+
+    //Can override later if need be.
+    LogicGate.gNodeSize = Game.sizeOfNodes;
+
+    for (let con of io.Connections) {
+        game.insertConnection(con, scale=scaleOfGame)
+    }
+
+    for (let gate of io.Gates) {
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scaleOfGame)
+    }
+
+    for (let comp of io.Components) {
+        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scale=scaleOfGame)
+    }
+
 }
