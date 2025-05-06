@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "test": "cd tests && python build_test_file.py"
+    "test": "cd tests && python build_test_file.py && node run_tests.js ./test1DraggableObject/testDraggableObject.js ./test2ShgWithDrgObj/testShgWithDrgObj.js ./test3NodeObjAndCollision/testNodeObjAndCollision.js ./test4NodesTransferState/testNodesTransferState.js"
   },
   "repository": {
     "type": "git",

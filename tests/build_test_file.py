@@ -30,6 +30,8 @@ def bundle_js_files(file_paths, output_path="test_build.js"):
             
         except Exception as e:
             print(f"Error processing {file_path}: {e}")
+
+    combined_js.append('\nexport { DraggableObject, SpatialHashGrid, GateNode };')
     
     # Write the combined content to the output file
     try:

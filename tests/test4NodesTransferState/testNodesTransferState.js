@@ -1,8 +1,8 @@
 // from skGateObjects.js
 const assert = require('assert');
-const skObjects = require('../skGateObjects.js');
-const Node = skObjects.Node;
-const SpatialHashGrid = skObjects.SpatialHashGrid
+const gkObjects = require('../test_build.js');
+const Node = gkObjects.GateNode;
+const SpatialHashGrid = gkObjects.SpatialHashGrid
 
 function testConstructor() {
   const parent = {};
@@ -13,7 +13,7 @@ function testConstructor() {
   assert.strictEqual(node.width, 30, "width should be initialized to 30");
   assert.strictEqual(node.height, 40, "height should be initialized to 40");
   assert.strictEqual(node.parentObject, parent, "parentObject should be initialized correctly");
-  assert.strictEqual(node.state, false, "state should be initialized to false");
+  assert.strictEqual(node.state, null, "state should be initialized to null");
   
   console.log("✓ Constructor test passed");
 }
@@ -159,19 +159,25 @@ function testStress() {
   
 // Run all tests
 function runTests() {
-  try {
-    testConstructor();
-    testMove();
-    testNoCollisions();
-    testForCollisions1();
-    testForCollisions2();
-    testStress();
-    console.log("All tests passed!");
-  } catch (error) {
-    console.error("Tests failed:", error.message);
-    console.error("Error name:", error.name);
-    console.error("Error stack:", error.stack);
-  }
+  testConstructor();
+  testMove();
+  testNoCollisions();
+  testForCollisions1();
+  testForCollisions2();
+  testStress();
+  // try {
+  //   testConstructor();
+  //   testMove();
+  //   testNoCollisions();
+  //   testForCollisions1();
+  //   testForCollisions2();
+  //   testStress();
+  //   console.log("All tests passed!");
+  // } catch (error) {
+  //   console.error("Tests failed:", error.message);
+  //   console.error("Error name:", error.name);
+  //   console.error("Error stack:", error.stack);
+  // }
 }
   
 // Execute tests

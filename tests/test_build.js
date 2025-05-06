@@ -1549,5 +1549,4 @@ function drawSwitch(isOn, x, y, w, h) {
     
     pop(); // Restore drawing state
   }
-
-
+export { DraggableObject, SpatialHashGrid, GateNode };

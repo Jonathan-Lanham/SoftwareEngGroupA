@@ -1,9 +1,8 @@
 // from skGateObjects.js
 const assert = require('assert');
-const skObjects = require('../skGateObjects.js');
-const DraggableObject = skObjects.DraggableObject;
-const spatialHash = require('../scripts/spatialHash.js');
-const SpatialHashGrid = spatialHash.SpatialHashGrid;
+const gkObjects = require('../test_build.js');
+const DraggableObject = gkObjects.DraggableObject;
+const SpatialHashGrid = gkObjects.SpatialHashGrid;
 
 
 // Test integration between the two classes
@@ -33,7 +32,7 @@ function testDraggableObjectWithSHG() {
     assert(!collided, "Objects should NOT collide");
     
     // Test dragging and updating in grid
-    objA.startDragging();
+    //objA.startDragging();
     objA.drag(40, 40);
     grid.update(objA);
     
@@ -79,14 +78,16 @@ function testDraggableObjectWithSHG() {
   
   // Run all tests
   function runTests() {
-    try {
-      //testSpatialHashGrid();
-      //testDraggableObject();
-      testDraggableObjectWithSHG();
-      console.log("All tests passed!");
-    } catch (error) {
-      console.error("Tests failed:", error.message);
-    }
+    testDraggableObjectWithSHG();
+    console.log("All tests passed!");
+    // try {
+    //   //testSpatialHashGrid();
+    //   //testDraggableObject();
+    //   testDraggableObjectWithSHG();
+    //   console.log("All tests passed!");
+    // } catch (error) {
+    //   console.error("Tests failed:", error.message);
+    // }
   }
   
   // Execute tests
