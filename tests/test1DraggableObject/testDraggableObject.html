@@ -26,10 +26,12 @@
   <h1 style="color: white; position: absolute; left: 20px; top: 5px;"><strong>THIS IS A DEMO OF <code>DraggableObject</code> INSTANCES</strong></h1>
 
 
-  <script src="../skGateObjects.js"></script>
+  <script src="../../main/assets/scripts/DraggableObjects.js"></script>
   <script>
     // Array to store all draggable objects
     let objects = [];
+
+    let beingDragged = [];
     
     // Colors for the rectangles
     const colors = [
@@ -53,7 +55,7 @@
         rect(this.x, this.y, this.width, this.height);
         
         // Add a handle indicator when being dragged
-        if (DraggableObject.beingDragged.includes(this)) {
+        if (beingDragged.includes(this)) {
           fill(255);
           ellipse(this.x + this.width/2, this.y + this.height/2, 10, 10);
         }
@@ -83,7 +85,7 @@
       }
       
       // Update position of objects being dragged
-      for (let obj of DraggableObject.beingDragged) {
+      for (let obj of beingDragged) {
         // Pass mouseX and mouseY to the drag method
         obj.drag(mouseX, mouseY);
       }
@@ -107,7 +109,7 @@
           obj.offsetY = mouseY - obj.y;
           
           // Start dragging the object
-          obj.startDragging();
+          beingDragged.push(obj)
           //break; // Only select one object
         }
       }
@@ -115,9 +117,7 @@
 
     function mouseReleased() {
       // Stop dragging all objects
-      for (let obj of DraggableObject.beingDragged.slice()) {
-        obj.stopDragging();
-      }
+      beingDragged = []
     }
   </script>
 </body>

@@ -1,7 +1,7 @@
-// from skGateObjects.js
+// from gkGateObjects.js
 const assert = require('assert');
-const skObjects = require('../skGateObjects.js');
-const DraggableObject = skObjects.DraggableObject;
+const gkObjects = require('../test_build.js');
+const DraggableObject = gkObjects.DraggableObject;
 
 // Define global variables used in the class (for testing)
 global.mouseX = 0;
@@ -25,8 +25,8 @@ function testConstructor() {
   
   assert.strictEqual(obj.x, 10, 'x should be initialized correctly');
   assert.strictEqual(obj.y, 20, 'y should be initialized correctly');
-  assert.strictEqual(obj.height, 30, 'height should be initialized correctly');
-  assert.strictEqual(obj.width, 40, 'width should be initialized correctly');
+  assert.strictEqual(obj.width, 30, 'width should be initialized correctly');
+  assert.strictEqual(obj.height, 40, 'height should be initialized correctly');
   assert.strictEqual(obj.offsetX, 0, 'offsetX should default to 0');
   assert.strictEqual(obj.offsetY, 0, 'offsetY should default to 0');
   
