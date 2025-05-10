@@ -41,16 +41,16 @@ class Game {
     //Not Finished With Connections
     connectionLines = [];
 
-    insertGate(x, y, width, height, gateClass = LogicGate, scale=1) {
-        gateClass.createObject(x * scale, y * scale, width * scale, height * scale, gateClass);
+    insertGate(x, y, width, height, gateClass = LogicGate, scaleSize=1) {
+        gateClass.createObject(x * scaleSize, y * scaleSize, width * scaleSize, height * scaleSize, gateClass);
     }
 
-    insertComponent(x, y, width, height, scale=1){
-        switchComponent.createObject(x * scale, y * scale, width * scale, height * scale)
+    insertComponent(x, y, width, height, scaleSize=1){
+        switchComponent.createObject(x * scaleSize, y * scaleSize, width * scaleSize, height * scaleSize)
     }
 
-    insertConnection(arrayOfPoints, scale=1) {
-        Connection.createConnection(arrayOfPoints, scale=scale);
+    insertConnection(arrayOfPoints, scaleSize=1) {
+        Connection.createConnection(arrayOfPoints, scaleSize=scaleSize);
     }
 
     handleDraggedObjects() {

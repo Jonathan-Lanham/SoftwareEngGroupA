@@ -10,10 +10,10 @@ class Connection {
 
     }
 
-    static createConnection(lineArray, scale=1) {
+    static createConnection(lineArray, scaleSize=1) {
         for (let point of lineArray){
-            point.x *= scale;
-            point.y *= scale;
+            point.x *= scaleSize;
+            point.y *= scaleSize;
         }
         let newLine = new Connection(lineArray);
         game.connectionLines.push(newLine);

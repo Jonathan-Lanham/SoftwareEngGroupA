@@ -37,33 +37,33 @@ function setup() {
         //document.getElementById("Description").innerHTML = io.Description;
     }
 
-    //Base scale off of viewport size.
-    let scale = window.innerWidth/2560;
+    //Base scaleSize off of viewport size.
+    let scaleSize = window.innerWidth/2560;
     console.log(window.innerWidth)
 
     //Until then, sample a level here
     //Directly tied to game instance
-    game = new Game(io.CanvasSize.w * scale, window.innerHeight-122, '#4287f5', sizeOfNodes=15 * scale);
-    game.entrancePoints = new EntrancePoints(io.EntrancePoints.x * scale, io.EntrancePoints.y * scale, io.EntrancePoints.w * scale, io.EntrancePoints.h * scale, io.EntrancePoints.states);
-    game.exitPoints = new ExitPoints(io.ExitPoints.x * scale, io.ExitPoints.y * scale, io.ExitPoints.w * scale, io.ExitPoints.h * scale, io.ExitPoints.states);
+    game = new Game(io.CanvasSize.w * scaleSize, window.innerHeight-122, '#4287f5', sizeOfNodes=15 * scaleSize);
+    game.entrancePoints = new EntrancePoints(io.EntrancePoints.x * scaleSize, io.EntrancePoints.y * scaleSize, io.EntrancePoints.w * scaleSize, io.EntrancePoints.h * scaleSize, io.EntrancePoints.states);
+    game.exitPoints = new ExitPoints(io.ExitPoints.x * scaleSize, io.ExitPoints.y * scaleSize, io.ExitPoints.w * scaleSize, io.ExitPoints.h * scaleSize, io.ExitPoints.states);
 
     for (let con of io.Connections) {
-        game.insertConnection(con, scale=scale)
+        game.insertConnection(con, scaleSize=scaleSize)
     }
 
     for (let gate of io.Gates) {
-        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scale=scale)
+        game.insertGate(gate.x, gate.y, gate.w, gate.h, gateClassMap[gate.type], scaleSize=scaleSize)
     }
 
     for (let comp of io.Components) {
-        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scale=scale)
+        game.insertComponent(comp.x, comp.y, comp.w, comp.h, scaleSize=scaleSize)
     }
 
-    // game.insertComponent(300, 300, 30, 30, scale=scale)
-    // game.insertComponent(300, 300, 30, 30, scale=scale)
-    // game.insertComponent(300, 300, 30, 30, scale=scale)
-    // game.insertComponent(300, 300, 30, 30, scale=scale)
-    // game.insertComponent(300, 300, 30, 30, scale=scale)
+    // game.insertComponent(300, 300, 30, 30, scaleSize=scaleSize)
+    // game.insertComponent(300, 300, 30, 30, scaleSize=scaleSize)
+    // game.insertComponent(300, 300, 30, 30, scaleSize=scaleSize)
+    // game.insertComponent(300, 300, 30, 30, scaleSize=scaleSize)
+    // game.insertComponent(300, 300, 30, 30, scaleSize=scaleSize)
 
     console.log("GAME" + JSON.stringify(game.gameSounds));
     game.gameSounds.loadSounds({
